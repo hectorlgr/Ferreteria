@@ -31,8 +31,8 @@ public class Usuario {
     @Column(nullable = false)
     private String password; 
 
-    // Aquí definiremos si es "ADMIN", "CLIENTE" u "OPERADOR" para cumplir 
-    // con el requisito de los 2 o 3 roles diferenciados
+    // Aquí definiremos si es "ADMIN" o "CLIENTE"
+    // con el requisito de los 2 roles diferenciados
     @Column(nullable = false)
     private String rol; 
 }
