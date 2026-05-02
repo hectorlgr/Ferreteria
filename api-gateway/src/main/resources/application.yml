@@ -1,0 +1,45 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            # 1. Catálogo
+            - id: catalogo-service
+              uri: http://localhost:9091
+              predicates:
+                - Path=/api/productos/**
+
+            # 2. Usuarios
+            - id: usuario-service
+              uri: http://localhost:9092
+              predicates:
+                - Path=/api/usuarios/**
+
+            # 3. Inventario
+            - id: inventario-service
+              uri: http://localhost:9093
+              predicates:
+                - Path=/api/inventario/**
+
+            # 4. Ventas
+            - id: venta-service
+              uri: http://localhost:9094
+              predicates:
+                - Path=/api/ventas/**
+
+            # 5. Despachos
+            - id: despacho-service
+              uri: http://localhost:9095
+              predicates:
+                - Path=/api/despachos/**
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
