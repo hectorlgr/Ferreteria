@@ -96,4 +96,30 @@ public class VentaService {
                     return new RuntimeException("Venta no encontrada con ID: " + id);
                 });
     }
+
+    public Venta actualizarVenta(Long id, Venta ventaActualizada) {
+        logger.info("Iniciando actualización de venta con ID: {}", id);
+        
+        Venta venta = obtenerPorId(id);
+        logger.debug("Venta encontrada. Aplicando cambios...");
+        
+        venta.setUsuarioId(ventaActualizada.getUsuarioId());
+        venta.setTotal(ventaActualizada.getTotal());
+        
+        logger.info("Guardando cambios de venta en base de datos...");
+        Venta ventaGuardada = ventaRepository.save(venta);
+        logger.info("Venta ID {} actualizada correctamente", id);
+        
+        return ventaGuardada;
+    }
+
+    public void eliminarVenta(Long id) {
+        logger.info("Iniciando eliminación de venta con ID: {}", id);
+        
+        Venta venta = obtenerPorId(id);
+        logger.debug("Venta encontrada. Procediendo a eliminar...");
+        
+        ventaRepository.delete(venta);
+        logger.info("Venta ID {} eliminada correctamente", id);
+    }
 }

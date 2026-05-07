@@ -83,4 +83,17 @@ public class DespachoService {
         
         return despachoRepository.save(despacho);
     }
+
+    public void eliminarDespacho(Long id) {
+        logger.info("Iniciando eliminación de despacho ID: {}", id);
+
+        Despacho despacho = despachoRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.warn("Intento de eliminar un despacho inexistente (ID: {})", id);
+                    return new RuntimeException("Despacho no encontrado");
+                });
+
+        despachoRepository.delete(despacho);
+        logger.info("Despacho ID {} eliminado correctamente", id);
+    }
 }

@@ -51,4 +51,20 @@ public class VentaController {
         logger.info("Venta creada exitosamente con ID: {}", nuevaVenta.getId());
         return nuevaVenta;
     }
+
+    @PutMapping("/{id}")
+    public Venta actualizarVenta(@PathVariable Long id, @RequestBody Venta venta) {
+        logger.info("PUT /api/ventas/{} - Solicitud para actualizar venta", id);
+        Venta ventaActualizada = ventaService.actualizarVenta(id, venta);
+        logger.info("Venta ID {} actualizada correctamente", id);
+        return ventaActualizada;
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarVenta(@PathVariable Long id) {
+        logger.info("DELETE /api/ventas/{} - Solicitud para eliminar venta", id);
+        ventaService.eliminarVenta(id);
+        logger.info("Venta ID {} eliminada correctamente", id);
+    }
 }

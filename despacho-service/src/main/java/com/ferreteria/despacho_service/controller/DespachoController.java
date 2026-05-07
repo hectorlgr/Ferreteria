@@ -56,4 +56,12 @@ public class DespachoController {
         logger.info("Estado del despacho ID {} actualizado correctamente", id);
         return despachoActualizado;
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarDespacho(@PathVariable Long id) {
+        logger.info("DELETE /api/despachos/{} - Solicitud para eliminar despacho", id);
+        despachoService.eliminarDespacho(id);
+        logger.info("Despacho ID {} eliminado correctamente", id);
+    }
 }
