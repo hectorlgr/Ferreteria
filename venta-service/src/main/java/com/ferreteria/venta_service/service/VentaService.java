@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -122,4 +124,20 @@ public class VentaService {
         ventaRepository.delete(venta);
         logger.info("Venta ID {} eliminada correctamente", id);
     }
+
+    public List<Venta> obtenerPorRangoFechas(java.time.LocalDate inicio, java.time.LocalDate fin) {
+    logger.info("Procesando rango de fechas: {} al {}", inicio, fin);
+
+    if (inicio.isAfter(fin)) {
+        throw new RuntimeException("La fecha de inicio no puede ser posterior a la fecha de fin");
+    }
+
+    // Convertimos LocalDate a LocalDateTime para la consulta en la BD
+    java.time.LocalDateTime fechaInicioCompleta = inicio.atStartOfDay(); // 00:00:00
+    java.time.LocalDateTime fechaFinCompleta = fin.atTime(java.time.LocalTime.MAX); // 23:59:59.999
+
+    logger.debug("Buscando en BD entre {} y {}", fechaInicioCompleta, fechaFinCompleta);
+    
+    return ventaRepository.findByFechaRango(fechaInicioCompleta, fechaFinCompleta);
+}
 }

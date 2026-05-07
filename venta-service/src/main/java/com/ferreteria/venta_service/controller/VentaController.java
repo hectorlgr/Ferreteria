@@ -5,6 +5,7 @@ import com.ferreteria.venta_service.service.VentaService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -34,6 +35,16 @@ public class VentaController {
         logger.debug("Cantidad de ventas obtenidas para el usuario {}: {}", usuarioId, ventas.size());
         return ventas;
     }
+
+    @GetMapping("/rango-fechas")
+public List<Venta> obtenerPorRangoFechas(
+        @RequestParam("fechaInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.time.LocalDate fechaInicio,
+        @RequestParam("fechaFin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.time.LocalDate fechaFin) {
+    
+    logger.info("GET /api/ventas/rango-fechas - Solicitud de búsqueda. Desde: {} Hasta: {}", fechaInicio, fechaFin);
+    
+    return ventaService.obtenerPorRangoFechas(fechaInicio, fechaFin);
+}
 
     @GetMapping("/{id}")
     public Venta obtenerPorId(@PathVariable Long id) {
