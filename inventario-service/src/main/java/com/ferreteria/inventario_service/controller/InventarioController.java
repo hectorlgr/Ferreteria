@@ -50,4 +50,12 @@ public class InventarioController {
         logger.info("Stock descontado exitosamente. Nuevo stock para Producto ID {}: {}", productoId, inventarioActualizado.getCantidad());
         return inventarioActualizado;
     }
+    
+    @DeleteMapping("/producto/{productoId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminarPorProductoId(@PathVariable Long productoId) {
+        logger.info("DELETE /api/inventario/producto/{} - Solicitud para eliminar inventario", productoId);
+        inventarioService.eliminarPorProductoId(productoId);
+        logger.info("Inventario eliminado para Producto ID: {}", productoId);
+    }
 }

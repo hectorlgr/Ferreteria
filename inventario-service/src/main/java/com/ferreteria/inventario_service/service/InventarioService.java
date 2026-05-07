@@ -59,4 +59,11 @@ public class InventarioService {
         
         return inventarioRepository.save(inventario);
     }
+
+    public void eliminarPorProductoId(Long productoId) {
+        logger.info("Eliminando inventario para Producto ID: {}", productoId);
+        Inventario inventario = obtenerPorProductoId(productoId);
+        inventarioRepository.delete(inventario);
+        logger.info("Inventario eliminado satisfactoriamente para Producto ID: {}", productoId);
+    }
 }
