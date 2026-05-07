@@ -5,10 +5,9 @@ CREATE TABLE despachos (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     venta_id BIGINT NOT NULL UNIQUE,
     direccion VARCHAR(255) NOT NULL,
-    estado VARCHAR(50) NOT NULL,
-    numero_seguimiento INT NOT NULL UNIQUE
+    estado VARCHAR(50) NOT NULL
 );
 
 --changeset hector:2
-INSERT INTO despachos (venta_id, direccion, estado, numero_seguimiento) VALUES
-(1, 'Av. Providencia 1234, Depto 54', 'EN_RUTA', 1);
+INSERT INTO despachos (venta_id, direccion, estado) VALUES
+(1, 'Av. Providencia 1234, Depto 54', 'EN_RUTA');

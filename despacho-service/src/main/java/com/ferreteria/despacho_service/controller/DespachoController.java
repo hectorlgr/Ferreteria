@@ -21,9 +21,9 @@ public class DespachoController {
         return despachoService.obtenerTodos();
     }
 
-    @GetMapping("/seguimiento/{numeroSeguimiento}")
-    public Despacho obtenerPorSeguimiento(@PathVariable Integer numeroSeguimiento) {
-        return despachoService.obtenerPorSeguimiento(numeroSeguimiento);
+    @GetMapping("/venta/{ventaId}")
+    public Despacho obtenerPorVentaId(@PathVariable Long ventaId) {
+        return despachoService.obtenerPorVentaId(ventaId);
     }
 
     @GetMapping("/estado/{estado}")

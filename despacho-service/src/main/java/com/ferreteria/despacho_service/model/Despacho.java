@@ -14,9 +14,8 @@ public class Despacho {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // Este será ahora tu identificador único y de seguimiento
 
-    // Relación lógica con el microservicio de ventas
     @Column(name = "venta_id", nullable = false, unique = true)
     private Long ventaId;
 
@@ -24,9 +23,5 @@ public class Despacho {
     private String direccion;
 
     @Column(nullable = false)
-    private String estado; // Ej: "PREPARANDO", "EN_RUTA", "ENTREGADO"
-
-    // numero de seguimiento único para cada despacho
-    @Column(name = "numero_seguimiento", nullable = false, unique = true)
-    private Integer numeroSeguimiento; 
+    private String estado; 
 }

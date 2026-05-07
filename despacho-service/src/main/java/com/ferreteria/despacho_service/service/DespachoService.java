@@ -19,10 +19,10 @@ public class DespachoService {
         return despachoRepository.findAll();
     }
 
-    public Despacho obtenerPorSeguimiento(Integer numeroSeguimiento) {
-        return despachoRepository.findByNumeroSeguimiento(numeroSeguimiento)
-                .orElseThrow(() -> new RuntimeException("No se encontró el pedido con el seguimiento: " + numeroSeguimiento));
-    }
+    public Despacho obtenerPorVentaId(Long ventaId) {
+    return despachoRepository.findByVentaId(ventaId)
+            .orElseThrow(() -> new RuntimeException("No se encontró un despacho asociado a la venta ID: " + ventaId));
+}
 
     public Despacho obtenerPorEstado(String estado) {
         return despachoRepository.findByEstado(estado)
@@ -30,26 +30,18 @@ public class DespachoService {
     }
 
     public Despacho crearDespacho(Despacho despacho) {
-        // 1. VALIDACIÓN: Comprobar que la venta existe en el venta-service (Puerto 9094)
+        // Validación con Venta Service
         try {
             webClientBuilder.build().get()
                     .uri("http://localhost:9094/api/ventas/" + despacho.getVentaId())
                     .retrieve()
                     .bodyToMono(Object.class)
-                    .block(); // block() espera la respuesta de forma síncrona
+                    .block();
         } catch (Exception e) {
-            throw new RuntimeException("Error: La venta ID " + despacho.getVentaId() + " no existe. No se puede crear el despacho.");
+            throw new RuntimeException("Error: La venta ID " + despacho.getVentaId() + " no existe.");
         }
 
-        // 2. LÓGICA DE SEGUIMIENTO: Buscar el número más alto y sumarle 1
-        Integer maximoActual = despachoRepository.obtenerMaximoSeguimiento();
-        int siguienteNumero = (maximoActual == null) ? 1 : maximoActual + 1;
-        
-        // 3. ASIGNACIÓN DE DATOS
-        despacho.setNumeroSeguimiento(siguienteNumero);
-        despacho.setEstado("PREPARANDO"); // Estado inicial por defecto
-        
-        // 4. GUARDAR EN BASE DE DATOS
+        despacho.setEstado("PREPARANDO");
         return despachoRepository.save(despacho);
     }
 
