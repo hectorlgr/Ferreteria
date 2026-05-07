@@ -3,6 +3,8 @@ package com.ferreteria.catalogo_service.controller;
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.service.ProductoService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,37 +15,52 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductoController {
 
+    // 1. Declarar el Logger
+    private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
+
     private final ProductoService productoService;
 
     // GET: Obtener todos los productos
     @GetMapping
     public List<Producto> obtenerTodos() {
-        return productoService.obtenerTodos();
+        logger.info("GET /api/productos - Solicitud para listar todo el catálogo");
+        List<Producto> productos = productoService.obtenerTodos();
+        logger.debug("Cantidad de productos obtenidos: {}", productos.size());
+        return productos;
     }
 
     // GET: Obtener un producto por ID
     @GetMapping("/{id}")
     public Producto obtenerPorId(@PathVariable Long id) {
+        logger.info("GET /api/productos/{} - Solicitud para obtener producto por ID", id);
         return productoService.obtenerPorId(id);
     }
 
     // POST: Crear un nuevo producto
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED) // Devuelve un código 201 (Created) si tiene éxito
+    @ResponseStatus(HttpStatus.CREATED)
     public Producto guardarProducto(@RequestBody Producto producto) {
-        return productoService.guardarProducto(producto);
+        logger.info("POST /api/productos - Solicitud para registrar nuevo producto: {}", producto.getNombre());
+        Producto nuevoProducto = productoService.guardarProducto(producto);
+        logger.info("Producto registrado exitosamente con ID: {}", nuevoProducto.getId());
+        return nuevoProducto;
     }
 
     // PUT: Actualizar un producto existente
     @PutMapping("/{id}")
     public Producto actualizarProducto(@PathVariable Long id, @RequestBody Producto producto) {
-        return productoService.actualizarProducto(id, producto);
+        logger.info("PUT /api/productos/{} - Solicitud para actualizar datos del producto", id);
+        Producto productoActualizado = productoService.actualizarProducto(id, producto);
+        logger.info("Producto ID {} actualizado correctamente", id);
+        return productoActualizado;
     }
 
     // DELETE: Eliminar un producto
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT) // Devuelve un código 204 (No Content) si tiene éxito
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminarProducto(@PathVariable Long id) {
+        logger.info("DELETE /api/productos/{} - Solicitud para eliminar producto", id);
         productoService.eliminarProducto(id);
+        logger.info("Producto ID {} eliminado exitosamente", id);
     }
 }

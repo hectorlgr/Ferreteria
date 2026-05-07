@@ -4,6 +4,8 @@ import com.ferreteria.venta_service.model.DetalleVenta;
 import com.ferreteria.venta_service.model.Venta;
 import com.ferreteria.venta_service.repository.VentaRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.time.LocalDateTime;
@@ -13,46 +15,62 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VentaService {
 
+    // 1. Declarar el Logger
+    private static final Logger logger = LoggerFactory.getLogger(VentaService.class);
+
     private final VentaRepository ventaRepository;
     private final WebClient.Builder webClientBuilder;
 
     public List<Venta> obtenerTodas() {
+        logger.info("Listando todas las ventas desde la base de datos");
         return ventaRepository.findAll();
     }
     
     public List<Venta> obtenerPorUsuario(Long usuarioId) {
+        logger.info("Buscando ventas asociadas al usuario ID: {}", usuarioId);
         return ventaRepository.findByUsuarioId(usuarioId);
     }
 
     public Venta procesarVenta(Venta venta) {
-        // 1. Verificar si el usuario existe (Llamada HTTP a usuario-service 9092)
+        logger.info("Iniciando procesamiento de venta para Usuario ID: {}", venta.getUsuarioId());
+
+        // 1. Verificar si el usuario existe
         try {
+            logger.debug("Validando existencia de usuario en usuario-service (Puerto 9092)");
             webClientBuilder.build().get()
                     .uri("http://localhost:9092/api/usuarios/" + venta.getUsuarioId())
                     .retrieve()
                     .bodyToMono(Object.class)
-                    .block(); // block() lo hace síncrono para esperar la respuesta
+                    .block();
+            logger.debug("Validación exitosa: Usuario ID {} existe.", venta.getUsuarioId());
         } catch (Exception e) {
+            logger.error("Error al validar usuario ID: {}. Excepción: {}", venta.getUsuarioId(), e.getMessage());
             throw new RuntimeException("Error: El usuario no existe o el servicio de usuarios está caído.");
         }
 
         // 2. Preparar los datos internos de la venta
+        logger.debug("Calculando totales y enlazando detalles de la venta...");
         venta.setFecha(LocalDateTime.now());
         int totalVenta = 0;
 
         for (DetalleVenta detalle : venta.getDetalles()) {
-            detalle.setVenta(venta); // Enlazamos el detalle con la cabecera
+            detalle.setVenta(venta);
             detalle.setSubtotal(detalle.getCantidad() * detalle.getPrecioUnitario());
             totalVenta += detalle.getSubtotal();
         }
         venta.setTotal(totalVenta);
+        logger.debug("Cálculos finalizados. Total calculado: {}", totalVenta);
 
-        // 3. Guardar la venta en nuestra base de datos (db_venta)
+        // 3. Guardar la venta en nuestra base de datos
+        logger.info("Guardando datos de la venta en base de datos...");
         Venta ventaGuardada = ventaRepository.save(venta);
+        logger.debug("Venta guardada temporalmente con ID: {}", ventaGuardada.getId());
 
-        // 4. Descontar el stock en el inventario (Llamada HTTP a inventario-service 9093)
+        // 4. Descontar el stock en el inventario
+        logger.info("Iniciando actualización de stock en inventario-service (Puerto 9093) para {} productos", venta.getDetalles().size());
         for (DetalleVenta detalle : venta.getDetalles()) {
             try {
+                logger.debug("Descontando {} unidades del Producto ID: {}", detalle.getCantidad(), detalle.getProductoId());
                 webClientBuilder.build().put()
                         .uri("http://localhost:9093/api/inventario/producto/" + 
                              detalle.getProductoId() + "/descontar?cantidad=" + detalle.getCantidad())
@@ -60,16 +78,22 @@ public class VentaService {
                         .bodyToMono(Object.class)
                         .block();
             } catch (Exception e) {
+                logger.error("Error crítico al descontar stock del Producto ID: {}. Excepción: {}", detalle.getProductoId(), e.getMessage());
                 // En un sistema avanzado haríamos un "Rollback", pero por ahora lanzamos la alerta
                 throw new RuntimeException("Error descontando stock del producto ID: " + detalle.getProductoId());
             }
         }
 
+        logger.info("Procesamiento de venta finalizado exitosamente. ID final: {}", ventaGuardada.getId());
         return ventaGuardada;
     }
 
     public Venta obtenerPorId(Long id) {
+        logger.info("Buscando venta con ID: {}", id);
         return ventaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Venta no encontrada con ID: " + id));
+                .orElseThrow(() -> {
+                    logger.warn("No se encontró ninguna venta con el ID: {}", id);
+                    return new RuntimeException("Venta no encontrada con ID: " + id);
+                });
     }
 }
