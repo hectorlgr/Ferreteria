@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    // Más adelante, para el login, podríamos necesitar buscar al usuario por su email.
-    // Spring Data JPA es tan inteligente que solo con escribir esta línea, 
-    // crea la consulta SQL automáticamente:
+    // Metodo para buscar un usuario por email, lo cual es necesario para el proceso de login
     Usuario findByEmail(String email);
 }

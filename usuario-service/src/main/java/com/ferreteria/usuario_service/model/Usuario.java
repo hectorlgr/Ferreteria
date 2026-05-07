@@ -12,13 +12,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Usuario {
 
+    //ID Generado automaticamente por la db
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Nombre del usuario
     @Column(nullable = false)
     private String nombre;
 
+    // Apellido del usuario
     @Column(nullable = false)
     private String apellido;
 
@@ -26,13 +29,12 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // Aquí guardaremos la contraseña (la rúbrica exige que esté encriptada, 
-    // así que este String almacenará el hash, no la clave en texto plano)
+    // Aquí guardaremos la contraseña
+    // Este String almacenará el hash, no la clave en texto plano
     @Column(nullable = false)
     private String password; 
 
     // Aquí definiremos si es "ADMIN" o "CLIENTE"
-    // con el requisito de los 2 roles diferenciados
     @Column(nullable = false)
     private String rol; 
 }

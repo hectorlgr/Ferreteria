@@ -13,9 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductoService {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(ProductoService.class);
-
     private final ProductoRepository productoRepository;
 
     public List<Producto> obtenerTodos() {
@@ -23,6 +22,7 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
+    // Método para obtener un producto por su ID, con manejo de excepción si no se encuentra
     public Producto obtenerPorId(Long id) {
         logger.info("Buscando producto en base de datos con ID: {}", id);
         return productoRepository.findById(id)
@@ -32,6 +32,7 @@ public class ProductoService {
                 });
     }
 
+    // Método para guardar un nuevo producto
     public Producto guardarProducto(Producto producto) {
         logger.info("Iniciando guardado de producto: {} (Marca: {})", producto.getNombre(), producto.getMarca());
         logger.debug("Precio a registrar: {}", producto.getPrecio());
@@ -42,6 +43,7 @@ public class ProductoService {
         return productoGuardado;
     }
 
+    // Método para actualizar un producto existente
     public Producto actualizarProducto(Long id, Producto detallesProducto) {
         logger.info("Iniciando actualización para el producto ID: {}", id);
         
@@ -59,6 +61,7 @@ public class ProductoService {
         return productoRepository.save(productoExistente);
     }
 
+    // Método para eliminar un producto por su ID
     public void eliminarProducto(Long id) {
         logger.info("Iniciando proceso de eliminación para el producto ID: {}", id);
         

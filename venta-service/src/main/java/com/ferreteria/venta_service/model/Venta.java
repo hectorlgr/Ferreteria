@@ -15,15 +15,21 @@ import java.util.List;
 @AllArgsConstructor
 public class Venta {
 
+    // ID de la venta
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // ID del usuario que realizó la venta (referencia a usuario-service)
     @Column(name = "usuario_id", nullable = false)
     private Long usuarioId; // Solo guardamos el ID, el nombre vive en usuario-service
 
+    // Fecha y hora de la venta
+    @Column(nullable = false)
     private LocalDateTime fecha;
 
+    // Total de la venta
+    @Column(nullable = false)
     private Integer total;
 
     // Relación 1 a Muchos: Una venta tiene muchos detalles

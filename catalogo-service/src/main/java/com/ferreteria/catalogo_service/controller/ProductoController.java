@@ -15,12 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductoController {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
 
     private final ProductoService productoService;
 
     // GET: Obtener todos los productos
+    // http://localhost:9090/api/productos
     @GetMapping
     public List<Producto> obtenerTodos() {
         logger.info("GET /api/productos - Solicitud para listar todo el catálogo");
@@ -30,6 +31,7 @@ public class ProductoController {
     }
 
     // GET: Obtener un producto por ID
+    // http://localhost:9090/api/productos/{id}
     @GetMapping("/{id}")
     public Producto obtenerPorId(@PathVariable Long id) {
         logger.info("GET /api/productos/{} - Solicitud para obtener producto por ID", id);
@@ -37,6 +39,7 @@ public class ProductoController {
     }
 
     // POST: Crear un nuevo producto
+    // http://localhost:9090/api/productos
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Producto guardarProducto(@RequestBody Producto producto) {
@@ -47,6 +50,7 @@ public class ProductoController {
     }
 
     // PUT: Actualizar un producto existente
+    // http://localhost:9090/api/productos/{id}
     @PutMapping("/{id}")
     public Producto actualizarProducto(@PathVariable Long id, @RequestBody Producto producto) {
         logger.info("PUT /api/productos/{} - Solicitud para actualizar datos del producto", id);
@@ -56,6 +60,7 @@ public class ProductoController {
     }
 
     // DELETE: Eliminar un producto
+    // http://localhost:9090/api/productos/{id} 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminarProducto(@PathVariable Long id) {

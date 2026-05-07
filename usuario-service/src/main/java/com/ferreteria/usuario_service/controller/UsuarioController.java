@@ -15,12 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 
     private final UsuarioService usuarioService;
 
     // GET: Obtener todos los usuarios
+    // http://localhost:9090/api/usuarios
     @GetMapping
     public List<Usuario> obtenerTodos() {
         logger.info("GET /api/usuarios - Solicitud para listar todos los usuarios");
@@ -30,6 +31,7 @@ public class UsuarioController {
     }
 
     // GET: Obtener un usuario por ID
+    // http://localhost:9090/api/usuarios/{id}
     @GetMapping("/{id}")
     public Usuario obtenerPorId(@PathVariable Long id) {
         logger.info("GET /api/usuarios/{} - Solicitud para obtener usuario por ID", id);
@@ -37,6 +39,7 @@ public class UsuarioController {
     }
 
     // POST: Crear un nuevo usuario
+    // http://localhost:9090/api/usuarios
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) // Devuelve 201 Created
     public Usuario guardarUsuario(@RequestBody Usuario usuario) {
@@ -47,6 +50,7 @@ public class UsuarioController {
     }
 
     // PUT: Actualizar un usuario existente
+    // http://localhost:9090/api/usuarios/{id} 
     @PutMapping("/{id}")
     public Usuario actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
         logger.info("PUT /api/usuarios/{} - Solicitud para actualizar datos del usuario", id);
@@ -56,6 +60,7 @@ public class UsuarioController {
     }
 
     // DELETE: Eliminar un usuario
+    // http://localhost:9090/api/usuarios/{id}
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Devuelve 204 No Content
     public void eliminarUsuario(@PathVariable Long id) {

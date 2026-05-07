@@ -15,11 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InventarioController {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(InventarioController.class);
 
     private final InventarioService inventarioService;
 
+    // GET todo el inventario
+    // http://localhost:9090/api/inventario
     @GetMapping
     public List<Inventario> obtenerTodos() {
         logger.info("GET /api/inventario - Solicitud para listar todo el inventario");
@@ -28,12 +30,16 @@ public class InventarioController {
         return inventarios;
     }
 
+    // GET inventario por ID de producto
+    // http://localhost:9090/api/inventario/producto/{productoId}
     @GetMapping("/producto/{productoId}")
     public Inventario obtenerPorProductoId(@PathVariable Long productoId) {
         logger.info("GET /api/inventario/producto/{} - Solicitud para buscar inventario por ID de producto", productoId);
         return inventarioService.obtenerPorProductoId(productoId);
     }
 
+    // POST para registrar nuevo inventario
+    // http://localhost:9090/api/inventario
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Inventario guardarInventario(@RequestBody Inventario inventario) {
@@ -43,6 +49,8 @@ public class InventarioController {
         return nuevoInventario;
     }
 
+    // PUT para actualizar el stock de un producto
+    // http://localhost:9090/api/inventario/producto/{productoId}/descontar
     @PutMapping("/producto/{productoId}/descontar")
     public Inventario descontarStock(@PathVariable Long productoId, @RequestParam Integer cantidad) {
         logger.info("PUT /api/inventario/producto/{}/descontar - Solicitud para descontar {} unidades", productoId, cantidad);
@@ -51,6 +59,8 @@ public class InventarioController {
         return inventarioActualizado;
     }
     
+    // DELETE para eliminar inventario por ID de producto
+    // http://localhost:9090/api/inventario/producto/{productoId} 
     @DeleteMapping("/producto/{productoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminarPorProductoId(@PathVariable Long productoId) {

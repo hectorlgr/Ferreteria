@@ -13,16 +13,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InventarioService {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(InventarioService.class);
 
     private final InventarioRepository inventarioRepository;
 
+    // Método para obtener todos los registros de inventario
     public List<Inventario> obtenerTodos() {
         logger.info("Consultando todos los registros de inventario en la base de datos");
         return inventarioRepository.findAll();
     }
 
+    // Método para obtener un inventario por el ID del producto
     public Inventario obtenerPorProductoId(Long productoId) {
         logger.info("Buscando inventario para el Producto ID: {}", productoId);
         return inventarioRepository.findByProductoId(productoId)
@@ -32,6 +34,7 @@ public class InventarioService {
                 });
     }
 
+    // Método para guardar un nuevo registro de inventario
     public Inventario guardarInventario(Inventario inventario) {
         logger.info("Iniciando guardado de inventario para Producto ID: {}", inventario.getProductoId());
         logger.debug("Cantidad inicial a registrar: {}", inventario.getCantidad());
@@ -42,6 +45,7 @@ public class InventarioService {
         return inventarioGuardado;
     }
 
+    // Método para actualizar el stock de un producto después de una compra
     public Inventario actualizarStock(Long productoId, Integer cantidadComprada) {
         logger.info("Iniciando proceso de descuento de stock para Producto ID: {}", productoId);
         
@@ -60,6 +64,7 @@ public class InventarioService {
         return inventarioRepository.save(inventario);
     }
 
+    // Método para eliminar un inventario por el ID del producto
     public void eliminarPorProductoId(Long productoId) {
         logger.info("Eliminando inventario para Producto ID: {}", productoId);
         Inventario inventario = obtenerPorProductoId(productoId);
