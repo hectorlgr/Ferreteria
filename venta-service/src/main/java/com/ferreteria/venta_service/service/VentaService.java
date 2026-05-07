@@ -67,4 +67,9 @@ public class VentaService {
 
         return ventaGuardada;
     }
+
+    public Venta obtenerPorId(Long id) {
+        return ventaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venta no encontrada con ID: " + id));
+    }
 }

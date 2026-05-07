@@ -24,6 +24,11 @@ public class VentaController {
         return ventaService.obtenerPorUsuario(usuarioId);
     }
 
+    @GetMapping("/{id}")
+    public Venta obtenerPorId(@PathVariable Long id) {
+        return ventaService.obtenerPorId(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Venta procesarVenta(@RequestBody Venta venta) {

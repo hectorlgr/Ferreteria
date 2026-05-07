@@ -4,6 +4,7 @@ import com.ferreteria.despacho_service.model.Despacho;
 import com.ferreteria.despacho_service.repository.DespachoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class DespachoService {
 
     private final DespachoRepository despachoRepository;
+    private final WebClient.Builder webClientBuilder;
 
     public List<Despacho> obtenerTodos() {
         return despachoRepository.findAll();
@@ -23,17 +25,26 @@ public class DespachoService {
     }
 
     public Despacho crearDespacho(Despacho despacho) {
-        // Buscamos cuál es el número más alto actualmente
+        // 1. VALIDACIÓN: Comprobar que la venta existe en el venta-service (Puerto 9094)
+        try {
+            webClientBuilder.build().get()
+                    .uri("http://localhost:9094/api/ventas/" + despacho.getVentaId())
+                    .retrieve()
+                    .bodyToMono(Object.class)
+                    .block(); // block() espera la respuesta de forma síncrona
+        } catch (Exception e) {
+            throw new RuntimeException("Error: La venta ID " + despacho.getVentaId() + " no existe. No se puede crear el despacho.");
+        }
+
+        // 2. LÓGICA DE SEGUIMIENTO: Buscar el número más alto y sumarle 1
         Integer maximoActual = despachoRepository.obtenerMaximoSeguimiento();
-        
-        // Si la base de datos está vacía (maximoActual es null), empezamos en 1.
-        // Si ya existen registros, le sumamos 1 al número mayor.
         int siguienteNumero = (maximoActual == null) ? 1 : maximoActual + 1;
         
-        // Por defecto, todo despacho nuevo parte en estado "PREPARANDO"
+        // 3. ASIGNACIÓN DE DATOS
         despacho.setNumeroSeguimiento(siguienteNumero);
-        despacho.setEstado("PREPARANDO");
+        despacho.setEstado("PREPARANDO"); // Estado inicial por defecto
         
+        // 4. GUARDAR EN BASE DE DATOS
         return despachoRepository.save(despacho);
     }
 
