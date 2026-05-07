@@ -26,6 +26,11 @@ public class DespachoController {
         return despachoService.obtenerPorSeguimiento(numeroSeguimiento);
     }
 
+    @GetMapping("/estado/{estado}")
+    public Despacho obtenerPorEstado(@PathVariable String estado) {
+        return despachoService.obtenerPorEstado(estado);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Despacho crearDespacho(@RequestBody Despacho despacho) {

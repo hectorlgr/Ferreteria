@@ -24,6 +24,11 @@ public class DespachoService {
                 .orElseThrow(() -> new RuntimeException("No se encontró el pedido con el seguimiento: " + numeroSeguimiento));
     }
 
+    public Despacho obtenerPorEstado(String estado) {
+        return despachoRepository.findByEstado(estado)
+                .orElseThrow(() -> new RuntimeException("No se encontró el pedido con el estado: " + estado));
+    }
+
     public Despacho crearDespacho(Despacho despacho) {
         // 1. VALIDACIÓN: Comprobar que la venta existe en el venta-service (Puerto 9094)
         try {
