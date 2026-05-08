@@ -32,6 +32,10 @@ public class Venta {
     @Column(nullable = false)
     private Integer total;
 
+    // Costo de despacho fijo incluido en la venta
+    @Column(nullable = false)
+    private Integer costoDespacho;
+
     // Relación 1 a Muchos: Una venta tiene muchos detalles
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
     @JsonManagedReference // Evita un bucle infinito al devolver el JSON

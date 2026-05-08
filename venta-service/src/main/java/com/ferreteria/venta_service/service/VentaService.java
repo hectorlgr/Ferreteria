@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -56,14 +55,17 @@ public class VentaService {
         logger.debug("Calculando totales y enlazando detalles de la venta...");
         venta.setFecha(LocalDateTime.now());
         int totalVenta = 0;
+        final int despachoFijo = 1500;
 
         for (DetalleVenta detalle : venta.getDetalles()) {
             detalle.setVenta(venta);
             detalle.setSubtotal(detalle.getCantidad() * detalle.getPrecioUnitario());
             totalVenta += detalle.getSubtotal();
         }
+        venta.setCostoDespacho(despachoFijo);
+        totalVenta += despachoFijo;
         venta.setTotal(totalVenta);
-        logger.debug("Cálculos finalizados. Total calculado: {}", totalVenta);
+        logger.debug("Cálculos finalizados. Total calculado: {} (incluye despacho fijo de {})", totalVenta, despachoFijo);
 
         // 3. Guardar la venta en la db
         logger.info("Guardando datos de la venta en base de datos...");
@@ -138,12 +140,12 @@ public class VentaService {
         throw new RuntimeException("La fecha de inicio no puede ser posterior a la fecha de fin");
     }
 
-    // Convertimos LocalDate a LocalDateTime para la consulta en la BD
-    java.time.LocalDateTime fechaInicioCompleta = inicio.atStartOfDay(); // 00:00:00
-    java.time.LocalDateTime fechaFinCompleta = fin.atTime(java.time.LocalTime.MAX); // 23:59:59.999
+        // Convertimos LocalDate a LocalDateTime para la consulta en la BD
+        java.time.LocalDateTime fechaInicioCompleta = inicio.atStartOfDay(); // 00:00:00
+        java.time.LocalDateTime fechaFinCompleta = fin.atTime(java.time.LocalTime.MAX); // 23:59:59.999
 
-    logger.debug("Buscando en BD entre {} y {}", fechaInicioCompleta, fechaFinCompleta);
+        logger.debug("Buscando en BD entre {} y {}", fechaInicioCompleta, fechaFinCompleta);
     
-    return ventaRepository.findByFechaRango(fechaInicioCompleta, fechaFinCompleta);
-}
+        return ventaRepository.findByFechaRango(fechaInicioCompleta, fechaFinCompleta);
+    }
 }

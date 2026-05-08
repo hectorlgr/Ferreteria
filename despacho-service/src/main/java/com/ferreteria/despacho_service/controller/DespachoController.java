@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -58,7 +57,7 @@ public class DespachoController {
     }
 
     // PUT: Actualizar el estado de un despacho
-    // http://localhost:9090/api/despachos/{id}/estado?estado={nuevoEstado}
+    // http://localhost:9090/api/despachos/{id}/estado?estado={nuevoEstado} (Ej: "EN_RUTA", "ENTREGADO")
     @PutMapping("/{id}/estado")
     public Despacho actualizarEstado(@PathVariable Long id, @RequestParam String estado) {
         logger.info("PUT /api/despachos/{}/estado - Solicitud para actualizar estado a: {}", id, estado);

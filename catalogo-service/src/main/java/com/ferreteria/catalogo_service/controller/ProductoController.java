@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -17,7 +16,6 @@ public class ProductoController {
 
     // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
-
     private final ProductoService productoService;
 
     // GET: Obtener todos los productos
