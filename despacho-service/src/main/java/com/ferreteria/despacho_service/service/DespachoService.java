@@ -14,17 +14,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DespachoService {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(DespachoService.class);
 
     private final DespachoRepository despachoRepository;
     private final WebClient.Builder webClientBuilder;
 
+    // Método para obtener todos los despachos
     public List<Despacho> obtenerTodos() {
         logger.info("Listando todos los despachos desde la base de datos");
         return despachoRepository.findAll();
     }
 
+    // Método para obtener un despacho por el ID de la venta asociada
     public Despacho obtenerPorVentaId(Long ventaId) {
         logger.info("Buscando despacho asociado a la Venta ID: {}", ventaId);
         return despachoRepository.findByVentaId(ventaId)
@@ -34,6 +36,7 @@ public class DespachoService {
                 });
     }
 
+    // Método para obtener un despacho por su estado
     public Despacho obtenerPorEstado(String estado) {
         logger.info("Buscando primer despacho con el estado: {}", estado);
         return despachoRepository.findByEstado(estado)
@@ -43,6 +46,7 @@ public class DespachoService {
                 });
     }
 
+    // Método para crear un nuevo despacho
     public Despacho crearDespacho(Despacho despacho) {
         logger.info("Iniciando creación de despacho para la Venta ID: {}", despacho.getVentaId());
 
@@ -60,8 +64,9 @@ public class DespachoService {
             throw new RuntimeException("Error: La venta ID " + despacho.getVentaId() + " no existe.");
         }
 
+        //POR DEFECTO, EL ESTADO INICIAL DEL DESPACHO ES "PREPARANDO"
         despacho.setEstado("PREPARANDO");
-        logger.info("Guardando nuevo despacho en la base de datos con estado PREPARANDO...");
+        logger.info("Guardando nuevo despacho en la base de datos con estado PREPARANDO");
         
         Despacho despachoGuardado = despachoRepository.save(despacho);
         logger.debug("Despacho guardado temporalmente con ID: {}", despachoGuardado.getId());
@@ -69,6 +74,7 @@ public class DespachoService {
         return despachoGuardado;
     }
 
+    // Método para actualizar el estado de un despacho
     public Despacho actualizarEstado(Long id, String nuevoEstado) {
         logger.info("Iniciando actualización de estado para Despacho ID: {}", id);
         
@@ -84,6 +90,7 @@ public class DespachoService {
         return despachoRepository.save(despacho);
     }
 
+    // Método para eliminar un despacho
     public void eliminarDespacho(Long id) {
         logger.info("Iniciando eliminación de despacho ID: {}", id);
 

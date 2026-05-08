@@ -16,22 +16,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VentaService {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(VentaService.class);
 
     private final VentaRepository ventaRepository;
     private final WebClient.Builder webClientBuilder;
 
+    // Método para obtener todas las ventas
     public List<Venta> obtenerTodas() {
         logger.info("Listando todas las ventas desde la base de datos");
         return ventaRepository.findAll();
     }
     
+    // Método para obtener ventas por ID de usuario
     public List<Venta> obtenerPorUsuario(Long usuarioId) {
         logger.info("Buscando ventas asociadas al usuario ID: {}", usuarioId);
         return ventaRepository.findByUsuarioId(usuarioId);
     }
 
+    // Método para procesar una nueva venta
     public Venta procesarVenta(Venta venta) {
         logger.info("Iniciando procesamiento de venta para Usuario ID: {}", venta.getUsuarioId());
 
@@ -62,7 +65,7 @@ public class VentaService {
         venta.setTotal(totalVenta);
         logger.debug("Cálculos finalizados. Total calculado: {}", totalVenta);
 
-        // 3. Guardar la venta en nuestra base de datos
+        // 3. Guardar la venta en la db
         logger.info("Guardando datos de la venta en base de datos...");
         Venta ventaGuardada = ventaRepository.save(venta);
         logger.debug("Venta guardada temporalmente con ID: {}", ventaGuardada.getId());
@@ -89,6 +92,7 @@ public class VentaService {
         return ventaGuardada;
     }
 
+    // Método para obtener una venta por ID
     public Venta obtenerPorId(Long id) {
         logger.info("Buscando venta con ID: {}", id);
         return ventaRepository.findById(id)
@@ -98,6 +102,7 @@ public class VentaService {
                 });
     }
 
+    // Método para actualizar una venta existente
     public Venta actualizarVenta(Long id, Venta ventaActualizada) {
         logger.info("Iniciando actualización de venta con ID: {}", id);
         
@@ -114,6 +119,7 @@ public class VentaService {
         return ventaGuardada;
     }
 
+    // Método para eliminar una venta
     public void eliminarVenta(Long id) {
         logger.info("Iniciando eliminación de venta con ID: {}", id);
         
@@ -124,6 +130,7 @@ public class VentaService {
         logger.info("Venta ID {} eliminada correctamente", id);
     }
 
+    // Método para obtener ventas por rango de fechas
     public List<Venta> obtenerPorRangoFechas(java.time.LocalDate inicio, java.time.LocalDate fin) {
     logger.info("Procesando rango de fechas: {} al {}", inicio, fin);
 

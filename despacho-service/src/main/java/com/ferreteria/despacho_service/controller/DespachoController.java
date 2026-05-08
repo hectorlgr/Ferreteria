@@ -15,11 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DespachoController {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(DespachoController.class);
 
     private final DespachoService despachoService;
 
+    // GET: Obtener todos los despachos
+    // http://localhost:9090/api/despachos
     @GetMapping
     public List<Despacho> obtenerTodos() {
         logger.info("GET /api/despachos - Solicitud para listar todos los despachos");
@@ -28,18 +30,24 @@ public class DespachoController {
         return despachos;
     }
 
+    // GET: Obtener despacho por ID de venta
+    // http://localhost:9090/api/despachos/venta/{ventaId}
     @GetMapping("/venta/{ventaId}")
     public Despacho obtenerPorVentaId(@PathVariable Long ventaId) {
         logger.info("GET /api/despachos/venta/{} - Solicitud para buscar despacho por ID de venta", ventaId);
         return despachoService.obtenerPorVentaId(ventaId);
     }
 
+    // GET: Obtener despacho por estado
+    // http://localhost:9090/api/despachos/estado/{estado}
     @GetMapping("/estado/{estado}")
     public Despacho obtenerPorEstado(@PathVariable String estado) {
         logger.info("GET /api/despachos/estado/{} - Solicitud para buscar despachos por estado", estado);
         return despachoService.obtenerPorEstado(estado);
     }
 
+    // POST: Crear un nuevo despacho
+    // http://localhost:9090/api/despachos
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Despacho crearDespacho(@RequestBody Despacho despacho) {
@@ -49,6 +57,8 @@ public class DespachoController {
         return nuevoDespacho;
     }
 
+    // PUT: Actualizar el estado de un despacho
+    // http://localhost:9090/api/despachos/{id}/estado?estado={nuevoEstado}
     @PutMapping("/{id}/estado")
     public Despacho actualizarEstado(@PathVariable Long id, @RequestParam String estado) {
         logger.info("PUT /api/despachos/{}/estado - Solicitud para actualizar estado a: {}", id, estado);

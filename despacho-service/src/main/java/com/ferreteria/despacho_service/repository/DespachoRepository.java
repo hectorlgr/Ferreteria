@@ -8,7 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface DespachoRepository extends JpaRepository<Despacho, Long> {
+    // Método para encontrar un despacho por el ID de la venta asociada
     Optional<Despacho> findByVentaId(Long ventaId);
+    // Método para encontrar un despacho por su estado
     Optional<Despacho> findByEstado(String estado);
 
 }

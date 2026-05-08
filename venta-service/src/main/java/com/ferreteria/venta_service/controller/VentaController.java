@@ -15,11 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VentaController {
 
-    // 1. Declarar el Logger
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(VentaController.class);
 
     private final VentaService ventaService;
 
+    //GET todas las ventas
+    // http://localhost:9090/api/ventas
     @GetMapping
     public List<Venta> obtenerTodas() {
         logger.info("GET /api/ventas - Solicitud para listar todas las ventas");
@@ -28,6 +30,8 @@ public class VentaController {
         return ventas;
     }
 
+    // GET: Obtener ventas por ID de usuario
+    // http://localhost:9090/api/ventas/usuario/{usuarioId}
     @GetMapping("/usuario/{usuarioId}")
     public List<Venta> obtenerPorUsuario(@PathVariable Long usuarioId) {
         logger.info("GET /api/ventas/usuario/{} - Solicitud para listar ventas por usuario", usuarioId);
@@ -36,22 +40,28 @@ public class VentaController {
         return ventas;
     }
 
+    // GET: Obtener ventas por rango de fechas
+    // http://localhost:9090/api/ventas/rango-fechas?fechaInicio={2024-01-01}&fechaFin={2024-12-31}
     @GetMapping("/rango-fechas")
-public List<Venta> obtenerPorRangoFechas(
+    public List<Venta> obtenerPorRangoFechas(
         @RequestParam("fechaInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.time.LocalDate fechaInicio,
         @RequestParam("fechaFin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.time.LocalDate fechaFin) {
     
-    logger.info("GET /api/ventas/rango-fechas - Solicitud de búsqueda. Desde: {} Hasta: {}", fechaInicio, fechaFin);
+        logger.info("GET /api/ventas/rango-fechas - Solicitud de búsqueda. Desde: {} Hasta: {}", fechaInicio, fechaFin);
     
-    return ventaService.obtenerPorRangoFechas(fechaInicio, fechaFin);
-}
+        return ventaService.obtenerPorRangoFechas(fechaInicio, fechaFin);
+    }
 
+    // GET: Obtener una venta por ID
+    // http://localhost:9090/api/ventas/{id}
     @GetMapping("/{id}")
     public Venta obtenerPorId(@PathVariable Long id) {
         logger.info("GET /api/ventas/{} - Solicitud para obtener venta por ID", id);
         return ventaService.obtenerPorId(id);
     }
 
+    // POST: Crear una nueva venta
+    // http://localhost:9090/api/ventas
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Venta procesarVenta(@RequestBody Venta venta) {
@@ -63,6 +73,8 @@ public List<Venta> obtenerPorRangoFechas(
         return nuevaVenta;
     }
 
+    // PUT: Actualizar una venta existente
+    // http://localhost:9090/api/ventas/{id}
     @PutMapping("/{id}")
     public Venta actualizarVenta(@PathVariable Long id, @RequestBody Venta venta) {
         logger.info("PUT /api/ventas/{} - Solicitud para actualizar venta", id);
@@ -71,6 +83,8 @@ public List<Venta> obtenerPorRangoFechas(
         return ventaActualizada;
     }
 
+    // DELETE: Eliminar una venta
+    // http://localhost:9090/api/ventas/{id}
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminarVenta(@PathVariable Long id) {

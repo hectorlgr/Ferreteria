@@ -12,16 +12,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Despacho {
 
+    // ID autogenerado por la db
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Este será ahora tu identificador único y de seguimiento
+    private Long id;
 
+    // ID de la venta asociada a este despacho, con este se hace el seguimiento (venta-service)
     @Column(name = "venta_id", nullable = false, unique = true)
     private Long ventaId;
 
+    // Dirección de entrega para el despacho
     @Column(nullable = false)
     private String direccion;
 
+    // Estado del despacho (Ej: "PREPARANDO", "EN_RUTA", "ENTREGADO")
     @Column(nullable = false)
     private String estado; 
 }
