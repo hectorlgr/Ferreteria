@@ -1,0 +1,140 @@
+00:57:28 INFO  Starting VentaServiceApplication using Java 21.0.10 with PID 15968 (D:\Proyectos\Ferreteria\venta-service\target\classes started by hecto in D:\Proyectos\Ferreteria\venta-service)
+00:57:28 INFO  No active profile set, falling back to 1 default profile: "default"
+00:57:28 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+00:57:28 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+00:57:30 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:57:30 INFO  Finished Spring Data repository scanning in 260 ms. Found 1 JPA repository interface.
+00:57:31 INFO  BeanFactory id=371b1c31-2a26-365d-8b17-840d62e1cbbe
+00:57:32 INFO  Tomcat initialized with port 9094 (http)
+00:57:32 INFO  Starting service [Tomcat]
+00:57:32 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+00:57:32 INFO  Root WebApplicationContext: initialization completed in 3628 ms
+00:57:32 INFO  HikariPool-1 - Starting...
+00:57:33 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@47193fb2
+00:57:33 INFO  HikariPool-1 - Start completed.
+00:57:35 INFO  Creating database changelog table with name: db_ventas.databasechangelog
+00:57:35 INFO  Reading from db_ventas.databasechangelog
+00:57:35 INFO  Creating snapshot
+00:57:35 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+00:57:35 INFO  Successfully acquired change log lock
+00:57:35 INFO  Using deploymentId: 8216252692
+00:57:35 INFO  Reading from db_ventas.databasechangelog
+00:57:35 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+00:57:36 INFO  Custom SQL executed
+00:57:36 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 48ms
+00:57:36 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+00:57:36 INFO  Custom SQL executed
+00:57:36 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 69ms
+00:57:36 INFO  Running Changeset: db/changelog/db.changelog.sql::3::hector
+00:57:36 INFO  Custom SQL executed
+00:57:36 INFO  ChangeSet db/changelog/db.changelog.sql::3::hector ran successfully in 35ms
+00:57:36 INFO  Running Changeset: db/changelog/db.changelog.sql::4::hector
+00:57:36 INFO  Custom SQL executed
+00:57:36 INFO  ChangeSet db/changelog/db.changelog.sql::4::hector ran successfully in 12ms
+00:57:36 INFO  UPDATE SUMMARY
+00:57:36 INFO  Run:                          4
+00:57:36 INFO  Previously run:               0
+00:57:36 INFO  Filtered out:                 0
+00:57:36 INFO  -------------------------------
+00:57:36 INFO  Total change sets:            4
+00:57:36 INFO  Update summary generated
+00:57:36 INFO  Update command completed successfully.
+00:57:36 INFO  Liquibase: Update has been successful. Rows affected: 20
+00:57:36 INFO  Successfully released change log lock
+00:57:36 INFO  Command execution complete
+00:57:36 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+00:57:36 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+00:57:37 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+00:57:38 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+00:57:38 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_ventas?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_ventas/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:57:39 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:57:39 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:57:40 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+00:57:41 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:57:42 INFO  Eureka HTTP Client uses RestClient.
+00:57:42 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+00:57:42 INFO  Setting initial instance status as: STARTING
+00:57:42 INFO  Initializing Eureka in region us-east-1
+00:57:42 INFO  Client configured to neither register nor query for data.
+00:57:42 INFO  Discovery Client initialized at timestamp 1778216262422 with initial instances count: 0
+00:57:42 INFO  Registering application VENTA-SERVICE with eureka with status UP
+00:57:42 INFO  Tomcat started on port 9094 (http) with context path '/'
+00:57:42 INFO  Updating port to 9094
+00:57:42 INFO  Started VentaServiceApplication in 14.938 seconds (process running for 16.453)
+01:01:13 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+01:01:13 INFO  Initializing Servlet 'dispatcherServlet'
+01:01:13 INFO  Completed initialization in 2 ms
+01:01:13 INFO  GET /api/ventas - Solicitud para listar todas las ventas
+01:01:13 INFO  Listando todas las ventas desde la base de datos
+01:02:43 INFO  GET /api/ventas/3 - Solicitud para obtener venta por ID
+01:02:43 INFO  Buscando venta con ID: 3
+01:55:44 INFO  DELETE /api/ventas/10 - Solicitud para eliminar venta
+01:55:44 INFO  Iniciando eliminación de venta con ID: 10
+01:55:44 INFO  Buscando venta con ID: 10
+01:55:44 INFO  Venta ID 10 eliminada correctamente
+01:55:44 INFO  Venta ID 10 eliminada correctamente
+01:55:51 INFO  GET /api/ventas/10 - Solicitud para obtener venta por ID
+01:55:51 INFO  Buscando venta con ID: 10
+01:55:51 WARN  No se encontró ninguna venta con el ID: 10
+01:55:51 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Venta no encontrada con ID: 10] with root cause
+java.lang.RuntimeException: Venta no encontrada con ID: 10
+	at com.ferreteria.venta_service.service.VentaService.lambda$0(VentaService.java:103)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.ferreteria.venta_service.service.VentaService.obtenerPorId(VentaService.java:101)
+	at com.ferreteria.venta_service.controller.VentaController.obtenerPorId(VentaController.java:60)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+01:55:56 INFO  GET /api/ventas - Solicitud para listar todas las ventas
+01:55:56 INFO  Listando todas las ventas desde la base de datos

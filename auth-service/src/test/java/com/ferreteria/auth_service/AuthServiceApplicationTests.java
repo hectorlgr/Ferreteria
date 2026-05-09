@@ -1,10 +1,10 @@
-package com.ferreteria.api_gateway;
+package com.ferreteria.auth_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiGatewayApplicationTests {
+class AuthServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

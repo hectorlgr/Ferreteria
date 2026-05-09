@@ -1,0 +1,312 @@
+00:51:14 INFO  Starting UsuarioServiceApplication using Java 21.0.10 with PID 16676 (D:\Proyectos\Ferreteria\usuario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\usuario-service)
+00:51:14 INFO  No active profile set, falling back to 1 default profile: "default"
+00:51:14 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+00:51:14 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+00:51:16 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+00:51:16 INFO  Finished Spring Data repository scanning in 256 ms. Found 1 JPA repository interface.
+00:51:16 INFO  BeanFactory id=c4948507-409b-3e45-9857-01ef71ac3a94
+00:51:17 INFO  Tomcat initialized with port 9092 (http)
+00:51:17 INFO  Starting service [Tomcat]
+00:51:17 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+00:51:18 INFO  Root WebApplicationContext: initialization completed in 3342 ms
+00:51:18 INFO  HikariPool-1 - Starting...
+00:51:18 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2c12696f
+00:51:18 INFO  HikariPool-1 - Start completed.
+00:51:21 INFO  Reading from db_usuarios.databasechangelog
+00:51:21 INFO  Database is up to date, no changesets to execute
+00:51:21 INFO  Reading from db_usuarios.databasechangelog
+00:51:21 INFO  UPDATE SUMMARY
+00:51:21 INFO  Run:                          0
+00:51:21 INFO  Previously run:               2
+00:51:21 INFO  Filtered out:                 0
+00:51:21 INFO  -------------------------------
+00:51:21 INFO  Total change sets:            2
+00:51:21 INFO  Update summary generated
+00:51:21 INFO  Command execution complete
+00:51:21 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+00:51:21 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+00:51:22 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+00:51:22 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+00:51:22 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_usuarios?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_usuarios/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+00:51:24 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+00:51:24 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+00:51:24 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+00:51:25 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+00:51:26 INFO  Eureka HTTP Client uses RestClient.
+00:51:26 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+00:51:26 INFO  Setting initial instance status as: STARTING
+00:51:26 INFO  Initializing Eureka in region us-east-1
+00:51:26 INFO  Client configured to neither register nor query for data.
+00:51:26 INFO  Discovery Client initialized at timestamp 1778215886328 with initial instances count: 0
+00:51:26 INFO  Registering application USUARIO-SERVICE with eureka with status UP
+00:51:26 INFO  Tomcat started on port 9092 (http) with context path '/'
+00:51:26 INFO  Updating port to 9092
+00:51:26 INFO  Started UsuarioServiceApplication in 12.812 seconds (process running for 14.39)
+01:00:49 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+01:00:49 INFO  Initializing Servlet 'dispatcherServlet'
+01:00:49 INFO  Completed initialization in 42 ms
+01:00:49 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+01:00:49 INFO  Consultando todos los usuarios en la base de datos
+01:22:32 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+01:22:32 INFO  Consultando todos los usuarios en la base de datos
+01:22:54 INFO  GET /api/usuarios/1 - Solicitud para obtener usuario por ID
+01:22:54 INFO  Buscando usuario en base de datos con ID: 1
+01:23:00 INFO  GET /api/usuarios/3 - Solicitud para obtener usuario por ID
+01:23:00 INFO  Buscando usuario en base de datos con ID: 3
+01:23:11 INFO  GET /api/usuarios/4 - Solicitud para obtener usuario por ID
+01:23:11 INFO  Buscando usuario en base de datos con ID: 4
+01:23:15 INFO  GET /api/usuarios/3 - Solicitud para obtener usuario por ID
+01:23:15 INFO  Buscando usuario en base de datos con ID: 3
+01:24:45 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+01:24:45 INFO  Consultando todos los usuarios en la base de datos
+01:29:41 INFO  Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+01:29:41 INFO  Unregistering application USUARIO-SERVICE with eureka with status DOWN
+01:29:41 INFO  Commencing graceful shutdown. Waiting for active requests to complete
+01:29:42 INFO  Graceful shutdown complete
+01:29:42 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
+01:29:42 INFO  HikariPool-1 - Shutdown initiated...
+01:29:42 INFO  HikariPool-1 - Shutdown completed.
+01:29:42 INFO  Shutting down DiscoveryClient ...
+01:29:42 INFO  Completed shut down of DiscoveryClient
+01:29:42 INFO  Starting UsuarioServiceApplication using Java 21.0.10 with PID 16676 (D:\Proyectos\Ferreteria\usuario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\usuario-service)
+01:29:42 INFO  No active profile set, falling back to 1 default profile: "default"
+01:29:43 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+01:29:43 INFO  Finished Spring Data repository scanning in 81 ms. Found 1 JPA repository interface.
+01:29:44 INFO  BeanFactory id=c4948507-409b-3e45-9857-01ef71ac3a94
+01:29:44 INFO  Tomcat initialized with port 9092 (http)
+01:29:44 INFO  Starting service [Tomcat]
+01:29:44 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+01:29:44 INFO  Root WebApplicationContext: initialization completed in 1435 ms
+01:29:44 INFO  HikariPool-2 - Starting...
+01:29:44 INFO  HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@706aba67
+01:29:44 INFO  HikariPool-2 - Start completed.
+01:29:44 INFO  Reading from db_usuarios.databasechangelog
+01:29:44 INFO  Database is up to date, no changesets to execute
+01:29:44 INFO  Reading from db_usuarios.databasechangelog
+01:29:44 INFO  UPDATE SUMMARY
+01:29:44 INFO  Run:                          0
+01:29:44 INFO  Previously run:               2
+01:29:44 INFO  Filtered out:                 0
+01:29:44 INFO  -------------------------------
+01:29:44 INFO  Total change sets:            2
+01:29:44 INFO  Update summary generated
+01:29:44 INFO  Command execution complete
+01:29:44 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+01:29:44 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+01:29:44 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+01:29:44 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_usuarios?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_usuarios/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+01:29:44 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+01:29:44 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+01:29:45 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+01:29:45 INFO  Eureka HTTP Client uses RestClient.
+01:29:45 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+01:29:45 INFO  Setting initial instance status as: STARTING
+01:29:45 INFO  Initializing Eureka in region us-east-1
+01:29:45 INFO  Client configured to neither register nor query for data.
+01:29:45 INFO  Discovery Client initialized at timestamp 1778218185402 with initial instances count: 0
+01:29:45 INFO  Registering application USUARIO-SERVICE with eureka with status UP
+01:29:45 INFO  Tomcat started on port 9092 (http) with context path '/'
+01:29:45 INFO  Updating port to 9092
+01:29:45 INFO  Started UsuarioServiceApplication in 2.67 seconds (process running for 2313.347)
+01:29:45 INFO  Condition evaluation unchanged
+01:31:07 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+01:31:07 INFO  Initializing Servlet 'dispatcherServlet'
+01:31:07 INFO  Completed initialization in 4 ms
+01:31:07 INFO  POST /api/usuarios - Solicitud para registrar un nuevo usuario: maria.lopez@gmail.com
+01:31:07 INFO  Iniciando guardado de nuevo usuario. Email: maria.lopez@gmail.com, Rol: CLIENTE
+01:31:07 INFO  Usuario registrado exitosamente con ID: 11
+01:31:31 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+01:31:31 INFO  Consultando todos los usuarios en la base de datos
+01:32:15 INFO  PUT /api/usuarios/3 - Solicitud para actualizar datos del usuario
+01:32:15 INFO  Iniciando actualización de datos para el usuario ID: 3
+01:32:15 INFO  Buscando usuario en base de datos con ID: 3
+01:32:15 INFO  Guardando usuario actualizado en la base de datos...
+01:32:16 INFO  Usuario ID 3 actualizado correctamente
+01:32:28 INFO  GET /api/usuarios/3 - Solicitud para obtener usuario por ID
+01:32:28 INFO  Buscando usuario en base de datos con ID: 3
+01:32:42 INFO  DELETE /api/usuarios/11 - Solicitud para eliminar usuario
+01:32:42 INFO  Iniciando proceso de eliminación para el usuario ID: 11
+01:32:42 INFO  Buscando usuario en base de datos con ID: 11
+01:32:42 INFO  Usuario ID 11 eliminado exitosamente
+01:32:44 INFO  DELETE /api/usuarios/11 - Solicitud para eliminar usuario
+01:32:44 INFO  Iniciando proceso de eliminación para el usuario ID: 11
+01:32:44 INFO  Buscando usuario en base de datos con ID: 11
+01:32:44 WARN  Búsqueda fallida: No se encontró ningún usuario con el ID: 11
+01:32:44 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Usuario no encontrado con el ID 11] with root cause
+java.lang.RuntimeException: Error: Usuario no encontrado con el ID 11
+	at com.ferreteria.usuario_service.service.UsuarioService.lambda$0(UsuarioService.java:32) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.ferreteria.usuario_service.service.UsuarioService.obtenerPorId(UsuarioService.java:30) ~[classes/:na]
+	at com.ferreteria.usuario_service.service.UsuarioService.eliminarUsuario(UsuarioService.java:80) ~[classes/:na]
+	at com.ferreteria.usuario_service.controller.UsuarioController.eliminarUsuario(UsuarioController.java:67) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:925) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:651) ~[tomcat-embed-core-11.0.21.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.21.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+01:32:54 INFO  PUT /api/usuarios/11 - Solicitud para actualizar datos del usuario
+01:32:54 INFO  Iniciando actualización de datos para el usuario ID: 11
+01:32:54 INFO  Buscando usuario en base de datos con ID: 11
+01:32:54 WARN  Búsqueda fallida: No se encontró ningún usuario con el ID: 11
+01:32:54 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Usuario no encontrado con el ID 11] with root cause
+java.lang.RuntimeException: Error: Usuario no encontrado con el ID 11
+	at com.ferreteria.usuario_service.service.UsuarioService.lambda$0(UsuarioService.java:32) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.ferreteria.usuario_service.service.UsuarioService.obtenerPorId(UsuarioService.java:30) ~[classes/:na]
+	at com.ferreteria.usuario_service.service.UsuarioService.actualizarUsuario(UsuarioService.java:54) ~[classes/:na]
+	at com.ferreteria.usuario_service.controller.UsuarioController.actualizarUsuario(UsuarioController.java:56) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:914) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:650) ~[tomcat-embed-core-11.0.21.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.21.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+01:33:03 INFO  GET /api/usuarios/11 - Solicitud para obtener usuario por ID
+01:33:03 INFO  Buscando usuario en base de datos con ID: 11
+01:33:03 WARN  Búsqueda fallida: No se encontró ningún usuario con el ID: 11
+01:33:03 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Usuario no encontrado con el ID 11] with root cause
+java.lang.RuntimeException: Error: Usuario no encontrado con el ID 11
+	at com.ferreteria.usuario_service.service.UsuarioService.lambda$0(UsuarioService.java:32) ~[classes/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.ferreteria.usuario_service.service.UsuarioService.obtenerPorId(UsuarioService.java:30) ~[classes/:na]
+	at com.ferreteria.usuario_service.controller.UsuarioController.obtenerPorId(UsuarioController.java:37) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.21.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.7.jar:7.0.7]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.21.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]

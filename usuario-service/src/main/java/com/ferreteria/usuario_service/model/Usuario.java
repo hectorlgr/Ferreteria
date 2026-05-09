@@ -21,20 +21,7 @@ public class Usuario {
     @Column(nullable = false)
     private String nombre;
 
-    // Apellido del usuario
-    @Column(nullable = false)
-    private String apellido;
-
     // El email debe ser único porque será el "nombre de usuario" para el login
     @Column(nullable = false, unique = true)
     private String email;
-
-    // Aquí guardaremos la contraseña
-    // Este String almacenará el hash, no la clave en texto plano
-    @Column(nullable = false)
-    private String password; 
-
-    // Aquí definiremos si es "ADMIN" o "CLIENTE"
-    @Column(nullable = false)
-    private String rol; 
 }

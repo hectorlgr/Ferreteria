@@ -16,7 +16,6 @@ public class InventarioController {
 
     // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(InventarioController.class);
-
     private final InventarioService inventarioService;
 
     // GET todo el inventario
@@ -49,7 +48,7 @@ public class InventarioController {
     }
 
     // PUT para actualizar el stock de un producto
-    // http://localhost:9090/api/inventario/producto/{productoId}/descontar
+    // http://localhost:9090/api/inventario/producto/{productoId}/descontar?cantidad={cantidad}
     @PutMapping("/producto/{productoId}/descontar")
     public Inventario descontarStock(@PathVariable Long productoId, @RequestParam Integer cantidad) {
         logger.info("PUT /api/inventario/producto/{}/descontar - Solicitud para descontar {} unidades", productoId, cantidad);

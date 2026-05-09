@@ -35,10 +35,8 @@ public class UsuarioService {
 
     // Método para guardar un nuevo usuario
     public Usuario guardarUsuario(Usuario usuario) {
-        logger.info("Iniciando guardado de nuevo usuario. Email: {}, Rol: {}", usuario.getEmail(), usuario.getRol());
+        logger.info("Iniciando guardado de nuevo usuario. Email: {}", usuario.getEmail());
         
-        // Todo: Aquí implementaremos la encriptación de la contraseña antes de guardar
-        // usando BCrypt, para cumplir con los requisitos de seguridad.
         logger.debug("Guardando usuario en la base de datos...");
         
         Usuario usuarioGuardado = usuarioRepository.save(usuario);
@@ -53,21 +51,11 @@ public class UsuarioService {
         
         Usuario usuarioExistente = obtenerPorId(id);
         
-        logger.debug("Aplicando nuevos datos: Nombre={}, Apellido={}, Email={}, Rol={}", 
-                detallesUsuario.getNombre(), detallesUsuario.getApellido(), 
-                detallesUsuario.getEmail(), detallesUsuario.getRol());
+        logger.debug("Aplicando nuevos datos: Nombre={}, Email={}", 
+                detallesUsuario.getNombre(), detallesUsuario.getEmail());
                 
         usuarioExistente.setNombre(detallesUsuario.getNombre());
-        usuarioExistente.setApellido(detallesUsuario.getApellido());
         usuarioExistente.setEmail(detallesUsuario.getEmail());
-        usuarioExistente.setRol(detallesUsuario.getRol());
-        
-        // Si el usuario envía una nueva contraseña, habría que encriptarla de nuevo.
-        // Por ahora, solo actualizamos si viene con datos.
-        if (detallesUsuario.getPassword() != null && !detallesUsuario.getPassword().isEmpty()) {
-            logger.debug("Se detectó una nueva contraseña en la solicitud de actualización.");
-            usuarioExistente.setPassword(detallesUsuario.getPassword());
-        }
         
         logger.info("Guardando usuario actualizado en la base de datos...");
         return usuarioRepository.save(usuarioExistente);

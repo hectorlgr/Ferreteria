@@ -40,7 +40,7 @@ public class UsuarioController {
     // POST: Crear un nuevo usuario
     // http://localhost:9090/api/usuarios
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED) // Devuelve 201 Created
+    @ResponseStatus(HttpStatus.CREATED)
     public Usuario guardarUsuario(@RequestBody Usuario usuario) {
         logger.info("POST /api/usuarios - Solicitud para registrar un nuevo usuario: {}", usuario.getEmail());
         Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);
