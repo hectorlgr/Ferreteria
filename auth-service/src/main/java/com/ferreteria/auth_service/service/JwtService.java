@@ -10,12 +10,18 @@ import org.springframework.stereotype.Service;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class JwtService {
 
-    private final Key key = Keys.hmacShaKeyFor("esta_es_mi_compleja_clave_secreta".getBytes());
-//    private final Key key = Keys.hmacShaKeyFor("9f3c2a87d1e64b55c6f4ab90e1d73c5f2d89b7aa34df56e0a1bf92c47e68d12f".getBytes());
+    // Spring irá al application.properties y traerá el valor
+    @Value("${jwt.secret}")
+    private String secretKey;
+
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
+    }
 
 
     public String generateToken(String email, String role) {
@@ -26,7 +32,7 @@ public class JwtService {
         .claim("role", role)
         .issuedAt(new Date())
         .expiration(expiration)
-        .signWith(key)
+        .signWith(getSigningKey())
         .compact();
     }
 
@@ -35,7 +41,7 @@ public class JwtService {
         String jwt = token.startsWith("Bearer ") ? token.substring(7) : token;
         try {
         return Jwts.parser()
-            .verifyWith((SecretKey) key)
+            .verifyWith((SecretKey) getSigningKey())
             .build()
             .parseSignedClaims(jwt)
             .getPayload()
@@ -50,7 +56,7 @@ public class JwtService {
         String jwt = token.startsWith("Bearer ") ? token.substring(7) : token;
         try {
             Jwts.parser()
-                .verifyWith((SecretKey) key)
+                .verifyWith((SecretKey) getSigningKey())
                 .build()
                 .parseSignedClaims(jwt);
             return true;

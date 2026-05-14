@@ -2,44 +2,45 @@ server:
   port: 9090
 
 spring:
-  application:
-    name: gateway-service
+  main:
+    web-application-type: reactive
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: FerreteriaSuperSecretaKeyParaTokens
+
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
-            # 1. Catálogo
-            - id: catalogo-service
-              uri: http://localhost:9091
-              predicates:
-                - Path=/api/productos/**
+      routes:
 
-            # 2. Usuarios
-            - id: usuario-service
-              uri: http://localhost:9092
-              predicates:
-                - Path=/api/usuarios/**
+        - id: auth-service
+          uri: http://localhost:9096 # Revisa si este es tu puerto de auth
+          predicates:
+            - Path=/auth/**
 
-            # 3. Inventario
-            - id: inventario-service
-              uri: http://localhost:9093
-              predicates:
-                - Path=/api/inventario/**
+        - id: venta-service
+          uri: http://localhost:9094
+          predicates:
+            - Path=/api/ventas/**
 
-            # 4. Ventas
-            - id: venta-service
-              uri: http://localhost:9094
-              predicates:
-                - Path=/api/ventas/**
+        - id: catalogo-service
+          uri: http://localhost:9091 # Revisa tu puerto de catálogo
+          predicates:
+            - Path=/api/productos/**
 
-            # 5. Despachos
-            - id: despacho-service
-              uri: http://localhost:9095
-              predicates:
-                - Path=/api/despachos/**
+        - id: usuario-service
+          uri: http://localhost:9092 # Revisa tu puerto de usuarios
+          predicates:
+            - Path=/api/usuarios/**
 
-eureka:
-  client:
-    fetch-registry: false
-    register-with-eureka: false
+        - id: inventario-service
+          uri: http://localhost:9093 # Revisa tu puerto de inventario
+          predicates:
+            - Path=/api/inventario/**
+            
+        - id: despacho-service
+          uri: http://localhost:9095 # Revisa tu puerto de despachos
+          predicates:
+            - Path=/api/despachos/**
