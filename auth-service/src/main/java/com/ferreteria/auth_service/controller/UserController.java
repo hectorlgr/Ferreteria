@@ -28,12 +28,22 @@ public class UserController {
         return resp;
     }
 
-    @PostMapping("/register")
-    public java.util.Map<String, String> register(@RequestBody java.util.Map<String, String> request) {
+    @PostMapping("/register/cliente")
+    public java.util.Map<String, String> registerCliente(@RequestBody java.util.Map<String, String> request) {
         String email = request.get("email");
         String password = request.get("password");
-        String role = request.get("role");
-        String resultado = userService.register(email, password, role);
+        String resultado = userService.register(email, password, "CLIENTE");
+
+        java.util.Map<String, String> resp = new java.util.HashMap<>();
+        resp.put("message", resultado);
+        return resp;
+    }
+
+    @PostMapping("/register/admin")
+    public java.util.Map<String, String> registerAdmin(@RequestBody java.util.Map<String, String> request) {
+        String email = request.get("email");
+        String password = request.get("password");
+        String resultado = userService.register(email, password, "ADMIN");
 
         java.util.Map<String, String> resp = new java.util.HashMap<>();
         resp.put("message", resultado);

@@ -43,7 +43,7 @@ public class UserService {
         user.setEmail(email);
         // store SHA-1 hash of the password
         user.setPassword(hashService.sha1(password));
-        user.setRole(role != null && !role.isBlank() ? role.toUpperCase() : "USER");
+        user.setRole(role);
 
         userRepository.save(user);
 
