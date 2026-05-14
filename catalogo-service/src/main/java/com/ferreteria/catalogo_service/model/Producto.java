@@ -32,4 +32,8 @@ public class Producto {
     //Precio del producto Int
     @Column(nullable = false)
     private Integer precio;
+
+    //Campo para indicar si el producto está habilitado o no
+    @Column(nullable = false)
+    private Boolean habilitado = true;
 }

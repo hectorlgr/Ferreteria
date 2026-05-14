@@ -5,12 +5,18 @@ import com.ferreteria.catalogo_service.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ProductoService {
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(ProductoService.class);
@@ -18,24 +24,25 @@ public class ProductoService {
 
     public List<Producto> obtenerTodos() {
         logger.info("Consultando todos los productos en la base de datos");
-        return productoRepository.findAll();
+        return productoRepository.findByHabilitadoTrue();
     }
 
     // Método para obtener un producto por su ID, con manejo de excepción si no se encuentra
     public Producto obtenerPorId(Long id) {
-        logger.info("Buscando producto en base de datos con ID: {}", id);
-        return productoRepository.findById(id)
+        logger.info("Buscando producto activo con ID: {}", id);
+        return productoRepository.findByIdAndHabilitadoTrue(id)
                 .orElseThrow(() -> {
-                    logger.warn("Búsqueda fallida: No se encontró el producto con el ID: {}", id);
+                    logger.warn("Búsqueda fallida: El producto con ID {} no existe o está deshabilitado", id);
                     return new RuntimeException("Error: Producto no encontrado con el ID " + id);
                 });
     }
 
     // Método para guardar un nuevo producto
     public Producto guardarProducto(Producto producto) {
-        logger.info("Iniciando guardado de producto: {} (Marca: {})", producto.getNombre(), producto.getMarca());
+        logger.info("Registrando nuevo producto: {}", producto.getNombre());
         logger.debug("Precio a registrar: {}", producto.getPrecio());
         
+        producto.setHabilitado(true); // Aseguramos que nazca habilitado
         Producto productoGuardado = productoRepository.save(producto);
         logger.debug("Producto guardado temporalmente con ID interno: {}", productoGuardado.getId());
         
@@ -60,13 +67,53 @@ public class ProductoService {
         return productoRepository.save(productoExistente);
     }
 
-    // Método para eliminar un producto por su ID
+    // Método para deshabilitar un producto (baja lógica) y resetear su stock en el inventario
     public void eliminarProducto(Long id) {
-        logger.info("Iniciando proceso de eliminación para el producto ID: {}", id);
-        
+        logger.info("Iniciando deshabilitación y reseteo de stock para ID: {}", id);
+    
         Producto productoExistente = obtenerPorId(id);
+        productoExistente.setHabilitado(false);
+        productoRepository.save(productoExistente);
+
+        // LLAMADA AL INVENTARIO: Ponemos el stock en 0
+        try {
+            // Asumiendo que tu inventario-service tiene un endpoint para ajustar stock
+            // Ajusta la URL y el puerto según tu configuración (ej: 9093)
+            String url = "http://localhost:9093/api/inventario/reset/" + id;
+            restTemplate.put(url, null);
+            logger.info("Stock reseteado en inventario-service para producto ID: {}", id);
+        } catch (Exception e) {
+            logger.error("No se pudo resetear el stock: {}", e.getMessage());
+        }
+    }
+
+    // Método para que otros servicios deshabiliten productos automáticamente
+    public void marcarComoAgotado(Long id) {
+        Producto producto = productoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+    
+        if (producto.getHabilitado()) {
+            producto.setHabilitado(false);
+            productoRepository.save(producto);
+            logger.info("Producto ID: {} deshabilitado automáticamente por falta de stock", id);
+        }
+    }
+
+    // Método para reactivar un producto (por ejemplo, cuando vuelve a tener stock)
+    public void habilitarProducto(Long id) {
+        logger.info("Iniciando habilitación para el producto ID: {}", id);
         
-        logger.debug("Procediendo a eliminar el producto de la base de datos...");
-        productoRepository.delete(productoExistente);
+        // ¡OJO AQUÍ! Usamos el findById nativo del repositorio, NO el obtenerPorId(), 
+        // porque necesitamos poder encontrarlo incluso si habilitado es false.
+        Producto producto = productoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado en la BD general con ID: " + id));
+            
+        if (!producto.getHabilitado()) {
+            producto.setHabilitado(true);
+            productoRepository.save(producto);
+            logger.info("Producto ID: {} reactivado y visible en el catálogo", id);
+        } else {
+            logger.info("El producto ID: {} ya estaba habilitado", id);
+        }
     }
 }

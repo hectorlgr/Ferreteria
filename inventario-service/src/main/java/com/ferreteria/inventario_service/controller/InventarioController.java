@@ -56,6 +56,24 @@ public class InventarioController {
         logger.info("Stock descontado exitosamente. Nuevo stock para Producto ID {}: {}", productoId, inventarioActualizado.getCantidad());
         return inventarioActualizado;
     }
+
+    // PUT para agregar stock a un producto
+    // http://localhost:9090/api/inventario/producto/{productoId}/agregar?cantidad={cantidad}
+    @PutMapping("/producto/{productoId}/agregar")
+    public Inventario agregarStock(@PathVariable Long productoId, @RequestParam Integer cantidad) {
+        logger.info("PUT /api/inventario/producto/{}/agregar - Solicitud para ingresar {} unidades", productoId, cantidad);
+        Inventario inventarioActualizado = inventarioService.agregarStock(productoId, cantidad);
+        logger.info("Stock ingresado exitosamente. Nuevo stock para Producto ID {}: {}", productoId, inventarioActualizado.getCantidad());
+        return inventarioActualizado;
+    }
+
+    // PUT para resetear el stock a cero desde el catalogo-service
+    // http://localhost:9090/api/inventario/reset/{productoId}
+    @PutMapping("/reset/{productoId}")
+    public void resetearStock(@PathVariable Long productoId) {
+        logger.info("PUT /api/inventario/reset/{} - Solicitud de catálogo para resetear stock", productoId);
+        inventarioService.resetearStock(productoId);
+    }
     
     // DELETE para eliminar inventario por ID de producto
     // http://localhost:9090/api/inventario/producto/{productoId} 

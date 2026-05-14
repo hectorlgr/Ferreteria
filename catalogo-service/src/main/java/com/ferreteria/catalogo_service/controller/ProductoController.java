@@ -57,13 +57,30 @@ public class ProductoController {
         return productoActualizado;
     }
 
-    // DELETE: Eliminar un producto
+    // PUT para habilitar/reactivar un producto
+    // http://localhost:9090/api/productos/{id}/habilitar
+    @PutMapping("/{id}/habilitar")
+    public void habilitarProducto(@PathVariable Long id) {
+        logger.info("PUT /api/productos/{}/habilitar - Solicitud para reactivar producto", id);
+        productoService.habilitarProducto(id);
+    }
+
+    // PUT para marcar un producto como agotado (deshabilitarlo)
+    // http://localhost:9090/api/productos/{id}/agotar
+    @PutMapping("/{id}/agotar")
+    public void marcarComoAgotado(@PathVariable Long id) {
+        logger.info("Recibida orden de deshabilitar producto ID: {} por stock cero", id);
+        productoService.marcarComoAgotado(id);
+    }
+
+    // // DELETE: Deshabilitar un producto
     // http://localhost:9090/api/productos/{id} 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminarProducto(@PathVariable Long id) {
-        logger.info("DELETE /api/productos/{} - Solicitud para eliminar producto", id);
+        logger.info("DELETE /api/productos/{} - Solicitud de baja lógica", id);
         productoService.eliminarProducto(id);
-        logger.info("Producto ID {} eliminado exitosamente", id);
+        // Aunque el registro sigue en la DB, el cliente ya no lo verá
+        logger.info("Producto ID {} procesado como NO DISPONIBLE", id);
     }
 }
