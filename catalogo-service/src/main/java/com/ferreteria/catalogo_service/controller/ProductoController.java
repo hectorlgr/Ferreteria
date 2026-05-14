@@ -1,86 +1,93 @@
 package com.ferreteria.catalogo_service.controller;
 
-import com.ferreteria.catalogo_service.model.Producto;
-import com.ferreteria.catalogo_service.service.ProductoService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ferreteria.catalogo_service.Dto.ProductoRequestDto;
+import com.ferreteria.catalogo_service.model.Producto;
+import com.ferreteria.catalogo_service.service.ProductoService;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/productos")
 @RequiredArgsConstructor
 public class ProductoController {
 
-    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
+
     private final ProductoService productoService;
 
     // GET: Obtener todos los productos
-    // http://localhost:9090/api/productos
     @GetMapping
-    public List<Producto> obtenerTodos() {
-        logger.info("GET /api/productos - Solicitud para listar todo el catálogo");
+    public ResponseEntity<List<Producto>> obtenerTodos() {
+        logger.info("GET /api/productos - Solicitud para listar todos los productos");
         List<Producto> productos = productoService.obtenerTodos();
         logger.debug("Cantidad de productos obtenidos: {}", productos.size());
-        return productos;
+        return ResponseEntity.ok(productos);
     }
 
     // GET: Obtener un producto por ID
-    // http://localhost:9090/api/productos/{id}
     @GetMapping("/{id}")
-    public Producto obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
         logger.info("GET /api/productos/{} - Solicitud para obtener producto por ID", id);
-        return productoService.obtenerPorId(id);
+        return ResponseEntity.ok(productoService.obtenerPorId(id));
     }
 
-    // POST: Crear un nuevo producto
-    // http://localhost:9090/api/productos
+    // POST: Crear un nuevo producto usando DTO
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Producto guardarProducto(@RequestBody Producto producto) {
-        logger.info("POST /api/productos - Solicitud para registrar nuevo producto: {}", producto.getNombre());
+    public ResponseEntity<Producto> guardarProducto(@Valid @RequestBody ProductoRequestDto dto) {
+        logger.info("POST /api/productos - Solicitud para registrar un nuevo producto: {}", dto.getNombre());
+        
+        Producto producto = new Producto();
+        producto.setNombre(dto.getNombre());
+        producto.setDescripcion(dto.getDescripcion());
+        producto.setMarca(dto.getMarca());
+        producto.setPrecio(dto.getPrecio());
+        
         Producto nuevoProducto = productoService.guardarProducto(producto);
         logger.info("Producto registrado exitosamente con ID: {}", nuevoProducto.getId());
-        return nuevoProducto;
+        
+        return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
     }
 
-    // PUT: Actualizar un producto existente
-    // http://localhost:9090/api/productos/{id}
+    // PUT: Actualizar un producto existente usando DTO
     @PutMapping("/{id}")
-    public Producto actualizarProducto(@PathVariable Long id, @RequestBody Producto producto) {
+    public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoRequestDto dto) {
         logger.info("PUT /api/productos/{} - Solicitud para actualizar datos del producto", id);
+        
+        Producto producto = new Producto();
+        producto.setNombre(dto.getNombre());
+        producto.setDescripcion(dto.getDescripcion());
+        producto.setMarca(dto.getMarca());
+        producto.setPrecio(dto.getPrecio());
+        
         Producto productoActualizado = productoService.actualizarProducto(id, producto);
         logger.info("Producto ID {} actualizado correctamente", id);
-        return productoActualizado;
+        
+        return ResponseEntity.ok(productoActualizado);
     }
 
-    // PUT para habilitar/reactivar un producto
-    // http://localhost:9090/api/productos/{id}/habilitar
-    @PutMapping("/{id}/habilitar")
-    public void habilitarProducto(@PathVariable Long id) {
-        logger.info("PUT /api/productos/{}/habilitar - Solicitud para reactivar producto", id);
-        productoService.habilitarProducto(id);
-    }
-
-    // PUT para marcar un producto como agotado (deshabilitarlo)
-    // http://localhost:9090/api/productos/{id}/agotar
-    @PutMapping("/{id}/agotar")
-    public void marcarComoAgotado(@PathVariable Long id) {
-        logger.info("Recibida orden de deshabilitar producto ID: {} por stock cero", id);
-        productoService.marcarComoAgotado(id);
-    }
-
-    // // DELETE: Deshabilitar un producto
-    // http://localhost:9090/api/productos/{id} 
+    // DELETE: Eliminar un producto
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void eliminarProducto(@PathVariable Long id) {
-        logger.info("DELETE /api/productos/{} - Solicitud de baja lógica", id);
+    public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
+        logger.info("DELETE /api/productos/{} - Solicitud para eliminar producto", id);
         productoService.eliminarProducto(id);
-        // Aunque el registro sigue en la DB, el cliente ya no lo verá
-        logger.info("Producto ID {} procesado como NO DISPONIBLE", id);
+        logger.info("Producto ID {} eliminado exitosamente", id);
+        
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
