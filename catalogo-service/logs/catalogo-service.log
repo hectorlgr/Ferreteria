@@ -1,187 +1,67 @@
-00:45:25 INFO  Starting CatalogoServiceApplication using Java 21.0.10 with PID 6832 (D:\Proyectos\Ferreteria\catalogo-service\target\classes started by hecto in D:\Proyectos\Ferreteria\catalogo-service)
-00:45:25 INFO  No active profile set, falling back to 1 default profile: "default"
-00:45:25 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-00:45:25 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-00:45:27 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-00:45:27 INFO  Finished Spring Data repository scanning in 280 ms. Found 1 JPA repository interface.
-00:45:27 INFO  BeanFactory id=31b98991-9f00-32dd-a2ec-3ecfffaf51c4
-00:45:28 INFO  Tomcat initialized with port 9091 (http)
-00:45:28 INFO  Starting service [Tomcat]
-00:45:28 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-00:45:28 INFO  Root WebApplicationContext: initialization completed in 3373 ms
-00:45:29 INFO  HikariPool-1 - Starting...
-00:45:30 WARN  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-00:45:30 INFO  Stopping service [Tomcat]
-00:45:30 INFO  
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-00:45:30 ERROR Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
-	at com.ferreteria.catalogo_service.CatalogoServiceApplication.main(CatalogoServiceApplication.java:10)
+00:35:23 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+00:35:23 INFO  Initializing Servlet 'dispatcherServlet'
+00:35:23 INFO  Completed initialization in 74 ms
+00:35:23 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+00:35:23 INFO  Consultando todos los productos en la base de datos
+00:43:30 INFO  POST /api/productos - Solicitud para registrar nuevo producto: null
+00:43:30 INFO  Iniciando guardado de producto: null (Marca: null)
+00:43:30 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: not-null property references a null or transient value for entity com.ferreteria.catalogo_service.model.Producto.descripcion] with root cause
+org.hibernate.PropertyValueException: not-null property references a null or transient value for entity com.ferreteria.catalogo_service.model.Producto.descripcion
+	at org.hibernate.engine.internal.Nullability.checkNullability(Nullability.java:120)
+	at org.hibernate.action.internal.AbstractEntityInsertAction.nullifyTransientReferencesIfNotAlready(AbstractEntityInsertAction.java:120)
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:67)
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:667)
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291)
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:270)
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322)
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:371)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:285)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:215)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:133)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:144)
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:90)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:74)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:50)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:692)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:675)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.DatabaseException: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309)
-	... 13 common frames omitted
-Caused by: liquibase.exception.LiquibaseException: liquibase.exception.DatabaseException: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:289)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
-	... 20 common frames omitted
-Caused by: liquibase.exception.DatabaseException: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:281)
-	at liquibase.Scope.lambda$child$0(Scope.java:241)
-	at liquibase.Scope.child(Scope.java:250)
-	at liquibase.Scope.child(Scope.java:240)
-	at liquibase.Scope.child(Scope.java:219)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272)
-	... 22 common frames omitted
-Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:165)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:55)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:840)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:416)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144)
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373)
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210)
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488)
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97)
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:276)
-	... 27 common frames omitted
-Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
-	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:52)
-	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:95)
-	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:140)
-	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:156)
-	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:79)
-	at com.mysql.cj.NativeSession.connect(NativeSession.java:142)
-	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:964)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:828)
-	... 38 common frames omitted
-Caused by: java.net.ConnectException: Connection refused: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:694)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
-	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
-	at java.base/java.net.Socket.connect(Socket.java:751)
-	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:144)
-	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:53)
-	... 41 common frames omitted
-00:48:28 INFO  Starting CatalogoServiceApplication using Java 21.0.10 with PID 10212 (D:\Proyectos\Ferreteria\catalogo-service\target\classes started by hecto in D:\Proyectos\Ferreteria\catalogo-service)
-00:48:28 INFO  No active profile set, falling back to 1 default profile: "default"
-00:48:28 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-00:48:28 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-00:48:30 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-00:48:30 INFO  Finished Spring Data repository scanning in 214 ms. Found 1 JPA repository interface.
-00:48:30 INFO  BeanFactory id=31b98991-9f00-32dd-a2ec-3ecfffaf51c4
-00:48:31 INFO  Tomcat initialized with port 9091 (http)
-00:48:31 INFO  Starting service [Tomcat]
-00:48:31 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-00:48:31 INFO  Root WebApplicationContext: initialization completed in 2817 ms
-00:48:31 INFO  HikariPool-1 - Starting...
-00:48:32 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1e89d9e3
-00:48:32 INFO  HikariPool-1 - Start completed.
-00:48:35 INFO  Reading from db_catalogo.databasechangelog
-00:48:35 INFO  Database is up to date, no changesets to execute
-00:48:35 INFO  Reading from db_catalogo.databasechangelog
-00:48:35 INFO  UPDATE SUMMARY
-00:48:35 INFO  Run:                          0
-00:48:35 INFO  Previously run:               2
-00:48:35 INFO  Filtered out:                 0
-00:48:35 INFO  -------------------------------
-00:48:35 INFO  Total change sets:            2
-00:48:35 INFO  Update summary generated
-00:48:35 INFO  Command execution complete
-00:48:35 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
-00:48:35 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
-00:48:37 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
-00:48:37 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
-00:48:37 INFO  HHH10001005: Database info:
-	Database JDBC URL [jdbc:mysql://localhost:3306/db_catalogo?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
-	Database driver: MySQL Connector/J
-	Database dialect: MySQLDialect
-	Database version: 5.5.5
-	Default catalog/schema: db_catalogo/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-00:48:38 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-00:48:39 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
-00:48:39 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
-00:48:39 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-00:48:40 INFO  Eureka HTTP Client uses RestClient.
-00:48:40 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-00:48:40 INFO  Setting initial instance status as: STARTING
-00:48:40 INFO  Initializing Eureka in region us-east-1
-00:48:40 INFO  Client configured to neither register nor query for data.
-00:48:40 INFO  Discovery Client initialized at timestamp 1778215720455 with initial instances count: 0
-00:48:40 INFO  Registering application CATALOGO-SERVICE with eureka with status UP
-00:48:40 INFO  Tomcat started on port 9091 (http) with context path '/'
-00:48:40 INFO  Updating port to 9091
-00:48:40 INFO  Started CatalogoServiceApplication in 12.645 seconds (process running for 14.052)
-01:00:18 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
-01:00:18 INFO  Initializing Servlet 'dispatcherServlet'
-01:00:18 INFO  Completed initialization in 44 ms
-01:00:18 INFO  GET /api/productos - Solicitud para listar todo el catálogo
-01:00:18 INFO  Consultando todos los productos en la base de datos
-01:03:34 INFO  GET /api/productos - Solicitud para listar todo el catálogo
-01:03:34 INFO  Consultando todos los productos en la base de datos
-01:04:19 INFO  GET /api/productos - Solicitud para listar todo el catálogo
-01:04:19 INFO  Consultando todos los productos en la base de datos
-01:04:22 INFO  GET /api/productos/2 - Solicitud para obtener producto por ID
-01:04:22 INFO  Buscando producto en base de datos con ID: 2
-01:04:28 INFO  GET /api/productos/22 - Solicitud para obtener producto por ID
-01:04:28 INFO  Buscando producto en base de datos con ID: 22
-01:04:28 WARN  Búsqueda fallida: No se encontró el producto con el ID: 22
-01:04:28 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Producto no encontrado con el ID 22] with root cause
-java.lang.RuntimeException: Error: Producto no encontrado con el ID 22
-	at com.ferreteria.catalogo_service.service.ProductoService.lambda$0(ProductoService.java:30)
-	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
-	at com.ferreteria.catalogo_service.service.ProductoService.obtenerPorId(ProductoService.java:28)
-	at com.ferreteria.catalogo_service.controller.ProductoController.obtenerPorId(ProductoController.java:36)
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:362)
+	at jdk.proxy4/jdk.proxy4.$Proxy136.persist(Unknown Source)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityHandlerInvocationHandler.invokeMethod(SharedEntityManagerCreator.java:240)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:386)
+	at jdk.proxy4/jdk.proxy4.$Proxy136.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:664)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:278)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:545)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:290)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:690)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:171)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:166)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+	at jdk.proxy4/jdk.proxy4.$Proxy145.save(Unknown Source)
+	at com.ferreteria.catalogo_service.service.ProductoService.guardarProducto(ProductoService.java:39)
+	at com.ferreteria.catalogo_service.controller.ProductoController.guardarProducto(ProductoController.java:45)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
@@ -193,8 +73,8 @@ java.lang.RuntimeException: Error: Producto no encontrado con el ID 22
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
@@ -225,136 +105,5 @@ java.lang.RuntimeException: Error: Producto no encontrado con el ID 22
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
-01:04:44 INFO  GET /api/productos/11 - Solicitud para obtener producto por ID
-01:04:44 INFO  Buscando producto en base de datos con ID: 11
-01:05:37 INFO  POST /api/productos - Solicitud para registrar nuevo producto: Martillo Azul
-01:05:37 INFO  Iniciando guardado de producto: Martillo Azul (Marca: Makita)
-01:05:37 INFO  Producto registrado exitosamente con ID: 11
-01:05:48 INFO  POST /api/productos - Solicitud para registrar nuevo producto: Martillo Azul
-01:05:48 INFO  Iniciando guardado de producto: Martillo Azul (Marca: Makita)
-01:05:48 INFO  Producto registrado exitosamente con ID: 12
-01:06:02 INFO  POST /api/productos - Solicitud para registrar nuevo producto: Martillo Verde
-01:06:02 INFO  Iniciando guardado de producto: Martillo Verde (Marca: Makita)
-01:06:02 INFO  Producto registrado exitosamente con ID: 13
-01:06:14 INFO  GET /api/productos - Solicitud para listar todo el catálogo
-01:06:14 INFO  Consultando todos los productos en la base de datos
-01:06:57 INFO  PUT /api/productos/12 - Solicitud para actualizar datos del producto
-01:06:57 INFO  Iniciando actualización para el producto ID: 12
-01:06:57 INFO  Buscando producto en base de datos con ID: 12
-01:06:57 INFO  Guardando producto actualizado en la base de datos...
-01:06:57 INFO  Producto ID 12 actualizado correctamente
-01:07:02 INFO  PUT /api/productos/15 - Solicitud para actualizar datos del producto
-01:07:02 INFO  Iniciando actualización para el producto ID: 15
-01:07:02 INFO  Buscando producto en base de datos con ID: 15
-01:07:02 WARN  Búsqueda fallida: No se encontró el producto con el ID: 15
-01:07:02 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Producto no encontrado con el ID 15] with root cause
-java.lang.RuntimeException: Error: Producto no encontrado con el ID 15
-	at com.ferreteria.catalogo_service.service.ProductoService.lambda$0(ProductoService.java:30)
-	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
-	at com.ferreteria.catalogo_service.service.ProductoService.obtenerPorId(ProductoService.java:28)
-	at com.ferreteria.catalogo_service.service.ProductoService.actualizarProducto(ProductoService.java:49)
-	at com.ferreteria.catalogo_service.controller.ProductoController.actualizarProducto(ProductoController.java:55)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
-	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:914)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:650)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-01:07:25 WARN  Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'PUT' is not supported]
-01:07:46 INFO  DELETE /api/productos/13 - Solicitud para eliminar producto
-01:07:46 INFO  Iniciando proceso de eliminación para el producto ID: 13
-01:07:46 INFO  Buscando producto en base de datos con ID: 13
-01:07:46 INFO  Producto ID 13 eliminado exitosamente
-01:07:50 INFO  DELETE /api/productos/13 - Solicitud para eliminar producto
-01:07:50 INFO  Iniciando proceso de eliminación para el producto ID: 13
-01:07:50 INFO  Buscando producto en base de datos con ID: 13
-01:07:50 WARN  Búsqueda fallida: No se encontró el producto con el ID: 13
-01:07:50 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Producto no encontrado con el ID 13] with root cause
-java.lang.RuntimeException: Error: Producto no encontrado con el ID 13
-	at com.ferreteria.catalogo_service.service.ProductoService.lambda$0(ProductoService.java:30)
-	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
-	at com.ferreteria.catalogo_service.service.ProductoService.obtenerPorId(ProductoService.java:28)
-	at com.ferreteria.catalogo_service.service.ProductoService.eliminarProducto(ProductoService.java:67)
-	at com.ferreteria.catalogo_service.controller.ProductoController.eliminarProducto(ProductoController.java:66)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
-	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:925)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:651)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-01:35:17 INFO  GET /api/productos - Solicitud para listar todo el catálogo
-01:35:17 INFO  Consultando todos los productos en la base de datos
+00:43:39 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+00:43:39 INFO  Consultando todos los productos en la base de datos

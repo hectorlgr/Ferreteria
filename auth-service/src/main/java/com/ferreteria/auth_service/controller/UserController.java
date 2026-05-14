@@ -32,7 +32,15 @@ public class UserController {
     public java.util.Map<String, String> registerCliente(@RequestBody java.util.Map<String, String> request) {
         String email = request.get("email");
         String password = request.get("password");
-        String resultado = userService.register(email, password, "CLIENTE");
+        
+        // NUEVO: Capturamos el nombre (o le ponemos uno por defecto si se les olvida)
+        String nombre = request.get("nombre");
+        if (nombre == null || nombre.isBlank()) {
+            nombre = "Cliente Ferretería"; 
+        }
+
+        // Le pasamos el nombre al servicio
+        String resultado = userService.register(email, password, "CLIENTE", nombre);
 
         java.util.Map<String, String> resp = new java.util.HashMap<>();
         resp.put("message", resultado);
@@ -43,7 +51,11 @@ public class UserController {
     public java.util.Map<String, String> registerAdmin(@RequestBody java.util.Map<String, String> request) {
         String email = request.get("email");
         String password = request.get("password");
-        String resultado = userService.register(email, password, "ADMIN");
+        String nombre = request.get("nombre");
+        if (nombre == null || nombre.isBlank()) {
+            nombre = "Admin Ferretería";
+        }
+        String resultado = userService.register(email, password, "ADMIN", nombre);
 
         java.util.Map<String, String> resp = new java.util.HashMap<>();
         resp.put("message", resultado);

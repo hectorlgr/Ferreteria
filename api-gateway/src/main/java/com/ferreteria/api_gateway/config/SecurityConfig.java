@@ -5,6 +5,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
@@ -23,16 +24,41 @@ public class SecurityConfig {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeExchange(exchanges -> exchanges
-                // Rutas públicas: Cualquiera puede hacer login o registrarse
+                // 1. RUTAS PÚBLICAS
                 .pathMatchers("/auth/**").permitAll()
                 
-                // Ejemplo de Roles: Solo los ADMIN pueden ver/modificar el inventario
-                .pathMatchers("/api/inventario/**").hasRole("ADMIN")
+                // 2. PRODUCTOS (CATÁLOGO)
+                // Cualquiera logueado puede VER productos
+                .pathMatchers(HttpMethod.GET, "/api/productos/**").authenticated()
+                // Solo ADMIN y OPERADOR pueden CREAR o EDITAR productos
+                .pathMatchers(HttpMethod.POST, "/api/productos/**").hasAnyRole("ADMIN", "OPERADOR")
+                .pathMatchers(HttpMethod.PUT, "/api/productos/**").hasAnyRole("ADMIN", "OPERADOR")
+                // Solo ADMIN puede BORRAR productos
+                .pathMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
                 
-                // Ejemplo: Ventas pueden ser vistas por ADMIN o VENDEDOR
-                .pathMatchers("/api/ventas/**").hasAnyRole("ADMIN", "OPERADOR", "CLIENTE")
+                // 3. INVENTARIO
+                // El CLIENTE no tiene acceso aquí
+                .pathMatchers("/api/inventario/**").hasAnyRole("ADMIN", "OPERADOR")
+
+                // 4. VENTAS
+                // Clientes pueden ver y comprar
+                .pathMatchers(HttpMethod.GET, "/api/ventas/**").authenticated()
+                .pathMatchers(HttpMethod.POST, "/api/ventas/**").authenticated()
+                // Pero solo ADMIN y OPERADOR pueden modificar o borrar ventas
+                .pathMatchers(HttpMethod.PUT, "/api/ventas/**").hasAnyRole("ADMIN", "OPERADOR")
+                .pathMatchers(HttpMethod.DELETE, "/api/ventas/**").hasAnyRole("ADMIN", "OPERADOR")
                 
-                // Cualquier otra ruta requiere al menos estar logueado con un token válido
+                // 5. DESPACHOS
+                // El cliente necesita ver cómo va su envío
+                .pathMatchers(HttpMethod.GET, "/api/despachos/**").authenticated()
+                // Solo el sistema o el personal crea, actualiza o borra despachos
+                .pathMatchers("/api/despachos/**").hasAnyRole("ADMIN", "OPERADOR")
+
+                // 6. USUARIOS
+                .pathMatchers(HttpMethod.GET, "/api/usuarios/me").authenticated()
+                .pathMatchers("/api/usuarios/**").hasAnyRole("ADMIN", "OPERADOR")
+
+                // Cualquier otra ruta requiere autenticación
                 .anyExchange().authenticated()
             )
             .oauth2ResourceServer(oauth2 -> oauth2
