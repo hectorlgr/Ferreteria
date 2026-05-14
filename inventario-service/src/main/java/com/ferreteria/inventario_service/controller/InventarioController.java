@@ -18,68 +18,80 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InventarioController {
 
+    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(InventarioController.class);
     private final InventarioService inventarioService;
 
     // GET todo el inventario
+    // http://localhost:9090/api/inventario
     @GetMapping
     public ResponseEntity<List<Inventario>> obtenerTodos() {
         logger.info("GET /api/inventario - Solicitud para listar todo el inventario");
         List<Inventario> inventarios = inventarioService.obtenerTodos();
-        logger.debug("Cantidad de registros obtenidos: {}", inventarios.size());
+        logger.debug("Cantidad de registros de inventario obtenidos: {}", inventarios.size());
         return ResponseEntity.ok(inventarios);
     }
 
     // GET inventario por ID de producto
+    // http://localhost:9090/api/inventario/producto/{productoId}
     @GetMapping("/producto/{productoId}")
     public ResponseEntity<Inventario> obtenerPorProductoId(@PathVariable Long productoId) {
-        logger.info("GET /api/inventario/producto/{} - Buscando inventario por ID de producto", productoId);
+        logger.info("GET /api/inventario/producto/{} - Solicitud para buscar inventario por ID de producto", productoId);
         return ResponseEntity.ok(inventarioService.obtenerPorProductoId(productoId));
     }
 
-    // POST para registrar nuevo inventario usando DTO
+    // POST para registrar nuevo inventario
+    // http://localhost:9090/api/inventario
     @PostMapping
     public ResponseEntity<Inventario> guardarInventario(@Valid @RequestBody InventarioRequestDto dto) {
-        logger.info("POST /api/inventario - Solicitud para Producto ID: {}", dto.getProductoId());
+        logger.info("POST /api/inventario - Solicitud para registrar inventario del Producto ID: {}", dto.getProductoId());
         
+        // Mapeo manual de DTO a Entidad
         Inventario inventario = new Inventario();
         inventario.setProductoId(dto.getProductoId());
         inventario.setCantidad(dto.getCantidad());
         
         Inventario nuevoInventario = inventarioService.guardarInventario(inventario);
-        logger.info("Inventario registrado con ID interno: {}", nuevoInventario.getId());
+        logger.info("Inventario registrado exitosamente con ID interno: {}", nuevoInventario.getId());
         return new ResponseEntity<>(nuevoInventario, HttpStatus.CREATED);
     }
 
-    // PUT para actualizar el stock (Descontar)
+    // PUT para actualizar el stock de un producto
+    // http://localhost:9090/api/inventario/producto/{productoId}/descontar?cantidad={cantidad}
     @PutMapping("/producto/{productoId}/descontar")
     public ResponseEntity<Inventario> descontarStock(@PathVariable Long productoId, @RequestParam Integer cantidad) {
-        logger.info("PUT /api/inventario/producto/{}/descontar - Cantidad: {}", productoId, cantidad);
-        Inventario actualizado = inventarioService.actualizarStock(productoId, cantidad);
-        return ResponseEntity.ok(actualizado);
+        logger.info("PUT /api/inventario/producto/{}/descontar - Solicitud para descontar {} unidades", productoId, cantidad);
+        Inventario inventarioActualizado = inventarioService.actualizarStock(productoId, cantidad);
+        logger.info("Stock descontado exitosamente. Nuevo stock para Producto ID {}: {}", productoId, inventarioActualizado.getCantidad());
+        return ResponseEntity.ok(inventarioActualizado);
     }
 
-    // PUT para actualizar el stock (Agregar)
+    // PUT para agregar stock a un producto
+    // http://localhost:9090/api/inventario/producto/{productoId}/agregar?cantidad={cantidad}
     @PutMapping("/producto/{productoId}/agregar")
     public ResponseEntity<Inventario> agregarStock(@PathVariable Long productoId, @RequestParam Integer cantidad) {
-        logger.info("PUT /api/inventario/producto/{}/agregar - Cantidad: {}", productoId, cantidad);
-        Inventario actualizado = inventarioService.agregarStock(productoId, cantidad);
-        return ResponseEntity.ok(actualizado);
+        logger.info("PUT /api/inventario/producto/{}/agregar - Solicitud para ingresar {} unidades", productoId, cantidad);
+        Inventario inventarioActualizado = inventarioService.agregarStock(productoId, cantidad);
+        logger.info("Stock ingresado exitosamente. Nuevo stock para Producto ID {}: {}", productoId, inventarioActualizado.getCantidad());
+        return ResponseEntity.ok(inventarioActualizado);
     }
 
-    // PUT para resetear stock
+    // PUT para resetear el stock a cero desde el catalogo-service
+    // http://localhost:9090/api/inventario/reset/{productoId}
     @PutMapping("/reset/{productoId}")
     public ResponseEntity<Void> resetearStock(@PathVariable Long productoId) {
-        logger.info("PUT /api/inventario/reset/{} - Reseteando stock a cero", productoId);
+        logger.info("PUT /api/inventario/reset/{} - Solicitud de catálogo para resetear stock", productoId);
         inventarioService.resetearStock(productoId);
         return ResponseEntity.noContent().build();
     }
-
-    // DELETE para eliminar inventario
+    
+    // DELETE para eliminar inventario por ID de producto
+    // http://localhost:9090/api/inventario/producto/{productoId} 
     @DeleteMapping("/producto/{productoId}")
     public ResponseEntity<Void> eliminarPorProductoId(@PathVariable Long productoId) {
-        logger.info("DELETE /api/inventario/producto/{} - Eliminando registro", productoId);
+        logger.info("DELETE /api/inventario/producto/{} - Solicitud para eliminar inventario", productoId);
         inventarioService.eliminarPorProductoId(productoId);
+        logger.info("Inventario eliminado para Producto ID: {}", productoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
