@@ -1,0 +1,25 @@
+[33m0a7b424[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m aplicacion de ResponseEntity y DTO en UsuarioController
+[33me7dcad4[m Implementar lógica de habilitación y deshabilitación de productos en el servicio de catálogo y actualizar el servicio de inventario para manejar stock automáticamente.
+[33m9611401[m Configuracion SecurityConfig y logs nuevos
+[33mbc4ded5[m api-gateway actualizado para funcionar con jwt
+[33m6945d61[m Nuevo endpoint en auth-service para registrar cliente y admin de manera independiente
+[33mae7e821[m Implementacion auth-service para login y register usando JWT
+[33mccf5259[m Logs en todo el codigo e implementacion de authser-service
+[33m8e866e1[m Refactor code by removing unnecessary blank lines and updating application properties for better clarity and organization. Added 'costoDespacho' field to Venta model and adjusted related SQL scripts for consistency.
+[33m41f0f1e[m Documentación en el código.
+[33mef84060[m Comentarios en productos, inventarios y usuarios
+[33m743d027[m Implementar búsqueda de ventas por rango de fechas
+[33m202a607[m Implementacion de metodos PUT y DELETE en venta y despacho
+[33m33066c6[m crud completo en inventario-service
+[33m4f08951[m logger aplicado a todos los servicios
+[33m50c2e1d[m se elimina numero de segumiento y se implementa buscar despacho por id de venta
+[33mc10f12b[m implemetacion busqueda por estado despacho-service
+[33m68723b5[m Implementacion WebClient en despacho-service
+[33m8c48f1a[m usuario-service funcional
+[33m15f16a2[m api-gateway funcional
+[33m78192d6[m despacho-service funcional
+[33m24bffdb[m venta-service funcional
+[33m1454c73[m inventario-service funcional
+[33m006079f[m Usuario funcional
+[33mdce235b[m catalogo-service funcional
+[33m8f81a55[m first commit

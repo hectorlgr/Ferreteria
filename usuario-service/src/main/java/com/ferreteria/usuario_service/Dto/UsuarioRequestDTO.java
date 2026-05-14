@@ -1,13 +1,13 @@
-package com.ferreteria.usuario_service.dto;
+package com.ferreteria.usuario_service.Dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class UsuarioRequestDTO {
+public class UsuarioRequestDto {
 
-    @NotBlank(message = "El nombre es obligatorio")
+    @NotBlank(message = "El nombre es obligatorio") 
     private String nombre;
 
     @NotBlank(message = "El email es obligatorio")
