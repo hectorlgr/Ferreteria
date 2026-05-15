@@ -1,46 +1,46 @@
-23:58:55 INFO  Starting DespachoServiceApplication using Java 21.0.10 with PID 16932 (D:\Proyectos\Ferreteria\despacho-service\target\classes started by hecto in D:\Proyectos\Ferreteria\despacho-service)
-23:58:55 INFO  No active profile set, falling back to 1 default profile: "default"
-23:58:55 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-23:58:55 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-23:58:56 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-23:58:57 INFO  Finished Spring Data repository scanning in 219 ms. Found 1 JPA repository interface.
-23:58:57 INFO  BeanFactory id=eca6831b-aa1d-3ffe-ab74-bd4d9f88959f
-23:58:58 INFO  Tomcat initialized with port 9095 (http)
-23:58:58 INFO  Starting service [Tomcat]
-23:58:58 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-23:58:58 INFO  Root WebApplicationContext: initialization completed in 3280 ms
-23:58:58 INFO  HikariPool-1 - Starting...
-23:58:59 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a6000b7
-23:58:59 INFO  HikariPool-1 - Start completed.
-23:59:01 INFO  Creating database changelog table with name: db_despachos.databasechangelog
-23:59:01 INFO  Reading from db_despachos.databasechangelog
-23:59:01 INFO  Creating snapshot
-23:59:01 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
-23:59:01 INFO  Successfully acquired change log lock
-23:59:01 INFO  Using deploymentId: 8731138893
-23:59:01 INFO  Reading from db_despachos.databasechangelog
-23:59:01 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
-23:59:01 INFO  Custom SQL executed
-23:59:01 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 74ms
-23:59:01 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
-23:59:01 INFO  Custom SQL executed
-23:59:01 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 14ms
-23:59:01 INFO  UPDATE SUMMARY
-23:59:01 INFO  Run:                          2
-23:59:01 INFO  Previously run:               0
-23:59:01 INFO  Filtered out:                 0
-23:59:01 INFO  -------------------------------
-23:59:01 INFO  Total change sets:            2
-23:59:01 INFO  Update summary generated
-23:59:02 INFO  Update command completed successfully.
-23:59:02 INFO  Liquibase: Update has been successful. Rows affected: 10
-23:59:02 INFO  Successfully released change log lock
-23:59:02 INFO  Command execution complete
-23:59:02 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
-23:59:02 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
-23:59:03 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
-23:59:03 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
-23:59:03 INFO  HHH10001005: Database info:
+11:01:26 INFO  Starting DespachoServiceApplication using Java 21.0.10 with PID 8196 (D:\Proyectos\Ferreteria\despacho-service\target\classes started by hecto in D:\Proyectos\Ferreteria\despacho-service)
+11:01:26 INFO  No active profile set, falling back to 1 default profile: "default"
+11:01:26 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+11:01:26 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+11:01:27 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+11:01:28 INFO  Finished Spring Data repository scanning in 229 ms. Found 1 JPA repository interface.
+11:01:28 INFO  BeanFactory id=eca6831b-aa1d-3ffe-ab74-bd4d9f88959f
+11:01:29 INFO  Tomcat initialized with port 9095 (http)
+11:01:29 INFO  Starting service [Tomcat]
+11:01:29 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+11:01:29 INFO  Root WebApplicationContext: initialization completed in 3482 ms
+11:01:30 INFO  HikariPool-1 - Starting...
+11:01:30 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b65c192
+11:01:30 INFO  HikariPool-1 - Start completed.
+11:01:33 INFO  Creating database changelog table with name: db_despachos.databasechangelog
+11:01:33 INFO  Reading from db_despachos.databasechangelog
+11:01:33 INFO  Creating snapshot
+11:01:33 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+11:01:33 INFO  Successfully acquired change log lock
+11:01:33 INFO  Using deploymentId: 8770889967
+11:01:33 INFO  Reading from db_despachos.databasechangelog
+11:01:33 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+11:01:33 INFO  Custom SQL executed
+11:01:33 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 55ms
+11:01:33 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+11:01:33 INFO  Custom SQL executed
+11:01:33 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 11ms
+11:01:33 INFO  UPDATE SUMMARY
+11:01:33 INFO  Run:                          2
+11:01:33 INFO  Previously run:               0
+11:01:33 INFO  Filtered out:                 0
+11:01:33 INFO  -------------------------------
+11:01:33 INFO  Total change sets:            2
+11:01:33 INFO  Update summary generated
+11:01:33 INFO  Update command completed successfully.
+11:01:33 INFO  Liquibase: Update has been successful. Rows affected: 10
+11:01:33 INFO  Successfully released change log lock
+11:01:33 INFO  Command execution complete
+11:01:33 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+11:01:33 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+11:01:34 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+11:01:34 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+11:01:34 INFO  HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/db_despachos?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -52,22 +52,22 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-23:59:05 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-23:59:05 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
-23:59:05 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
-23:59:05 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-23:59:07 INFO  Cannot determine local hostname
-23:59:08 INFO  Cannot determine local hostname
-23:59:08 INFO  Eureka HTTP Client uses RestClient.
-23:59:09 INFO  Cannot determine local hostname
-23:59:09 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-23:59:09 INFO  Setting initial instance status as: STARTING
-23:59:09 INFO  Initializing Eureka in region us-east-1
-23:59:09 INFO  Client configured to neither register nor query for data.
-23:59:09 INFO  Discovery Client initialized at timestamp 1778731149966 with initial instances count: 0
-23:59:09 INFO  Registering application DESPACHO-SERVICE with eureka with status UP
-23:59:10 INFO  Tomcat started on port 9095 (http) with context path '/'
-23:59:10 INFO  Updating port to 9095
-23:59:11 INFO  Cannot determine local hostname
-23:59:12 INFO  Cannot determine local hostname
-23:59:12 INFO  Started DespachoServiceApplication in 18.75 seconds (process running for 20.424)
+11:01:36 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+11:01:36 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+11:01:36 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+11:01:37 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+11:01:38 INFO  Cannot determine local hostname
+11:01:39 INFO  Cannot determine local hostname
+11:01:39 INFO  Eureka HTTP Client uses RestClient.
+11:01:40 INFO  Cannot determine local hostname
+11:01:40 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+11:01:41 INFO  Setting initial instance status as: STARTING
+11:01:41 INFO  Initializing Eureka in region us-east-1
+11:01:41 INFO  Client configured to neither register nor query for data.
+11:01:41 INFO  Discovery Client initialized at timestamp 1778770901102 with initial instances count: 0
+11:01:41 INFO  Registering application DESPACHO-SERVICE with eureka with status UP
+11:01:41 INFO  Tomcat started on port 9095 (http) with context path '/'
+11:01:41 INFO  Updating port to 9095
+11:01:42 INFO  Cannot determine local hostname
+11:01:43 INFO  Cannot determine local hostname
+11:01:43 INFO  Started DespachoServiceApplication in 18.978 seconds (process running for 20.357)

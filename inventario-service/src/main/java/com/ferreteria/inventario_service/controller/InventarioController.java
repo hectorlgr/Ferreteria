@@ -77,11 +77,11 @@ public class InventarioController {
     
     // DELETE para eliminar inventario por ID de producto
     // http://localhost:9090/api/inventario/producto/{productoId} 
-    @DeleteMapping("/producto/{productoId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void eliminarPorProductoId(@PathVariable Long productoId) {
-        logger.info("DELETE /api/inventario/producto/{} - Solicitud para eliminar inventario", productoId);
-        inventarioService.eliminarPorProductoId(productoId);
-        logger.info("Inventario eliminado para Producto ID: {}", productoId);
-    }
+    //@DeleteMapping("/producto/{productoId}")
+    //@ResponseStatus(HttpStatus.NO_CONTENT)
+    //public void eliminarPorProductoId(@PathVariable Long productoId) {
+    //    logger.info("DELETE /api/inventario/producto/{} - Solicitud para eliminar inventario", productoId);
+    //    inventarioService.eliminarPorProductoId(productoId);
+    //    logger.info("Inventario eliminado para Producto ID: {}", productoId);
+    //}
 }

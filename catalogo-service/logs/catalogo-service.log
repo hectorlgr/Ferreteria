@@ -107,3 +107,783 @@ org.hibernate.PropertyValueException: not-null property references a null or tra
 	at java.base/java.lang.Thread.run(Thread.java:1583)
 00:43:39 INFO  GET /api/productos - Solicitud para listar todo el catálogo
 00:43:39 INFO  Consultando todos los productos en la base de datos
+10:56:33 INFO  Starting CatalogoServiceApplication using Java 21.0.10 with PID 15048 (D:\Proyectos\Ferreteria\catalogo-service\target\classes started by hecto in D:\Proyectos\Ferreteria\catalogo-service)
+10:56:33 INFO  No active profile set, falling back to 1 default profile: "default"
+10:56:33 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+10:56:33 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+10:56:35 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+10:56:35 INFO  Finished Spring Data repository scanning in 286 ms. Found 1 JPA repository interface.
+10:56:35 INFO  BeanFactory id=b1c318f0-5980-38f2-8e93-6cd9f15d0258
+10:56:36 INFO  Tomcat initialized with port 9091 (http)
+10:56:36 INFO  Starting service [Tomcat]
+10:56:36 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+10:56:36 INFO  Root WebApplicationContext: initialization completed in 3353 ms
+10:56:37 INFO  HikariPool-1 - Starting...
+10:56:37 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a931c85
+10:56:37 INFO  HikariPool-1 - Start completed.
+10:56:41 INFO  Creating database changelog table with name: db_catalogo.databasechangelog
+10:56:41 INFO  Reading from db_catalogo.databasechangelog
+10:56:41 INFO  Creating snapshot
+10:56:41 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+10:56:41 INFO  Successfully acquired change log lock
+10:56:41 INFO  Using deploymentId: 8770597245
+10:56:41 INFO  Reading from db_catalogo.databasechangelog
+10:56:41 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+10:56:42 INFO  Custom SQL executed
+10:56:42 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 41ms
+10:56:42 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+10:56:42 INFO  Custom SQL executed
+10:56:42 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 23ms
+10:56:42 INFO  UPDATE SUMMARY
+10:56:42 INFO  Run:                          2
+10:56:42 INFO  Previously run:               0
+10:56:42 INFO  Filtered out:                 0
+10:56:42 INFO  -------------------------------
+10:56:42 INFO  Total change sets:            2
+10:56:42 INFO  Update summary generated
+10:56:42 INFO  Update command completed successfully.
+10:56:42 INFO  Liquibase: Update has been successful. Rows affected: 10
+10:56:42 INFO  Successfully released change log lock
+10:56:42 INFO  Command execution complete
+10:56:42 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+10:56:42 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+10:56:43 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+10:56:43 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+10:56:43 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_catalogo?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_catalogo/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+10:56:45 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+10:56:45 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+10:56:45 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+10:56:45 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+10:56:47 INFO  Cannot determine local hostname
+10:56:48 INFO  Cannot determine local hostname
+10:56:48 INFO  Eureka HTTP Client uses RestClient.
+10:56:48 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+10:56:48 INFO  Setting initial instance status as: STARTING
+10:56:48 INFO  Initializing Eureka in region us-east-1
+10:56:48 INFO  Client configured to neither register nor query for data.
+10:56:48 INFO  Discovery Client initialized at timestamp 1778770608920 with initial instances count: 0
+10:56:48 INFO  Registering application CATALOGO-SERVICE with eureka with status UP
+10:56:48 INFO  Tomcat started on port 9091 (http) with context path '/'
+10:56:48 INFO  Updating port to 9091
+10:56:50 INFO  Cannot determine local hostname
+10:56:50 INFO  Started CatalogoServiceApplication in 18.549 seconds (process running for 20.143)
+11:06:42 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+11:06:44 INFO  Initializing Servlet 'dispatcherServlet'
+11:06:44 INFO  Completed initialization in 7 ms
+11:06:44 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:06:44 INFO  Consultando todos los productos en la base de datos
+11:06:45 WARN  HHH000247: ErrorCode: 1054, SQLState: 42S22
+11:06:45 WARN  Unknown column 'p1_0.habilitado' in 'field list'
+11:06:45 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [Unknown column 'p1_0.habilitado' in 'field list'] [select p1_0.id,p1_0.descripcion,p1_0.habilitado,p1_0.marca,p1_0.nombre,p1_0.precio from productos p1_0 where p1_0.habilitado=true]; SQL [select p1_0.id,p1_0.descripcion,p1_0.habilitado,p1_0.marca,p1_0.nombre,p1_0.precio from productos p1_0 where p1_0.habilitado=true]] with root cause
+java.sql.SQLSyntaxErrorException: Unknown column 'p1_0.habilitado' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1056)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:271)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:190)
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.<init>(JdbcValuesResultSetImpl.java:71)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValues(JdbcSelectExecutorStandardImpl.java:422)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValuesSource(JdbcSelectExecutorStandardImpl.java:349)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:143)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:100)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:63)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:137)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:134)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:464)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:392)
+	at org.hibernate.query.sqm.internal.SqmQueryImpl.doList(SqmQueryImpl.java:374)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:153)
+	at org.hibernate.query.Query.getResultList(Query.java:121)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$CollectionExecution.doExecute(JpaQueryExecution.java:132)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+	at jdk.proxy4/jdk.proxy4.$Proxy146.findByHabilitadoTrue(Unknown Source)
+	at com.ferreteria.catalogo_service.service.ProductoService.obtenerTodos(ProductoService.java:27)
+	at com.ferreteria.catalogo_service.controller.ProductoController.obtenerTodos(ProductoController.java:26)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+11:08:17 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:08:17 INFO  Consultando todos los productos en la base de datos
+11:08:17 WARN  HHH000247: ErrorCode: 1054, SQLState: 42S22
+11:08:17 WARN  Unknown column 'p1_0.habilitado' in 'field list'
+11:08:17 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [Unknown column 'p1_0.habilitado' in 'field list'] [select p1_0.id,p1_0.descripcion,p1_0.habilitado,p1_0.marca,p1_0.nombre,p1_0.precio from productos p1_0 where p1_0.habilitado=true]; SQL [select p1_0.id,p1_0.descripcion,p1_0.habilitado,p1_0.marca,p1_0.nombre,p1_0.precio from productos p1_0 where p1_0.habilitado=true]] with root cause
+java.sql.SQLSyntaxErrorException: Unknown column 'p1_0.habilitado' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1056)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:271)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:190)
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.<init>(JdbcValuesResultSetImpl.java:71)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValues(JdbcSelectExecutorStandardImpl.java:422)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValuesSource(JdbcSelectExecutorStandardImpl.java:349)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:143)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:100)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:63)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:137)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:134)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:464)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:392)
+	at org.hibernate.query.sqm.internal.SqmQueryImpl.doList(SqmQueryImpl.java:374)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:153)
+	at org.hibernate.query.Query.getResultList(Query.java:121)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$CollectionExecution.doExecute(JpaQueryExecution.java:132)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+	at jdk.proxy4/jdk.proxy4.$Proxy146.findByHabilitadoTrue(Unknown Source)
+	at com.ferreteria.catalogo_service.service.ProductoService.obtenerTodos(ProductoService.java:27)
+	at com.ferreteria.catalogo_service.controller.ProductoController.obtenerTodos(ProductoController.java:26)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+11:12:21 INFO  Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+11:12:21 INFO  Unregistering application CATALOGO-SERVICE with eureka with status DOWN
+11:12:21 INFO  Commencing graceful shutdown. Waiting for active requests to complete
+11:12:21 INFO  Graceful shutdown complete
+11:12:21 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
+11:12:21 INFO  HikariPool-1 - Shutdown initiated...
+11:12:21 INFO  HikariPool-1 - Shutdown completed.
+11:12:21 INFO  Shutting down DiscoveryClient ...
+11:12:21 INFO  Completed shut down of DiscoveryClient
+11:12:21 INFO  Starting CatalogoServiceApplication using Java 21.0.10 with PID 15048 (D:\Proyectos\Ferreteria\catalogo-service\target\classes started by hecto in D:\Proyectos\Ferreteria\catalogo-service)
+11:12:21 INFO  No active profile set, falling back to 1 default profile: "default"
+11:12:21 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+11:12:21 INFO  Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+11:12:21 INFO  BeanFactory id=b1c318f0-5980-38f2-8e93-6cd9f15d0258
+11:12:22 INFO  Tomcat initialized with port 9091 (http)
+11:12:22 INFO  Starting service [Tomcat]
+11:12:22 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+11:12:22 INFO  Root WebApplicationContext: initialization completed in 888 ms
+11:12:22 INFO  HikariPool-2 - Starting...
+11:12:22 INFO  HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@78cea56f
+11:12:22 INFO  HikariPool-2 - Start completed.
+11:12:22 INFO  Reading from db_catalogo.databasechangelog
+11:12:22 INFO  Change failed validation!
+11:12:22 INFO  Logging exception.
+11:12:22 INFO  ERROR: Exception Details
+11:12:22 INFO  ERROR: Exception Primary Class:  ValidationFailedException
+11:12:22 INFO  ERROR: Exception Primary Reason:  Validation Failed:
+     2 changesets check sum
+          db/changelog/db.changelog.sql::1::hector was: 9:5424bf1a8b9abe290f4b97325cc37465 but is now: 9:a26bcb636f1660c44e794986d4b31450
+          db/changelog/db.changelog.sql::2::hector was: 9:facdd2de40f435ea27c8963c4d563a21 but is now: 9:cf5e4ff44cac0ad71456345dbef0ad5b
+
+11:12:22 INFO  ERROR: Exception Primary Source:  5.0.2
+11:12:22 INFO  Command execution complete
+11:12:22 WARN  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/db.changelog.sql::1::hector was: 9:5424bf1a8b9abe290f4b97325cc37465 but is now: 9:a26bcb636f1660c44e794986d4b31450
+          db/changelog/db.changelog.sql::2::hector was: 9:facdd2de40f435ea27c8963c4d563a21 but is now: 9:cf5e4ff44cac0ad71456345dbef0ad5b
+
+11:12:22 INFO  HikariPool-2 - Shutdown initiated...
+11:12:22 INFO  HikariPool-2 - Shutdown completed.
+11:12:22 INFO  Stopping service [Tomcat]
+11:12:22 INFO  
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+11:12:22 ERROR Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/db.changelog.sql::1::hector was: 9:5424bf1a8b9abe290f4b97325cc37465 but is now: 9:a26bcb636f1660c44e794986d4b31450
+          db/changelog/db.changelog.sql::2::hector was: 9:facdd2de40f435ea27c8963c4d563a21 but is now: 9:cf5e4ff44cac0ad71456345dbef0ad5b
+
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
+	at com.ferreteria.catalogo_service.CatalogoServiceApplication.main(CatalogoServiceApplication.java:12) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/db.changelog.sql::1::hector was: 9:5424bf1a8b9abe290f4b97325cc37465 but is now: 9:a26bcb636f1660c44e794986d4b31450
+          db/changelog/db.changelog.sql::2::hector was: 9:facdd2de40f435ea27c8963c4d563a21 but is now: 9:cf5e4ff44cac0ad71456345dbef0ad5b
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309) ~[spring-beans-7.0.7.jar:7.0.7]
+	... 13 common frames omitted
+Caused by: liquibase.exception.LiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/db.changelog.sql::1::hector was: 9:5424bf1a8b9abe290f4b97325cc37465 but is now: 9:a26bcb636f1660c44e794986d4b31450
+          db/changelog/db.changelog.sql::2::hector was: 9:facdd2de40f435ea27c8963c4d563a21 but is now: 9:cf5e4ff44cac0ad71456345dbef0ad5b
+
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:289) ~[liquibase-core-5.0.2.jar:na]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
+	... 20 common frames omitted
+Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/db.changelog.sql::1::hector was: 9:5424bf1a8b9abe290f4b97325cc37465 but is now: 9:a26bcb636f1660c44e794986d4b31450
+          db/changelog/db.changelog.sql::2::hector was: 9:facdd2de40f435ea27c8963c4d563a21 but is now: 9:cf5e4ff44cac0ad71456345dbef0ad5b
+
+	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:325) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.child(Scope.java:226) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.command.CommandScope.execute(CommandScope.java:257) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Liquibase.runInScope(Liquibase.java:1366) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Liquibase.update(Liquibase.java:205) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Liquibase.update(Liquibase.java:188) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272) ~[liquibase-core-5.0.2.jar:na]
+	... 22 common frames omitted
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     2 changesets check sum
+          db/changelog/db.changelog.sql::1::hector was: 9:5424bf1a8b9abe290f4b97325cc37465 but is now: 9:a26bcb636f1660c44e794986d4b31450
+          db/changelog/db.changelog.sql::2::hector was: 9:facdd2de40f435ea27c8963c4d563a21 but is now: 9:cf5e4ff44cac0ad71456345dbef0ad5b
+
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:392) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:89) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:269) ~[liquibase-core-5.0.2.jar:na]
+	... 40 common frames omitted
+11:17:14 INFO  Starting CatalogoServiceApplication using Java 21.0.10 with PID 3660 (D:\Proyectos\Ferreteria\catalogo-service\target\classes started by hecto in D:\Proyectos\Ferreteria\catalogo-service)
+11:17:14 INFO  No active profile set, falling back to 1 default profile: "default"
+11:17:14 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+11:17:14 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+11:17:16 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+11:17:16 INFO  Finished Spring Data repository scanning in 256 ms. Found 1 JPA repository interface.
+11:17:17 INFO  BeanFactory id=b1c318f0-5980-38f2-8e93-6cd9f15d0258
+11:17:18 INFO  Tomcat initialized with port 9091 (http)
+11:17:18 INFO  Starting service [Tomcat]
+11:17:18 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+11:17:18 INFO  Root WebApplicationContext: initialization completed in 3329 ms
+11:17:18 INFO  HikariPool-1 - Starting...
+11:17:19 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3353a49
+11:17:19 INFO  HikariPool-1 - Start completed.
+11:17:21 INFO  Creating database changelog table with name: db_catalogo.databasechangelog
+11:17:21 INFO  Reading from db_catalogo.databasechangelog
+11:17:21 INFO  Creating snapshot
+11:17:22 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+11:17:22 INFO  Successfully acquired change log lock
+11:17:22 INFO  Using deploymentId: 8771838563
+11:17:22 INFO  Reading from db_catalogo.databasechangelog
+11:17:22 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+11:17:22 INFO  Custom SQL executed
+11:17:22 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 40ms
+11:17:22 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+11:17:22 INFO  Custom SQL executed
+11:17:22 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 18ms
+11:17:22 INFO  UPDATE SUMMARY
+11:17:22 INFO  Run:                          2
+11:17:22 INFO  Previously run:               0
+11:17:22 INFO  Filtered out:                 0
+11:17:22 INFO  -------------------------------
+11:17:22 INFO  Total change sets:            2
+11:17:22 INFO  Update summary generated
+11:17:22 INFO  Update command completed successfully.
+11:17:22 INFO  Liquibase: Update has been successful. Rows affected: 10
+11:17:22 INFO  Successfully released change log lock
+11:17:22 INFO  Command execution complete
+11:17:22 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+11:17:22 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+11:17:23 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+11:17:23 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+11:17:23 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_catalogo?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_catalogo/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+11:17:25 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+11:17:25 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+11:17:25 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+11:17:26 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+11:17:27 INFO  Eureka HTTP Client uses RestClient.
+11:17:27 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+11:17:27 INFO  Setting initial instance status as: STARTING
+11:17:27 INFO  Initializing Eureka in region us-east-1
+11:17:27 INFO  Client configured to neither register nor query for data.
+11:17:27 INFO  Discovery Client initialized at timestamp 1778771847306 with initial instances count: 0
+11:17:27 INFO  Registering application CATALOGO-SERVICE with eureka with status UP
+11:17:27 INFO  Tomcat started on port 9091 (http) with context path '/'
+11:17:27 INFO  Updating port to 9091
+11:17:27 INFO  Started CatalogoServiceApplication in 13.562 seconds (process running for 15.123)
+11:17:54 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+11:17:54 INFO  Initializing Servlet 'dispatcherServlet'
+11:17:54 INFO  Completed initialization in 2 ms
+11:17:54 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:17:54 INFO  Consultando todos los productos en la base de datos
+11:21:21 INFO  POST /api/productos - Solicitud para registrar nuevo producto: Taladro Percutor Inalámbrico
+11:21:21 INFO  Registrando nuevo producto: Taladro Percutor Inalámbrico
+11:21:21 INFO  Producto registrado exitosamente con ID: 11
+11:21:42 INFO  GET /api/productos/2 - Solicitud para obtener producto por ID
+11:21:42 INFO  Buscando producto activo con ID: 2
+11:21:46 INFO  GET /api/productos/11 - Solicitud para obtener producto por ID
+11:21:46 INFO  Buscando producto activo con ID: 11
+11:21:51 INFO  GET /api/productos/12 - Solicitud para obtener producto por ID
+11:21:51 INFO  Buscando producto activo con ID: 12
+11:21:51 WARN  Búsqueda fallida: El producto con ID 12 no existe o está deshabilitado
+11:21:51 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Producto no encontrado con el ID 12] with root cause
+java.lang.RuntimeException: Error: Producto no encontrado con el ID 12
+	at com.ferreteria.catalogo_service.service.ProductoService.lambda$0(ProductoService.java:36)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.ferreteria.catalogo_service.service.ProductoService.obtenerPorId(ProductoService.java:34)
+	at com.ferreteria.catalogo_service.controller.ProductoController.obtenerPorId(ProductoController.java:36)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+11:22:42 WARN  Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('}' (code 125)): expected a value]
+11:22:49 INFO  POST /api/productos - Solicitud para registrar nuevo producto: Taladro Percutor Inalámbrico
+11:22:49 INFO  Registrando nuevo producto: Taladro Percutor Inalámbrico
+11:22:49 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: not-null property references a null or transient value for entity com.ferreteria.catalogo_service.model.Producto.precio] with root cause
+org.hibernate.PropertyValueException: not-null property references a null or transient value for entity com.ferreteria.catalogo_service.model.Producto.precio
+	at org.hibernate.engine.internal.Nullability.checkNullability(Nullability.java:120)
+	at org.hibernate.action.internal.AbstractEntityInsertAction.nullifyTransientReferencesIfNotAlready(AbstractEntityInsertAction.java:120)
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:67)
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:667)
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291)
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:270)
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322)
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:371)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:285)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:215)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:133)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:144)
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:90)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:74)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:50)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:692)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:675)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:362)
+	at jdk.proxy4/jdk.proxy4.$Proxy136.persist(Unknown Source)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityHandlerInvocationHandler.invokeMethod(SharedEntityManagerCreator.java:240)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:386)
+	at jdk.proxy4/jdk.proxy4.$Proxy136.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:664)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:278)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:545)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:290)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:690)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:171)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:166)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+	at jdk.proxy4/jdk.proxy4.$Proxy146.save(Unknown Source)
+	at com.ferreteria.catalogo_service.service.ProductoService.guardarProducto(ProductoService.java:46)
+	at com.ferreteria.catalogo_service.controller.ProductoController.guardarProducto(ProductoController.java:45)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+11:23:41 WARN  Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'PUT' is not supported]
+11:23:53 INFO  PUT /api/productos/11 - Solicitud para actualizar datos del producto
+11:23:53 INFO  Iniciando actualización para el producto ID: 11
+11:23:53 INFO  Buscando producto activo con ID: 11
+11:23:53 INFO  Guardando producto actualizado en la base de datos...
+11:23:53 INFO  Producto ID 11 actualizado correctamente
+11:24:04 INFO  PUT /api/productos/11 - Solicitud para actualizar datos del producto
+11:24:04 INFO  Iniciando actualización para el producto ID: 11
+11:24:04 INFO  Buscando producto activo con ID: 11
+11:24:04 INFO  Guardando producto actualizado en la base de datos...
+11:24:04 INFO  Producto ID 11 actualizado correctamente
+11:28:49 INFO  DELETE /api/productos/11 - Solicitud de baja lógica
+11:28:49 INFO  Iniciando deshabilitación y reseteo de stock para ID: 11
+11:28:49 INFO  Buscando producto activo con ID: 11
+11:28:50 INFO  Stock reseteado en inventario-service para producto ID: 11
+11:28:50 INFO  Producto ID 11 procesado como NO DISPONIBLE
+11:28:57 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:28:57 INFO  Consultando todos los productos en la base de datos
+11:30:02 INFO  PUT /api/productos/11/habilitar - Solicitud para reactivar producto
+11:30:02 INFO  Iniciando habilitación para el producto ID: 11
+11:30:02 INFO  Producto ID: 11 reactivado y visible en el catálogo
+11:30:10 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:30:10 INFO  Consultando todos los productos en la base de datos
+11:31:42 INFO  Recibida orden de deshabilitar producto ID: 11 por stock cero
+11:31:42 INFO  Producto ID: 11 deshabilitado automáticamente por falta de stock
+11:31:48 INFO  GET /api/productos/11 - Solicitud para obtener producto por ID
+11:31:48 INFO  Buscando producto activo con ID: 11
+11:31:48 WARN  Búsqueda fallida: El producto con ID 11 no existe o está deshabilitado
+11:31:48 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Producto no encontrado con el ID 11] with root cause
+java.lang.RuntimeException: Error: Producto no encontrado con el ID 11
+	at com.ferreteria.catalogo_service.service.ProductoService.lambda$0(ProductoService.java:36)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.ferreteria.catalogo_service.service.ProductoService.obtenerPorId(ProductoService.java:34)
+	at com.ferreteria.catalogo_service.controller.ProductoController.obtenerPorId(ProductoController.java:36)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+11:31:51 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:31:51 INFO  Consultando todos los productos en la base de datos
+11:32:01 WARN  Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+11:32:10 INFO  PUT /api/productos/11/habilitar - Solicitud para reactivar producto
+11:32:10 INFO  Iniciando habilitación para el producto ID: 11
+11:32:10 INFO  Producto ID: 11 reactivado y visible en el catálogo
+11:32:17 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:32:17 INFO  Consultando todos los productos en la base de datos
+11:50:28 INFO  Recibida orden de deshabilitar producto ID: 1 por stock cero
+11:50:28 INFO  Producto ID: 1 deshabilitado automáticamente por falta de stock
+11:50:44 INFO  PUT /api/productos/1 - Solicitud para actualizar datos del producto
+11:50:44 INFO  Iniciando actualización para el producto ID: 1
+11:50:44 INFO  Buscando producto activo con ID: 1
+11:50:44 WARN  Búsqueda fallida: El producto con ID 1 no existe o está deshabilitado
+11:50:44 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Producto no encontrado con el ID 1] with root cause
+java.lang.RuntimeException: Error: Producto no encontrado con el ID 1
+	at com.ferreteria.catalogo_service.service.ProductoService.lambda$0(ProductoService.java:36)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.ferreteria.catalogo_service.service.ProductoService.obtenerPorId(ProductoService.java:34)
+	at com.ferreteria.catalogo_service.service.ProductoService.actualizarProducto(ProductoService.java:56)
+	at com.ferreteria.catalogo_service.controller.ProductoController.actualizarProducto(ProductoController.java:55)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:650)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+11:50:51 WARN  Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'PUT' is not supported]
+11:50:56 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:50:56 INFO  Consultando todos los productos en la base de datos
+11:51:51 INFO  PUT /api/productos/1/habilitar - Solicitud para reactivar producto
+11:51:51 INFO  Iniciando habilitación para el producto ID: 1
+11:51:51 INFO  Producto ID: 1 reactivado y visible en el catálogo
+11:51:53 INFO  PUT /api/productos/1/habilitar - Solicitud para reactivar producto
+11:51:53 INFO  Iniciando habilitación para el producto ID: 1
+11:51:53 INFO  El producto ID: 1 ya estaba habilitado
+11:51:55 INFO  PUT /api/productos/1/habilitar - Solicitud para reactivar producto
+11:51:55 INFO  Iniciando habilitación para el producto ID: 1
+11:51:55 INFO  El producto ID: 1 ya estaba habilitado
+11:52:01 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+11:52:01 INFO  Consultando todos los productos en la base de datos
+11:53:03 INFO  Recibida orden de deshabilitar producto ID: 1 por stock cero
+11:53:03 INFO  Producto ID: 1 deshabilitado automáticamente por falta de stock
+12:03:37 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+12:03:37 INFO  Consultando todos los productos en la base de datos
+12:04:24 INFO  POST /api/productos - Solicitud para registrar nuevo producto: Taladro Inalámbrico
+12:04:24 INFO  Registrando nuevo producto: Taladro Inalámbrico
+12:04:24 INFO  Producto registrado exitosamente con ID: 12
+12:05:10 INFO  GET /api/productos - Solicitud para listar todo el catálogo
+12:05:10 INFO  Consultando todos los productos en la base de datos

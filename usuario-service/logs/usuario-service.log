@@ -178,3 +178,168 @@ com.ferreteria.usuario_service.controller.UsuarioController#guardarUsuario(Usuar
 00:42:31 INFO  Usuario registrado exitosamente con ID: 13
 00:44:33 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
 00:44:33 INFO  Consultando todos los usuarios en la base de datos
+10:57:28 INFO  Starting UsuarioServiceApplication using Java 21.0.10 with PID 2408 (D:\Proyectos\Ferreteria\usuario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\usuario-service)
+10:57:28 INFO  No active profile set, falling back to 1 default profile: "default"
+10:57:28 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+10:57:28 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+10:57:29 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+10:57:29 INFO  Finished Spring Data repository scanning in 231 ms. Found 1 JPA repository interface.
+10:57:30 INFO  BeanFactory id=c4948507-409b-3e45-9857-01ef71ac3a94
+10:57:31 INFO  Tomcat initialized with port 9092 (http)
+10:57:31 INFO  Starting service [Tomcat]
+10:57:31 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+10:57:31 INFO  Root WebApplicationContext: initialization completed in 3072 ms
+10:57:31 INFO  HikariPool-1 - Starting...
+10:57:32 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5d9f3cab
+10:57:32 INFO  HikariPool-1 - Start completed.
+10:57:34 INFO  Creating database changelog table with name: db_usuarios.databasechangelog
+10:57:34 INFO  Reading from db_usuarios.databasechangelog
+10:57:34 INFO  Creating snapshot
+10:57:34 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+10:57:35 INFO  Successfully acquired change log lock
+10:57:35 INFO  Using deploymentId: 8770651621
+10:57:35 INFO  Reading from db_usuarios.databasechangelog
+10:57:35 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+10:57:35 INFO  Custom SQL executed
+10:57:35 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 56ms
+10:57:35 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+10:57:35 INFO  Custom SQL executed
+10:57:35 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 18ms
+10:57:35 INFO  UPDATE SUMMARY
+10:57:35 INFO  Run:                          2
+10:57:35 INFO  Previously run:               0
+10:57:35 INFO  Filtered out:                 0
+10:57:35 INFO  -------------------------------
+10:57:35 INFO  Total change sets:            2
+10:57:35 INFO  Update summary generated
+10:57:35 INFO  Update command completed successfully.
+10:57:35 INFO  Liquibase: Update has been successful. Rows affected: 10
+10:57:35 INFO  Successfully released change log lock
+10:57:35 INFO  Command execution complete
+10:57:35 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+10:57:35 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+10:57:36 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+10:57:36 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+10:57:36 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_usuarios?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_usuarios/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+10:57:38 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+10:57:38 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+10:57:38 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+10:57:38 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+10:57:40 INFO  Cannot determine local hostname
+10:57:41 INFO  Cannot determine local hostname
+10:57:41 INFO  Eureka HTTP Client uses RestClient.
+10:57:41 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+10:57:41 INFO  Setting initial instance status as: STARTING
+10:57:41 INFO  Initializing Eureka in region us-east-1
+10:57:41 INFO  Client configured to neither register nor query for data.
+10:57:41 INFO  Discovery Client initialized at timestamp 1778770661926 with initial instances count: 0
+10:57:41 INFO  Registering application USUARIO-SERVICE with eureka with status UP
+10:57:42 INFO  Tomcat started on port 9092 (http) with context path '/'
+10:57:42 INFO  Updating port to 9092
+10:57:43 INFO  Cannot determine local hostname
+10:57:43 INFO  Started UsuarioServiceApplication in 16.943 seconds (process running for 18.426)
+11:05:44 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+11:05:44 INFO  Initializing Servlet 'dispatcherServlet'
+11:05:44 INFO  Completed initialization in 2 ms
+11:05:44 INFO  POST /api/usuarios - Solicitud para registrar un nuevo usuario: jp@ferreteria.cl
+11:05:44 INFO  Iniciando guardado de nuevo usuario. Email: jp@ferreteria.cl
+11:05:44 INFO  Usuario registrado exitosamente con ID: 11
+11:07:22 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+11:07:22 INFO  Consultando todos los usuarios en la base de datos
+11:18:15 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+11:18:15 INFO  Consultando todos los usuarios en la base de datos
+11:35:48 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+11:35:48 INFO  Consultando todos los usuarios en la base de datos
+11:36:43 INFO  POST /api/usuarios - Solicitud para registrar un nuevo usuario: estudiante@universidad.cl
+11:36:43 INFO  Iniciando guardado de nuevo usuario. Email: estudiante@universidad.cl
+11:36:43 INFO  Usuario registrado exitosamente con ID: 12
+11:37:28 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+11:37:28 INFO  Consultando todos los usuarios en la base de datos
+11:37:33 INFO  GET /api/usuarios/12 - Solicitud para obtener usuario por ID
+11:37:33 INFO  Buscando usuario en base de datos con ID: 12
+11:37:37 INFO  GET /api/usuarios/13 - Solicitud para obtener usuario por ID
+11:37:37 INFO  Buscando usuario en base de datos con ID: 13
+11:37:37 WARN  Búsqueda fallida: No se encontró ningún usuario con el ID: 13
+11:37:37 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Error: Usuario no encontrado con el ID 13] with root cause
+java.lang.RuntimeException: Error: Usuario no encontrado con el ID 13
+	at com.ferreteria.usuario_service.service.UsuarioService.lambda$0(UsuarioService.java:32)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.ferreteria.usuario_service.service.UsuarioService.obtenerPorId(UsuarioService.java:30)
+	at com.ferreteria.usuario_service.controller.UsuarioController.obtenerPorId(UsuarioController.java:37)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+11:38:11 INFO  PUT /api/usuarios/12 - Solicitud para actualizar datos del usuario
+11:38:11 INFO  Iniciando actualización de datos para el usuario ID: 12
+11:38:11 INFO  Buscando usuario en base de datos con ID: 12
+11:38:11 INFO  Guardando usuario actualizado en la base de datos...
+11:38:11 INFO  Usuario ID 12 actualizado correctamente
+11:38:17 INFO  GET /api/usuarios/12 - Solicitud para obtener usuario por ID
+11:38:17 INFO  Buscando usuario en base de datos con ID: 12
+11:38:20 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+11:38:20 INFO  Consultando todos los usuarios en la base de datos
+11:38:46 INFO  DELETE /api/usuarios/12 - Solicitud para eliminar usuario
+11:38:46 INFO  Iniciando proceso de eliminación para el usuario ID: 12
+11:38:46 INFO  Buscando usuario en base de datos con ID: 12
+11:38:46 INFO  Usuario ID 12 eliminado exitosamente
+11:38:51 INFO  DELETE /api/usuarios/11 - Solicitud para eliminar usuario
+11:38:51 INFO  Iniciando proceso de eliminación para el usuario ID: 11
+11:38:51 INFO  Buscando usuario en base de datos con ID: 11
+11:38:51 INFO  Usuario ID 11 eliminado exitosamente
+11:38:55 INFO  DELETE /api/usuarios/10 - Solicitud para eliminar usuario
+11:38:55 INFO  Iniciando proceso de eliminación para el usuario ID: 10
+11:38:55 INFO  Buscando usuario en base de datos con ID: 10
+11:38:55 INFO  Usuario ID 10 eliminado exitosamente
+11:39:01 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+11:39:01 INFO  Consultando todos los usuarios en la base de datos
