@@ -56,6 +56,16 @@ public class VentaController {
         return ResponseEntity.ok(ventas);
     }
 
+    // GET: Obtener el historial de ventas por el correo del cliente
+    // http://localhost:9090/api/ventas/cliente/email/{email}
+    @GetMapping("/cliente/email/{email}")
+    public List<Venta> obtenerVentasPorEmail(@PathVariable String email) {
+        logger.info("GET /api/ventas/cliente/email/{} - Solicitud de historial de compras", email);
+        List<Venta> ventas = ventaService.obtenerVentasPorEmailUsuario(email);
+        logger.debug("Se encontraron {} ventas para el cliente con email {}", ventas.size(), email);
+        return ventas;
+    }
+
     // GET: Obtener ventas por rango de fechas
     // http://localhost:9090/api/ventas/rango-fechas?fechaInicio={2024-01-01}&fechaFin={2024-12-31}
     @GetMapping("/rango-fechas")
@@ -75,6 +85,8 @@ public class VentaController {
         logger.info("GET /api/ventas/{} - Solicitud para obtener venta por ID", id);
         return ResponseEntity.ok(ventaService.obtenerPorId(id));
     }
+
+
 
     // POST: Crear una nueva venta
     // http://localhost:9090/api/ventas

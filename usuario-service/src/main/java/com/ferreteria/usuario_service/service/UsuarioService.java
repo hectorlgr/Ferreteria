@@ -33,6 +33,17 @@ public class UsuarioService {
                 });
     }
 
+    //Metodo para obtener un usuario por su email
+    public Usuario obtenerPorEmail(String email) {
+        logger.info("Buscando usuario en base de datos con email: {}", email);
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario == null) {
+            logger.warn("Búsqueda fallida: No se encontró ningún usuario con el email: {}", email);
+            throw new RuntimeException("Error: Usuario no encontrado con el email " + email);
+        }
+        return usuario;
+    }
+
     // Método para guardar un nuevo usuario
     public Usuario guardarUsuario(Usuario usuario) {
         logger.info("Iniciando guardado de nuevo usuario. Email: {}", usuario.getEmail());

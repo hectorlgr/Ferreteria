@@ -50,6 +50,14 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.obtenerPorId(id));
     }
 
+    // GET: Obtener un usuario por email
+    // http://localhost:9090/api/usuarios/email/{email} 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Usuario> obtenerPorEmail(@PathVariable String email) {
+        logger.info("GET /api/usuarios/email/{} - Solicitud para obtener usuario por email", email);
+        return ResponseEntity.ok(usuarioService.obtenerPorEmail(email));
+    }
+
     // POST: Crear un nuevo usuario
     // http://localhost:9090/api/usuarios
     @PostMapping

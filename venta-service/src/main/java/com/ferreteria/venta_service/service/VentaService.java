@@ -1,12 +1,15 @@
 package com.ferreteria.venta_service.service;
 
+import com.ferreteria.venta_service.Dto.UsuarioDto;
 import com.ferreteria.venta_service.model.DetalleVenta;
 import com.ferreteria.venta_service.model.Venta;
 import com.ferreteria.venta_service.repository.VentaRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +17,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class VentaService {
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(VentaService.class);
@@ -148,4 +154,32 @@ public class VentaService {
     
         return ventaRepository.findByFechaRango(fechaInicioCompleta, fechaFinCompleta);
     }
+
+    public List<Venta> obtenerVentasPorEmailUsuario(String email) {
+        logger.info("Iniciando búsqueda de ventas para el email: {}", email);
+        Long idClienteObtenido;
+
+        // 1. Preguntamos a usuario-service por el ID asociado a este email
+        try {
+            // OJO: Ajusta el puerto (ej: 9092) al puerto real de tu usuario-service
+            String urlUsuario = "http://localhost:9092/api/usuarios/email/" + email;
+            
+            // Hacemos la llamada HTTP y mapeamos la respuesta a nuestro DTO
+            UsuarioDto usuario = restTemplate.getForObject(urlUsuario, UsuarioDto.class);
+            idClienteObtenido = usuario.getId();
+            logger.info("Usuario encontrado en usuario-service. ID mapeado: {}", idClienteObtenido);
+            
+        } catch (Exception e) {
+            logger.error("Error al contactar a usuario-service o el email no existe: {}", email);
+            throw new RuntimeException("No se encontró al usuario con el email " + email + " para buscar sus ventas.");
+        }
+
+        // 2. Usamos el ID obtenido para buscar en nuestra propia base de datos de ventas
+        logger.info("Buscando las ventas asociadas al ID de cliente: {}", idClienteObtenido);
+        // Asumo que ya tienes este método creado en tu VentaRepository
+        return ventaRepository.findByUsuarioId(idClienteObtenido); 
+    }
+
+
+
 }
