@@ -14,7 +14,4 @@ public class DespachoRequestDto {
 
     @NotBlank(message = "La dirección de entrega no puede estar vacía")
     private String direccion;
-
-    @NotBlank(message = "El estado inicial del despacho es obligatorio")
-    private String estado;
 }

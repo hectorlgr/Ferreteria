@@ -19,5 +19,4 @@ INSERT INTO inventario (producto_id, cantidad) VALUES
 (7, 30),  -- Esmeril Angular
 (8, 150), -- Alicate Universal
 (9, 45),  -- Nivel de Burbuja
-(10, 10), -- Soldadora Inverter
-(11, 999); -- Martillo Azul
+(10, 10) -- Soldadora Inverter

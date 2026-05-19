@@ -69,7 +69,6 @@ public class DespachoController {
         Despacho despacho = new Despacho();
         despacho.setVentaId(dto.getVentaId());
         despacho.setDireccion(dto.getDireccion());
-        despacho.setEstado(dto.getEstado());
         
         Despacho nuevoDespacho = despachoService.crearDespacho(despacho);
         logger.info("Despacho creado exitosamente con ID: {}", nuevoDespacho.getId());

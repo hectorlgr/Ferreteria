@@ -39,7 +39,6 @@ public class VentaService {
         return ventaRepository.findByUsuarioId(usuarioId);
     }
 
-    // Método para procesar una nueva venta
     public Venta procesarVenta(Venta venta) {
         logger.info("Iniciando procesamiento de venta para Usuario ID: {}", venta.getUsuarioId());
 
@@ -61,17 +60,19 @@ public class VentaService {
         logger.debug("Calculando totales y enlazando detalles de la venta...");
         venta.setFecha(LocalDateTime.now());
         int totalVenta = 0;
-        final int despachoFijo = 1500;
+        int costoDespachoIngresado = venta.getCostoDespacho() != null ? venta.getCostoDespacho() : 0;
 
         for (DetalleVenta detalle : venta.getDetalles()) {
             detalle.setVenta(venta);
             detalle.setSubtotal(detalle.getCantidad() * detalle.getPrecioUnitario());
             totalVenta += detalle.getSubtotal();
         }
-        venta.setCostoDespacho(despachoFijo);
-        totalVenta += despachoFijo;
+        
+        // Sumamos el costo de despacho que ingresó el usuario
+        totalVenta += costoDespachoIngresado;
+        
         venta.setTotal(totalVenta);
-        logger.debug("Cálculos finalizados. Total calculado: {} (incluye despacho fijo de {})", totalVenta, despachoFijo);
+        logger.debug("Cálculos finalizados. Total calculado: {} (incluye despacho de {})", totalVenta, costoDespachoIngresado);
 
         // 3. Guardar la venta en la db
         logger.info("Guardando datos de la venta en base de datos...");
