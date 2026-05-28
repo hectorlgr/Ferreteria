@@ -16,7 +16,7 @@ spring:
       routes:
 
         - id: auth-service
-          uri: http://localhost:9096 # Revisa si este es tu puerto de auth
+          uri: http://localhost:9096
           predicates:
             - Path=/auth/**
 
@@ -26,21 +26,21 @@ spring:
             - Path=/api/ventas/**
 
         - id: catalogo-service
-          uri: http://localhost:9091 # Revisa tu puerto de catálogo
+          uri: http://localhost:9091
           predicates:
             - Path=/api/productos/**
 
         - id: usuario-service
-          uri: http://localhost:9092 # Revisa tu puerto de usuarios
+          uri: http://localhost:9092
           predicates:
             - Path=/api/usuarios/**
 
         - id: inventario-service
-          uri: http://localhost:9093 # Revisa tu puerto de inventario
+          uri: http://localhost:9093
           predicates:
             - Path=/api/inventario/**
             
         - id: despacho-service
-          uri: http://localhost:9095 # Revisa tu puerto de despachos
+          uri: http://localhost:9095
           predicates:
             - Path=/api/despachos/**

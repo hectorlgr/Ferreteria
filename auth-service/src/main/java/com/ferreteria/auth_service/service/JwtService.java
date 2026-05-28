@@ -23,7 +23,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-
+    // Método para generar un token JWT con el email y el rol del usuario
     public String generateToken(String email, String role) {
         Date ahora = new Date();
         Date expiration = new Date(ahora.getTime() + 1000 * 60 * 60);
@@ -36,6 +36,7 @@ public class JwtService {
         .compact();
     }
 
+    // Método para extraer el email del usuario a partir del token JWT
     public String getEmailFromToken(String token) {
         if (token == null || token.isBlank()) return null;
         String jwt = token.startsWith("Bearer ") ? token.substring(7) : token;
@@ -51,6 +52,7 @@ public class JwtService {
         }
     }
 
+    // Método para validar un token JWT
     public boolean isValid(String token) {
         if (token == null || token.isBlank()) return false;
         String jwt = token.startsWith("Bearer ") ? token.substring(7) : token;

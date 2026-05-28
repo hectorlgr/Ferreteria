@@ -8,7 +8,6 @@ CREATE TABLE inventario (
 );
 
 --changeset hector:2
--- Asignamos stock inicial a los 10 productos de tu catálogo
 INSERT INTO inventario (producto_id, cantidad) VALUES
 (1, 50),  -- Taladro Percutor
 (2, 120), -- Martillo Carpintero

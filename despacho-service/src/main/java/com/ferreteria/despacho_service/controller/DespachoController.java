@@ -85,6 +85,8 @@ public class DespachoController {
         return ResponseEntity.ok(despachoActualizado);
     }
 
+    // DELETE: Eliminar un despacho por ID
+    // http://localhost:9090/api/despachos/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarDespacho(@PathVariable Long id) {
         logger.info("DELETE /api/despachos/{} - Solicitud para eliminar despacho", id);

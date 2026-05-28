@@ -22,7 +22,7 @@ public class Venta {
 
     // ID del usuario que realizó la venta (referencia a usuario-service)
     @Column(name = "usuario_id", nullable = false)
-    private Long usuarioId; // Solo guardamos el ID, el nombre vive en usuario-service
+    private Long usuarioId;
 
     // Fecha y hora de la venta
     @Column(nullable = false)

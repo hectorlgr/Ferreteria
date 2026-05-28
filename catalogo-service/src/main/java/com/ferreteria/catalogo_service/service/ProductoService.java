@@ -22,6 +22,7 @@ public class ProductoService {
     private static final Logger logger = LoggerFactory.getLogger(ProductoService.class);
     private final ProductoRepository productoRepository;
 
+    // Método para obtener todos los productos habilitados
     public List<Producto> obtenerTodos() {
         logger.info("Consultando todos los productos en la base de datos");
         return productoRepository.findByHabilitadoTrue();
@@ -42,7 +43,7 @@ public class ProductoService {
         logger.info("Registrando nuevo producto: {}", producto.getNombre());
         logger.debug("Precio a registrar: {}", producto.getPrecio());
         
-        producto.setHabilitado(true); // Aseguramos que nazca habilitado
+        producto.setHabilitado(true);
         Producto productoGuardado = productoRepository.save(producto);
         logger.debug("Producto guardado temporalmente con ID interno: {}", productoGuardado.getId());
         
@@ -75,10 +76,8 @@ public class ProductoService {
         productoExistente.setHabilitado(false);
         productoRepository.save(productoExistente);
 
-        // LLAMADA AL INVENTARIO: Ponemos el stock en 0
+        // Llamar al inventario-service: Poner el stock en 0
         try {
-            // Asumiendo que tu inventario-service tiene un endpoint para ajustar stock
-            // Ajusta la URL y el puerto según tu configuración (ej: 9093)
             String url = "http://localhost:9093/api/inventario/reset/" + id;
             restTemplate.put(url, null);
             logger.info("Stock reseteado en inventario-service para producto ID: {}", id);
@@ -103,8 +102,6 @@ public class ProductoService {
     public void habilitarProducto(Long id) {
         logger.info("Iniciando habilitación para el producto ID: {}", id);
         
-        // ¡OJO AQUÍ! Usamos el findById nativo del repositorio, NO el obtenerPorId(), 
-        // porque necesitamos poder encontrarlo incluso si habilitado es false.
         Producto producto = productoRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Producto no encontrado en la BD general con ID: " + id));
             

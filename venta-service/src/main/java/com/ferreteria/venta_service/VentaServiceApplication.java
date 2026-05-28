@@ -12,6 +12,7 @@ public class VentaServiceApplication {
 		SpringApplication.run(VentaServiceApplication.class, args);
 	}
 
+	// Bean para RestTemplate, que se usará para hacer llamadas HTTP a otros microservicios
 	@Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();

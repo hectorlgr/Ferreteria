@@ -11,6 +11,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // Endpoint para login
+    // http://localhost:9090/auth/login
     @PostMapping("/login")
     public java.util.Map<String, String> login(@RequestBody java.util.Map<String, String> request) {
         String email = request.get("email");
@@ -28,27 +30,31 @@ public class UserController {
         return resp;
     }
 
+    // Endpoint para registro de clientes
+    // http://localhost:9090/auth/register/cliente
     @PostMapping("/register/cliente")
-    public java.util.Map<String, String> registerCliente(@RequestBody java.util.Map<String, String> request) {
+    public org.springframework.http.ResponseEntity<java.util.Map<String, String>> registerCliente(@RequestBody java.util.Map<String, String> request) {
         String email = request.get("email");
         String password = request.get("password");
-        
-        // NUEVO: Capturamos el nombre (o le ponemos uno por defecto si se les olvida)
         String nombre = request.get("nombre");
-        if (nombre == null || nombre.isBlank()) {
-            nombre = "Cliente Ferretería"; 
+        
+        java.util.Map<String, String> resp = new java.util.HashMap<>();
+
+        if (nombre == null || nombre.trim().isEmpty()) {
+            resp.put("error", "El campo 'nombre' es obligatorio para registrar un cliente.");
+            return org.springframework.http.ResponseEntity.badRequest().body(resp); 
         }
 
-        // Le pasamos el nombre al servicio
         String resultado = userService.register(email, password, "CLIENTE", nombre);
 
-        java.util.Map<String, String> resp = new java.util.HashMap<>();
         resp.put("message", resultado);
-        return resp;
+        return org.springframework.http.ResponseEntity.ok(resp);
     }
 
+    // Endpoint para registro de admins
+    // http://localhost:9090/auth/register/admin
     @PostMapping("/register/admin")
-    public java.util.Map<String, String> registerAdmin(@RequestBody java.util.Map<String, String> request) {
+    public org.springframework.http.ResponseEntity<java.util.Map<String, String>> registerAdmin(@RequestBody java.util.Map<String, String> request) {
         String email = request.get("email");
         String password = request.get("password");
         String nombre = request.get("nombre");
@@ -59,6 +65,6 @@ public class UserController {
 
         java.util.Map<String, String> resp = new java.util.HashMap<>();
         resp.put("message", resultado);
-        return resp;
+        return org.springframework.http.ResponseEntity.ok(resp);
     }
 }

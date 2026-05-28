@@ -127,8 +127,6 @@ public class VentaController {
         Venta venta = new Venta();
         venta.setUsuarioId(dto.getUsuarioId());
         venta.setCostoDespacho(dto.getCostoDespacho());
-        // (La lógica de actualizar detalles suele ser más compleja en el Service, 
-        // pero mapeamos lo básico para el controlador)
         
         Venta ventaActualizada = ventaService.actualizarVenta(id, venta);
         logger.info("Venta ID {} actualizada correctamente", id);

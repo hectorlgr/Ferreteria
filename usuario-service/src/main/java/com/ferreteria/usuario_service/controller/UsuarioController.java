@@ -97,6 +97,6 @@ public class UsuarioController {
         logger.info("DELETE /api/usuarios/{} - Solicitud para eliminar usuario", id);
         usuarioService.eliminarUsuario(id);
         logger.info("Usuario ID {} eliminado exitosamente", id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Devuelve 204 No Content
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

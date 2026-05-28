@@ -22,7 +22,7 @@ public class UserService {
     @Autowired
     private RestTemplate restTemplate;
 
-
+    // Método para manejar el proceso de login
     public String login (String email, String password) {
         User user = userRepository.findByEmail(email);
 
@@ -34,31 +34,33 @@ public class UserService {
         return jwtService.generateToken(email, user.getRole());
     }
 
+    // Método para obtener el rol de un usuario a partir de su email
     public String getRole(String email){
         User user = userRepository.findByEmail(email);
         return user.getRole();
     }
 
+    // Método para registrar un nuevo usuario
     public String register(String email, String password, String role, String nombre) {
         User existing = userRepository.findByEmail(email);
         if (existing != null) {
             return "Usuario ya existe!";
         }
 
-        // 1. Guardamos en DB de Auth (Fíjate que NO guardamos el nombre aquí)
+        // Guardar en DB de Auth
         User user = new User();
         user.setEmail(email);
         user.setPassword(hashService.sha1(password));
         user.setRole(role);
         userRepository.save(user);
 
-        // 2. Comunicamos al Usuario-Service
+        // Comunicar al Usuario-Service
         try {
             java.util.Map<String, String> usuarioPerfil = new java.util.HashMap<>();
             usuarioPerfil.put("email", email);
-            usuarioPerfil.put("nombre", nombre); // ¡Aquí usamos el nombre que nos enviaron!
+            usuarioPerfil.put("nombre", nombre);
             
-            // Llama al puerto 9092 (o el que uses para usuario-service)
+            // Llamar al puerto de usuario-service
             restTemplate.postForEntity("http://localhost:9092/api/usuarios", usuarioPerfil, String.class);
             
         } catch (Exception e) {

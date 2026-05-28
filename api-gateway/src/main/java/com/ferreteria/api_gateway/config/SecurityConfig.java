@@ -24,10 +24,10 @@ public class SecurityConfig {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeExchange(exchanges -> exchanges
-                // 1. RUTAS PÚBLICAS
+                // RUTAS PÚBLICAS
                 .pathMatchers("/auth/**").permitAll()
                 
-                // 2. PRODUCTOS (CATÁLOGO)
+                // PRODUCTOS (CATÁLOGO)
                 // Cualquiera logueado puede VER productos
                 .pathMatchers(HttpMethod.GET, "/api/productos/**").authenticated()
                 // Solo ADMIN y OPERADOR pueden CREAR o EDITAR productos
@@ -36,11 +36,11 @@ public class SecurityConfig {
                 // Solo ADMIN puede BORRAR productos
                 .pathMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
                 
-                // 3. INVENTARIO
+                // INVENTARIO
                 // El CLIENTE no tiene acceso aquí
                 .pathMatchers("/api/inventario/**").hasAnyRole("ADMIN", "OPERADOR")
 
-                // 4. VENTAS
+                // VENTAS
                 // Clientes pueden ver y comprar
                 .pathMatchers(HttpMethod.GET, "/api/ventas/**").authenticated()
                 .pathMatchers(HttpMethod.POST, "/api/ventas/**").authenticated()
@@ -48,13 +48,13 @@ public class SecurityConfig {
                 .pathMatchers(HttpMethod.PUT, "/api/ventas/**").hasAnyRole("ADMIN", "OPERADOR")
                 .pathMatchers(HttpMethod.DELETE, "/api/ventas/**").hasAnyRole("ADMIN", "OPERADOR")
                 
-                // 5. DESPACHOS
+                // DESPACHOS
                 // El cliente necesita ver cómo va su envío
                 .pathMatchers(HttpMethod.GET, "/api/despachos/**").authenticated()
                 // Solo el sistema o el personal crea, actualiza o borra despachos
                 .pathMatchers("/api/despachos/**").hasAnyRole("ADMIN", "OPERADOR")
 
-                // 6. USUARIOS
+                // USUARIOS
                 .pathMatchers(HttpMethod.GET, "/api/usuarios/me").authenticated()
                 .pathMatchers("/api/usuarios/**").hasAnyRole("ADMIN", "OPERADOR")
 
@@ -62,13 +62,13 @@ public class SecurityConfig {
                 .anyExchange().authenticated()
             )
             .oauth2ResourceServer(oauth2 -> oauth2
-                // Le decimos a Spring que use nuestro convertidor de roles
+                // Configurar JWT como método de autenticación
                 .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
             )
             .build();
     }
 
-    // Bean del profe para leer la firma del token
+    // Bean para leer la firma del token
     @Bean
     public ReactiveJwtDecoder jwtDecoder() {
         SecretKeySpec key = new SecretKeySpec(
@@ -78,17 +78,17 @@ public class SecurityConfig {
         return NimbusReactiveJwtDecoder.withSecretKey(key).build();
     }
 
-    // --- LEER LOS ROLES ---
+    // Leer roles
     @Bean
     public org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverter jwtAuthenticationConverter() {
-        // 1. Configuramos el extractor de roles estándar
+        // Extractor de roles estándar
         org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter authoritiesConverter = 
             new org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter();
         
         authoritiesConverter.setAuthoritiesClaimName("role"); // Busca el campo "role" en tu token
         authoritiesConverter.setAuthorityPrefix("ROLE_");     // Spring requiere este prefijo internamente
 
-        // 2. Armamos el conversor reactivo usando nuestro extractor
+        // Conversor reactivo usando nuestro extractor
         org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverter jwtConverter = 
             new org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverter();
             

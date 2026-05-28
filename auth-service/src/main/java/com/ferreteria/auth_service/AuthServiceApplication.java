@@ -12,6 +12,7 @@ public class AuthServiceApplication {
 		SpringApplication.run(AuthServiceApplication.class, args);
 	}
 
+	// Bean para RestTemplate, que nos permitirá hacer llamadas HTTP a otros servicios
 	@Bean
 	public RestTemplate restTemplate() {
     	return new RestTemplate();

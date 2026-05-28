@@ -63,24 +63,22 @@ public class InventarioService {
             throw new RuntimeException("Stock insuficiente para el producto ID: " + productoId);
         }
         
-        // 1. Descontamos el stock
+        // Descontar el stock
         int nuevoStock = inventario.getCantidad() - cantidadComprada;
         inventario.setCantidad(nuevoStock);
         
-        // 2. Guardamos en la base de datos de inventario
+        // Guardar en la base de datos de inventario
         logger.info("Actualizando inventario en la base de datos...");
         Inventario inventarioGuardado = inventarioRepository.save(inventario);
 
-        // 3. Validamos si llegó a cero
+        // Validar si llegó a cero
         if (nuevoStock == 0) {
             logger.info("El stock del producto ID: {} llegó a CERO. Notificando a catalogo-service...", productoId);
             try {
-                // IMPORTANTE: Ajusta el puerto (ej: 9091) al que usa tu catalogo-service
                 String url = "http://localhost:9091/api/productos/" + productoId + "/agotar";
                 restTemplate.put(url, null);
                 logger.info("Catalogo-service notificado con éxito. Producto deshabilitado.");
             } catch (Exception e) {
-                // Solo logueamos el error para que la compra no se cancele si el catálogo falla un milisegundo
                 logger.error("No se pudo contactar al catalogo-service para agotar el producto: {}", e.getMessage());
             }
         }
@@ -100,24 +98,22 @@ public class InventarioService {
         Inventario inventario = obtenerPorProductoId(productoId);
         logger.debug("Stock actual: {}. Cantidad a ingresar: {}", inventario.getCantidad(), cantidadAgregada);
 
-        // 1. Sumamos el stock
+        // Sumar el stock
         int nuevoStock = inventario.getCantidad() + cantidadAgregada;
         inventario.setCantidad(nuevoStock);
 
-        // 2. Guardamos en la base de datos de inventario
+        // Guardar en la base de datos de inventario
         logger.info("Actualizando inventario en la base de datos...");
         Inventario inventarioGuardado = inventarioRepository.save(inventario);
 
-        // 3. Si el stock subió (y por ende es mayor a 0), le pedimos al catálogo que despierte el producto
+        // Si el stock subió (y por ende es mayor a 0), el catálogo habilita el producto automáticamente (en caso de que estuviera deshabilitado por falta de stock)
         if (nuevoStock > 0) {
             logger.info("El stock del producto ID: {} subió a {}. Notificando a catalogo-service...", productoId, nuevoStock);
             try {
-                // IMPORTANTE: Revisa que el puerto (ej: 9091) sea el de tu catalogo-service
                 String url = "http://localhost:9091/api/productos/" + productoId + "/habilitar";
                 restTemplate.put(url, null);
                 logger.info("Catalogo-service notificado con éxito. Producto reactivado.");
             } catch (Exception e) {
-                // Logueamos el error sin detener el flujo, ya que el stock sí se guardó en la BD
                 logger.error("No se pudo contactar al catalogo-service para habilitar el producto: {}", e.getMessage());
             }
         }

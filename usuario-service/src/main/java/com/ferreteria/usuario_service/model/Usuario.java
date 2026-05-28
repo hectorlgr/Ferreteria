@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Usuario {
 
-    //ID Generado automaticamente por la db
+    // ID Generado automaticamente por la db
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

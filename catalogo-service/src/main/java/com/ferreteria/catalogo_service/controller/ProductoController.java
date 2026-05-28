@@ -32,6 +32,7 @@ public class ProductoController {
     private final ProductoService productoService;
 
     // GET: Obtener todos los productos
+    // http://localhost:9091/api/productos
     @GetMapping
     public ResponseEntity<List<Producto>> obtenerTodos() {
         logger.info("GET /api/productos - Solicitud para listar todos los productos");
@@ -41,6 +42,7 @@ public class ProductoController {
     }
 
     // GET: Obtener un producto por ID
+    // http://localhost:9091/api/productos/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
         logger.info("GET /api/productos/{} - Solicitud para obtener producto por ID", id);
@@ -48,6 +50,7 @@ public class ProductoController {
     }
 
     // POST: Crear un nuevo producto usando DTO
+    // http://localhost:9091/api/productos
     @PostMapping
     public ResponseEntity<Producto> guardarProducto(@Valid @RequestBody ProductoRequestDto dto) {
         logger.info("POST /api/productos - Solicitud para registrar un nuevo producto: {}", dto.getNombre());
@@ -65,6 +68,7 @@ public class ProductoController {
     }
 
     // PUT: Actualizar un producto existente usando DTO
+    // http://localhost:9091/api/productos/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoRequestDto dto) {
         logger.info("PUT /api/productos/{} - Solicitud para actualizar datos del producto", id);
@@ -82,6 +86,7 @@ public class ProductoController {
     }
 
     // DELETE: Eliminar un producto
+    // http://localhost:9091/api/productos/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
         logger.info("DELETE /api/productos/{} - Solicitud para eliminar producto", id);

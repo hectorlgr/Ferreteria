@@ -1,6 +1,5 @@
 package com.ferreteria.despacho_service.Dto;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -8,10 +7,11 @@ import lombok.Data;
 @Data
 public class DespachoRequestDto {
 
+    // El ID de la venta asociada al despacho
     @NotNull(message = "El ID de la venta es obligatorio")
-    @Min(value = 1, message = "El ID de la venta debe ser un número positivo")
     private Long ventaId;
 
+    // La dirección de entrega para el despacho
     @NotBlank(message = "La dirección de entrega no puede estar vacía")
     private String direccion;
 }

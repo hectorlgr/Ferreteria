@@ -42,7 +42,7 @@ public class VentaService {
     public Venta procesarVenta(Venta venta) {
         logger.info("Iniciando procesamiento de venta para Usuario ID: {}", venta.getUsuarioId());
 
-        // 1. Verificar si el usuario existe
+        // Verificar si el usuario existe
         try {
             logger.debug("Validando existencia de usuario en usuario-service (Puerto 9092)");
             webClientBuilder.build().get()
@@ -56,7 +56,7 @@ public class VentaService {
             throw new RuntimeException("Error: El usuario no existe o el servicio de usuarios está caído.");
         }
 
-        // 2. Preparar los datos internos de la venta
+        // Preparar los datos internos de la venta
         logger.debug("Calculando totales y enlazando detalles de la venta...");
         venta.setFecha(LocalDateTime.now());
         int totalVenta = 0;
@@ -68,18 +68,18 @@ public class VentaService {
             totalVenta += detalle.getSubtotal();
         }
         
-        // Sumamos el costo de despacho que ingresó el usuario
+        // Sumar el costo de despacho que ingresó el usuario
         totalVenta += costoDespachoIngresado;
         
         venta.setTotal(totalVenta);
         logger.debug("Cálculos finalizados. Total calculado: {} (incluye despacho de {})", totalVenta, costoDespachoIngresado);
 
-        // 3. Guardar la venta en la db
+        // Guardar la venta en la db
         logger.info("Guardando datos de la venta en base de datos...");
         Venta ventaGuardada = ventaRepository.save(venta);
         logger.debug("Venta guardada temporalmente con ID: {}", ventaGuardada.getId());
 
-        // 4. Descontar el stock en el inventario
+        // Descontar el stock en el inventario
         logger.info("Iniciando actualización de stock en inventario-service (Puerto 9093) para {} productos", venta.getDetalles().size());
         for (DetalleVenta detalle : venta.getDetalles()) {
             try {
@@ -92,7 +92,6 @@ public class VentaService {
                         .block();
             } catch (Exception e) {
                 logger.error("Error crítico al descontar stock del Producto ID: {}. Excepción: {}", detalle.getProductoId(), e.getMessage());
-                // En un sistema avanzado haríamos un "Rollback", pero por ahora lanzamos la alerta
                 throw new RuntimeException("Error descontando stock del producto ID: " + detalle.getProductoId());
             }
         }
@@ -147,7 +146,7 @@ public class VentaService {
         throw new RuntimeException("La fecha de inicio no puede ser posterior a la fecha de fin");
     }
 
-        // Convertimos LocalDate a LocalDateTime para la consulta en la BD
+        // Convertir LocalDate a LocalDateTime para la consulta en la BD
         java.time.LocalDateTime fechaInicioCompleta = inicio.atStartOfDay(); // 00:00:00
         java.time.LocalDateTime fechaFinCompleta = fin.atTime(java.time.LocalTime.MAX); // 23:59:59.999
 
@@ -160,12 +159,9 @@ public class VentaService {
         logger.info("Iniciando búsqueda de ventas para el email: {}", email);
         Long idClienteObtenido;
 
-        // 1. Preguntamos a usuario-service por el ID asociado a este email
         try {
-            // OJO: Ajusta el puerto (ej: 9092) al puerto real de tu usuario-service
             String urlUsuario = "http://localhost:9092/api/usuarios/email/" + email;
             
-            // Hacemos la llamada HTTP y mapeamos la respuesta a nuestro DTO
             UsuarioDto usuario = restTemplate.getForObject(urlUsuario, UsuarioDto.class);
             idClienteObtenido = usuario.getId();
             logger.info("Usuario encontrado en usuario-service. ID mapeado: {}", idClienteObtenido);
@@ -174,10 +170,7 @@ public class VentaService {
             logger.error("Error al contactar a usuario-service o el email no existe: {}", email);
             throw new RuntimeException("No se encontró al usuario con el email " + email + " para buscar sus ventas.");
         }
-
-        // 2. Usamos el ID obtenido para buscar en nuestra propia base de datos de ventas
         logger.info("Buscando las ventas asociadas al ID de cliente: {}", idClienteObtenido);
-        // Asumo que ya tienes este método creado en tu VentaRepository
         return ventaRepository.findByUsuarioId(idClienteObtenido); 
     }
 

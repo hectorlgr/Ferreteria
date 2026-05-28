@@ -12,6 +12,7 @@ public class InventarioServiceApplication {
 		SpringApplication.run(InventarioServiceApplication.class, args);
 	}
 
+	// Bean para RestTemplate, que nos permitirá hacer llamadas HTTP a otros microservicios
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
