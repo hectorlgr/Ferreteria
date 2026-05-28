@@ -1,963 +1,153 @@
-17:03:49 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 8668 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
-17:03:49 INFO  No active profile set, falling back to 1 default profile: "default"
-17:03:49 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-17:03:49 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-17:03:51 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:03:51 INFO  Finished Spring Data repository scanning in 363 ms. Found 1 JPA repository interface.
-17:03:52 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
-17:03:53 INFO  Tomcat initialized with port 9093 (http)
-17:03:53 INFO  Starting service [Tomcat]
-17:03:53 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-17:03:53 INFO  Root WebApplicationContext: initialization completed in 3694 ms
-17:03:53 INFO  HikariPool-1 - Starting...
-17:03:53 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8c6da19
-17:03:53 INFO  HikariPool-1 - Start completed.
-17:03:55 INFO  Creating database changelog table with name: db_inventario.databasechangelog
-17:03:56 INFO  Reading from db_inventario.databasechangelog
-17:03:56 INFO  Creating snapshot
-17:03:56 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
-17:03:56 INFO  Successfully acquired change log lock
-17:03:56 INFO  Using deploymentId: 9224633485
-17:03:56 INFO  Reading from db_inventario.databasechangelog
-17:03:56 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
-17:03:56 INFO  Custom SQL executed
-17:03:56 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 144ms
-17:03:56 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
-17:03:56 INFO  Custom SQL executed
-17:03:56 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 46ms
-17:03:57 INFO  UPDATE SUMMARY
-17:03:57 INFO  Run:                          2
-17:03:57 INFO  Previously run:               0
-17:03:57 INFO  Filtered out:                 0
-17:03:57 INFO  -------------------------------
-17:03:57 INFO  Total change sets:            2
-17:03:57 INFO  Update summary generated
-17:03:57 INFO  Update command completed successfully.
-17:03:57 INFO  Liquibase: Update has been successful. Rows affected: 11
-17:03:57 INFO  Successfully released change log lock
-17:03:57 INFO  Command execution complete
-17:03:57 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
-17:03:57 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
-17:03:58 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
-17:03:58 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
-17:03:58 INFO  HHH10001005: Database info:
-	Database JDBC URL [jdbc:mysql://localhost:3306/db_inventario?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
-	Database driver: MySQL Connector/J
-	Database dialect: MySQLDialect
-	Database version: 5.5.5
-	Default catalog/schema: db_inventario/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-17:04:00 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-17:04:00 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
-17:04:00 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
-17:04:00 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-17:04:01 INFO  Eureka HTTP Client uses RestClient.
-17:04:01 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-17:04:01 INFO  Setting initial instance status as: STARTING
-17:04:01 INFO  Initializing Eureka in region us-east-1
-17:04:01 INFO  Client configured to neither register nor query for data.
-17:04:01 INFO  Discovery Client initialized at timestamp 1779224641860 with initial instances count: 0
-17:04:01 INFO  Registering application INVENTARIO-SERVICE with eureka with status UP
-17:04:01 INFO  Tomcat started on port 9093 (http) with context path '/'
-17:04:01 INFO  Updating port to 9093
-17:04:01 INFO  Started InventarioServiceApplication in 13.509 seconds (process running for 14.794)
-17:35:52 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:35:52 INFO  Initializing Servlet 'dispatcherServlet'
-17:35:52 INFO  Completed initialization in 103 ms
-17:35:52 INFO  GET /api/inventario - Solicitud para listar todo el inventario
-17:35:52 INFO  Consultando todos los registros de inventario en la base de datos
-17:37:31 INFO  Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-17:37:31 INFO  Unregistering application INVENTARIO-SERVICE with eureka with status DOWN
-17:37:31 INFO  Commencing graceful shutdown. Waiting for active requests to complete
-17:37:31 INFO  Graceful shutdown complete
-17:37:31 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
-17:37:31 INFO  HikariPool-1 - Shutdown initiated...
-17:37:31 INFO  HikariPool-1 - Shutdown completed.
-17:37:31 INFO  Shutting down DiscoveryClient ...
-17:37:31 INFO  Completed shut down of DiscoveryClient
-17:37:32 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 8668 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
-17:37:32 INFO  No active profile set, falling back to 1 default profile: "default"
-17:37:33 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:37:33 INFO  Finished Spring Data repository scanning in 45 ms. Found 1 JPA repository interface.
-17:37:33 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
-17:37:33 INFO  Tomcat initialized with port 9093 (http)
-17:37:33 INFO  Starting service [Tomcat]
-17:37:33 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-17:37:33 INFO  Root WebApplicationContext: initialization completed in 1360 ms
-17:37:33 INFO  HikariPool-2 - Starting...
-17:37:33 INFO  HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4fce36e
-17:37:33 INFO  HikariPool-2 - Start completed.
-17:37:34 INFO  Reading from db_inventario.databasechangelog
-17:37:34 INFO  Change failed validation!
-17:37:34 INFO  Logging exception.
-17:37:34 INFO  ERROR: Exception Details
-17:37:34 INFO  ERROR: Exception Primary Class:  ValidationFailedException
-17:37:34 INFO  ERROR: Exception Primary Reason:  Validation Failed:
+20:40:00 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 16608 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
+20:40:00 INFO  No active profile set, falling back to 1 default profile: "default"
+20:40:00 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+20:40:00 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+20:40:02 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:40:02 INFO  Finished Spring Data repository scanning in 331 ms. Found 1 JPA repository interface.
+20:40:03 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
+20:40:04 INFO  Tomcat initialized with port 9093 (http)
+20:40:04 INFO  Starting service [Tomcat]
+20:40:04 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+20:40:05 INFO  Root WebApplicationContext: initialization completed in 4421 ms
+20:40:05 INFO  HikariPool-1 - Starting...
+20:40:05 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8037585
+20:40:05 INFO  HikariPool-1 - Start completed.
+20:40:08 INFO  Reading from db_inventario.databasechangelog
+20:40:08 INFO  Change failed validation!
+20:40:08 INFO  Logging exception.
+20:40:08 INFO  ERROR: Exception Details
+20:40:08 INFO  ERROR: Exception Primary Class:  ValidationFailedException
+20:40:08 INFO  ERROR: Exception Primary Reason:  Validation Failed:
      1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
+          db/changelog/db.changelog.sql::2::hector was: 9:b12bcb2560b4fb59c4cc817d75fc71e8 but is now: 9:de0cc310c1d6b4a4c710065dc4ed49e0
 
-17:37:34 INFO  ERROR: Exception Primary Source:  5.0.2
-17:37:34 INFO  Command execution complete
-17:37:34 WARN  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+20:40:08 INFO  ERROR: Exception Primary Source:  5.0.2
+20:40:08 INFO  Command execution complete
+20:40:08 WARN  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
      1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
+          db/changelog/db.changelog.sql::2::hector was: 9:b12bcb2560b4fb59c4cc817d75fc71e8 but is now: 9:de0cc310c1d6b4a4c710065dc4ed49e0
 
-17:37:34 INFO  HikariPool-2 - Shutdown initiated...
-17:37:34 INFO  HikariPool-2 - Shutdown completed.
-17:37:34 INFO  Stopping service [Tomcat]
-17:37:34 INFO  
+20:40:08 INFO  HikariPool-1 - Shutdown initiated...
+20:40:08 INFO  HikariPool-1 - Shutdown completed.
+20:40:08 INFO  Stopping service [Tomcat]
+20:40:08 INFO  
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-17:37:34 ERROR Application run failed
+20:40:08 ERROR Application run failed
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
      1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
+          db/changelog/db.changelog.sql::2::hector was: 9:b12bcb2560b4fb59c4cc817d75fc71e8 but is now: 9:de0cc310c1d6b4a4c710065dc4ed49e0
 
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
-	at com.ferreteria.inventario_service.InventarioServiceApplication.main(InventarioServiceApplication.java:12) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.ferreteria.inventario_service.InventarioServiceApplication.main(InventarioServiceApplication.java:12)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52)
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
      1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
+          db/changelog/db.changelog.sql::2::hector was: 9:b12bcb2560b4fb59c4cc817d75fc71e8 but is now: 9:de0cc310c1d6b4a4c710065dc4ed49e0
 
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309)
 	... 13 common frames omitted
 Caused by: liquibase.exception.LiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
      1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
+          db/changelog/db.changelog.sql::2::hector was: 9:b12bcb2560b4fb59c4cc817d75fc71e8 but is now: 9:de0cc310c1d6b4a4c710065dc4ed49e0
 
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:289) ~[liquibase-core-5.0.2.jar:na]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
 	... 20 common frames omitted
 Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
      1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
+          db/changelog/db.changelog.sql::2::hector was: 9:b12bcb2560b4fb59c4cc817d75fc71e8 but is now: 9:de0cc310c1d6b4a4c710065dc4ed49e0
 
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:325) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:226) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.execute(CommandScope.java:257) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.runInScope(Liquibase.java:1366) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:205) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:325)
+	at liquibase.Scope.child(Scope.java:250)
+	at liquibase.Scope.child(Scope.java:226)
+	at liquibase.command.CommandScope.execute(CommandScope.java:257)
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216)
+	at liquibase.Scope.lambda$child$0(Scope.java:241)
+	at liquibase.Scope.child(Scope.java:250)
+	at liquibase.Scope.child(Scope.java:240)
+	at liquibase.Scope.child(Scope.java:219)
+	at liquibase.Liquibase.runInScope(Liquibase.java:1366)
+	at liquibase.Liquibase.update(Liquibase.java:205)
+	at liquibase.Liquibase.update(Liquibase.java:188)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327)
+	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279)
+	at liquibase.Scope.lambda$child$0(Scope.java:241)
+	at liquibase.Scope.child(Scope.java:250)
+	at liquibase.Scope.child(Scope.java:240)
+	at liquibase.Scope.child(Scope.java:219)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272)
 	... 22 common frames omitted
 Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
      1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
+          db/changelog/db.changelog.sql::2::hector was: 9:b12bcb2560b4fb59c4cc817d75fc71e8 but is now: 9:de0cc310c1d6b4a4c710065dc4ed49e0
 
-	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:392) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:89) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:269) ~[liquibase-core-5.0.2.jar:na]
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:392)
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:89)
+	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:269)
 	... 40 common frames omitted
-17:37:46 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 8668 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
-17:37:46 INFO  No active profile set, falling back to 1 default profile: "default"
-17:37:46 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:37:46 INFO  Finished Spring Data repository scanning in 23 ms. Found 1 JPA repository interface.
-17:37:46 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
-17:37:46 INFO  Tomcat initialized with port 9093 (http)
-17:37:46 INFO  Starting service [Tomcat]
-17:37:46 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-17:37:47 INFO  Root WebApplicationContext: initialization completed in 905 ms
-17:37:47 INFO  HikariPool-3 - Starting...
-17:37:47 INFO  HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@a840b49
-17:37:47 INFO  HikariPool-3 - Start completed.
-17:37:47 INFO  Reading from db_inventario.databasechangelog
-17:37:47 INFO  Change failed validation!
-17:37:47 INFO  Logging exception.
-17:37:47 INFO  ERROR: Exception Details
-17:37:47 INFO  ERROR: Exception Primary Class:  ValidationFailedException
-17:37:47 INFO  ERROR: Exception Primary Reason:  Validation Failed:
-     1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
-
-17:37:47 INFO  ERROR: Exception Primary Source:  5.0.2
-17:37:47 INFO  Command execution complete
-17:37:47 WARN  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
-     1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
-
-17:37:47 INFO  HikariPool-3 - Shutdown initiated...
-17:37:47 INFO  HikariPool-3 - Shutdown completed.
-17:37:47 INFO  Stopping service [Tomcat]
-17:37:47 INFO  
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-17:37:47 ERROR Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
-     1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
-
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
-	at com.ferreteria.inventario_service.InventarioServiceApplication.main(InventarioServiceApplication.java:12) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
-     1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
-
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309) ~[spring-beans-7.0.7.jar:7.0.7]
-	... 13 common frames omitted
-Caused by: liquibase.exception.LiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
-     1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
-
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:289) ~[liquibase-core-5.0.2.jar:na]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
-	... 20 common frames omitted
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
-     1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
-
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:325) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:226) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.execute(CommandScope.java:257) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.runInScope(Liquibase.java:1366) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:205) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272) ~[liquibase-core-5.0.2.jar:na]
-	... 22 common frames omitted
-Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
-     1 changesets check sum
-          db/changelog/db.changelog.sql::2::hector was: 9:725ffa448fe44e79920aced4fc7146fb but is now: 9:ba4efc466298f562143e180ecf60f5ca
-
-	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:392) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:89) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:269) ~[liquibase-core-5.0.2.jar:na]
-	... 40 common frames omitted
-17:38:40 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 8668 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
-17:38:40 INFO  No active profile set, falling back to 1 default profile: "default"
-17:38:40 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:38:40 INFO  Finished Spring Data repository scanning in 23 ms. Found 1 JPA repository interface.
-17:38:40 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
-17:38:40 INFO  Tomcat initialized with port 9093 (http)
-17:38:40 INFO  Starting service [Tomcat]
-17:38:40 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-17:38:40 INFO  Root WebApplicationContext: initialization completed in 835 ms
-17:38:41 INFO  HikariPool-4 - Starting...
-17:38:41 INFO  HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@74bf2026
-17:38:41 INFO  HikariPool-4 - Start completed.
-17:38:41 INFO  Creating database changelog table with name: db_inventario.databasechangelog
-17:38:41 INFO  Reading from db_inventario.databasechangelog
-17:38:41 INFO  Creating snapshot
-17:38:41 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
-17:38:41 INFO  Successfully acquired change log lock
-17:38:41 INFO  Using deploymentId: 9226721132
-17:38:41 INFO  Reading from db_inventario.databasechangelog
-17:38:41 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
-17:38:41 INFO  Custom SQL executed
-17:38:41 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 43ms
-17:38:41 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
-17:38:41 ERROR ChangeSet db/changelog/db.changelog.sql::2::hector encountered an exception.
-liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:525) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:85) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.AbstractExecutor.execute(AbstractExecutor.java:148) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1198) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:860) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.visitor.UpdateVisitor.executeAcceptedChange(UpdateVisitor.java:127) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:71) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.lambda$run$0(ChangeLogIterator.java:133) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.lambda$run$1(ChangeLogIterator.java:122) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:307) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:311) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:91) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.AbstractUpdateCommandStep.lambda$run$1(AbstractUpdateCommandStep.java:122) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.AbstractUpdateCommandStep.run(AbstractUpdateCommandStep.java:120) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.UpdateCommandStep.run(UpdateCommandStep.java:100) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:269) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:226) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.execute(CommandScope.java:257) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.runInScope(Liquibase.java:1366) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:205) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272) ~[liquibase-core-5.0.2.jar:na]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
-	at com.ferreteria.inventario_service.InventarioServiceApplication.main(InventarioServiceApplication.java:12) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
-Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:839) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:687) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-7.0.2.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-7.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:517) ~[liquibase-core-5.0.2.jar:na]
-	... 68 common frames omitted
-17:38:41 INFO  UPDATE SUMMARY
-17:38:41 INFO  Run:                          1
-17:38:41 INFO  Previously run:               0
-17:38:41 INFO  Filtered out:                 0
-17:38:41 INFO  -------------------------------
-17:38:41 INFO  Total change sets:            2
-17:38:41 INFO  Update summary generated
-17:38:41 INFO  Update command encountered an exception.
-17:38:41 INFO  Successfully released change log lock
-17:38:41 INFO  Logging exception.
-17:38:41 INFO  ERROR: Exception Details
-17:38:41 INFO  ERROR: Exception Primary Class:  SQLSyntaxErrorException
-17:38:41 INFO  ERROR: Exception Primary Reason:  You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11
-17:38:41 INFO  ERROR: Exception Primary Source:  MySQL 5.5.5-10.4.32-MariaDB
-17:38:41 INFO  Command execution complete
-17:38:41 WARN  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-17:38:41 INFO  HikariPool-4 - Shutdown initiated...
-17:38:41 INFO  HikariPool-4 - Shutdown completed.
-17:38:41 INFO  Stopping service [Tomcat]
-17:38:41 INFO  
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-17:38:41 ERROR Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
-	at com.ferreteria.inventario_service.InventarioServiceApplication.main(InventarioServiceApplication.java:12) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309) ~[spring-beans-7.0.7.jar:7.0.7]
-	... 13 common frames omitted
-Caused by: liquibase.exception.LiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:289) ~[liquibase-core-5.0.2.jar:na]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
-	... 20 common frames omitted
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:325) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:226) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.execute(CommandScope.java:257) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.runInScope(Liquibase.java:1366) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:205) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272) ~[liquibase-core-5.0.2.jar:na]
-	... 22 common frames omitted
-Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:155) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.AbstractUpdateCommandStep.lambda$run$1(AbstractUpdateCommandStep.java:122) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.AbstractUpdateCommandStep.run(AbstractUpdateCommandStep.java:120) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.UpdateCommandStep.run(UpdateCommandStep.java:100) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:269) ~[liquibase-core-5.0.2.jar:na]
-	... 40 common frames omitted
-Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:918) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.visitor.UpdateVisitor.executeAcceptedChange(UpdateVisitor.java:127) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:71) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.lambda$run$0(ChangeLogIterator.java:133) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.lambda$run$1(ChangeLogIterator.java:122) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:307) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:311) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:91) ~[liquibase-core-5.0.2.jar:na]
-	... 48 common frames omitted
-Caused by: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:525) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:85) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.AbstractExecutor.execute(AbstractExecutor.java:148) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1198) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:860) ~[liquibase-core-5.0.2.jar:na]
-	... 63 common frames omitted
-Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:839) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:687) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-7.0.2.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-7.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:517) ~[liquibase-core-5.0.2.jar:na]
-	... 68 common frames omitted
-17:38:45 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 8668 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
-17:38:45 INFO  No active profile set, falling back to 1 default profile: "default"
-17:38:45 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:38:45 INFO  Finished Spring Data repository scanning in 17 ms. Found 1 JPA repository interface.
-17:38:45 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
-17:38:45 INFO  Tomcat initialized with port 9093 (http)
-17:38:45 INFO  Starting service [Tomcat]
-17:38:45 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-17:38:45 INFO  Root WebApplicationContext: initialization completed in 795 ms
-17:38:46 INFO  HikariPool-5 - Starting...
-17:38:46 INFO  HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@134f130b
-17:38:46 INFO  HikariPool-5 - Start completed.
-17:38:46 INFO  Reading from db_inventario.databasechangelog
-17:38:46 INFO  Successfully acquired change log lock
-17:38:46 INFO  Using deploymentId: 9226725999
-17:38:46 INFO  Reading from db_inventario.databasechangelog
-17:38:46 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
-17:38:46 ERROR ChangeSet db/changelog/db.changelog.sql::2::hector encountered an exception.
-liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:525) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:85) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.AbstractExecutor.execute(AbstractExecutor.java:148) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1198) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:860) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.visitor.UpdateVisitor.executeAcceptedChange(UpdateVisitor.java:127) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:71) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.lambda$run$0(ChangeLogIterator.java:133) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.lambda$run$1(ChangeLogIterator.java:122) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:307) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:311) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:91) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.AbstractUpdateCommandStep.lambda$run$1(AbstractUpdateCommandStep.java:122) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.AbstractUpdateCommandStep.run(AbstractUpdateCommandStep.java:120) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.UpdateCommandStep.run(UpdateCommandStep.java:100) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:269) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:226) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.execute(CommandScope.java:257) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.runInScope(Liquibase.java:1366) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:205) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272) ~[liquibase-core-5.0.2.jar:na]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
-	at com.ferreteria.inventario_service.InventarioServiceApplication.main(InventarioServiceApplication.java:12) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
-Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:839) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:687) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-7.0.2.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-7.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:517) ~[liquibase-core-5.0.2.jar:na]
-	... 68 common frames omitted
-17:38:46 INFO  UPDATE SUMMARY
-17:38:46 INFO  Run:                          0
-17:38:46 INFO  Previously run:               1
-17:38:46 INFO  Filtered out:                 0
-17:38:46 INFO  -------------------------------
-17:38:46 INFO  Total change sets:            2
-17:38:46 INFO  Update summary generated
-17:38:46 INFO  Update command encountered an exception.
-17:38:46 INFO  Successfully released change log lock
-17:38:46 INFO  Logging exception.
-17:38:46 INFO  ERROR: Exception Details
-17:38:46 INFO  ERROR: Exception Primary Class:  SQLSyntaxErrorException
-17:38:46 INFO  ERROR: Exception Primary Reason:  You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11
-17:38:46 INFO  ERROR: Exception Primary Source:  MySQL 5.5.5-10.4.32-MariaDB
-17:38:46 INFO  Command execution complete
-17:38:46 WARN  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-17:38:46 INFO  HikariPool-5 - Shutdown initiated...
-17:38:46 INFO  HikariPool-5 - Shutdown completed.
-17:38:46 INFO  Stopping service [Tomcat]
-17:38:46 INFO  
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-17:38:46 ERROR Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar:4.0.6]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar:4.0.6]
-	at com.ferreteria.inventario_service.InventarioServiceApplication.main(InventarioServiceApplication.java:12) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.6.jar:4.0.6]
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309) ~[spring-beans-7.0.7.jar:7.0.7]
-	... 13 common frames omitted
-Caused by: liquibase.exception.LiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:289) ~[liquibase-core-5.0.2.jar:na]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
-	... 20 common frames omitted
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:325) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:226) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.execute(CommandScope.java:257) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.runInScope(Liquibase.java:1366) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:205) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Liquibase.update(Liquibase.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272) ~[liquibase-core-5.0.2.jar:na]
-	... 22 common frames omitted
-Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:155) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.AbstractUpdateCommandStep.lambda$run$1(AbstractUpdateCommandStep.java:122) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.AbstractUpdateCommandStep.run(AbstractUpdateCommandStep.java:120) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.core.UpdateCommandStep.run(UpdateCommandStep.java:100) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:269) ~[liquibase-core-5.0.2.jar:na]
-	... 40 common frames omitted
-Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/db.changelog.sql::2::hector:
-     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:918) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.visitor.UpdateVisitor.executeAcceptedChange(UpdateVisitor.java:127) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:71) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.lambda$run$0(ChangeLogIterator.java:133) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.lambda$run$1(ChangeLogIterator.java:122) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.lambda$child$0(Scope.java:241) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:250) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:240) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:219) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:307) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.Scope.child(Scope.java:311) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:91) ~[liquibase-core-5.0.2.jar:na]
-	... 48 common frames omitted
-Caused by: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11 [Failed SQL: (1064) INSERT INTO inventario (producto_id, cantidad) VALUES
-(1, 50),  
-(2, 120), 
-(3, 200), 
-(4, 15),  
-(5, 85),  
-(6, 60),  
-(7, 30),  
-(8, 150), 
-(9, 45),  
-(10, 10),]
-	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:525) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:85) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:188) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.executor.AbstractExecutor.execute(AbstractExecutor.java:148) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1198) ~[liquibase-core-5.0.2.jar:na]
-	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:860) ~[liquibase-core-5.0.2.jar:na]
-	... 63 common frames omitted
-Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 11
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:839) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:687) ~[mysql-connector-j-9.7.0.jar:9.7.0]
-	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-7.0.2.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-7.0.2.jar:na]
-	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:517) ~[liquibase-core-5.0.2.jar:na]
-	... 68 common frames omitted
-17:38:59 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 8668 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
-17:38:59 INFO  No active profile set, falling back to 1 default profile: "default"
-17:38:59 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:38:59 INFO  Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interface.
-17:38:59 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
-17:38:59 INFO  Tomcat initialized with port 9093 (http)
-17:38:59 INFO  Starting service [Tomcat]
-17:38:59 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-17:38:59 INFO  Root WebApplicationContext: initialization completed in 709 ms
-17:38:59 INFO  HikariPool-6 - Starting...
-17:38:59 INFO  HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@19502eb9
-17:38:59 INFO  HikariPool-6 - Start completed.
-17:39:00 INFO  Reading from db_inventario.databasechangelog
-17:39:00 INFO  Successfully acquired change log lock
-17:39:00 INFO  Using deploymentId: 9226739889
-17:39:00 INFO  Reading from db_inventario.databasechangelog
-17:39:00 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
-17:39:00 INFO  Custom SQL executed
-17:39:00 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 12ms
-17:39:00 INFO  UPDATE SUMMARY
-17:39:00 INFO  Run:                          1
-17:39:00 INFO  Previously run:               1
-17:39:00 INFO  Filtered out:                 0
-17:39:00 INFO  -------------------------------
-17:39:00 INFO  Total change sets:            2
-17:39:00 INFO  Update summary generated
-17:39:00 INFO  Update command completed successfully.
-17:39:00 INFO  Liquibase: Update has been successful. Rows affected: 10
-17:39:00 INFO  Successfully released change log lock
-17:39:00 INFO  Command execution complete
-17:39:00 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
-17:39:00 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
-17:39:00 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
-17:39:00 INFO  HHH10001005: Database info:
+20:54:30 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 952 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
+20:54:31 INFO  No active profile set, falling back to 1 default profile: "default"
+20:54:31 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+20:54:31 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+20:54:32 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:54:32 INFO  Finished Spring Data repository scanning in 225 ms. Found 1 JPA repository interface.
+20:54:33 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
+20:54:34 INFO  Tomcat initialized with port 9093 (http)
+20:54:34 INFO  Starting service [Tomcat]
+20:54:34 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+20:54:34 INFO  Root WebApplicationContext: initialization completed in 3243 ms
+20:54:34 INFO  HikariPool-1 - Starting...
+20:54:35 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1757a28a
+20:54:35 INFO  HikariPool-1 - Start completed.
+20:54:37 INFO  Creating database changelog table with name: db_inventario.databasechangelog
+20:54:37 INFO  Reading from db_inventario.databasechangelog
+20:54:37 INFO  Creating snapshot
+20:54:37 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+20:54:37 INFO  Successfully acquired change log lock
+20:54:37 INFO  Using deploymentId: 9929674589
+20:54:37 INFO  Reading from db_inventario.databasechangelog
+20:54:37 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+20:54:37 INFO  Custom SQL executed
+20:54:37 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 120ms
+20:54:37 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+20:54:37 INFO  Custom SQL executed
+20:54:37 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 12ms
+20:54:37 INFO  UPDATE SUMMARY
+20:54:37 INFO  Run:                          2
+20:54:37 INFO  Previously run:               0
+20:54:37 INFO  Filtered out:                 0
+20:54:37 INFO  -------------------------------
+20:54:37 INFO  Total change sets:            2
+20:54:37 INFO  Update summary generated
+20:54:37 INFO  Update command completed successfully.
+20:54:37 INFO  Liquibase: Update has been successful. Rows affected: 10
+20:54:37 INFO  Successfully released change log lock
+20:54:37 INFO  Command execution complete
+20:54:38 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+20:54:38 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+20:54:40 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+20:54:40 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+20:54:40 INFO  HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/db_inventario?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -969,156 +159,32 @@ Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL synta
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-17:39:00 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-17:39:00 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
-17:39:00 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-17:39:01 INFO  Eureka HTTP Client uses RestClient.
-17:39:01 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-17:39:01 INFO  Setting initial instance status as: STARTING
-17:39:01 INFO  Initializing Eureka in region us-east-1
-17:39:01 INFO  Client configured to neither register nor query for data.
-17:39:01 INFO  Discovery Client initialized at timestamp 1779226741194 with initial instances count: 0
-17:39:01 INFO  Registering application INVENTARIO-SERVICE with eureka with status UP
-17:39:01 INFO  Tomcat started on port 9093 (http) with context path '/'
-17:39:01 INFO  Updating port to 9093
-17:39:01 INFO  Started InventarioServiceApplication in 2.174 seconds (process running for 2114.049)
-17:39:01 INFO  Condition evaluation unchanged
-17:39:08 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:39:08 INFO  Initializing Servlet 'dispatcherServlet'
-17:39:08 INFO  Completed initialization in 14 ms
-17:39:08 INFO  GET /api/inventario - Solicitud para listar todo el inventario
-17:39:08 INFO  Consultando todos los registros de inventario en la base de datos
-17:40:39 INFO  GET /api/inventario - Solicitud para listar todo el inventario
-17:40:39 INFO  Consultando todos los registros de inventario en la base de datos
-17:40:58 INFO  PUT /api/inventario/producto/1/descontar - Solicitud para descontar 2 unidades
-17:40:58 INFO  Iniciando proceso de descuento de stock para Producto ID: 1
-17:40:58 INFO  Buscando inventario para el Producto ID: 1
-17:40:59 INFO  Actualizando inventario en la base de datos...
-17:40:59 INFO  Stock descontado exitosamente. Nuevo stock para Producto ID 1: 48
-17:40:59 INFO  PUT /api/inventario/producto/2/descontar - Solicitud para descontar 1 unidades
-17:40:59 INFO  Iniciando proceso de descuento de stock para Producto ID: 2
-17:40:59 INFO  Buscando inventario para el Producto ID: 2
-17:40:59 INFO  Actualizando inventario en la base de datos...
-17:40:59 INFO  Stock descontado exitosamente. Nuevo stock para Producto ID 2: 119
-17:41:14 INFO  GET /api/inventario - Solicitud para listar todo el inventario
-17:41:14 INFO  Consultando todos los registros de inventario en la base de datos
-17:43:54 INFO  GET /api/inventario/producto/11 - Solicitud para buscar inventario por ID de producto
-17:43:54 INFO  Buscando inventario para el Producto ID: 11
-17:43:54 WARN  No se encontró ningún registro de inventario para el Producto ID: 11
-17:43:54 ERROR Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: No se encontró inventario para el producto ID: 11] with root cause
-java.lang.RuntimeException: No se encontró inventario para el producto ID: 11
-	at com.ferreteria.inventario_service.service.InventarioService.lambda$obtenerPorProductoId$0(InventarioService.java:38) ~[classes/:na]
-	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
-	at com.ferreteria.inventario_service.service.InventarioService.obtenerPorProductoId(InventarioService.java:36) ~[classes/:na]
-	at com.ferreteria.inventario_service.controller.InventarioController.obtenerPorProductoId(InventarioController.java:40) ~[classes/:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.7.jar:7.0.7]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.7.jar:7.0.7]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.21.jar:6.1]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.7.jar:7.0.7]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.21.jar:6.1]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.21.jar:11.0.21]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.7.jar:7.0.7]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.7.jar:7.0.7]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.7.jar:7.0.7]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar:7.0.7]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.21.jar:11.0.21]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-18:07:28 INFO  Starting InventarioServiceApplication using Java 21.0.10 with PID 11196 (D:\Proyectos\Ferreteria\inventario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\inventario-service)
-18:07:28 INFO  No active profile set, falling back to 1 default profile: "default"
-18:07:29 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-18:07:29 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-18:07:30 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-18:07:30 INFO  Finished Spring Data repository scanning in 244 ms. Found 1 JPA repository interface.
-18:07:31 INFO  BeanFactory id=83583592-6e80-359a-9813-287eb895980c
-18:07:31 INFO  Tomcat initialized with port 9093 (http)
-18:07:31 INFO  Starting service [Tomcat]
-18:07:31 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-18:07:32 INFO  Root WebApplicationContext: initialization completed in 2982 ms
-18:07:32 INFO  HikariPool-1 - Starting...
-18:07:32 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@14048f3f
-18:07:32 INFO  HikariPool-1 - Start completed.
-18:07:34 INFO  Reading from db_inventario.databasechangelog
-18:07:34 INFO  Database is up to date, no changesets to execute
-18:07:34 INFO  Reading from db_inventario.databasechangelog
-18:07:34 INFO  UPDATE SUMMARY
-18:07:34 INFO  Run:                          0
-18:07:34 INFO  Previously run:               2
-18:07:34 INFO  Filtered out:                 0
-18:07:34 INFO  -------------------------------
-18:07:34 INFO  Total change sets:            2
-18:07:34 INFO  Update summary generated
-18:07:35 INFO  Command execution complete
-18:07:35 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
-18:07:35 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
-18:07:36 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
-18:07:36 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
-18:07:36 INFO  HHH10001005: Database info:
-	Database JDBC URL [jdbc:mysql://localhost:3306/db_inventario?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
-	Database driver: MySQL Connector/J
-	Database dialect: MySQLDialect
-	Database version: 5.5.5
-	Default catalog/schema: db_inventario/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-18:07:37 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-18:07:37 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
-18:07:37 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
-18:07:38 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-18:07:39 INFO  Eureka HTTP Client uses RestClient.
-18:07:39 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-18:07:39 INFO  Setting initial instance status as: STARTING
-18:07:39 INFO  Initializing Eureka in region us-east-1
-18:07:39 INFO  Client configured to neither register nor query for data.
-18:07:39 INFO  Discovery Client initialized at timestamp 1779228459330 with initial instances count: 0
-18:07:39 INFO  Registering application INVENTARIO-SERVICE with eureka with status UP
-18:07:39 INFO  Tomcat started on port 9093 (http) with context path '/'
-18:07:39 INFO  Updating port to 9093
-18:07:39 INFO  Started InventarioServiceApplication in 11.47 seconds (process running for 12.807)
-18:31:24 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
-18:31:26 INFO  Initializing Servlet 'dispatcherServlet'
-18:31:26 INFO  Completed initialization in 2 ms
-18:31:26 INFO  PUT /api/inventario/producto/2/descontar - Solicitud para descontar 2 unidades
-18:31:26 INFO  Iniciando proceso de descuento de stock para Producto ID: 2
-18:31:26 INFO  Buscando inventario para el Producto ID: 2
-18:31:27 INFO  Actualizando inventario en la base de datos...
-18:31:27 INFO  Stock descontado exitosamente. Nuevo stock para Producto ID 2: 117
-18:31:27 INFO  PUT /api/inventario/producto/1/descontar - Solicitud para descontar 1 unidades
-18:31:27 INFO  Iniciando proceso de descuento de stock para Producto ID: 1
-18:31:27 INFO  Buscando inventario para el Producto ID: 1
-18:31:27 INFO  Actualizando inventario en la base de datos...
-18:31:27 INFO  Stock descontado exitosamente. Nuevo stock para Producto ID 1: 47
+20:54:41 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:54:42 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:54:42 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+20:54:42 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20:54:43 INFO  Eureka HTTP Client uses RestClient.
+20:54:43 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+20:54:43 INFO  Setting initial instance status as: STARTING
+20:54:43 INFO  Initializing Eureka in region us-east-1
+20:54:43 INFO  Client configured to neither register nor query for data.
+20:54:43 INFO  Discovery Client initialized at timestamp 1779929683492 with initial instances count: 0
+20:54:43 INFO  Registering application INVENTARIO-SERVICE with eureka with status UP
+20:54:43 INFO  Tomcat started on port 9093 (http) with context path '/'
+20:54:43 INFO  Updating port to 9093
+20:54:43 INFO  Started InventarioServiceApplication in 13.716 seconds (process running for 15.231)
+21:02:24 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+21:02:24 INFO  Initializing Servlet 'dispatcherServlet'
+21:02:24 INFO  Completed initialization in 4 ms
+21:03:25 INFO  GET /api/inventario - Solicitud para listar todo el inventario
+21:03:25 INFO  Consultando todos los registros de inventario en la base de datos
+21:04:03 INFO  POST /api/inventario - Solicitud para registrar inventario del Producto ID: 11
+21:04:03 INFO  Iniciando guardado de inventario para Producto ID: 11
+21:04:03 INFO  Inventario registrado exitosamente con ID interno: 11
+21:04:10 INFO  GET /api/inventario - Solicitud para listar todo el inventario
+21:04:10 INFO  Consultando todos los registros de inventario en la base de datos
+21:13:04 INFO  PUT /api/inventario/producto/11/descontar - Solicitud para descontar 9 unidades
+21:13:04 INFO  Iniciando proceso de descuento de stock para Producto ID: 11
+21:13:04 INFO  Buscando inventario para el Producto ID: 11
+21:13:04 INFO  Actualizando inventario en la base de datos...
+21:13:04 INFO  Stock descontado exitosamente. Nuevo stock para Producto ID 11: 91

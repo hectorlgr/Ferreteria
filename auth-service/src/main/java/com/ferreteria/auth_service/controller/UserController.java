@@ -41,7 +41,7 @@ public class UserController {
         java.util.Map<String, String> resp = new java.util.HashMap<>();
 
         if (nombre == null || nombre.trim().isEmpty()) {
-            resp.put("error", "El campo 'nombre' es obligatorio para registrar un cliente.");
+            resp.put("error", "Nombre es obligatorio para registrar un usuario.");
             return org.springframework.http.ResponseEntity.badRequest().body(resp); 
         }
 
@@ -58,12 +58,15 @@ public class UserController {
         String email = request.get("email");
         String password = request.get("password");
         String nombre = request.get("nombre");
-        if (nombre == null || nombre.isBlank()) {
-            nombre = "Admin Ferretería";
+
+        java.util.Map<String, String> resp = new java.util.HashMap<>();
+
+        if (nombre == null || nombre.trim().isEmpty()) {
+            resp.put("error", "Nombre es obligatorio para registrar un usuario.");
+            return org.springframework.http.ResponseEntity.badRequest().body(resp); 
         }
         String resultado = userService.register(email, password, "ADMIN", nombre);
 
-        java.util.Map<String, String> resp = new java.util.HashMap<>();
         resp.put("message", resultado);
         return org.springframework.http.ResponseEntity.ok(resp);
     }

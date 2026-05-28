@@ -1,46 +1,46 @@
-17:03:01 INFO  Starting UsuarioServiceApplication using Java 21.0.10 with PID 2464 (D:\Proyectos\Ferreteria\usuario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\usuario-service)
-17:03:01 INFO  No active profile set, falling back to 1 default profile: "default"
-17:03:01 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-17:03:01 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-17:03:03 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:03:03 INFO  Finished Spring Data repository scanning in 321 ms. Found 1 JPA repository interface.
-17:03:04 INFO  BeanFactory id=381c88e6-f872-3fd8-be1d-a22f066a8098
-17:03:05 INFO  Tomcat initialized with port 9092 (http)
-17:03:05 INFO  Starting service [Tomcat]
-17:03:05 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-17:03:05 INFO  Root WebApplicationContext: initialization completed in 3447 ms
-17:03:05 INFO  HikariPool-1 - Starting...
-17:03:05 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@fd59892
-17:03:05 INFO  HikariPool-1 - Start completed.
-17:03:07 INFO  Creating database changelog table with name: db_usuarios.databasechangelog
-17:03:08 INFO  Reading from db_usuarios.databasechangelog
-17:03:08 INFO  Creating snapshot
-17:03:08 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
-17:03:08 INFO  Successfully acquired change log lock
-17:03:08 INFO  Using deploymentId: 9224585414
-17:03:08 INFO  Reading from db_usuarios.databasechangelog
-17:03:08 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
-17:03:08 INFO  Custom SQL executed
-17:03:08 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 78ms
-17:03:08 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
-17:03:08 INFO  Custom SQL executed
-17:03:08 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 36ms
-17:03:08 INFO  UPDATE SUMMARY
-17:03:08 INFO  Run:                          2
-17:03:08 INFO  Previously run:               0
-17:03:08 INFO  Filtered out:                 0
-17:03:08 INFO  -------------------------------
-17:03:08 INFO  Total change sets:            2
-17:03:08 INFO  Update summary generated
-17:03:08 INFO  Update command completed successfully.
-17:03:08 INFO  Liquibase: Update has been successful. Rows affected: 10
-17:03:08 INFO  Successfully released change log lock
-17:03:08 INFO  Command execution complete
-17:03:09 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
-17:03:09 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
-17:03:10 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
-17:03:10 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
-17:03:10 INFO  HHH10001005: Database info:
+20:54:01 INFO  Starting UsuarioServiceApplication using Java 21.0.10 with PID 18112 (D:\Proyectos\Ferreteria\usuario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\usuario-service)
+20:54:01 INFO  No active profile set, falling back to 1 default profile: "default"
+20:54:01 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+20:54:01 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+20:54:02 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:54:02 INFO  Finished Spring Data repository scanning in 228 ms. Found 1 JPA repository interface.
+20:54:03 INFO  BeanFactory id=381c88e6-f872-3fd8-be1d-a22f066a8098
+20:54:04 INFO  Tomcat initialized with port 9092 (http)
+20:54:04 INFO  Starting service [Tomcat]
+20:54:04 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+20:54:04 INFO  Root WebApplicationContext: initialization completed in 3340 ms
+20:54:04 INFO  HikariPool-1 - Starting...
+20:54:05 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1cb2460d
+20:54:05 INFO  HikariPool-1 - Start completed.
+20:54:07 INFO  Creating database changelog table with name: db_usuarios.databasechangelog
+20:54:07 INFO  Reading from db_usuarios.databasechangelog
+20:54:08 INFO  Creating snapshot
+20:54:08 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+20:54:08 INFO  Successfully acquired change log lock
+20:54:08 INFO  Using deploymentId: 9929644936
+20:54:08 INFO  Reading from db_usuarios.databasechangelog
+20:54:08 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+20:54:08 INFO  Custom SQL executed
+20:54:08 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 53ms
+20:54:08 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+20:54:08 INFO  Custom SQL executed
+20:54:08 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 13ms
+20:54:08 INFO  UPDATE SUMMARY
+20:54:08 INFO  Run:                          2
+20:54:08 INFO  Previously run:               0
+20:54:08 INFO  Filtered out:                 0
+20:54:08 INFO  -------------------------------
+20:54:08 INFO  Total change sets:            2
+20:54:08 INFO  Update summary generated
+20:54:08 INFO  Update command completed successfully.
+20:54:08 INFO  Liquibase: Update has been successful. Rows affected: 10
+20:54:08 INFO  Successfully released change log lock
+20:54:08 INFO  Command execution complete
+20:54:08 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+20:54:08 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+20:54:09 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+20:54:09 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+20:54:09 INFO  HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/db_usuarios?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -52,96 +52,32 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-17:03:11 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-17:03:11 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
-17:03:12 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
-17:03:12 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-17:03:13 INFO  Eureka HTTP Client uses RestClient.
-17:03:13 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-17:03:13 INFO  Setting initial instance status as: STARTING
-17:03:13 INFO  Initializing Eureka in region us-east-1
-17:03:13 INFO  Client configured to neither register nor query for data.
-17:03:13 INFO  Discovery Client initialized at timestamp 1779224593658 with initial instances count: 0
-17:03:13 INFO  Registering application USUARIO-SERVICE with eureka with status UP
-17:03:13 INFO  Tomcat started on port 9092 (http) with context path '/'
-17:03:13 INFO  Updating port to 9092
-17:03:13 INFO  Started UsuarioServiceApplication in 13.274 seconds (process running for 14.535)
-17:34:48 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:34:48 INFO  Initializing Servlet 'dispatcherServlet'
-17:34:48 INFO  Completed initialization in 78 ms
-17:34:48 INFO  POST /api/usuarios - Solicitud para registrar un nuevo usuario: eduardo@gmail.com
-17:34:48 INFO  Iniciando guardado de nuevo usuario. Email: eduardo@gmail.com
-17:34:48 INFO  Usuario registrado exitosamente con ID: 11
-17:40:58 INFO  GET /api/usuarios/1 - Solicitud para obtener usuario por ID
-17:40:58 INFO  Buscando usuario en base de datos con ID: 1
-17:54:27 INFO  GET /api/usuarios/1 - Solicitud para obtener usuario por ID
-17:54:27 INFO  Buscando usuario en base de datos con ID: 1
-17:55:51 INFO  GET /api/usuarios/1 - Solicitud para obtener usuario por ID
-17:55:51 INFO  Buscando usuario en base de datos con ID: 1
-18:00:51 INFO  GET /api/usuarios/1 - Solicitud para obtener usuario por ID
-18:00:51 INFO  Buscando usuario en base de datos con ID: 1
-18:03:03 INFO  GET /api/usuarios/2 - Solicitud para obtener usuario por ID
-18:03:03 INFO  Buscando usuario en base de datos con ID: 2
-18:04:27 INFO  GET /api/usuarios/2 - Solicitud para obtener usuario por ID
-18:04:27 INFO  Buscando usuario en base de datos con ID: 2
-18:06:39 INFO  Starting UsuarioServiceApplication using Java 21.0.10 with PID 10156 (D:\Proyectos\Ferreteria\usuario-service\target\classes started by hecto in D:\Proyectos\Ferreteria\usuario-service)
-18:06:39 INFO  No active profile set, falling back to 1 default profile: "default"
-18:06:39 INFO  Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-18:06:39 INFO  For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-18:06:41 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-18:06:41 INFO  Finished Spring Data repository scanning in 248 ms. Found 1 JPA repository interface.
-18:06:41 INFO  BeanFactory id=381c88e6-f872-3fd8-be1d-a22f066a8098
-18:06:42 INFO  Tomcat initialized with port 9092 (http)
-18:06:42 INFO  Starting service [Tomcat]
-18:06:42 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
-18:06:42 INFO  Root WebApplicationContext: initialization completed in 3111 ms
-18:06:43 INFO  HikariPool-1 - Starting...
-18:06:43 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@384ce63d
-18:06:43 INFO  HikariPool-1 - Start completed.
-18:06:46 INFO  Reading from db_usuarios.databasechangelog
-18:06:46 INFO  Database is up to date, no changesets to execute
-18:06:46 INFO  Reading from db_usuarios.databasechangelog
-18:06:46 INFO  UPDATE SUMMARY
-18:06:46 INFO  Run:                          0
-18:06:46 INFO  Previously run:               2
-18:06:46 INFO  Filtered out:                 0
-18:06:46 INFO  -------------------------------
-18:06:46 INFO  Total change sets:            2
-18:06:46 INFO  Update summary generated
-18:06:46 INFO  Command execution complete
-18:06:47 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
-18:06:47 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
-18:06:48 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
-18:06:48 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
-18:06:48 INFO  HHH10001005: Database info:
-	Database JDBC URL [jdbc:mysql://localhost:3306/db_usuarios?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
-	Database driver: MySQL Connector/J
-	Database dialect: MySQLDialect
-	Database version: 5.5.5
-	Default catalog/schema: db_usuarios/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-18:06:50 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-18:06:50 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
-18:06:50 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
-18:06:50 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-18:06:51 INFO  Eureka HTTP Client uses RestClient.
-18:06:51 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-18:06:51 INFO  Setting initial instance status as: STARTING
-18:06:51 INFO  Initializing Eureka in region us-east-1
-18:06:51 INFO  Client configured to neither register nor query for data.
-18:06:51 INFO  Discovery Client initialized at timestamp 1779228411816 with initial instances count: 0
-18:06:51 INFO  Registering application USUARIO-SERVICE with eureka with status UP
-18:06:51 INFO  Tomcat started on port 9092 (http) with context path '/'
-18:06:51 INFO  Updating port to 9092
-18:06:51 INFO  Started UsuarioServiceApplication in 13.235 seconds (process running for 14.596)
-18:31:23 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
-18:31:23 INFO  Initializing Servlet 'dispatcherServlet'
-18:31:23 INFO  Completed initialization in 10 ms
-18:31:23 INFO  GET /api/usuarios/2 - Solicitud para obtener usuario por ID
-18:31:23 INFO  Buscando usuario en base de datos con ID: 2
-18:45:29 WARN  Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.ferreteria.usuario_service.model.Usuario> com.ferreteria.usuario_service.controller.UsuarioController.guardarUsuario(com.ferreteria.usuario_service.Dto.UsuarioRequestDto): [Field error in object 'usuarioRequestDto' on field 'email': rejected value [MACA]; codes [Email.usuarioRequestDto.email,Email.email,Email.java.lang.String,Email]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [usuarioRequestDto.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@2ca4e854,.*]; default message [Debe ser un formato de email válido]] ]
+20:54:11 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:54:11 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:54:11 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+20:54:11 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20:54:12 INFO  Eureka HTTP Client uses RestClient.
+20:54:12 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+20:54:12 INFO  Setting initial instance status as: STARTING
+20:54:13 INFO  Initializing Eureka in region us-east-1
+20:54:13 INFO  Client configured to neither register nor query for data.
+20:54:13 INFO  Discovery Client initialized at timestamp 1779929653010 with initial instances count: 0
+20:54:13 INFO  Registering application USUARIO-SERVICE with eureka with status UP
+20:54:13 INFO  Tomcat started on port 9092 (http) with context path '/'
+20:54:13 INFO  Updating port to 9092
+20:54:13 INFO  Started UsuarioServiceApplication in 13.085 seconds (process running for 14.567)
+20:58:56 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+20:58:56 INFO  Initializing Servlet 'dispatcherServlet'
+20:58:56 INFO  Completed initialization in 52 ms
+20:58:56 INFO  POST /api/usuarios - Solicitud para registrar un nuevo usuario: eduardo@gmail.com
+20:58:56 INFO  Iniciando guardado de nuevo usuario. Email: eduardo@gmail.com
+20:58:57 INFO  Usuario registrado exitosamente con ID: 11
+21:04:26 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+21:04:26 INFO  Consultando todos los usuarios en la base de datos
+21:13:03 INFO  GET /api/usuarios/11 - Solicitud para obtener usuario por ID
+21:13:03 INFO  Buscando usuario en base de datos con ID: 11
+21:17:03 INFO  POST /api/usuarios - Solicitud para registrar un nuevo usuario: eduardo111@gmail.com
+21:17:03 INFO  Iniciando guardado de nuevo usuario. Email: eduardo111@gmail.com
+21:17:03 INFO  Usuario registrado exitosamente con ID: 12
+21:18:32 INFO  GET /api/usuarios - Solicitud para listar todos los usuarios
+21:18:32 INFO  Consultando todos los usuarios en la base de datos
