@@ -1,4 +1,4 @@
-package com.ferreteria.venta_service.config;
+package com.ferreteria.catalogo_service.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

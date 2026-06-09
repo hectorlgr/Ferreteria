@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,9 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class VentaService {
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(VentaService.class);
@@ -162,9 +158,12 @@ public class VentaService {
         Long idClienteObtenido;
 
         try {
-            String urlUsuario = "http://usuario-service/api/usuarios/email/" + email;
+            UsuarioDto usuario = webClientBuilder.build().get()
+                    .uri("http://usuario-service/api/usuarios/email/" + email)
+                    .retrieve()
+                    .bodyToMono(UsuarioDto.class)
+                    .block();
             
-            UsuarioDto usuario = restTemplate.getForObject(urlUsuario, UsuarioDto.class);
             idClienteObtenido = usuario.getId();
             logger.info("Usuario encontrado en usuario-service. ID mapeado: {}", idClienteObtenido);
             

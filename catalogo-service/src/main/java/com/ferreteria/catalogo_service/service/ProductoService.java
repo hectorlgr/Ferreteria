@@ -5,22 +5,20 @@ import com.ferreteria.catalogo_service.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ProductoService {
-
-    @Autowired
-    private RestTemplate restTemplate;
-
+    
     // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(ProductoService.class);
+
     private final ProductoRepository productoRepository;
+    private final WebClient.Builder webClientBuilder;
 
     // Método para obtener todos los productos habilitados
     public List<Producto> obtenerTodos() {
@@ -76,10 +74,12 @@ public class ProductoService {
         productoExistente.setHabilitado(false);
         productoRepository.save(productoExistente);
 
-        // Llamar al inventario-service: Poner el stock en 0
         try {
-            String url = "http://localhost:9093/api/inventario/reset/" + id;
-            restTemplate.put(url, null);
+            webClientBuilder.build().put()
+                    .uri("http://inventario-service/api/inventario/reset/" + id)
+                    .retrieve()
+                    .bodyToMono(Void.class)
+                    .block();
             logger.info("Stock reseteado en inventario-service para producto ID: {}", id);
         } catch (Exception e) {
             logger.error("No se pudo resetear el stock: {}", e.getMessage());

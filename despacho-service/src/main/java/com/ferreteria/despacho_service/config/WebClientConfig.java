@@ -8,7 +8,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
-    // Bean para WebClient.Builder, para hacer llamadas HTTP reactivas a otros servicios
     @Bean
     @LoadBalanced
     public WebClient.Builder webClientBuilder() {

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -15,13 +16,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InventarioService {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(InventarioService.class);
 
     private final InventarioRepository inventarioRepository;
+    private final WebClient.Builder webClientBuilder;
 
     // Método para obtener todos los registros de inventario
     public List<Inventario> obtenerTodos() {
@@ -75,8 +74,11 @@ public class InventarioService {
         if (nuevoStock == 0) {
             logger.info("El stock del producto ID: {} llegó a CERO. Notificando a catalogo-service...", productoId);
             try {
-                String url = "http://localhost:9091/api/productos/" + productoId + "/agotar";
-                restTemplate.put(url, null);
+                webClientBuilder.build().put()
+                        .uri("http://catalogo-service/api/productos/" + productoId + "/agotar")
+                        .retrieve()
+                        .bodyToMono(Void.class)
+                        .block();
                 logger.info("Catalogo-service notificado con éxito. Producto deshabilitado.");
             } catch (Exception e) {
                 logger.error("No se pudo contactar al catalogo-service para agotar el producto: {}", e.getMessage());
@@ -110,14 +112,16 @@ public class InventarioService {
         if (nuevoStock > 0) {
             logger.info("El stock del producto ID: {} subió a {}. Notificando a catalogo-service...", productoId, nuevoStock);
             try {
-                String url = "http://localhost:9091/api/productos/" + productoId + "/habilitar";
-                restTemplate.put(url, null);
+                webClientBuilder.build().put()
+                        .uri("http://catalogo-service/api/productos/" + productoId + "/habilitar")
+                        .retrieve()
+                        .bodyToMono(Void.class)
+                        .block();
                 logger.info("Catalogo-service notificado con éxito. Producto reactivado.");
             } catch (Exception e) {
                 logger.error("No se pudo contactar al catalogo-service para habilitar el producto: {}", e.getMessage());
             }
         }
-
         return inventarioGuardado;
     }
 

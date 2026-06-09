@@ -49,7 +49,7 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.obtenerPorId(id));
     }
 
-    // POST: Crear un nuevo producto usando DTO
+    // POST: Crear un nuevo producto
     // http://localhost:9091/api/productos
     @PostMapping
     public ResponseEntity<Producto> guardarProducto(@Valid @RequestBody ProductoRequestDto dto) {
@@ -67,7 +67,7 @@ public class ProductoController {
         return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
     }
 
-    // PUT: Actualizar un producto existente usando DTO
+    // PUT: Actualizar un producto existente
     // http://localhost:9091/api/productos/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoRequestDto dto) {

@@ -3,7 +3,7 @@ package com.ferreteria.auth_service.service;
 import com.ferreteria.auth_service.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ferreteria.auth_service.repository.UserRepository;
 
@@ -20,7 +20,7 @@ public class UserService {
     private HashService hashService;
     
     @Autowired
-    private RestTemplate restTemplate;
+    private WebClient.Builder webClientBuilder;
 
     // Método para manejar el proceso de login
     public String login (String email, String password) {
@@ -60,8 +60,13 @@ public class UserService {
             usuarioPerfil.put("email", email);
             usuarioPerfil.put("nombre", nombre);
             
-            // Llamar al puerto de usuario-service
-            restTemplate.postForEntity("http://localhost:9092/api/usuarios", usuarioPerfil, String.class);
+            // Llamar al usuario-service a través de Eureka usando POST
+            webClientBuilder.build().post()
+                    .uri("http://usuario-service/api/usuarios")
+                    .bodyValue(usuarioPerfil)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
             
         } catch (Exception e) {
             System.out.println("No se pudo crear el perfil en usuario-service: " + e.getMessage());
