@@ -53,7 +53,7 @@ public class DespachoService {
         try {
             logger.debug("Validando existencia de Venta ID {} en venta-service (Puerto 9094)", despacho.getVentaId());
             webClientBuilder.build().get()
-                    .uri("http://localhost:9094/api/ventas/" + despacho.getVentaId())
+                    .uri("http://venta-service/api/ventas/" + despacho.getVentaId())
                     .retrieve()
                     .bodyToMono(Object.class)
                     .block();

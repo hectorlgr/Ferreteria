@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +40,7 @@ public class VentaService {
         return ventaRepository.findByUsuarioId(usuarioId);
     }
 
+    @Transactional
     public Venta procesarVenta(Venta venta) {
         logger.info("Iniciando procesamiento de venta para Usuario ID: {}", venta.getUsuarioId());
 
@@ -46,7 +48,7 @@ public class VentaService {
         try {
             logger.debug("Validando existencia de usuario en usuario-service (Puerto 9092)");
             webClientBuilder.build().get()
-                    .uri("http://localhost:9092/api/usuarios/" + venta.getUsuarioId())
+                    .uri("http://usuario-service/api/usuarios/" + venta.getUsuarioId())
                     .retrieve()
                     .bodyToMono(Object.class)
                     .block();
@@ -80,12 +82,12 @@ public class VentaService {
         logger.debug("Venta guardada temporalmente con ID: {}", ventaGuardada.getId());
 
         // Descontar el stock en el inventario
-        logger.info("Iniciando actualización de stock en inventario-service (Puerto 9093) para {} productos", venta.getDetalles().size());
+        logger.info("Iniciando actualización de stock en inventario-service para {} productos", venta.getDetalles().size());
         for (DetalleVenta detalle : venta.getDetalles()) {
             try {
                 logger.debug("Descontando {} unidades del Producto ID: {}", detalle.getCantidad(), detalle.getProductoId());
                 webClientBuilder.build().put()
-                        .uri("http://localhost:9093/api/inventario/producto/" + 
+                        .uri("http://inventario-service/api/inventario/producto/" + 
                              detalle.getProductoId() + "/descontar?cantidad=" + detalle.getCantidad())
                         .retrieve()
                         .bodyToMono(Object.class)
@@ -160,7 +162,7 @@ public class VentaService {
         Long idClienteObtenido;
 
         try {
-            String urlUsuario = "http://localhost:9092/api/usuarios/email/" + email;
+            String urlUsuario = "http://usuario-service/api/usuarios/email/" + email;
             
             UsuarioDto usuario = restTemplate.getForObject(urlUsuario, UsuarioDto.class);
             idClienteObtenido = usuario.getId();
