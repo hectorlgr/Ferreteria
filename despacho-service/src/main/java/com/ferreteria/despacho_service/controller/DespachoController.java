@@ -43,12 +43,12 @@ public class DespachoController {
         return ResponseEntity.ok(despachos);
     }
 
-    // GET: Obtener despacho por ID de venta
-    // http://localhost:9090/api/despachos/venta/{ventaId}
-    @GetMapping("/venta/{ventaId}")
-    public ResponseEntity<Despacho> obtenerPorVentaId(@PathVariable Long ventaId) {
-        logger.info("GET /api/despachos/venta/{} - Solicitud para buscar despacho por ID de venta", ventaId);
-        return ResponseEntity.ok(despachoService.obtenerPorVentaId(ventaId));
+    // GET: Obtener despacho por ID de pedido
+    // http://localhost:9090/api/despachos/pedido/{pedidoId}
+    @GetMapping("/pedido/{pedidoId}")
+    public ResponseEntity<Despacho> obtenerPorPedidoId(@PathVariable Long pedidoId) {
+        logger.info("GET /api/despachos/pedido/{} - Solicitud para buscar despacho", pedidoId);
+        return ResponseEntity.ok(despachoService.obtenerPorPedidoId(pedidoId));
     }
 
     // GET: Obtener despacho por estado
@@ -59,19 +59,17 @@ public class DespachoController {
         return ResponseEntity.ok(despachoService.obtenerPorEstado(estado));
     }
 
-    // POST: Crear un nuevo despacho
     // http://localhost:9090/api/despachos
+    // POST: Crear un nuevo despacho
     @PostMapping
     public ResponseEntity<Despacho> crearDespacho(@Valid @RequestBody DespachoRequestDto dto) {
-        logger.info("POST /api/despachos - Solicitud para crear despacho para Venta ID: {}", dto.getVentaId());
+        logger.info("POST /api/despachos - Creando despacho para Pedido ID: {}", dto.getIdPedido());
         
-        // Mapeo manual del DTO a la Entidad
         Despacho despacho = new Despacho();
-        despacho.setVentaId(dto.getVentaId());
+        despacho.setPedidoId(dto.getIdPedido());
         despacho.setDireccion(dto.getDireccion());
         
         Despacho nuevoDespacho = despachoService.crearDespacho(despacho);
-        logger.info("Despacho creado exitosamente con ID: {}", nuevoDespacho.getId());
         return new ResponseEntity<>(nuevoDespacho, HttpStatus.CREATED);
     }
 

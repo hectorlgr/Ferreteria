@@ -53,7 +53,6 @@ public class VentaService {
             throw new RuntimeException("Error: El usuario no existe o el servicio de usuarios está caído.");
         }
 
-        // Preparar los datos internos de la venta
         logger.debug("Calculando totales y enlazando detalles de la venta...");
         venta.setFechaVenta(LocalDateTime.now());
         int totalVenta = 0;
@@ -91,6 +90,24 @@ public class VentaService {
                 logger.error("Error crítico al descontar stock del Producto ID: {}. Excepción: {}", detalle.getProductoId(), e.getMessage());
                 throw new RuntimeException("Error descontando stock del producto ID: " + detalle.getProductoId());
             }
+        }
+
+        logger.info("Notificando a pedido-service para orquestar la logística...");
+        try {
+            java.util.Map<String, Long> pedidoPayload = new java.util.HashMap<>();
+            pedidoPayload.put("idUsuario", ventaGuardada.getUsuarioId());
+            pedidoPayload.put("idVenta", ventaGuardada.getId());
+
+            webClientBuilder.build().post()
+                    .uri("http://pedido-service/api/pedidos")
+                    .bodyValue(pedidoPayload)
+                    .retrieve()
+                    .bodyToMono(Void.class)
+                    .block();
+            logger.info("Pedido orquestado exitosamente en pedido-service.");
+        } catch (Exception e) {
+            logger.error("Error al crear el pedido en pedido-service: {}", e.getMessage());
+            throw new RuntimeException("La venta se procesó, pero falló la creación del pedido: " + e.getMessage());
         }
 
         logger.info("Procesamiento de venta finalizado exitosamente. ID final: {}", ventaGuardada.getId());

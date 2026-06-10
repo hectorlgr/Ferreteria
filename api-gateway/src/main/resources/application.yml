@@ -20,6 +20,11 @@ spring:
           enabled: true
       routes:
 
+        - id: pedido-service
+          uri: lb://pedido-service
+          predicates:
+            - Path=/api/pedidos/**
+
         - id: resena-service
           uri: lb://resena-service
           predicates:
