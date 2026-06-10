@@ -112,7 +112,7 @@ public class VentaController {
         
         venta.setDetalles(detalles);
         
-        Venta nuevaVenta = ventaService.procesarVenta(venta);
+        Venta nuevaVenta = ventaService.procesarVenta(venta, dto.getDireccion(), dto.getCodigoPromocion());
         
         logger.info("Venta creada exitosamente con ID: {}", nuevaVenta.getId());
         return new ResponseEntity<>(nuevaVenta, HttpStatus.CREATED);

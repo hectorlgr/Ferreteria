@@ -22,7 +22,8 @@ public class PedidoController {
     @PostMapping
     public ResponseEntity<?> crearPedido(@Valid @RequestBody PedidoRequestDto dto) {
         try {
-            Pedido nuevoPedido = pedidoService.crearPedido(dto.getIdUsuario(), dto.getIdVenta());
+            // Se añade dto.getDireccion() como tercer parámetro
+            Pedido nuevoPedido = pedidoService.crearPedido(dto.getIdUsuario(), dto.getIdVenta(), dto.getDireccion());
             return new ResponseEntity<>(nuevoPedido, HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

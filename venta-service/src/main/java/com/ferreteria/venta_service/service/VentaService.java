@@ -36,7 +36,7 @@ public class VentaService {
     }
 
     @Transactional
-    public Venta procesarVenta(Venta venta) {
+    public Venta procesarVenta(Venta venta, String direccion, String codigoPromocion) {
         logger.info("Iniciando procesamiento de venta para Usuario ID: {}", venta.getUsuarioId());
 
         // Verificar si el usuario existe
@@ -55,17 +55,45 @@ public class VentaService {
 
         logger.debug("Calculando totales y enlazando detalles de la venta...");
         venta.setFechaVenta(LocalDateTime.now());
-        int totalVenta = 0;
+        int totalProductos = 0;
         int costoDespachoIngresado = venta.getCostoDespacho() != null ? venta.getCostoDespacho() : 0;
 
         for (DetalleVenta detalle : venta.getDetalles()) {
             detalle.setVenta(venta);
             detalle.setSubtotal(detalle.getCantidad() * detalle.getPrecioUnitario());
-            totalVenta += detalle.getSubtotal();
+            totalProductos += detalle.getSubtotal();
         }
         
-        // Sumar el costo de despacho que ingresó el usuario
-        totalVenta += costoDespachoIngresado;
+        double porcentajeDescuento = 0.0;
+
+        if (codigoPromocion != null && !codigoPromocion.trim().isEmpty()) {
+            logger.info("Procesando cupón de descuento: {}", codigoPromocion);
+            try {
+                java.util.Map<?, ?> respuestaPromocion = webClientBuilder.build().get()
+                        .uri("http://promocion-service/api/promociones/validar/" + codigoPromocion.trim())
+                        .retrieve()
+                        .bodyToMono(java.util.Map.class)
+                        .block();
+
+                if (respuestaPromocion != null && respuestaPromocion.containsKey("descuento")) {
+                    porcentajeDescuento = (Double) respuestaPromocion.get("descuento");
+                    logger.info("Cupón verificado con éxito. Descuento a aplicar: {}%", porcentajeDescuento);
+                }
+            } catch (Exception e) {
+                logger.error("El cupón fue rechazado por el sistema de promociones: {}", e.getMessage());
+                throw new RuntimeException("Error en la compra: " + e.getMessage());
+            }
+        }
+
+        // Aplicar el porcentaje de descuento si el cupón es válido
+        if (porcentajeDescuento > 0.0) {
+            double descuentoDinero = totalProductos * (porcentajeDescuento / 100.0);
+            totalProductos = (int) (totalProductos - descuentoDinero);
+            logger.info("Descuento global aplicado correctamente. Total productos rebajado: ${}", totalProductos);
+        }
+
+        // Sumar el costo de despacho que ingresó el usuario al total final recalculado
+        int totalVenta = totalProductos + costoDespachoIngresado;
         
         venta.setTotal(totalVenta);
         logger.debug("Cálculos finalizados. Total calculado: {} (incluye despacho de {})", totalVenta, costoDespachoIngresado);
@@ -94,9 +122,10 @@ public class VentaService {
 
         logger.info("Notificando a pedido-service para orquestar la logística...");
         try {
-            java.util.Map<String, Long> pedidoPayload = new java.util.HashMap<>();
+            java.util.Map<String, Object> pedidoPayload = new java.util.HashMap<>();
             pedidoPayload.put("idUsuario", ventaGuardada.getUsuarioId());
             pedidoPayload.put("idVenta", ventaGuardada.getId());
+            pedidoPayload.put("direccion", direccion); 
 
             webClientBuilder.build().post()
                     .uri("http://pedido-service/api/pedidos")
@@ -190,7 +219,4 @@ public class VentaService {
         logger.info("Buscando las ventas asociadas al ID de cliente: {}", idClienteObtenido);
         return ventaRepository.findByUsuarioId(idClienteObtenido); 
     }
-
-
-
 }

@@ -20,6 +20,11 @@ spring:
           enabled: true
       routes:
 
+        - id: promocion-service
+          uri: lb://promocion-service
+          predicates:
+            - Path=/api/promociones/**
+
         - id: pedido-service
           uri: lb://pedido-service
           predicates:

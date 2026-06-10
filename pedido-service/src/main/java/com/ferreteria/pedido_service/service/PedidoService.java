@@ -24,7 +24,7 @@ public class PedidoService {
     private final WebClient.Builder webClientBuilder;
 
     @Transactional
-    public Pedido crearPedido(Long idUsuario, Long idVenta) {
+    public Pedido crearPedido(Long idUsuario, Long idVenta, String direccion) {
         logger.info("Iniciando orquestación de nuevo pedido para Usuario ID: {} y Venta ID: {}", idUsuario, idVenta);
 
         // Crear y guardar el estado inicial
@@ -41,6 +41,7 @@ public class PedidoService {
             Map<String, Object> despachoPayload = new HashMap<>();
             despachoPayload.put("idPedido", pedidoGuardado.getId());
             despachoPayload.put("idUsuario", idUsuario);
+            despachoPayload.put("direccion", direccion);
 
             logger.info("Enviando orden a despacho-service...");
             webClientBuilder.build().post()

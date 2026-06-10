@@ -28,38 +28,51 @@ public class SecurityConfig {
                 .pathMatchers("/auth/**").permitAll()
                 
                 // PRODUCTOS (CATÁLOGO)
-                // Cualquiera logueado puede VER productos
                 .pathMatchers(HttpMethod.GET, "/api/productos/**").authenticated()
-                // Solo ADMIN y OPERADOR pueden CREAR o EDITAR productos
-                .pathMatchers(HttpMethod.POST, "/api/productos/**").hasAnyRole("ADMIN", "OPERADOR")
-                .pathMatchers(HttpMethod.PUT, "/api/productos/**").hasAnyRole("ADMIN", "OPERADOR")
-                // Solo ADMIN puede BORRAR productos
-                .pathMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
+                // DELETE permitido a ADMIN y OPERADOR (Soft Delete)
+                .pathMatchers(HttpMethod.DELETE, "/api/productos/**").hasAnyRole("ADMIN", "OPERADOR")
+                .pathMatchers("/api/productos/**").hasAnyRole("ADMIN", "OPERADOR")
                 
                 // INVENTARIO
-                // El CLIENTE no tiene acceso aquí
+                .pathMatchers(HttpMethod.DELETE, "/api/inventario/**").hasRole("ADMIN")
                 .pathMatchers("/api/inventario/**").hasAnyRole("ADMIN", "OPERADOR")
 
                 // VENTAS
-                // Clientes pueden ver y comprar
                 .pathMatchers(HttpMethod.GET, "/api/ventas/**").authenticated()
                 .pathMatchers(HttpMethod.POST, "/api/ventas/**").authenticated()
-                // Pero solo ADMIN y OPERADOR pueden modificar o borrar ventas
+                .pathMatchers(HttpMethod.DELETE, "/api/ventas/**").hasRole("ADMIN")
                 .pathMatchers(HttpMethod.PUT, "/api/ventas/**").hasAnyRole("ADMIN", "OPERADOR")
-                .pathMatchers(HttpMethod.DELETE, "/api/ventas/**").hasAnyRole("ADMIN", "OPERADOR")
                 
                 // DESPACHOS
-                // El cliente necesita ver cómo va su envío
                 .pathMatchers(HttpMethod.GET, "/api/despachos/**").authenticated()
-                // Solo el sistema o el personal crea, actualiza o borra despachos
+                .pathMatchers(HttpMethod.DELETE, "/api/despachos/**").hasRole("ADMIN")
                 .pathMatchers("/api/despachos/**").hasAnyRole("ADMIN", "OPERADOR")
 
                 // USUARIOS
                 .pathMatchers(HttpMethod.GET, "/api/usuarios/me").authenticated()
+                .pathMatchers(HttpMethod.DELETE, "/api/usuarios/**").hasRole("ADMIN")
                 .pathMatchers("/api/usuarios/**").hasAnyRole("ADMIN", "OPERADOR")
 
+                // PROMOCIONES
+                .pathMatchers(HttpMethod.GET, "/api/promociones/**").authenticated()
+                // REGLA GENERAL: Solo ADMIN borra
+                .pathMatchers(HttpMethod.DELETE, "/api/promociones/**").hasRole("ADMIN")
+                .pathMatchers("/api/promociones/**").hasAnyRole("ADMIN", "OPERADOR")
+
+                // PEDIDOS
+                .pathMatchers(HttpMethod.GET, "/api/pedidos/**").authenticated()
+                .pathMatchers(HttpMethod.PUT, "/api/pedidos/*/cancelar").authenticated()
+                .pathMatchers(HttpMethod.DELETE, "/api/pedidos/**").hasRole("ADMIN")
+                .pathMatchers("/api/pedidos/**").hasAnyRole("ADMIN", "OPERADOR")
+                
+                // RESEÑAS
+                .pathMatchers(HttpMethod.GET, "/api/resenas/**").authenticated()
+                .pathMatchers(HttpMethod.POST, "/api/resenas/**").authenticated()
+                .pathMatchers(HttpMethod.DELETE, "/api/resenas/**").hasRole("ADMIN")
+                .pathMatchers(HttpMethod.PUT, "/api/resenas/**").hasAnyRole("ADMIN", "OPERADOR")
+
                 // Cualquier otra ruta requiere autenticación
-                .anyExchange().authenticated()
+                .anyExchange().hasRole("ADMIN")
             )
             .oauth2ResourceServer(oauth2 -> oauth2
                 // Configurar JWT como método de autenticación
@@ -85,8 +98,8 @@ public class SecurityConfig {
         org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter authoritiesConverter = 
             new org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter();
         
-        authoritiesConverter.setAuthoritiesClaimName("role"); // Busca el campo "role" en tu token
-        authoritiesConverter.setAuthorityPrefix("ROLE_");     // Spring requiere este prefijo internamente
+        authoritiesConverter.setAuthoritiesClaimName("role");
+        authoritiesConverter.setAuthorityPrefix("ROLE_");
 
         // Conversor reactivo usando nuestro extractor
         org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverter jwtConverter = 

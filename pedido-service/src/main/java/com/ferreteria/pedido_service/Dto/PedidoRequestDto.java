@@ -1,5 +1,6 @@
 package com.ferreteria.pedido_service.Dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +19,6 @@ public class PedidoRequestDto {
     @NotNull(message = "El ID de la venta es obligatorio")
     private Long idVenta;
 
+    @NotBlank(message = "La dirección es obligatoria")
+    private String direccion;
 }
