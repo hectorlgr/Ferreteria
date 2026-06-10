@@ -20,6 +20,11 @@ spring:
           enabled: true
       routes:
 
+        - id: resena-service
+          uri: lb://resena-service
+          predicates:
+            - Path=/api/resenas/**
+
         - id: auth-service
           uri: lb://auth-service
           predicates:

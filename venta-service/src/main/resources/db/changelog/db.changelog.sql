@@ -4,7 +4,7 @@
 CREATE TABLE ventas (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     usuario_id BIGINT NOT NULL,
-    fecha DATETIME NOT NULL,
+    fecha_venta DATETIME NOT NULL,
     total INT NOT NULL,
     costo_despacho INT NOT NULL
 );
@@ -21,7 +21,7 @@ CREATE TABLE detalle_ventas (
 );
 
 --changeset hector:3
-INSERT INTO ventas (usuario_id, fecha, total, costo_despacho) VALUES 
+INSERT INTO ventas (usuario_id, fecha_venta, total, costo_despacho) VALUES 
 (1, NOW(), 46500, 1500),
 (2, NOW(), 18500, 1500),
 (3, NOW(), 5000, 1500),

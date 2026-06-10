@@ -14,12 +14,12 @@ public class VentaRequestDto {
     @NotNull(message = "El ID del usuario es obligatorio")
     private Long usuarioId;
 
-    // El costo de despacho debe ser al menos 0
+    // Costo de despacho debe ser al menos 0
     @NotNull(message = "El costo de despacho es obligatorio")
     @Min(value = 0, message = "El costo de despacho debe ser al menos 0")
     private Integer costoDespacho;
 
-    // La lista de detalles de venta no puede estar vacía
+    // Lista de detalles de venta no puede estar vacía
     @NotEmpty(message = "La venta debe tener al menos un producto")
     private List<DetalleVentaRequestDto> detalles;
 }

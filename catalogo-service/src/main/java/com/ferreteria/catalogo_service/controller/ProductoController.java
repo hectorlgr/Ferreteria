@@ -41,7 +41,7 @@ public class ProductoController {
         return ResponseEntity.ok(productos);
     }
 
-    // GET: Obtener un producto por ID
+    // GET: Obtener producto por ID
     // http://localhost:9091/api/productos/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {

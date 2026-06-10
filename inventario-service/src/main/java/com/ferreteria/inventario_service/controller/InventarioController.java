@@ -22,7 +22,7 @@ public class InventarioController {
     private static final Logger logger = LoggerFactory.getLogger(InventarioController.class);
     private final InventarioService inventarioService;
 
-    // GET todo el inventario
+    // GET: Obtener todo el inventario
     // http://localhost:9090/api/inventario
     @GetMapping
     public ResponseEntity<List<Inventario>> obtenerTodos() {
@@ -32,7 +32,7 @@ public class InventarioController {
         return ResponseEntity.ok(inventarios);
     }
 
-    // GET inventario por ID de producto
+    // GET: Obtener inventario por ID de producto
     // http://localhost:9090/api/inventario/producto/{productoId}
     @GetMapping("/producto/{productoId}")
     public ResponseEntity<Inventario> obtenerPorProductoId(@PathVariable Long productoId) {

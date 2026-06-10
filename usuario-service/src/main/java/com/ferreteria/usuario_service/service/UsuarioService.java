@@ -33,7 +33,7 @@ public class UsuarioService {
                 });
     }
 
-    //Metodo para obtener un usuario por su email
+    // Metodo para obtener un usuario por su email
     public Usuario obtenerPorEmail(String email) {
         logger.info("Buscando usuario en base de datos con email: {}", email);
         Usuario usuario = usuarioRepository.findByEmail(email);

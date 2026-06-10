@@ -3,14 +3,17 @@ package com.ferreteria.venta_service.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "ventas")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Venta {
@@ -26,7 +29,7 @@ public class Venta {
 
     // Fecha y hora de la venta
     @Column(nullable = false)
-    private LocalDateTime fecha;
+    private LocalDateTime fechaVenta;
 
     // Total de la venta
     @Column(nullable = false)
@@ -36,8 +39,8 @@ public class Venta {
     @Column(nullable = false)
     private Integer costoDespacho;
 
-    // Relación 1 a Muchos: Una venta tiene muchos detalles
+    // Relación 1 a Muchos
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
-    @JsonManagedReference // Evita un bucle infinito al devolver el JSON
+    @JsonManagedReference
     private List<DetalleVenta> detalles;
 }

@@ -2,26 +2,28 @@ package com.ferreteria.inventario_service.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "inventario")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Inventario {
 
-    // El ID del inventario, autogenerado por la db
+    // ID del inventario, autogenerado por la db
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Se guarda el ID del producto que viene del catalogo-service
+    // Guardar el ID del producto que viene del catalogo-service
     @Column(name = "producto_id", nullable = false, unique = true)
     private Long productoId; 
 
-    // El stock actual
+    // Stock actual
     @Column(nullable = false)
     private Integer cantidad;
 }

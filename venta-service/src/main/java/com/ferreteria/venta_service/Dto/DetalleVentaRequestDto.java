@@ -11,12 +11,12 @@ public class DetalleVentaRequestDto {
     @NotNull(message = "El ID del producto es obligatorio")
     private Long productoId;
 
-    // La cantidad debe ser al menos 1
+    // Cantidad debe ser al menos 1
     @NotNull(message = "La cantidad es obligatoria")
     @Min(value = 1, message = "La cantidad debe ser al menos 1")
     private Integer cantidad;
 
-    // El precio unitario debe ser al menos 0
+    // Precio unitario debe ser al menos 0
     @NotNull(message = "El precio unitario es obligatorio")
     @Min(value = 0, message = "El precio unitario debe ser al menos 0")
     private Integer precioUnitario;

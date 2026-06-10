@@ -14,7 +14,7 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
     List<Venta> findByUsuarioId(Long usuarioId);
     
     // Método para buscar ventas dentro de un rango de fechas
-    @Query("SELECT v FROM Venta v WHERE v.fecha BETWEEN :fechaInicio AND :fechaFin ORDER BY v.fecha DESC")
+    @Query("SELECT v FROM Venta v WHERE v.fechaVenta BETWEEN :fechaInicio AND :fechaFin ORDER BY v.fechaVenta DESC")
     List<Venta> findByFechaRango(
             @Param("fechaInicio") LocalDateTime fechaInicio, 
             @Param("fechaFin") LocalDateTime fechaFin

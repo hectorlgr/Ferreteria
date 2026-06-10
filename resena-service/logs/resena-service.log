@@ -1,0 +1,295 @@
+19:26:32 INFO  Starting ResenaServiceApplication using Java 21.0.10 with PID 19328 (D:\Proyectos\Ferreteria\resena-service\target\classes started by hecto in D:\Proyectos\Ferreteria\resena-service)
+19:26:32 INFO  No active profile set, falling back to 1 default profile: "default"
+19:26:35 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+19:26:36 INFO  Finished Spring Data repository scanning in 642 ms. Found 1 JPA repository interface.
+19:26:37 INFO  BeanFactory id=59485c3e-bf7f-316c-bba7-706fbf13b9ae
+19:26:39 INFO  Tomcat initialized with port 9097 (http)
+19:26:39 INFO  Starting service [Tomcat]
+19:26:39 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+19:26:39 INFO  Root WebApplicationContext: initialization completed in 7402 ms
+19:26:40 INFO  HikariPool-1 - Starting...
+19:26:41 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3866c96e
+19:26:41 INFO  HikariPool-1 - Start completed.
+19:26:43 INFO  Creating database changelog table with name: db_resenas.databasechangelog
+19:26:44 INFO  Reading from db_resenas.databasechangelog
+19:26:44 INFO  Creating snapshot
+19:26:44 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+19:26:44 INFO  Successfully acquired change log lock
+19:26:44 INFO  Using deploymentId: 1047600077
+19:26:44 INFO  Reading from db_resenas.databasechangelog
+19:26:44 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+19:26:44 INFO  Custom SQL executed
+19:26:44 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 55ms
+19:26:44 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+19:26:44 INFO  Custom SQL executed
+19:26:44 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 24ms
+19:26:44 INFO  UPDATE SUMMARY
+19:26:44 INFO  Run:                          2
+19:26:44 INFO  Previously run:               0
+19:26:44 INFO  Filtered out:                 0
+19:26:44 INFO  -------------------------------
+19:26:44 INFO  Total change sets:            2
+19:26:44 INFO  Update summary generated
+19:26:44 INFO  Update command completed successfully.
+19:26:44 INFO  Liquibase: Update has been successful. Rows affected: 10
+19:26:44 INFO  Successfully released change log lock
+19:26:44 INFO  Command execution complete
+19:26:45 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+19:26:45 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+19:26:47 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+19:26:47 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+19:26:47 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_resenas?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_resenas/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+19:26:50 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+19:26:50 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+19:26:50 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+19:26:52 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+19:26:53 INFO  Eureka HTTP Client uses RestClient.
+19:26:53 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+19:26:53 INFO  Setting initial instance status as: STARTING
+19:26:53 INFO  Initializing Eureka in region us-east-1
+19:26:53 INFO  Resolving eureka endpoints via configuration
+19:26:53 INFO  Disable delta property : false
+19:26:53 INFO  Single vip registry refresh property : null
+19:26:53 INFO  Force full registry fetch : false
+19:26:53 INFO  Application is null : false
+19:26:53 INFO  Registered Applications size is zero : true
+19:26:53 INFO  Application version is -1: true
+19:26:53 INFO  Getting all instance registry info from the eureka server
+19:26:54 INFO  The response status is 200
+19:26:54 INFO  Starting heartbeat executor: renew interval is: 30
+19:26:54 INFO  InstanceInfoReplicator onDemand update allowed rate per min is 4
+19:26:54 INFO  Discovery Client initialized at timestamp 1781047614712 with initial instances count: 1
+19:26:54 INFO  Registering application RESENA-SERVICE with eureka with status UP
+19:26:54 INFO  Saw local status change event StatusChangeEvent [timestamp=1781047614730, current=UP, previous=STARTING]
+19:26:54 INFO  DiscoveryClient_RESENA-SERVICE/Hector:resena-service:9097: registering service...
+19:26:54 INFO  Tomcat started on port 9097 (http) with context path '/'
+19:26:54 INFO  Updating port to 9097
+19:26:54 INFO  DiscoveryClient_RESENA-SERVICE/Hector:resena-service:9097 - registration status: 204
+19:26:55 INFO  Started ResenaServiceApplication in 25.588 seconds (process running for 28.395)
+19:30:52 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:30:52 INFO  Initializing Servlet 'dispatcherServlet'
+19:30:52 INFO  Completed initialization in 2 ms
+19:30:52 WARN  Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+19:31:53 INFO  Resolving eureka endpoints via configuration
+19:32:56 WARN  Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.ferreteria.resena_service.controller.ResenaController.crearResena(com.ferreteria.resena_service.Dto.ResenaRequestDto) with 2 errors: [Field error in object 'resenaRequestDto' on field 'idUsuario': rejected value [null]; codes [NotNull.resenaRequestDto.idUsuario,NotNull.idUsuario,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.idUsuario,idUsuario]; arguments []; default message [idUsuario]]; default message [El ID del usuario es obligatorio]] [Field error in object 'resenaRequestDto' on field 'idProducto': rejected value [null]; codes [NotNull.resenaRequestDto.idProducto,NotNull.idProducto,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.idProducto,idProducto]; arguments []; default message [idProducto]]; default message [El ID del producto es obligatorio]] ]
+19:33:44 WARN  Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.ferreteria.resena_service.controller.ResenaController.crearResena(com.ferreteria.resena_service.Dto.ResenaRequestDto) with 2 errors: [Field error in object 'resenaRequestDto' on field 'idProducto': rejected value [null]; codes [NotNull.resenaRequestDto.idProducto,NotNull.idProducto,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.idProducto,idProducto]; arguments []; default message [idProducto]]; default message [El ID del producto es obligatorio]] [Field error in object 'resenaRequestDto' on field 'idUsuario': rejected value [null]; codes [NotNull.resenaRequestDto.idUsuario,NotNull.idUsuario,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.idUsuario,idUsuario]; arguments []; default message [idUsuario]]; default message [El ID del usuario es obligatorio]] ]
+19:36:31 INFO  Iniciando validaciones para crear reseña del Producto ID: 1 por Usuario ID: 11
+19:36:33 INFO  Verificando si el usuario compró el producto en venta-service...
+19:36:36 WARN  Reseña rechazada: El usuario 11 no ha comprado el producto 1
+19:36:53 INFO  Resolving eureka endpoints via configuration
+19:36:56 WARN  Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.ferreteria.resena_service.controller.ResenaController.crearResena(com.ferreteria.resena_service.Dto.ResenaRequestDto): [Field error in object 'resenaRequestDto' on field 'calificacion': rejected value [6]; codes [Max.resenaRequestDto.calificacion,Max.calificacion,Max.java.lang.Integer,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.calificacion,calificacion]; arguments []; default message [calificacion],5]; default message [La calificación máxima es 5]] ]
+19:41:31 INFO  Iniciando validaciones para crear reseña del Producto ID: 1 por Usuario ID: 1
+19:41:31 INFO  Verificando si el usuario compró el producto en venta-service...
+19:41:31 INFO  Validaciones superadas. Guardando reseña en base de datos...
+19:41:53 INFO  Resolving eureka endpoints via configuration
+19:42:19 WARN  Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.ferreteria.resena_service.controller.ResenaController.crearResena(com.ferreteria.resena_service.Dto.ResenaRequestDto): [Field error in object 'resenaRequestDto' on field 'calificacion': rejected value [6]; codes [Max.resenaRequestDto.calificacion,Max.calificacion,Max.java.lang.Integer,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.calificacion,calificacion]; arguments []; default message [calificacion],5]; default message [La calificación máxima es 5]] ]
+19:46:53 INFO  Resolving eureka endpoints via configuration
+19:51:53 INFO  Resolving eureka endpoints via configuration
+19:52:33 WARN  Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.ferreteria.resena_service.controller.ResenaController.crearResena(com.ferreteria.resena_service.Dto.ResenaRequestDto): [Field error in object 'resenaRequestDto' on field 'calificacion': rejected value [6]; codes [Max.resenaRequestDto.calificacion,Max.calificacion,Max.java.lang.Integer,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.calificacion,calificacion]; arguments []; default message [calificacion],5]; default message [La calificación máxima es 5]] ]
+19:52:36 WARN  Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.ferreteria.resena_service.controller.ResenaController.crearResena(com.ferreteria.resena_service.Dto.ResenaRequestDto): [Field error in object 'resenaRequestDto' on field 'calificacion': rejected value [6]; codes [Max.resenaRequestDto.calificacion,Max.calificacion,Max.java.lang.Integer,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.calificacion,calificacion]; arguments []; default message [calificacion],5]; default message [La calificación máxima es 5]] ]
+19:52:48 WARN  Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?> com.ferreteria.resena_service.controller.ResenaController.crearResena(com.ferreteria.resena_service.Dto.ResenaRequestDto): [Field error in object 'resenaRequestDto' on field 'calificacion': rejected value [6]; codes [Max.resenaRequestDto.calificacion,Max.calificacion,Max.java.lang.Integer,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [resenaRequestDto.calificacion,calificacion]; arguments []; default message [calificacion],5]; default message [La calificación máxima es 5]] ]
+19:53:54 INFO  Starting ResenaServiceApplication using Java 21.0.10 with PID 14416 (D:\Proyectos\Ferreteria\resena-service\target\classes started by hecto in D:\Proyectos\Ferreteria\resena-service)
+19:53:54 INFO  No active profile set, falling back to 1 default profile: "default"
+19:53:56 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+19:53:56 INFO  Finished Spring Data repository scanning in 313 ms. Found 1 JPA repository interface.
+19:53:57 INFO  BeanFactory id=e7be4bc1-6a47-3c22-b832-5aeba44b2573
+19:53:58 INFO  Tomcat initialized with port 9097 (http)
+19:53:58 INFO  Starting service [Tomcat]
+19:53:58 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+19:53:58 INFO  Root WebApplicationContext: initialization completed in 3975 ms
+19:53:58 INFO  HikariPool-1 - Starting...
+19:53:59 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@65753724
+19:53:59 INFO  HikariPool-1 - Start completed.
+19:54:02 INFO  Reading from db_resenas.databasechangelog
+19:54:02 INFO  Database is up to date, no changesets to execute
+19:54:02 INFO  Reading from db_resenas.databasechangelog
+19:54:02 INFO  UPDATE SUMMARY
+19:54:02 INFO  Run:                          0
+19:54:02 INFO  Previously run:               2
+19:54:02 INFO  Filtered out:                 0
+19:54:02 INFO  -------------------------------
+19:54:02 INFO  Total change sets:            2
+19:54:02 INFO  Update summary generated
+19:54:02 INFO  Command execution complete
+19:54:02 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+19:54:03 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+19:54:04 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+19:54:04 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+19:54:04 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_resenas?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_resenas/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+19:54:06 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+19:54:06 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+19:54:06 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+19:54:07 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+19:54:08 INFO  Eureka HTTP Client uses RestClient.
+19:54:08 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+19:54:08 INFO  Setting initial instance status as: STARTING
+19:54:08 INFO  Initializing Eureka in region us-east-1
+19:54:08 INFO  Resolving eureka endpoints via configuration
+19:54:08 INFO  Disable delta property : false
+19:54:08 INFO  Single vip registry refresh property : null
+19:54:08 INFO  Force full registry fetch : false
+19:54:08 INFO  Application is null : false
+19:54:08 INFO  Registered Applications size is zero : true
+19:54:08 INFO  Application version is -1: true
+19:54:08 INFO  Getting all instance registry info from the eureka server
+19:54:09 INFO  The response status is 200
+19:54:09 INFO  Starting heartbeat executor: renew interval is: 30
+19:54:09 INFO  InstanceInfoReplicator onDemand update allowed rate per min is 4
+19:54:09 INFO  Discovery Client initialized at timestamp 1781049249481 with initial instances count: 9
+19:54:09 INFO  Registering application RESENA-SERVICE with eureka with status UP
+19:54:09 INFO  Saw local status change event StatusChangeEvent [timestamp=1781049249521, current=UP, previous=STARTING]
+19:54:09 INFO  DiscoveryClient_RESENA-SERVICE/Hector:resena-service:9097: registering service...
+19:54:09 INFO  Tomcat started on port 9097 (http) with context path '/'
+19:54:09 INFO  Updating port to 9097
+19:54:09 INFO  DiscoveryClient_RESENA-SERVICE/Hector:resena-service:9097 - registration status: 204
+19:54:09 INFO  Started ResenaServiceApplication in 16.578 seconds (process running for 18.073)
+19:54:21 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+19:54:21 INFO  Initializing Servlet 'dispatcherServlet'
+19:54:21 INFO  Completed initialization in 0 ms
+19:54:35 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+19:54:37 INFO  Verificando si el usuario compró el producto en venta-service...
+19:54:37 INFO  Validaciones superadas. Guardando reseña en base de datos...
+19:54:39 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+19:54:39 INFO  Verificando si el usuario compró el producto en venta-service...
+19:54:40 INFO  Validaciones superadas. Guardando reseña en base de datos...
+19:54:42 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+19:54:42 INFO  Verificando si el usuario compró el producto en venta-service...
+19:54:42 INFO  Validaciones superadas. Guardando reseña en base de datos...
+19:54:44 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+19:54:44 INFO  Verificando si el usuario compró el producto en venta-service...
+19:54:44 INFO  Validaciones superadas. Guardando reseña en base de datos...
+19:54:45 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+19:54:45 INFO  Verificando si el usuario compró el producto en venta-service...
+19:54:45 INFO  Validaciones superadas. Guardando reseña en base de datos...
+19:54:47 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+19:54:47 INFO  Verificando si el usuario compró el producto en venta-service...
+19:54:47 INFO  Validaciones superadas. Guardando reseña en base de datos...
+19:54:48 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+19:54:48 INFO  Verificando si el usuario compró el producto en venta-service...
+19:54:49 INFO  Validaciones superadas. Guardando reseña en base de datos...
+19:55:10 INFO  Consultando reseñas para el producto ID: 2
+19:59:08 INFO  Resolving eureka endpoints via configuration
+20:03:53 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+20:03:53 INFO  Verificando si el usuario compró el producto en venta-service...
+20:03:53 INFO  Validaciones superadas. Guardando reseña en base de datos...
+20:03:55 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+20:03:55 INFO  Verificando si el usuario compró el producto en venta-service...
+20:03:55 INFO  Validaciones superadas. Guardando reseña en base de datos...
+20:03:57 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+20:03:57 INFO  Verificando si el usuario compró el producto en venta-service...
+20:03:57 INFO  Validaciones superadas. Guardando reseña en base de datos...
+20:04:08 INFO  Resolving eureka endpoints via configuration
+20:04:30 INFO  Iniciando validaciones para crear reseña del Producto ID: 2 por Usuario ID: 2
+20:04:30 INFO  Verificando si el usuario compró el producto en venta-service...
+20:04:30 INFO  Validaciones superadas. Guardando reseña en base de datos...
+20:04:39 INFO  Iniciando validaciones para crear reseña del Producto ID: 1 por Usuario ID: 1
+20:04:39 INFO  Verificando si el usuario compró el producto en venta-service...
+20:04:39 INFO  Validaciones superadas. Guardando reseña en base de datos...
+20:04:42 INFO  Iniciando validaciones para crear reseña del Producto ID: 1 por Usuario ID: 1
+20:04:42 INFO  Verificando si el usuario compró el producto en venta-service...
+20:04:42 INFO  Validaciones superadas. Guardando reseña en base de datos...
+20:04:54 INFO  Unregistering application RESENA-SERVICE with eureka with status DOWN
+20:04:54 INFO  Saw local status change event StatusChangeEvent [timestamp=1781049894853, current=DOWN, previous=UP]
+20:04:54 INFO  DiscoveryClient_RESENA-SERVICE/Hector:resena-service:9097: registering service...
+20:04:54 INFO  Commencing graceful shutdown. Waiting for active requests to complete
+20:04:54 INFO  DiscoveryClient_RESENA-SERVICE/Hector:resena-service:9097 - registration status: 204
+20:04:54 INFO  Graceful shutdown complete
+20:04:57 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
+20:04:57 INFO  HikariPool-1 - Shutdown initiated...
+20:04:57 INFO  HikariPool-1 - Shutdown completed.
+20:04:57 INFO  Shutting down DiscoveryClient ...
+20:05:33 INFO  Starting ResenaServiceApplication using Java 21.0.10 with PID 2280 (D:\Proyectos\Ferreteria\resena-service\target\classes started by hecto in D:\Proyectos\Ferreteria\resena-service)
+20:05:33 INFO  No active profile set, falling back to 1 default profile: "default"
+20:05:35 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+20:05:36 INFO  Finished Spring Data repository scanning in 450 ms. Found 1 JPA repository interface.
+20:05:37 INFO  BeanFactory id=e7be4bc1-6a47-3c22-b832-5aeba44b2573
+20:05:38 INFO  Tomcat initialized with port 9097 (http)
+20:05:38 INFO  Starting service [Tomcat]
+20:05:38 INFO  Starting Servlet engine: [Apache Tomcat/11.0.21]
+20:05:38 INFO  Root WebApplicationContext: initialization completed in 5279 ms
+20:05:39 INFO  HikariPool-1 - Starting...
+20:05:40 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2707c790
+20:05:40 INFO  HikariPool-1 - Start completed.
+20:05:43 INFO  Reading from db_resenas.databasechangelog
+20:05:43 INFO  Database is up to date, no changesets to execute
+20:05:43 INFO  Reading from db_resenas.databasechangelog
+20:05:43 INFO  UPDATE SUMMARY
+20:05:43 INFO  Run:                          0
+20:05:43 INFO  Previously run:               2
+20:05:43 INFO  Filtered out:                 0
+20:05:43 INFO  -------------------------------
+20:05:43 INFO  Total change sets:            2
+20:05:43 INFO  Update summary generated
+20:05:43 INFO  Command execution complete
+20:05:43 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+20:05:44 INFO  HHH000001: Hibernate ORM core version 7.2.12.Final
+20:05:45 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+20:05:46 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+20:05:46 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/db_resenas?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_resenas/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+20:05:48 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+20:05:48 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+20:05:48 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+20:05:49 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+20:05:50 INFO  Eureka HTTP Client uses RestClient.
+20:05:50 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+20:05:50 INFO  Setting initial instance status as: STARTING
+20:05:50 INFO  Initializing Eureka in region us-east-1
+20:05:50 INFO  Resolving eureka endpoints via configuration
+20:05:50 INFO  Disable delta property : false
+20:05:50 INFO  Single vip registry refresh property : null
+20:05:50 INFO  Force full registry fetch : false
+20:05:50 INFO  Application is null : false
+20:05:50 INFO  Registered Applications size is zero : true
+20:05:50 INFO  Application version is -1: true
+20:05:50 INFO  Getting all instance registry info from the eureka server
+20:05:51 INFO  The response status is 200
+20:05:51 INFO  Starting heartbeat executor: renew interval is: 30
+20:05:51 INFO  InstanceInfoReplicator onDemand update allowed rate per min is 4
+20:05:51 INFO  Discovery Client initialized at timestamp 1781049951462 with initial instances count: 9
+20:05:51 INFO  Registering application RESENA-SERVICE with eureka with status UP
+20:05:51 INFO  Saw local status change event StatusChangeEvent [timestamp=1781049951491, current=UP, previous=STARTING]
+20:05:51 INFO  DiscoveryClient_RESENA-SERVICE/Hector:resena-service:9097: registering service...
+20:05:51 INFO  Tomcat started on port 9097 (http) with context path '/'
+20:05:51 INFO  Updating port to 9097
+20:05:51 INFO  DiscoveryClient_RESENA-SERVICE/Hector:resena-service:9097 - registration status: 204
+20:05:51 INFO  Started ResenaServiceApplication in 19.579 seconds (process running for 21.481)
+20:06:13 INFO  Initializing Spring DispatcherServlet 'dispatcherServlet'
+20:06:13 INFO  Initializing Servlet 'dispatcherServlet'
+20:06:13 INFO  Completed initialization in 4 ms
+20:06:13 INFO  Consultando reseñas para el producto ID: 2
+20:06:30 INFO  Consultando reseñas para el producto ID: 1
+20:06:40 INFO  Iniciando validaciones para crear reseña del Producto ID: 1 por Usuario ID: 1
+20:06:41 WARN  Reseña rechazada: El usuario 1 ya reseñó el producto 1

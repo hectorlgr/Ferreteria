@@ -12,6 +12,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     // Devuelve solo los productos que tienen habilitado = true
     List<Producto> findByHabilitadoTrue();
 
-    // Busca por ID pero solo si está habilitado
+    // Buscar por ID pero solo si está habilitado
     java.util.Optional<Producto> findByIdAndHabilitadoTrue(Long id);
 }

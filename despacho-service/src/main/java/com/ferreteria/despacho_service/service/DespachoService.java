@@ -63,7 +63,7 @@ public class DespachoService {
             throw new RuntimeException("Error: La venta ID " + despacho.getVentaId() + " no existe.");
         }
 
-        //POR DEFECTO, EL ESTADO INICIAL DEL DESPACHO ES "PREPARANDO"
+        // Por defecto, el estado inicial del despacho es "PREPARANDO"
         despacho.setEstado("PREPARANDO");
         logger.info("Guardando nuevo despacho en la base de datos con estado PREPARANDO");
         

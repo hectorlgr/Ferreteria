@@ -3,12 +3,14 @@ package com.ferreteria.venta_service.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "detalle_ventas")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DetalleVenta {
@@ -18,7 +20,7 @@ public class DetalleVenta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relación Muchos a Uno: Muchos detalles pertenecen a una venta
+    // Relación Muchos a 1
     @ManyToOne
     @JoinColumn(name = "venta_id", nullable = false)
     @JsonBackReference

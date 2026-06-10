@@ -7,7 +7,6 @@ import com.ferreteria.venta_service.repository.VentaRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.time.LocalDateTime;
@@ -56,7 +55,7 @@ public class VentaService {
 
         // Preparar los datos internos de la venta
         logger.debug("Calculando totales y enlazando detalles de la venta...");
-        venta.setFecha(LocalDateTime.now());
+        venta.setFechaVenta(LocalDateTime.now());
         int totalVenta = 0;
         int costoDespachoIngresado = venta.getCostoDespacho() != null ? venta.getCostoDespacho() : 0;
 

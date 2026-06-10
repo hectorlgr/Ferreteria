@@ -60,7 +60,6 @@ public class UserService {
             usuarioPerfil.put("email", email);
             usuarioPerfil.put("nombre", nombre);
             
-            // Llamar al usuario-service a través de Eureka usando POST
             webClientBuilder.build().post()
                     .uri("http://usuario-service/api/usuarios")
                     .bodyValue(usuarioPerfil)

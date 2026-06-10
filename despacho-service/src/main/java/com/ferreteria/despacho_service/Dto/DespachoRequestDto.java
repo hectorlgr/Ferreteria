@@ -7,11 +7,11 @@ import lombok.Data;
 @Data
 public class DespachoRequestDto {
 
-    // El ID de la venta asociada al despacho
+    // ID de la venta asociada al despacho
     @NotNull(message = "El ID de la venta es obligatorio")
     private Long ventaId;
 
-    // La dirección de entrega para el despacho
+    // Dirección de entrega para el despacho
     @NotBlank(message = "La dirección de entrega no puede estar vacía")
     private String direccion;
 }

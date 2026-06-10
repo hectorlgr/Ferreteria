@@ -12,15 +12,15 @@ public class ProductoRequestDto {
     @NotBlank(message = "El nombre del producto no puede estar vacío")
     private String nombre;
 
-    // La descripción es obligatoria, pero no puede ser solo espacios en blanco
+    // Descripción obligatoria
     @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
 
-    // La marca es obligatoria, pero no puede ser solo espacios en blanco
+    // La marca es obligatoria
     @NotBlank(message = "La marca es obligatoria")
     private String marca;
 
-    // El precio es obligatorio y debe ser un número positivo
+    // Precio obligatorio y debe ser un número positivo
     @NotNull(message = "El precio es obligatorio")
     @Min(value = 1, message = "El precio debe ser mayor a 0")
     private Integer precio;

@@ -36,7 +36,7 @@ public class VentaController {
 
     private final VentaService ventaService;
 
-    //GET todas las ventas
+    // GET: Obtener todas las ventas
     // http://localhost:9090/api/ventas
     @GetMapping
     public ResponseEntity<List<Venta>> obtenerTodas() {
@@ -78,7 +78,7 @@ public class VentaController {
         return ResponseEntity.ok(ventaService.obtenerPorRangoFechas(fechaInicio, fechaFin));
     }
 
-    // GET: Obtener una venta por ID
+    // GET: Obtener venta por ID
     // http://localhost:9090/api/ventas/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Venta> obtenerPorId(@PathVariable Long id) {
