@@ -4,8 +4,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-// IMPORTANTE: Cambia estos imports por la ruta real de tus clases
 import com.ferreteria.usuario_service.model.Usuario;
 import com.ferreteria.usuario_service.repository.UsuarioRepository;
 
