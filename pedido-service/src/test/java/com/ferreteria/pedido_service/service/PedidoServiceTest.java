@@ -33,13 +33,13 @@ public class PedidoServiceTest {
 
     @Test
     void testCancelarPedido_RechazadoPorEstadoAvanzado() {
-        // GIVEN: Un pedido que ya está "EN_PROCESO"
+        // GIVEN
         Pedido pedidoAvanzado = new Pedido();
         pedidoAvanzado.setId(1L);
         pedidoAvanzado.setEstado("EN_PROCESO");
         when(pedidoRepository.findById(1L)).thenReturn(Optional.of(pedidoAvanzado));
 
-        // WHEN & THEN: Verificamos que lance la excepción de negocio
+        // WHEN & THEN
         RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
             pedidoService.cancelarPedido(1L);
         });

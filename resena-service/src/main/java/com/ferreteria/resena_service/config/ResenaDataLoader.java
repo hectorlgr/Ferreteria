@@ -29,14 +29,14 @@ public class ResenaDataLoader implements CommandLineRunner {
             resena1.setIdUsuario(2L);
             resena1.setCalificacion(5);
             resena1.setComentario("Excelente taladro, perfora concreto sin problemas.");
-            resena1.setFechaResena(LocalDateTime.now()); // Nombre exacto que definiste
+            resena1.setFechaResena(LocalDateTime.now());
 
             Resena resena2 = new Resena();
             resena2.setIdProducto(2L);
             resena2.setIdUsuario(2L);
             resena2.setCalificacion(4);
             resena2.setComentario("Buenas llaves, pero la caja llegó un poco abollada.");
-            resena2.setFechaResena(LocalDateTime.now()); // Nombre exacto que definiste
+            resena2.setFechaResena(LocalDateTime.now());
 
             resenaRepository.save(resena1);
             resenaRepository.save(resena2);

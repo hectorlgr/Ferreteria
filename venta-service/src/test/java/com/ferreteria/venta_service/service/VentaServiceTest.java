@@ -27,22 +27,17 @@ import com.ferreteria.venta_service.repository.VentaRepository;
 @ExtendWith(MockitoExtension.class)
 public class VentaServiceTest {
 
-    // 1. Clonamos el repositorio de base de datos
     @Mock
     private VentaRepository ventaRepository;
 
-    // 2. Clonamos el WebClient (aunque no lo usemos, Héctor lo exige en el constructor)
     @Mock
     private WebClient.Builder webClientBuilder;
 
-    // 3. Inyectamos los clones en el servicio real
     @InjectMocks
     private VentaService ventaService;
 
-    // Inicializamos la variable directa para evitar los errores de NullPointerException
     private Venta ventaPrueba = crearVentaPrueba();
 
-    // Método auxiliar para crear una venta de mentira
     private Venta crearVentaPrueba() {
         Venta v = new Venta();
         v.setId(1L);
@@ -53,7 +48,7 @@ public class VentaServiceTest {
 
     @Test
     void testObtenerTodas_Exito() {
-        // GIVEN: Le decimos al clon que devuelva una lista con 1 venta
+        // GIVEN
         when(ventaRepository.findAll()).thenReturn(Arrays.asList(ventaPrueba));
 
         // WHEN
@@ -96,17 +91,17 @@ public class VentaServiceTest {
 
     @Test
     void testObtenerPorRangoFechas_FechasInvalidas_LanzaExcepcion() {
-        // GIVEN: Fechas al revés (inicio es después de fin)
+        // GIVEN
         LocalDate inicio = LocalDate.of(2026, 12, 31);
         LocalDate fin = LocalDate.of(2026, 1, 1);
 
-        // WHEN & THEN: Verificamos la validación de Héctor
+        // WHEN & THEN
         RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
             ventaService.obtenerPorRangoFechas(inicio, fin);
         });
 
         assertEquals("La fecha de inicio no puede ser posterior a la fecha de fin", excepcion.getMessage());
-        // Verificamos que NUNCA intentó buscar en la base de datos
+        
         verify(ventaRepository, never()).findByFechaRango(any(LocalDateTime.class), any(LocalDateTime.class));
     }
 }

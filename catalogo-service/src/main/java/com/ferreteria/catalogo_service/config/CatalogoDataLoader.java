@@ -15,13 +15,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j 
 public class CatalogoDataLoader implements CommandLineRunner {
 
-    // Cambiado a minúscula inicial (convención de Java)
+    
     private final ProductoRepository productoRepository;
 
     @Override
     public void run(String... args) throws Exception {
         
-        // Verifica si la base de datos está vacía para no duplicar datos
+        
         if (productoRepository.count() == 0) {
             log.info("Iniciando la carga de datos maestros en el Catálogo...");
 

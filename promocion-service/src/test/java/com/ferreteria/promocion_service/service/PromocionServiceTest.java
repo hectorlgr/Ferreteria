@@ -28,7 +28,7 @@ public class PromocionServiceTest {
     @InjectMocks
     private PromocionService promocionService;
 
-    // Helper para crear una promoción de prueba rápidamente
+
     private Promocion crearPromocionPrueba() {
         Promocion p = new Promocion();
         p.setId(1L);
@@ -40,15 +40,15 @@ public class PromocionServiceTest {
 
     @Test
     void testValidarYObtenerDescuento_Exito() {
-        // GIVEN: El profesor quiere ver cómo aplicamos reglas de negocio.
+        // GIVEN
         Promocion promo = crearPromocionPrueba();
-        // Simulamos que el repositorio encuentra la promoción activa
+        
         when(promocionRepository.findByCodigoAndEstadoTrue("CYBERDAY")).thenReturn(Optional.of(promo));
 
-        // WHEN: El usuario ingresa el cupón en minúsculas (el service debe pasarlo a mayúsculas)
+        // WHEN
         Double descuento = promocionService.validarYObtenerDescuento("cyberday");
 
-        // THEN: Verificamos que el cálculo de la regla de negocio es correcto
+        // THEN
         assertNotNull(descuento);
         assertEquals(20.0, descuento);
         verify(promocionRepository, times(1)).findByCodigoAndEstadoTrue("CYBERDAY");
@@ -56,10 +56,10 @@ public class PromocionServiceTest {
 
     @Test
     void testValidarYObtenerDescuento_Invalido_LanzaExcepcion() {
-        // GIVEN: Un código que no existe o está apagado
+        // GIVEN
         when(promocionRepository.findByCodigoAndEstadoTrue("FALSO")).thenReturn(Optional.empty());
 
-        // WHEN & THEN: Comprobamos que salte el error de negocio de Héctor
+        // WHEN & THEN
         RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
             promocionService.validarYObtenerDescuento("falso");
         });
@@ -80,14 +80,13 @@ public class PromocionServiceTest {
         Promocion resultado = promocionService.crearPromocion(promoNueva);
 
         // THEN
-        // Verificamos que el service modificó el objeto antes de guardarlo
         assertEquals("NAVIDAD2026", resultado.getCodigo());
         verify(promocionRepository, times(1)).save(promoNueva);
     }
 
     @Test
     void testActivarPromocion_Exito() {
-        // GIVEN: Una promoción apagada
+        // GIVEN
         Promocion promo = crearPromocionPrueba();
         promo.setEstado(false);
         when(promocionRepository.findById(1L)).thenReturn(Optional.of(promo));
@@ -97,7 +96,7 @@ public class PromocionServiceTest {
         Promocion resultado = promocionService.activarPromocion(1L);
 
         // THEN
-        assertTrue(resultado.getEstado()); // Verificamos que ahora es true
+        assertTrue(resultado.getEstado()); 
         verify(promocionRepository, times(1)).findById(1L);
         verify(promocionRepository, times(1)).save(promo);
     }

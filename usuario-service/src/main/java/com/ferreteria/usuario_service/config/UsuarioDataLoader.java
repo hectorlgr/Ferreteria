@@ -2,10 +2,12 @@ package com.ferreteria.usuario_service.config;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 import com.ferreteria.usuario_service.model.Usuario;
 import com.ferreteria.usuario_service.repository.UsuarioRepository;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
@@ -17,7 +19,6 @@ public class UsuarioDataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         
-        // Verifica si la base de datos está vacía
         if (usuarioRepository.count() == 0) {
             log.info("Iniciando la carga de usuarios por defecto...");
 
