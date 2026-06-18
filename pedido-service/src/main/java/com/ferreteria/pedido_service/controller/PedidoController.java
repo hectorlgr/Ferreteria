@@ -5,11 +5,19 @@ import com.ferreteria.pedido_service.model.Pedido;
 import com.ferreteria.pedido_service.service.PedidoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -32,8 +40,24 @@ public class PedidoController {
 
     // GET: Historial de compras de un cliente
     @GetMapping("/usuario/{idUsuario}")
-    public ResponseEntity<List<Pedido>> obtenerPorUsuario(@PathVariable Long idUsuario) {
-        return ResponseEntity.ok(pedidoService.obtenerPedidosPorUsuario(idUsuario));
+    public ResponseEntity<CollectionModel<EntityModel<Pedido>>> obtenerPorUsuario(@PathVariable Long idUsuario) {
+        List<Pedido> pedidos = pedidoService.obtenerPedidosPorUsuario(idUsuario);
+
+        List<EntityModel<Pedido>> pedidosModel = pedidos.stream()
+            .map(pedido -> {
+                EntityModel<Pedido> recurso = EntityModel.of(pedido);
+                
+                // Le inyectamos las "acciones" posibles para este pedido
+                recurso.add(linkTo(methodOn(this.getClass()).cancelarPedido(pedido.getId())).withRel("cancelar-pedido"));
+                // Le pasamos un estado genérico al link para que sepa qué ruta usar
+                recurso.add(linkTo(methodOn(this.getClass()).actualizarEstado(pedido.getId(), "NUEVO_ESTADO")).withRel("actualizar-estado"));
+                
+                return recurso;
+            })
+            .collect(Collectors.toList());
+
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorUsuario(idUsuario));
+        return ResponseEntity.ok(CollectionModel.of(pedidosModel, linkSelf.withSelfRel()));
     }
 
     // PUT: Actualizar el estado del pedido (Llamado internamente por despacho-service)
