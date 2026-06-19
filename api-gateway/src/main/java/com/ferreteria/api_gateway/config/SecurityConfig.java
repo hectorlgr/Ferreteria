@@ -26,6 +26,12 @@ public class SecurityConfig {
             .authorizeExchange(exchanges -> exchanges
                 // RUTAS PÚBLICAS
                 .pathMatchers("/auth/**").permitAll()
+                .pathMatchers(
+                    "/doc/swagger-ui.html", 
+                    "/webjars/swagger-ui/**", 
+                    "/v3/api-docs/**",
+                    "/api/*/v3/api-docs"
+                ).permitAll()
                 
                 // PRODUCTOS (CATÁLOGO)
                 .pathMatchers(HttpMethod.GET, "/api/productos/**").authenticated()

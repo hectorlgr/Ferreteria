@@ -26,12 +26,21 @@ import com.ferreteria.catalogo_service.Dto.ProductoRequestDto;
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.service.ProductoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/productos")
 @RequiredArgsConstructor
+@Tag(name = "Catálogo de Productos", description = "API para la gestión y consulta de artículos de ferretería")
 public class ProductoController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
@@ -39,7 +48,10 @@ public class ProductoController {
     private final ProductoService productoService;
 
     // GET: Obtener todos los productos
-    // http://localhost:9091/api/productos
+    @Operation(summary = "Obtener todos los productos", description = "Retorna una lista completa de los productos registrados en el catálogo con enlaces HATEOAS.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de productos obtenida exitosamente")
+    })
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<Producto>>> obtenerTodos() {
         logger.info("GET /api/productos - Solicitud para listar todos los productos");
@@ -57,9 +69,15 @@ public class ProductoController {
     }
 
     // GET: Obtener producto por ID
-    // http://localhost:9091/api/productos/{id}
+    @Operation(summary = "Buscar producto por ID", description = "Retorna los detalles de un único producto basado en su identificador.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Producto localizado correctamente", 
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
+        @ApiResponse(responseCode = "404", description = "El producto no fue encontrado", content = @Content)
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<EntityModel<Producto>> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<Producto>> obtenerPorId(
+            @Parameter(description = "ID único del producto a buscar", example = "1") @PathVariable Long id) {
         logger.info("GET /api/productos/{} - Solicitud para obtener producto por ID", id);
         Producto producto = productoService.obtenerPorId(id);
         
@@ -74,9 +92,15 @@ public class ProductoController {
     }
 
     // POST: Crear un nuevo producto
-    // http://localhost:9091/api/productos
+    @Operation(summary = "Registrar un nuevo producto", description = "Crea un nuevo artículo en el catálogo. Requiere validar los datos de entrada.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Producto creado exitosamente", 
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos", content = @Content)
+    })
     @PostMapping
-    public ResponseEntity<Producto> guardarProducto(@Valid @RequestBody ProductoRequestDto dto) {
+    public ResponseEntity<Producto> guardarProducto(
+            @Parameter(description = "Objeto con los datos del nuevo producto") @Valid @RequestBody ProductoRequestDto dto) {
         logger.info("POST /api/productos - Solicitud para registrar un nuevo producto: {}", dto.getNombre());
         
         Producto producto = new Producto();
@@ -92,9 +116,17 @@ public class ProductoController {
     }
 
     // PUT: Actualizar un producto existente
-    // http://localhost:9091/api/productos/{id}
+    @Operation(summary = "Actualizar producto", description = "Modifica los datos de un producto existente identificado por su ID.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Producto actualizado correctamente", 
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos", content = @Content),
+        @ApiResponse(responseCode = "404", description = "El producto a actualizar no fue encontrado", content = @Content)
+    })
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoRequestDto dto) {
+    public ResponseEntity<Producto> actualizarProducto(
+            @Parameter(description = "ID del producto a actualizar", example = "1") @PathVariable Long id, 
+            @Parameter(description = "Nuevos datos del producto") @Valid @RequestBody ProductoRequestDto dto) {
         logger.info("PUT /api/productos/{} - Solicitud para actualizar datos del producto", id);
         
         Producto producto = new Producto();
@@ -110,9 +142,14 @@ public class ProductoController {
     }
 
     // DELETE: Eliminar un producto
-    // http://localhost:9091/api/productos/{id}
+    @Operation(summary = "Eliminar producto", description = "Elimina un producto del catálogo utilizando su ID.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Producto eliminado exitosamente"),
+        @ApiResponse(responseCode = "404", description = "El producto a eliminar no fue encontrado", content = @Content)
+    })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminarProducto(
+            @Parameter(description = "ID del producto a eliminar", example = "1") @PathVariable Long id) {
         logger.info("DELETE /api/productos/{} - Solicitud para eliminar producto", id);
         productoService.eliminarProducto(id);
         logger.info("Producto ID {} eliminado exitosamente", id);

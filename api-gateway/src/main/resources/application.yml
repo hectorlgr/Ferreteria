@@ -19,7 +19,6 @@ spring:
         locator:
           enabled: true
       routes:
-
         - id: promocion-service
           uri: lb://promocion-service
           predicates:
@@ -71,3 +70,30 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+# --- CONFIGURACIÓN DE SWAGGER ---
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+    urls:
+      - name: 1. Catálogo Service
+        url: /api/productos/v3/api-docs
+      - name: 2. Venta Service
+        url: /api/ventas/v3/api-docs
+      - name: 3. Usuario Service
+        url: /api/usuarios/v3/api-docs
+      - name: 4. Pedido Service
+        url: /api/pedidos/v3/api-docs
+      - name: 5. Promoción Service
+        url: /api/promociones/v3/api-docs
+      - name: 6. Reseña Service
+        url: /api/resenas/v3/api-docs
+      - name: 7. Inventario Service
+        url: /api/inventario/v3/api-docs
+      - name: 8. Despacho Service
+        url: /api/despachos/v3/api-docs
+      - name: 9. Auth Service
+        url: /auth/v3/api-docs

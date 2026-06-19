@@ -25,21 +25,32 @@ import com.ferreteria.usuario_service.Dto.UsuarioRequestDTO;
 import com.ferreteria.usuario_service.model.Usuario;
 import com.ferreteria.usuario_service.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/usuarios")
 @RequiredArgsConstructor
+@Tag(name = "Gestión de Usuarios", description = "API para la administración y consulta de perfiles de usuarios del sistema")
 public class UsuarioController {
 
-    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 
     private final UsuarioService usuarioService;
 
     // GET: Obtener todos los usuarios
-    // http://localhost:9090/api/usuarios
+    @Operation(summary = "Obtener todos los usuarios", description = "Retorna una lista completa de los usuarios registrados con enlaces HATEOAS.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de usuarios obtenida exitosamente")
+    })
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<Usuario>>> obtenerTodos() {
         logger.info("GET /api/usuarios - Solicitud para listar todos los usuarios");
@@ -57,9 +68,15 @@ public class UsuarioController {
     }
 
     // GET: Obtener un usuario por ID
-    // http://localhost:9090/api/usuarios/{id}
+    @Operation(summary = "Buscar usuario por ID", description = "Retorna los detalles de un único usuario basado en su identificador numérico.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usuario localizado correctamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class))),
+        @ApiResponse(responseCode = "404", description = "El usuario no fue encontrado", content = @Content)
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<EntityModel<Usuario>> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<Usuario>> obtenerPorId(
+            @Parameter(description = "ID único del usuario a buscar", example = "1") @PathVariable Long id) {
         logger.info("GET /api/usuarios/{} - Solicitud para obtener usuario por ID", id);
         Usuario usuario = usuarioService.obtenerPorId(id);
         
@@ -74,9 +91,15 @@ public class UsuarioController {
     }
 
     // GET: Obtener un usuario por email
-    // http://localhost:9090/api/usuarios/email/{email} 
+    @Operation(summary = "Buscar usuario por email", description = "Permite buscar un usuario específico utilizando su dirección de correo electrónico exacto.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usuario localizado correctamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class))),
+        @ApiResponse(responseCode = "404", description = "El usuario no fue encontrado con el email proporcionado", content = @Content)
+    })
     @GetMapping("/email/{email}")
-    public ResponseEntity<EntityModel<Usuario>> obtenerPorEmail(@PathVariable String email) {
+    public ResponseEntity<EntityModel<Usuario>> obtenerPorEmail(
+            @Parameter(description = "Correo electrónico del usuario a buscar", example = "juan.perez@email.com") @PathVariable String email) {
         logger.info("GET /api/usuarios/email/{} - Solicitud para obtener usuario por email", email);
         Usuario usuario = usuarioService.obtenerPorEmail(email);
         
@@ -91,12 +114,17 @@ public class UsuarioController {
     }
 
     // POST: Crear un nuevo usuario
-    // http://localhost:9090/api/usuarios
+    @Operation(summary = "Registrar un nuevo usuario", description = "Crea un nuevo usuario en el sistema. Validará que el formato del correo sea correcto.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos", content = @Content)
+    })
     @PostMapping
-    public ResponseEntity<Usuario> guardarUsuario(@Valid @RequestBody UsuarioRequestDTO dto) {
+    public ResponseEntity<Usuario> guardarUsuario(
+            @Parameter(description = "Objeto con los datos del nuevo usuario") @Valid @RequestBody UsuarioRequestDTO dto) {
         logger.info("POST /api/usuarios - Solicitud para registrar un nuevo usuario: {}", dto.getEmail());
         
-        // Convertir DTO a Entidad para no romper el servicio
         Usuario usuario = new Usuario();
         usuario.setNombre(dto.getNombre());
         usuario.setEmail(dto.getEmail());
@@ -107,12 +135,19 @@ public class UsuarioController {
     }
 
     // PUT: Actualizar un usuario existente
-    // http://localhost:9090/api/usuarios/{id} 
+    @Operation(summary = "Actualizar usuario", description = "Modifica los datos de un usuario existente identificado por su ID.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usuario actualizado correctamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Usuario.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos", content = @Content),
+        @ApiResponse(responseCode = "404", description = "El usuario a actualizar no fue encontrado", content = @Content)
+    })
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioRequestDTO dto) {
+    public ResponseEntity<Usuario> actualizarUsuario(
+            @Parameter(description = "ID del usuario a actualizar", example = "1") @PathVariable Long id, 
+            @Parameter(description = "Nuevos datos del usuario") @Valid @RequestBody UsuarioRequestDTO dto) {
         logger.info("PUT /api/usuarios/{} - Solicitud para actualizar datos del usuario", id);
         
-        // Convertir DTO a Entidad para no romper el servicio
         Usuario usuario = new Usuario();
         usuario.setNombre(dto.getNombre());
         usuario.setEmail(dto.getEmail());
@@ -123,9 +158,14 @@ public class UsuarioController {
     }
 
     // DELETE: Eliminar un usuario
-    // http://localhost:9090/api/usuarios/{id}
+    @Operation(summary = "Eliminar usuario", description = "Elimina de forma permanente un usuario del sistema utilizando su ID.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Usuario eliminado exitosamente"),
+        @ApiResponse(responseCode = "404", description = "El usuario a eliminar no fue encontrado", content = @Content)
+    })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminarUsuario(
+            @Parameter(description = "ID del usuario a eliminar", example = "1") @PathVariable Long id) {
         logger.info("DELETE /api/usuarios/{} - Solicitud para eliminar usuario", id);
         usuarioService.eliminarUsuario(id);
         logger.info("Usuario ID {} eliminado exitosamente", id);

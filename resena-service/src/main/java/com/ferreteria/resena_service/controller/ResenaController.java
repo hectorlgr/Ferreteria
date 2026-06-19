@@ -15,20 +15,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/resenas")
 @RequiredArgsConstructor
+@Tag(name = "Gestión de Reseñas", description = "API para la administración de comentarios y valoraciones de los productos")
 public class ResenaController {
 
     private final ResenaService resenaService;
 
     // POST: Crear una nueva reseña
-    // http://localhost:9090/api/resenas
+    @Operation(summary = "Crear una nueva reseña", description = "Registra la valoración y comentario de un usuario sobre un producto específico.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Reseña creada exitosamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Resena.class))),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos o error de validación del servicio", content = @Content)
+    })
     @PostMapping
-    public ResponseEntity<?> crearResena(@Valid @RequestBody com.ferreteria.resena_service.Dto.ResenaRequestDto dto) {
+    public ResponseEntity<?> crearResena(
+            @Parameter(description = "Objeto con los datos de la reseña a crear") @Valid @RequestBody com.ferreteria.resena_service.Dto.ResenaRequestDto dto) {
         try {
             Resena resena = new Resena();
             resena.setIdProducto(dto.getIdProducto());
@@ -44,17 +59,19 @@ public class ResenaController {
     }
 
     // GET: Obtener todas las reseñas de un producto
-    // http://localhost:9090/api/resenas/producto/{idProducto}
+    @Operation(summary = "Obtener reseñas por producto", description = "Devuelve una lista de todas las reseñas asociadas a un ID de producto específico.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de reseñas obtenida correctamente")
+    })
     @GetMapping("/producto/{idProducto}")
-    public ResponseEntity<CollectionModel<EntityModel<Resena>>> obtenerPorProducto(@PathVariable Long idProducto) {
+    public ResponseEntity<CollectionModel<EntityModel<Resena>>> obtenerPorProducto(
+            @Parameter(description = "ID del producto para consultar sus reseñas", example = "1") @PathVariable Long idProducto) {
         List<Resena> resenas = resenaService.obtenerResenasPorProducto(idProducto);
 
-        // Envolvemos cada reseña en un EntityModel
         List<EntityModel<Resena>> resenasModel = resenas.stream()
             .map(resena -> EntityModel.of(resena))
             .collect(Collectors.toList());
 
-        // Creamos los links para la colección general
         WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorProducto(idProducto));
         WebMvcLinkBuilder linkPromedio = linkTo(methodOn(this.getClass()).obtenerPromedioProducto(idProducto));
 
@@ -64,12 +81,16 @@ public class ResenaController {
     }
 
     // GET: Obtener el promedio de calificación de un producto
-    // http://localhost:9090/api/resenas/producto/{idProducto}/promedio
+    @Operation(summary = "Obtener el promedio de calificaciones", description = "Calcula y retorna el promedio numérico de todas las calificaciones válidas de un producto.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Promedio calculado exitosamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Double.class)))
+    })
     @GetMapping("/producto/{idProducto}/promedio")
-    public ResponseEntity<EntityModel<Double>> obtenerPromedioProducto(@PathVariable Long idProducto) {
+    public ResponseEntity<EntityModel<Double>> obtenerPromedioProducto(
+            @Parameter(description = "ID del producto para calcular el promedio", example = "1") @PathVariable Long idProducto) {
         Double promedio = resenaService.calcularPromedioProducto(idProducto);
         
-        // Envolvemos el número Double en un EntityModel para poder pegarle links
         EntityModel<Double> recurso = EntityModel.of(promedio != null ? promedio : 0.0);
         
         WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPromedioProducto(idProducto));

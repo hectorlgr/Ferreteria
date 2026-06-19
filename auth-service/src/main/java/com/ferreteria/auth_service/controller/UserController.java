@@ -1,73 +1,90 @@
 package com.ferreteria.auth_service.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import com.ferreteria.auth_service.Dto.LoginRequestDto;
+import com.ferreteria.auth_service.Dto.RegisterRequestDto;
 import com.ferreteria.auth_service.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
+@Tag(name = "Autenticación", description = "API para inicio de sesión y registro de usuarios")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     // Endpoint para login
-    // http://localhost:9090/auth/login
+    @Operation(summary = "Iniciar sesión", description = "Valida las credenciales del usuario y devuelve un token JWT para autorizar peticiones.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Login exitoso, devuelve el token."),
+            @ApiResponse(responseCode = "401", description = "Credenciales inválidas (contraseña o email incorrecto).", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Formato de petición incorrecto (ej. falta email).", content = @Content)
+    })
     @PostMapping("/login")
-    public java.util.Map<String, String> login(@RequestBody java.util.Map<String, String> request) {
-        String email = request.get("email");
-        String password = request.get("password");
-        String token = userService.login(email, password);
+    public ResponseEntity<Map<String, String>> login(@Valid @RequestBody LoginRequestDto dto) {
+        String token = userService.login(dto.getEmail(), dto.getPassword());
 
-        java.util.Map<String, String> resp = new java.util.HashMap<>();
+        Map<String, String> resp = new HashMap<>();
         if (token == null) {
-            resp.put("status", "error");
-            resp.put("token", "");
-        } else {
-            resp.put("status", "ok");
-            resp.put("token", token);
-        }
-        return resp;
+            resp.put("error", "Credenciales inválidas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resp);
+        } 
+        
+        resp.put("token", token);
+        return ResponseEntity.ok(resp);
     }
 
     // Endpoint para registro de clientes
-    // http://localhost:9090/auth/register/cliente
+    @Operation(summary = "Registrar un nuevo cliente", description = "Crea un usuario en el sistema con el rol predeterminado de CLIENTE.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Cliente creado exitosamente."),
+            @ApiResponse(responseCode = "400", description = "Error de validación o el email ya está registrado.", content = @Content)
+    })
     @PostMapping("/register/cliente")
-    public org.springframework.http.ResponseEntity<java.util.Map<String, String>> registerCliente(@RequestBody java.util.Map<String, String> request) {
-        String email = request.get("email");
-        String password = request.get("password");
-        String nombre = request.get("nombre");
-        
-        java.util.Map<String, String> resp = new java.util.HashMap<>();
-
-        if (nombre == null || nombre.trim().isEmpty()) {
-            resp.put("error", "Nombre es obligatorio para registrar un usuario.");
-            return org.springframework.http.ResponseEntity.badRequest().body(resp); 
+    public ResponseEntity<Map<String, String>> registerCliente(@Valid @RequestBody RegisterRequestDto dto) {
+        try {
+            String resultado = userService.register(dto.getEmail(), dto.getPassword(), "CLIENTE", dto.getNombre());
+            
+            Map<String, String> resp = new HashMap<>();
+            resp.put("message", resultado);
+            return ResponseEntity.status(HttpStatus.CREATED).body(resp);
+        } catch (RuntimeException e) {
+            Map<String, String> errorResp = new HashMap<>();
+            errorResp.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(errorResp);
         }
-
-        String resultado = userService.register(email, password, "CLIENTE", nombre);
-
-        resp.put("message", resultado);
-        return org.springframework.http.ResponseEntity.ok(resp);
     }
 
     // Endpoint para registro de admins
-    // http://localhost:9090/auth/register/admin
+    @Operation(summary = "Registrar un administrador", description = "Crea un usuario en el sistema con privilegios elevados (rol ADMIN).")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Administrador creado exitosamente."),
+            @ApiResponse(responseCode = "400", description = "Error de validación o el email ya está registrado.", content = @Content)
+    })
     @PostMapping("/register/admin")
-    public org.springframework.http.ResponseEntity<java.util.Map<String, String>> registerAdmin(@RequestBody java.util.Map<String, String> request) {
-        String email = request.get("email");
-        String password = request.get("password");
-        String nombre = request.get("nombre");
+    public ResponseEntity<Map<String, String>> registerAdmin(@Valid @RequestBody RegisterRequestDto dto) {
+        try {
+            String resultado = userService.register(dto.getEmail(), dto.getPassword(), "ADMIN", dto.getNombre());
 
-        java.util.Map<String, String> resp = new java.util.HashMap<>();
-
-        if (nombre == null || nombre.trim().isEmpty()) {
-            resp.put("error", "Nombre es obligatorio para registrar un usuario.");
-            return org.springframework.http.ResponseEntity.badRequest().body(resp); 
+            Map<String, String> resp = new HashMap<>();
+            resp.put("message", resultado);
+            return ResponseEntity.status(HttpStatus.CREATED).body(resp);
+        } catch (RuntimeException e) {
+            Map<String, String> errorResp = new HashMap<>();
+            errorResp.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(errorResp);
         }
-        String resultado = userService.register(email, password, "ADMIN", nombre);
-
-        resp.put("message", resultado);
-        return org.springframework.http.ResponseEntity.ok(resp);
     }
 }

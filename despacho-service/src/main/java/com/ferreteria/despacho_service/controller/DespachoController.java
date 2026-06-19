@@ -27,21 +27,32 @@ import com.ferreteria.despacho_service.Dto.DespachoRequestDto;
 import com.ferreteria.despacho_service.model.Despacho;
 import com.ferreteria.despacho_service.service.DespachoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/despachos")
 @RequiredArgsConstructor
+@Tag(name = "Gestión de Despachos", description = "API para la coordinación, seguimiento y actualización del estado logístico de las entregas")
 public class DespachoController {
 
-    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(DespachoController.class);
 
     private final DespachoService despachoService;
 
     // GET: Obtener todos los despachos
-    // http://localhost:9090/api/despachos
+    @Operation(summary = "Obtener todos los despachos", description = "Retorna una lista completa con la información de todos los despachos registrados en el sistema.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de despachos obtenida exitosamente")
+    })
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<Despacho>>> obtenerTodos() {
         logger.info("GET /api/despachos - Solicitud para listar todos los despachos");
@@ -50,7 +61,6 @@ public class DespachoController {
         List<EntityModel<Despacho>> despachosModel = despachos.stream()
             .map(despacho -> {
                 EntityModel<Despacho> recurso = EntityModel.of(despacho);
-                // Usamos el pedidoId como referencia para el "self" ya que no hay GET /{id}
                 recurso.add(linkTo(methodOn(this.getClass()).obtenerPorPedidoId(despacho.getPedidoId())).withSelfRel());
                 recurso.add(linkTo(methodOn(this.getClass()).actualizarEstado(despacho.getId(), "NUEVO_ESTADO")).withRel("actualizar-estado"));
                 return recurso;
@@ -64,9 +74,15 @@ public class DespachoController {
     }
 
     // GET: Obtener despacho por ID de pedido
-    // http://localhost:9090/api/despachos/pedido/{pedidoId}
+    @Operation(summary = "Buscar despacho por ID de Pedido", description = "Localiza la información de envío asociada a un número de pedido específico.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Despacho encontrado correctamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Despacho.class))),
+        @ApiResponse(responseCode = "404", description = "No se encontró un despacho para el pedido indicado", content = @Content)
+    })
     @GetMapping("/pedido/{pedidoId}")
-    public ResponseEntity<EntityModel<Despacho>> obtenerPorPedidoId(@PathVariable Long pedidoId) {
+    public ResponseEntity<EntityModel<Despacho>> obtenerPorPedidoId(
+            @Parameter(description = "ID del pedido a consultar", example = "1024") @PathVariable Long pedidoId) {
         logger.info("GET /api/despachos/pedido/{} - Solicitud para buscar despacho", pedidoId);
         Despacho despacho = despachoService.obtenerPorPedidoId(pedidoId);
         
@@ -79,9 +95,15 @@ public class DespachoController {
     }
 
     // GET: Obtener despacho por estado
-    // http://localhost:9090/api/despachos/estado/{estado}
+    @Operation(summary = "Filtrar despachos por estado", description = "Obtiene los despachos que se encuentran en un estado logístico determinado (ej. EN_RUTA).")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Despacho(s) encontrado(s) correctamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Despacho.class))),
+        @ApiResponse(responseCode = "404", description = "No existen despachos en el estado especificado", content = @Content)
+    })
     @GetMapping("/estado/{estado}")
-    public ResponseEntity<EntityModel<Despacho>> obtenerPorEstado(@PathVariable String estado) {
+    public ResponseEntity<EntityModel<Despacho>> obtenerPorEstado(
+            @Parameter(description = "Estado logístico a buscar", example = "EN_RUTA") @PathVariable String estado) {
         logger.info("GET /api/despachos/estado/{} - Solicitud para buscar despachos por estado", estado);
         Despacho despacho = despachoService.obtenerPorEstado(estado);
         
@@ -92,10 +114,16 @@ public class DespachoController {
         return ResponseEntity.ok(recurso);
     }
 
-    // http://localhost:9090/api/despachos
     // POST: Crear un nuevo despacho
+    @Operation(summary = "Generar orden de despacho", description = "Crea un nuevo registro de entrega logística para un pedido que acaba de ser confirmado.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Orden de despacho generada exitosamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Despacho.class))),
+        @ApiResponse(responseCode = "400", description = "Datos requeridos inválidos o faltantes", content = @Content)
+    })
     @PostMapping
-    public ResponseEntity<Despacho> crearDespacho(@Valid @RequestBody DespachoRequestDto dto) {
+    public ResponseEntity<Despacho> crearDespacho(
+            @Parameter(description = "Datos base para registrar la entrega") @Valid @RequestBody DespachoRequestDto dto) {
         logger.info("POST /api/despachos - Creando despacho para Pedido ID: {}", dto.getIdPedido());
         
         Despacho despacho = new Despacho();
@@ -107,9 +135,16 @@ public class DespachoController {
     }
 
     // PUT: Actualizar el estado de un despacho
-    // http://localhost:9090/api/despachos/{id}/estado?estado={nuevoEstado} (Ej: "EN_RUTA", "ENTREGADO")
+    @Operation(summary = "Actualizar estado logístico", description = "Modifica la etapa de envío de un paquete.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Estado actualizado exitosamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Despacho.class))),
+        @ApiResponse(responseCode = "404", description = "El despacho a actualizar no fue encontrado", content = @Content)
+    })
     @PutMapping("/{id}/estado")
-    public ResponseEntity<Despacho> actualizarEstado(@PathVariable Long id, @RequestParam String estado) {
+    public ResponseEntity<Despacho> actualizarEstado(
+            @Parameter(description = "ID interno del despacho", example = "1") @PathVariable Long id, 
+            @Parameter(description = "Nuevo estado (Ej: RECIBIDO_EN_BODEGA, PREPARANDO_PAQUETE, EN_RUTA, ENTREGADO)", example = "EN_RUTA") @RequestParam String estado) {
         logger.info("PUT /api/despachos/{}/estado - Solicitud para actualizar estado a: {}", id, estado);
         Despacho despachoActualizado = despachoService.actualizarEstado(id, estado);
         logger.info("Estado del despacho ID {} actualizado correctamente", id);
@@ -117,9 +152,14 @@ public class DespachoController {
     }
 
     // DELETE: Eliminar un despacho por ID
-    // http://localhost:9090/api/despachos/{id}
+    @Operation(summary = "Eliminar un despacho", description = "Borra el registro logístico del sistema utilizando su identificador único.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Despacho eliminado exitosamente"),
+        @ApiResponse(responseCode = "404", description = "El despacho a eliminar no fue encontrado", content = @Content)
+    })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarDespacho(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminarDespacho(
+            @Parameter(description = "ID interno del despacho a eliminar", example = "1") @PathVariable Long id) {
         logger.info("DELETE /api/despachos/{} - Solicitud para eliminar despacho", id);
         despachoService.eliminarDespacho(id);
         logger.info("Despacho ID {} eliminado correctamente", id);
