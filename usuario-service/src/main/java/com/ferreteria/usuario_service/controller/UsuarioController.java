@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ferreteria.usuario_service.Dto.UsuarioRequestDto;
+import com.ferreteria.usuario_service.Dto.UsuarioRequestDTO;
 import com.ferreteria.usuario_service.model.Usuario;
 import com.ferreteria.usuario_service.service.UsuarioService;
 
@@ -93,7 +93,7 @@ public class UsuarioController {
     // POST: Crear un nuevo usuario
     // http://localhost:9090/api/usuarios
     @PostMapping
-    public ResponseEntity<Usuario> guardarUsuario(@Valid @RequestBody UsuarioRequestDto dto) {
+    public ResponseEntity<Usuario> guardarUsuario(@Valid @RequestBody UsuarioRequestDTO dto) {
         logger.info("POST /api/usuarios - Solicitud para registrar un nuevo usuario: {}", dto.getEmail());
         
         // Convertir DTO a Entidad para no romper el servicio
@@ -109,7 +109,7 @@ public class UsuarioController {
     // PUT: Actualizar un usuario existente
     // http://localhost:9090/api/usuarios/{id} 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioRequestDto dto) {
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioRequestDTO dto) {
         logger.info("PUT /api/usuarios/{} - Solicitud para actualizar datos del usuario", id);
         
         // Convertir DTO a Entidad para no romper el servicio
