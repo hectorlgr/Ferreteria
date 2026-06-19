@@ -1,9 +1,16 @@
 package com.ferreteria.despacho_service.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,27 +43,53 @@ public class DespachoController {
     // GET: Obtener todos los despachos
     // http://localhost:9090/api/despachos
     @GetMapping
-    public ResponseEntity<List<Despacho>> obtenerTodos() {
+    public ResponseEntity<CollectionModel<EntityModel<Despacho>>> obtenerTodos() {
         logger.info("GET /api/despachos - Solicitud para listar todos los despachos");
         List<Despacho> despachos = despachoService.obtenerTodos();
+        
+        List<EntityModel<Despacho>> despachosModel = despachos.stream()
+            .map(despacho -> {
+                EntityModel<Despacho> recurso = EntityModel.of(despacho);
+                // Usamos el pedidoId como referencia para el "self" ya que no hay GET /{id}
+                recurso.add(linkTo(methodOn(this.getClass()).obtenerPorPedidoId(despacho.getPedidoId())).withSelfRel());
+                recurso.add(linkTo(methodOn(this.getClass()).actualizarEstado(despacho.getId(), "NUEVO_ESTADO")).withRel("actualizar-estado"));
+                return recurso;
+            })
+            .collect(Collectors.toList());
+            
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerTodos());
         logger.debug("Cantidad de despachos obtenidos: {}", despachos.size());
-        return ResponseEntity.ok(despachos);
+        
+        return ResponseEntity.ok(CollectionModel.of(despachosModel, linkSelf.withSelfRel()));
     }
 
     // GET: Obtener despacho por ID de pedido
     // http://localhost:9090/api/despachos/pedido/{pedidoId}
     @GetMapping("/pedido/{pedidoId}")
-    public ResponseEntity<Despacho> obtenerPorPedidoId(@PathVariable Long pedidoId) {
+    public ResponseEntity<EntityModel<Despacho>> obtenerPorPedidoId(@PathVariable Long pedidoId) {
         logger.info("GET /api/despachos/pedido/{} - Solicitud para buscar despacho", pedidoId);
-        return ResponseEntity.ok(despachoService.obtenerPorPedidoId(pedidoId));
+        Despacho despacho = despachoService.obtenerPorPedidoId(pedidoId);
+        
+        EntityModel<Despacho> recurso = EntityModel.of(despacho);
+        recurso.add(linkTo(methodOn(this.getClass()).obtenerPorPedidoId(pedidoId)).withSelfRel());
+        recurso.add(linkTo(methodOn(this.getClass()).obtenerTodos()).withRel("todos-los-despachos"));
+        recurso.add(linkTo(methodOn(this.getClass()).actualizarEstado(despacho.getId(), "NUEVO_ESTADO")).withRel("actualizar-estado"));
+        
+        return ResponseEntity.ok(recurso);
     }
 
     // GET: Obtener despacho por estado
     // http://localhost:9090/api/despachos/estado/{estado}
     @GetMapping("/estado/{estado}")
-    public ResponseEntity<Despacho> obtenerPorEstado(@PathVariable String estado) {
+    public ResponseEntity<EntityModel<Despacho>> obtenerPorEstado(@PathVariable String estado) {
         logger.info("GET /api/despachos/estado/{} - Solicitud para buscar despachos por estado", estado);
-        return ResponseEntity.ok(despachoService.obtenerPorEstado(estado));
+        Despacho despacho = despachoService.obtenerPorEstado(estado);
+        
+        EntityModel<Despacho> recurso = EntityModel.of(despacho);
+        recurso.add(linkTo(methodOn(this.getClass()).obtenerPorEstado(estado)).withSelfRel());
+        recurso.add(linkTo(methodOn(this.getClass()).obtenerTodos()).withRel("todos-los-despachos"));
+        
+        return ResponseEntity.ok(recurso);
     }
 
     // http://localhost:9090/api/despachos
