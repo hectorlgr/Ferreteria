@@ -1,9 +1,16 @@
 package com.ferreteria.catalogo_service.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,19 +41,36 @@ public class ProductoController {
     // GET: Obtener todos los productos
     // http://localhost:9091/api/productos
     @GetMapping
-    public ResponseEntity<List<Producto>> obtenerTodos() {
+    public ResponseEntity<CollectionModel<EntityModel<Producto>>> obtenerTodos() {
         logger.info("GET /api/productos - Solicitud para listar todos los productos");
         List<Producto> productos = productoService.obtenerTodos();
+        
+        List<EntityModel<Producto>> productosModel = productos.stream()
+            .map(producto -> EntityModel.of(producto,
+                linkTo(methodOn(this.getClass()).obtenerPorId(producto.getId())).withSelfRel()))
+            .collect(Collectors.toList());
+            
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerTodos());
+        
         logger.debug("Cantidad de productos obtenidos: {}", productos.size());
-        return ResponseEntity.ok(productos);
+        return ResponseEntity.ok(CollectionModel.of(productosModel, linkSelf.withSelfRel()));
     }
 
     // GET: Obtener producto por ID
     // http://localhost:9091/api/productos/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<Producto>> obtenerPorId(@PathVariable Long id) {
         logger.info("GET /api/productos/{} - Solicitud para obtener producto por ID", id);
-        return ResponseEntity.ok(productoService.obtenerPorId(id));
+        Producto producto = productoService.obtenerPorId(id);
+        
+        EntityModel<Producto> recurso = EntityModel.of(producto);
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorId(id));
+        WebMvcLinkBuilder linkTodos = linkTo(methodOn(this.getClass()).obtenerTodos());
+        
+        recurso.add(linkSelf.withSelfRel());
+        recurso.add(linkTodos.withRel("todos-los-productos"));
+        
+        return ResponseEntity.ok(recurso);
     }
 
     // POST: Crear un nuevo producto

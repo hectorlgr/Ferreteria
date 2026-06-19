@@ -1,11 +1,15 @@
 package com.ferreteria.venta_service.controller;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,7 +35,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class VentaController {
 
-    // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(VentaController.class);
 
     private final VentaService ventaService;
@@ -39,54 +42,86 @@ public class VentaController {
     // GET: Obtener todas las ventas
     // http://localhost:9090/api/ventas
     @GetMapping
-    public ResponseEntity<List<Venta>> obtenerTodas() {
+    public ResponseEntity<CollectionModel<EntityModel<Venta>>> obtenerTodas() {
         logger.info("GET /api/ventas - Solicitud para listar todas las ventas");
         List<Venta> ventas = ventaService.obtenerTodas();
-        logger.debug("Cantidad de ventas obtenidas: {}", ventas.size());
-        return ResponseEntity.ok(ventas);
+        
+        List<EntityModel<Venta>> ventasModel = ventas.stream()
+            .map(venta -> EntityModel.of(venta,
+                linkTo(methodOn(this.getClass()).obtenerPorId(venta.getId())).withSelfRel()))
+            .collect(Collectors.toList());
+            
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerTodas());
+        return ResponseEntity.ok(CollectionModel.of(ventasModel, linkSelf.withSelfRel()));
     }
 
     // GET: Obtener ventas por ID de usuario
     // http://localhost:9090/api/ventas/usuario/{usuarioId}
     @GetMapping("/usuario/{usuarioId}")
-    public ResponseEntity<List<Venta>> obtenerPorUsuario(@PathVariable Long usuarioId) {
+    public ResponseEntity<CollectionModel<EntityModel<Venta>>> obtenerPorUsuario(@PathVariable Long usuarioId) {
         logger.info("GET /api/ventas/usuario/{} - Solicitud para listar ventas por usuario", usuarioId);
         List<Venta> ventas = ventaService.obtenerPorUsuario(usuarioId);
-        logger.debug("Cantidad de ventas obtenidas para el usuario {}: {}", usuarioId, ventas.size());
-        return ResponseEntity.ok(ventas);
+        
+        List<EntityModel<Venta>> ventasModel = ventas.stream()
+            .map(venta -> EntityModel.of(venta,
+                linkTo(methodOn(this.getClass()).obtenerPorId(venta.getId())).withSelfRel()))
+            .collect(Collectors.toList());
+            
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorUsuario(usuarioId));
+        return ResponseEntity.ok(CollectionModel.of(ventasModel, linkSelf.withSelfRel()));
     }
 
     // GET: Obtener el historial de ventas por el correo del cliente
     // http://localhost:9090/api/ventas/cliente/email/{email}
     @GetMapping("/cliente/email/{email}")
-    public List<Venta> obtenerVentasPorEmail(@PathVariable String email) {
+    public ResponseEntity<CollectionModel<EntityModel<Venta>>> obtenerVentasPorEmail(@PathVariable String email) {
         logger.info("GET /api/ventas/cliente/email/{} - Solicitud de historial de compras", email);
         List<Venta> ventas = ventaService.obtenerVentasPorEmailUsuario(email);
-        logger.debug("Se encontraron {} ventas para el cliente con email {}", ventas.size(), email);
-        return ventas;
+        
+        List<EntityModel<Venta>> ventasModel = ventas.stream()
+            .map(venta -> EntityModel.of(venta,
+                linkTo(methodOn(this.getClass()).obtenerPorId(venta.getId())).withSelfRel()))
+            .collect(Collectors.toList());
+            
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerVentasPorEmail(email));
+        return ResponseEntity.ok(CollectionModel.of(ventasModel, linkSelf.withSelfRel()));
     }
 
     // GET: Obtener ventas por rango de fechas
     // http://localhost:9090/api/ventas/rango-fechas?fechaInicio={2024-01-01}&fechaFin={2024-12-31}
     @GetMapping("/rango-fechas")
-    public ResponseEntity<List<Venta>> obtenerPorRangoFechas(
+    public ResponseEntity<CollectionModel<EntityModel<Venta>>> obtenerPorRangoFechas(
         @RequestParam("fechaInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.time.LocalDate fechaInicio,
         @RequestParam("fechaFin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.time.LocalDate fechaFin) {
     
         logger.info("GET /api/ventas/rango-fechas - Solicitud de búsqueda. Desde: {} Hasta: {}", fechaInicio, fechaFin);
-    
-        return ResponseEntity.ok(ventaService.obtenerPorRangoFechas(fechaInicio, fechaFin));
+        List<Venta> ventas = ventaService.obtenerPorRangoFechas(fechaInicio, fechaFin);
+        
+        List<EntityModel<Venta>> ventasModel = ventas.stream()
+            .map(venta -> EntityModel.of(venta,
+                linkTo(methodOn(this.getClass()).obtenerPorId(venta.getId())).withSelfRel()))
+            .collect(Collectors.toList());
+            
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorRangoFechas(fechaInicio, fechaFin));
+        return ResponseEntity.ok(CollectionModel.of(ventasModel, linkSelf.withSelfRel()));
     }
 
     // GET: Obtener venta por ID
     // http://localhost:9090/api/ventas/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<Venta> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<Venta>> obtenerPorId(@PathVariable Long id) {
         logger.info("GET /api/ventas/{} - Solicitud para obtener venta por ID", id);
-        return ResponseEntity.ok(ventaService.obtenerPorId(id));
+        Venta venta = ventaService.obtenerPorId(id);
+        
+        EntityModel<Venta> recurso = EntityModel.of(venta);
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorId(id));
+        WebMvcLinkBuilder linkTodas = linkTo(methodOn(this.getClass()).obtenerTodas());
+        
+        recurso.add(linkSelf.withSelfRel());
+        recurso.add(linkTodas.withRel("todas-las-ventas"));
+        
+        return ResponseEntity.ok(recurso);
     }
-
-
 
     // POST: Crear una nueva venta
     // http://localhost:9090/api/ventas
@@ -94,12 +129,10 @@ public class VentaController {
     public ResponseEntity<Venta> procesarVenta(@Valid @RequestBody VentaRequestDto dto) {
         logger.info("POST /api/ventas - Solicitud para crear venta. Usuario ID: {}", dto.getUsuarioId());
         
-        // Mapeo manual del DTO a la Entidad Venta
         Venta venta = new Venta();
         venta.setUsuarioId(dto.getUsuarioId());
         venta.setCostoDespacho(dto.getCostoDespacho());
         
-        // Mapeo de los detalles
         List<DetalleVenta> detalles = dto.getDetalles().stream().map(dDto -> {
             DetalleVenta detalle = new DetalleVenta();
             detalle.setProductoId(dDto.getProductoId());

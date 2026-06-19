@@ -7,11 +7,19 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/inventario")
@@ -25,19 +33,41 @@ public class InventarioController {
     // GET: Obtener todo el inventario
     // http://localhost:9090/api/inventario
     @GetMapping
-    public ResponseEntity<List<Inventario>> obtenerTodos() {
+    public ResponseEntity<CollectionModel<EntityModel<Inventario>>> obtenerTodos() {
         logger.info("GET /api/inventario - Solicitud para listar todo el inventario");
         List<Inventario> inventarios = inventarioService.obtenerTodos();
+        
+        List<EntityModel<Inventario>> inventarioModels = inventarios.stream()
+            .map(inventario -> EntityModel.of(inventario,
+                linkTo(methodOn(this.getClass()).obtenerPorProductoId(inventario.getProductoId())).withSelfRel()))
+            .collect(Collectors.toList());
+            
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerTodos());
+        
         logger.debug("Cantidad de registros de inventario obtenidos: {}", inventarios.size());
-        return ResponseEntity.ok(inventarios);
+        return ResponseEntity.ok(CollectionModel.of(inventarioModels, linkSelf.withSelfRel()));
     }
 
     // GET: Obtener inventario por ID de producto
     // http://localhost:9090/api/inventario/producto/{productoId}
     @GetMapping("/producto/{productoId}")
-    public ResponseEntity<Inventario> obtenerPorProductoId(@PathVariable Long productoId) {
+    public ResponseEntity<EntityModel<Inventario>> obtenerPorProductoId(@PathVariable Long productoId) {
         logger.info("GET /api/inventario/producto/{} - Solicitud para buscar inventario por ID de producto", productoId);
-        return ResponseEntity.ok(inventarioService.obtenerPorProductoId(productoId));
+        Inventario inventario = inventarioService.obtenerPorProductoId(productoId);
+        
+        EntityModel<Inventario> recurso = EntityModel.of(inventario);
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorProductoId(productoId));
+        WebMvcLinkBuilder linkTodos = linkTo(methodOn(this.getClass()).obtenerTodos());
+        
+        // Agregamos el self y el volver a la lista
+        recurso.add(linkSelf.withSelfRel());
+        recurso.add(linkTodos.withRel("todo-el-inventario"));
+        
+        // Enlaces de acción (ponemos un 0 por defecto para que Spring genere la estructura de la URL)
+        recurso.add(linkTo(methodOn(this.getClass()).agregarStock(productoId, 0)).withRel("agregar-stock"));
+        recurso.add(linkTo(methodOn(this.getClass()).descontarStock(productoId, 0)).withRel("descontar-stock"));
+        
+        return ResponseEntity.ok(recurso);
     }
 
     // POST para registrar nuevo inventario
