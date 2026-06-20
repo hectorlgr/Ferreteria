@@ -3,6 +3,7 @@ package com.ferreteria.despacho_service.service;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,38 +55,46 @@ public class DespachoServiceTest {
     }
 
     @Test
-    void testCrearDespacho_Exito() {
+    void testCrearDespacho_AsignaEstadoInicialPorDefecto() {
         // GIVEN
-        Despacho despachoNuevo = new Despacho();
-        despachoNuevo.setPedidoId(500L);
+        Despacho despachoEntrada = new Despacho();
+        despachoEntrada.setPedidoId(1024L);
+        despachoEntrada.setDireccion("Av. Providencia 123");
 
-        when(despachoRepository.save(any(Despacho.class))).thenReturn(despachoNuevo);
+        Despacho despachoGuardado = new Despacho();
+        despachoGuardado.setId(1L);
+        despachoGuardado.setPedidoId(1024L);
+        despachoGuardado.setDireccion("Av. Providencia 123");
+        despachoGuardado.setEstado("RECIBIDO_EN_BODEGA");
+
+        when(despachoRepository.save(any(Despacho.class))).thenReturn(despachoGuardado);
 
         // WHEN
-        Despacho resultado = despachoService.crearDespacho(despachoNuevo);
+        Despacho resultado = despachoService.crearDespacho(despachoEntrada);
 
         // THEN
+        assertNotNull(resultado);
         assertEquals("RECIBIDO_EN_BODEGA", resultado.getEstado());
-        verify(despachoRepository, times(1)).save(despachoNuevo);
+        verify(despachoRepository, times(1)).save(despachoEntrada);
     }
 
     @Test
-    void testActualizarEstado_AEntregado_Exito() {
+    void testActualizarEstado_Exito() {
         // GIVEN
-        Despacho despacho = new Despacho();
-        despacho.setId(1L);
-        despacho.setPedidoId(500L);
-        despacho.setEstado("RECIBIDO_EN_BODEGA");
+        Despacho despachoExistente = new Despacho();
+        despachoExistente.setId(5L);
+        despachoExistente.setEstado("PREPARANDO_PAQUETE");
 
-        when(despachoRepository.findById(1L)).thenReturn(Optional.of(despacho));
-        when(despachoRepository.save(any(Despacho.class))).thenReturn(despacho);
+        when(despachoRepository.findById(5L)).thenReturn(Optional.of(despachoExistente));
+        when(despachoRepository.save(any(Despacho.class))).thenReturn(despachoExistente);
 
         // WHEN
-        Despacho resultado = despachoService.actualizarEstado(1L, "ENTREGADO");
+        Despacho resultado = despachoService.actualizarEstado(5L, "EN_RUTA");
 
         // THEN
-        assertEquals("ENTREGADO", resultado.getEstado());
-        verify(despachoRepository, times(1)).save(despacho);
+        assertEquals("EN_RUTA", resultado.getEstado());
+        verify(despachoRepository, times(1)).findById(5L);
+        verify(despachoRepository, times(1)).save(despachoExistente);
     }
 
     @Test
@@ -93,12 +102,12 @@ public class DespachoServiceTest {
         // GIVEN
         when(despachoRepository.findByPedidoId(999L)).thenReturn(Optional.empty());
 
-        // WHEN / THEN
+        // WHEN & THEN
         RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
             despachoService.obtenerPorPedidoId(999L);
         });
 
-        assertEquals("No se encontró un despacho asociado al pedido ID: 999", excepcion.getMessage());
+        assertEquals("No se encontró despacho para el pedido ID: 999", excepcion.getMessage());
         verify(despachoRepository, times(1)).findByPedidoId(999L);
     }
 }
