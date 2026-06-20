@@ -69,8 +69,12 @@ public class ResenaController {
         List<Resena> resenas = resenaService.obtenerResenasPorProducto(idProducto);
 
         List<EntityModel<Resena>> resenasModel = resenas.stream()
-            .map(resena -> EntityModel.of(resena))
-            .collect(Collectors.toList());
+    .map(resena -> {
+        EntityModel<Resena> modelo = EntityModel.of(resena);
+        modelo.add(linkTo(methodOn(this.getClass()).obtenerPromedioProducto(resena.getIdProducto())).withRel("ver-promedio"));
+        return modelo;
+    })
+    .collect(Collectors.toList());
 
         WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorProducto(idProducto));
         WebMvcLinkBuilder linkPromedio = linkTo(methodOn(this.getClass()).obtenerPromedioProducto(idProducto));

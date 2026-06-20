@@ -79,8 +79,8 @@ public class InventarioController {
         recurso.add(linkSelf.withSelfRel());
         recurso.add(linkTodos.withRel("todo-el-inventario"));
         
-        recurso.add(linkTo(methodOn(this.getClass()).agregarStock(productoId, 0)).withRel("agregar-stock"));
-        recurso.add(linkTo(methodOn(this.getClass()).descontarStock(productoId, 0)).withRel("descontar-stock"));
+        recurso.add(linkTo(methodOn(this.getClass()).agregarStock(productoId, null)).withRel("agregar-stock"));
+        recurso.add(linkTo(methodOn(this.getClass()).descontarStock(productoId, null)).withRel("descontar-stock"));
         
         return ResponseEntity.ok(recurso);
     }

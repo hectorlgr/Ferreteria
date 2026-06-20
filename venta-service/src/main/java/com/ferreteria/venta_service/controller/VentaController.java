@@ -147,8 +147,12 @@ public class VentaController {
         WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorId(id));
         WebMvcLinkBuilder linkTodas = linkTo(methodOn(this.getClass()).obtenerTodas());
         
+        // --- LA MEJORA HATEOAS: Descubrimiento del recurso relacionado (Historial del cliente) ---
+        WebMvcLinkBuilder linkHistorialUsuario = linkTo(methodOn(this.getClass()).obtenerPorUsuario(venta.getUsuarioId()));
+        
         recurso.add(linkSelf.withSelfRel());
         recurso.add(linkTodas.withRel("todas-las-ventas"));
+        recurso.add(linkHistorialUsuario.withRel("otras-compras-del-usuario")); // <--- Se inyecta aquí
         
         return ResponseEntity.ok(recurso);
     }

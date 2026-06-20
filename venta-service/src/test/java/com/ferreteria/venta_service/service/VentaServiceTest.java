@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.ferreteria.venta_service.model.DetalleVenta;
 import com.ferreteria.venta_service.model.Venta;
 import com.ferreteria.venta_service.repository.VentaRepository;
 
@@ -103,5 +104,30 @@ public class VentaServiceTest {
         assertEquals("La fecha de inicio no puede ser posterior a la fecha de fin", excepcion.getMessage());
         
         verify(ventaRepository, never()).findByFechaRango(any(LocalDateTime.class), any(LocalDateTime.class));
+    }
+
+    @Test
+    void testProcesarVenta_CalculoSubtotalYTotalCorrecto() {
+        // GIVEN
+        Venta venta = new Venta();
+        venta.setUsuarioId(1L);
+        venta.setCostoDespacho(3000);
+
+        DetalleVenta detalle = new DetalleVenta();
+        detalle.setCantidad(2);
+        detalle.setPrecioUnitario(5000);
+        venta.setDetalles(Arrays.asList(detalle));
+
+        when(ventaRepository.save(any(Venta.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // WHEN
+        Venta resultado = ventaService.procesarVenta(venta, "Av. Siempre Viva 123", null);
+
+        // THEN
+        assertNotNull(resultado);
+        assertEquals(10000, resultado.getDetalles().get(0).getSubtotal());
+        assertEquals(13000, resultado.getTotal()); 
+        
+        verify(ventaRepository, times(1)).save(any(Venta.class));
     }
 }
