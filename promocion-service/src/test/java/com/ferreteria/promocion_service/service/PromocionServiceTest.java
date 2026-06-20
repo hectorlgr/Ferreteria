@@ -28,7 +28,6 @@ public class PromocionServiceTest {
     @InjectMocks
     private PromocionService promocionService;
 
-
     private Promocion crearPromocionPrueba() {
         Promocion p = new Promocion();
         p.setId(1L);
@@ -42,7 +41,6 @@ public class PromocionServiceTest {
     void testValidarYObtenerDescuento_Exito() {
         // GIVEN
         Promocion promo = crearPromocionPrueba();
-        
         when(promocionRepository.findByCodigoAndEstadoTrue("CYBERDAY")).thenReturn(Optional.of(promo));
 
         // WHEN

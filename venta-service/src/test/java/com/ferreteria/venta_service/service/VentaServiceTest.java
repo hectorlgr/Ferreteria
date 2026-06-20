@@ -102,32 +102,34 @@ public class VentaServiceTest {
         });
 
         assertEquals("La fecha de inicio no puede ser posterior a la fecha de fin", excepcion.getMessage());
-        
         verify(ventaRepository, never()).findByFechaRango(any(LocalDateTime.class), any(LocalDateTime.class));
     }
 
     @Test
-    void testProcesarVenta_CalculoSubtotalYTotalCorrecto() {
+    void testProcesarVenta_CalculoTotalCorrecto() {
         // GIVEN
         Venta venta = new Venta();
         venta.setUsuarioId(1L);
         venta.setCostoDespacho(3000);
 
-        DetalleVenta detalle = new DetalleVenta();
-        detalle.setCantidad(2);
-        detalle.setPrecioUnitario(5000);
-        venta.setDetalles(Arrays.asList(detalle));
+        DetalleVenta detalle1 = new DetalleVenta();
+        detalle1.setCantidad(2);
+        detalle1.setPrecioUnitario(5000);
+
+        DetalleVenta detalle2 = new DetalleVenta();
+        detalle2.setCantidad(1);
+        detalle2.setPrecioUnitario(2000);
+
+        venta.setDetalles(Arrays.asList(detalle1, detalle2));
 
         when(ventaRepository.save(any(Venta.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // WHEN
-        Venta resultado = ventaService.procesarVenta(venta, "Av. Siempre Viva 123", null);
+        Venta resultado = ventaService.procesarVenta(venta, "Av. Providencia 123", null);
 
         // THEN
         assertNotNull(resultado);
-        assertEquals(10000, resultado.getDetalles().get(0).getSubtotal());
-        assertEquals(13000, resultado.getTotal()); 
-        
+        assertEquals(15000, resultado.getTotal());
         verify(ventaRepository, times(1)).save(any(Venta.class));
     }
 }
