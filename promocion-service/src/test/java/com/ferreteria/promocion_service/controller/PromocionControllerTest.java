@@ -44,14 +44,12 @@ public class PromocionControllerTest {
         PromocionController controller = new PromocionController(promocionService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
-        // 1. Modelo de respuesta simulado
         promocionMock = new Promocion();
         promocionMock.setId(1L);
         promocionMock.setCodigo("CYBER2026");
         promocionMock.setPorcentajeDescuento(30.0);
         promocionMock.setEstado(true);
 
-        // 2. DTO de entrada simulado
         dtoMock = new PromocionRequestDto();
         dtoMock.setCodigo("cyber2026");
         dtoMock.setPorcentajeDescuento(30.0);
@@ -84,7 +82,6 @@ public class PromocionControllerTest {
         mockMvc.perform(get("/api/promociones"))
                 .andExpect(status().isOk()) // HTTP 200
                 .andExpect(jsonPath("$._embedded.promocionList[0].codigo").value("CYBER2026"))
-                // Validar HATEOAS
                 .andExpect(jsonPath("$._embedded.promocionList[0]._links.validar-codigo.href").exists())
                 .andExpect(jsonPath("$._links.self.href").exists());
                 
@@ -99,8 +96,7 @@ public class PromocionControllerTest {
         // WHEN & THEN
         mockMvc.perform(get("/api/promociones/validar/CYBER2026"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.descuento").value(30.0)) // Verifica que el Map devuelve la clave "descuento"
-                // Validar HATEOAS
+                .andExpect(jsonPath("$.descuento").value(30.0))
                 .andExpect(jsonPath("$._links.todas-las-promociones.href").exists());
                 
         verify(promocionService, times(1)).validarYObtenerDescuento("CYBER2026");
