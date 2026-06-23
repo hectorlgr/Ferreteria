@@ -84,7 +84,6 @@ public class DespachoControllerTest {
         mockMvc.perform(get("/api/despachos/pedido/1024"))
                 .andExpect(status().isOk()) // HTTP 200
                 .andExpect(jsonPath("$.estado").value("RECIBIDO_EN_BODEGA"))
-                // Validar inyección de HATEOAS (navegación y acciones)
                 .andExpect(jsonPath("$._links.self.href").exists())
                 .andExpect(jsonPath("$._links.todos-los-despachos.href").exists())
                 .andExpect(jsonPath("$._links.actualizar-estado.href").exists());

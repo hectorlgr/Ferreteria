@@ -1,0 +1,89 @@
+x-common-env: &common-env
+  SECRET: "FerreteriaSuperSecretaKeyParaTokens" 
+
+services:
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "9090:9090"
+    environment:
+      <<: *common-env
+    depends_on:
+      - auth-service
+      - usuario-service
+      - catalogo-service
+      - venta-service
+      - pedido-service
+      - despacho-service
+      - inventario-service
+      - resena-service
+      - promocion-service
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "9096:9096"
+    environment:
+      <<: *common-env
+
+  usuario-service:
+    build: ./usuario-service
+    ports:
+      - "9092:9092"
+    environment:
+      <<: *common-env
+
+  catalogo-service:
+    build: ./catalogo-service
+    ports:
+      - "9091:9091"
+    environment:
+      <<: *common-env
+
+  venta-service:
+    build: ./venta-service
+    ports:
+      - "9094:9094"
+    environment:
+      <<: *common-env
+
+  pedido-service:
+    build: ./pedido-service
+    ports:
+      - "9098:9098"
+    environment:
+      <<: *common-env
+
+  despacho-service:
+    build: ./despacho-service
+    ports:
+      - "9095:9095"
+    environment:
+      <<: *common-env
+
+  inventario-service:
+    build: ./inventario-service
+    ports:
+      - "9093:9093"
+    environment:
+      <<: *common-env
+
+  resena-service:
+    build: ./resena-service
+    ports:
+      - "9097:9097"
+    environment:
+      <<: *common-env
+
+  promocion-service:
+    build: ./promocion-service
+    ports:
+      - "9099:9099"
+    environment:
+      <<: *common-env
+
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761" 
