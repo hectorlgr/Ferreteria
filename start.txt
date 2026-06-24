@@ -1,3 +1,6 @@
 ./mvnw spring-boot:run
 ./mvnw clean install -U
+
+.\clean-all.bat
+.\build-all.bat
 docker-compose up -d --build
