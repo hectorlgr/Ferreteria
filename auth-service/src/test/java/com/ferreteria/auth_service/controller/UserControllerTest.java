@@ -40,7 +40,6 @@ public class UserControllerTest {
         UserController controller = new UserController(userService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
-        // Inicializamos los DTOs exactamente con las propiedades que me mostraste
         loginDto = new LoginRequestDto();
         loginDto.setEmail("cliente@correo.com");
         loginDto.setPassword("MiPassword123");
@@ -61,7 +60,7 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().isOk()) // Espera HTTP 200
-                .andExpect(jsonPath("$.token").value("token_jwt_simulado")); // Valida el Map devuelto
+                .andExpect(jsonPath("$.token").value("token_jwt_simulado"));
                 
         verify(userService, times(1)).login("cliente@correo.com", "MiPassword123");
     }
@@ -69,7 +68,6 @@ public class UserControllerTest {
     @Test
     public void testLogin_CredencialesInvalidas_Retorna401() throws Exception {
         // GIVEN
-        // Tu controlador espera que el servicio devuelva null si falla el login
         when(userService.login("cliente@correo.com", "MiPassword123")).thenReturn(null);
 
         // WHEN & THEN
@@ -85,7 +83,6 @@ public class UserControllerTest {
     @Test
     public void testRegisterCliente_Exito() throws Exception {
         // GIVEN
-        // Simulamos la creación de un cliente (pasa el rol "CLIENTE" en duro como hace tu controlador)
         when(userService.register("juan.perez@correo.com", "MiPassword123", "CLIENTE", "Juan Pérez"))
             .thenReturn("Usuario creado exitosamente!");
 
@@ -102,7 +99,6 @@ public class UserControllerTest {
     @Test
     public void testRegisterAdmin_Exito() throws Exception {
         // GIVEN
-        // Simulamos la creación de un admin (pasa el rol "ADMIN" en duro como hace tu controlador)
         when(userService.register("juan.perez@correo.com", "MiPassword123", "ADMIN", "Juan Pérez"))
             .thenReturn("Administrador creado exitosamente!");
 
@@ -119,7 +115,6 @@ public class UserControllerTest {
     @Test
     public void testRegister_Falla_Retorna400() throws Exception {
         // GIVEN
-        // Simulamos que el servicio lanza una excepción (ej. si el correo ya existe)
         when(userService.register(anyString(), anyString(), anyString(), anyString()))
             .thenThrow(new RuntimeException("Usuario ya existe!"));
 
@@ -127,7 +122,7 @@ public class UserControllerTest {
         mockMvc.perform(post("/auth/register/cliente")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(registerDto)))
-                .andExpect(status().isBadRequest()) // Espera HTTP 400
+                .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.error").value("Usuario ya existe!"));
     }
 }

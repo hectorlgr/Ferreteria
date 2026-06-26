@@ -80,17 +80,13 @@ public class PedidoControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/pedidos/usuario/5"))
-                // .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print()) // Útil si necesitas ver el JSON
-                .andExpect(status().isOk()) // HTTP 200
+                .andExpect(status().isOk())
                 
-                // 1. Reemplazamos '_embedded.pedidoList' por 'content'
                 .andExpect(jsonPath("$.content[0].estado").value("CONFIRMADO"))
                 
-                // 2. Buscamos los enlaces del pedido en el arreglo 'links'
-                .andExpect(jsonPath("$.content[0].links[0].href").exists()) // cancelar-pedido
-                .andExpect(jsonPath("$.content[0].links[1].href").exists()) // actualizar-estado
+                .andExpect(jsonPath("$.content[0].links[0].href").exists())
+                .andExpect(jsonPath("$.content[0].links[1].href").exists())
                 
-                // 3. Buscamos el enlace 'self' general de la colección en el arreglo 'links' de la raíz
                 .andExpect(jsonPath("$.links[0].href").exists());
                 
         verify(pedidoService, times(1)).obtenerPedidosPorUsuario(5L);

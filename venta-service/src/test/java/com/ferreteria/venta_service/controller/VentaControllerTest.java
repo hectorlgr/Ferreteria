@@ -76,11 +76,10 @@ public class VentaControllerTest {
                 .andExpect(jsonPath("$.id").value(10L))
                 .andExpect(jsonPath("$.usuarioId").value(5L))
                 .andExpect(jsonPath("$.total").value(12500))
-                
-                // 👇 Validamos HATEOAS usando el arreglo estándar 'links'
-                .andExpect(jsonPath("$.links[0].href").exists()) // Corresponde a 'self'
-                .andExpect(jsonPath("$.links[1].href").exists()) // Corresponde a 'todas-las-ventas'
-                .andExpect(jsonPath("$.links[2].href").exists()); // Corresponde a 'otras-compras-del-usuario'
+
+                .andExpect(jsonPath("$.links[0].href").exists())
+                .andExpect(jsonPath("$.links[1].href").exists())
+                .andExpect(jsonPath("$.links[2].href").exists());
                 
         verify(ventaService, times(1)).obtenerPorId(10L);
     }
@@ -94,7 +93,7 @@ public class VentaControllerTest {
         mockMvc.perform(post("/api/ventas")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(ventaDtoMock)))
-                .andExpect(status().isCreated()) // Esperamos un 201 Created
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(10L))
                 .andExpect(jsonPath("$.usuarioId").value(5L));
     }

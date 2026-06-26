@@ -21,8 +21,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.ferreteria.catalogo_service.Dto.ProductoRequestDto;
-import com.ferreteria.catalogo_service.controller.ProductoController;
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.service.ProductoService;
 
@@ -60,7 +58,7 @@ public class ProductoControllerTest {
         mockMvc.perform(post("/api/productos")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{\"nombre\":\"Martillo de Uña\",\"descripcion\":\"Mango de fibra\",\"marca\":\"Stanley\",\"precio\":14990}"))
-                .andExpect(status().isCreated()) // HTTP 201
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.nombre").value("Martillo de Uña"))
                 .andExpect(jsonPath("$.precio").value(14990));
@@ -89,7 +87,7 @@ public class ProductoControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/productos/1"))
-                .andExpect(status().isOk()) // HTTP 200
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre").value("Martillo de Uña"))
             ;
                 

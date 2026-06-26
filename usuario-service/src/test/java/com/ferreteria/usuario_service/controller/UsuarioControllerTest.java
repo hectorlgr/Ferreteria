@@ -82,9 +82,8 @@ public class UsuarioControllerTest {
         mockMvc.perform(get("/api/usuarios/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre").value("Pedro Pascal"))
-                // 👇 Validamos HATEOAS usando el arreglo estándar 'links'
-                .andExpect(jsonPath("$.links[0].href").exists()) // Corresponde a 'self'
-                .andExpect(jsonPath("$.links[1].href").exists()); // Corresponde a 'todos-los-usuarios'
+                .andExpect(jsonPath("$.links[0].href").exists())
+                .andExpect(jsonPath("$.links[1].href").exists());
                 
         verify(usuarioService, times(1)).obtenerPorId(1L);
     }
@@ -98,8 +97,7 @@ public class UsuarioControllerTest {
         mockMvc.perform(get("/api/usuarios/email/pedro@email.com"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                // 👇 Formato estándar de Jackson para links
-                .andExpect(jsonPath("$.links[0].href").exists()); // Corresponde a 'self'
+                .andExpect(jsonPath("$.links[0].href").exists());
                 
         verify(usuarioService, times(1)).obtenerPorEmail("pedro@email.com");
     }
@@ -112,9 +110,7 @@ public class UsuarioControllerTest {
         // WHEN & THEN
         mockMvc.perform(get("/api/usuarios"))
                 .andExpect(status().isOk())
-                // 👇 La colección de usuarios va dentro del nodo 'content'
                 .andExpect(jsonPath("$.content[0].nombre").value("Pedro Pascal"))
-                // 👇 El link 'self' de la lista general va en la raíz del arreglo 'links'
                 .andExpect(jsonPath("$.links[0].href").exists());
                 
         verify(usuarioService, times(1)).obtenerTodos();

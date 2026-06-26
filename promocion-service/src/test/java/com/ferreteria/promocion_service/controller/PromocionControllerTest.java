@@ -65,7 +65,7 @@ public class PromocionControllerTest {
         mockMvc.perform(post("/api/promociones")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dtoMock)))
-                .andExpect(status().isCreated()) // HTTP 201
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.codigo").value("CYBER2026"))
                 .andExpect(jsonPath("$.porcentajeDescuento").value(30.0));
@@ -80,16 +80,12 @@ public class PromocionControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/promociones"))
-                // .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print())
-                .andExpect(status().isOk()) // HTTP 200
+                .andExpect(status().isOk())
                 
-                // 1. Buscamos el código dentro del nodo 'content'
                 .andExpect(jsonPath("$.content[0].codigo").value("CYBER2026"))
                 
-                // 2. Buscamos el link de la promoción en su arreglo (validar-codigo)
                 .andExpect(jsonPath("$.content[0].links[0].href").exists())
                 
-                // 3. Buscamos el link 'self' general de la colección en la raíz
                 .andExpect(jsonPath("$.links[0].href").exists());
                 
         verify(promocionService, times(1)).obtenerTodas();
@@ -102,13 +98,10 @@ public class PromocionControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/promociones/validar/CYBER2026"))
-                // .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 
-                // El descuento se mapea correctamente en la raíz
                 .andExpect(jsonPath("$.descuento").value(30.0))
                 
-                // Reemplazamos '_links.todas-las-promociones' por la posición en el arreglo
                 .andExpect(jsonPath("$.links[1].href").exists());
                 
         verify(promocionService, times(1)).validarYObtenerDescuento("CYBER2026");

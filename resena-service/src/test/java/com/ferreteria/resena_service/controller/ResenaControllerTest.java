@@ -43,7 +43,6 @@ public class ResenaControllerTest {
         ResenaController controller = new ResenaController(resenaService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
-        // 1. Modelo simulado
         resenaMock = new Resena();
         resenaMock.setId(1L);
         resenaMock.setIdProducto(100L);
@@ -51,7 +50,6 @@ public class ResenaControllerTest {
         resenaMock.setCalificacion(5);
         resenaMock.setComentario("Muy buen producto");
 
-        // 2. DTO de entrada simulado
         dtoMock = new ResenaRequestDto();
         dtoMock.setIdProducto(100L);
         dtoMock.setIdUsuario(5L);
@@ -85,12 +83,10 @@ public class ResenaControllerTest {
         mockMvc.perform(get("/api/resenas/producto/100"))
                 .andExpect(status().isOk()) // HTTP 200
                 
-                // Buscamos dentro del arreglo 'content'
                 .andExpect(jsonPath("$.content[0].calificacion").value(5))
                 
-                // Buscamos los links en el arreglo 'links' general de la colección
-                .andExpect(jsonPath("$.links[0].href").exists()) // self
-                .andExpect(jsonPath("$.links[1].href").exists()); // ver-promedio-calificacion
+                .andExpect(jsonPath("$.links[0].href").exists())
+                .andExpect(jsonPath("$.links[1].href").exists());
                 
         verify(resenaService, times(1)).obtenerResenasPorProducto(100L);
     }
@@ -104,12 +100,10 @@ public class ResenaControllerTest {
         mockMvc.perform(get("/api/resenas/producto/100/promedio"))
                 .andExpect(status().isOk()) // Ya no será HTTP 500
                 
-                // Validamos la llave 'promedio' que creamos en el Map del controlador
                 .andExpect(jsonPath("$.promedio").value(4.5))
                 
-                // Validamos los links en el arreglo estándar
-                .andExpect(jsonPath("$.links[0].href").exists()) // self
-                .andExpect(jsonPath("$.links[1].href").exists()); // ver-todas-las-resenas
+                .andExpect(jsonPath("$.links[0].href").exists())
+                .andExpect(jsonPath("$.links[1].href").exists());
                 
         verify(resenaService, times(1)).calcularPromedioProducto(100L);
     }
