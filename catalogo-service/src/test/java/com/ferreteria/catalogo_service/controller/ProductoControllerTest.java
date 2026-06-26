@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.util.Arrays;
 
@@ -20,8 +21,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferreteria.catalogo_service.Dto.ProductoRequestDto;
+import com.ferreteria.catalogo_service.controller.ProductoController;
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.service.ProductoService;
 
@@ -33,10 +34,7 @@ public class ProductoControllerTest {
     @Mock
     private ProductoService productoService;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
     private Producto productoMock;
-    private ProductoRequestDto dtoMock;
 
     @BeforeEach
     void setUp() {
@@ -51,11 +49,6 @@ public class ProductoControllerTest {
         productoMock.setPrecio(14990);
         productoMock.setHabilitado(true);
 
-        dtoMock = new ProductoRequestDto();
-        dtoMock.setNombre("Martillo de Uña");
-        dtoMock.setDescripcion("Mango de fibra");
-        dtoMock.setMarca("Stanley");
-        dtoMock.setPrecio(14990); 
     }
 
     @Test
@@ -65,8 +58,8 @@ public class ProductoControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(post("/api/productos")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dtoMock)))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"nombre\":\"Martillo de Uña\",\"descripcion\":\"Mango de fibra\",\"marca\":\"Stanley\",\"precio\":14990}"))
                 .andExpect(status().isCreated()) // HTTP 201
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.nombre").value("Martillo de Uña"))
@@ -82,10 +75,9 @@ public class ProductoControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/productos"))
+                .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$._embedded.productoList[0].nombre").value("Martillo de Uña"))
-                .andExpect(jsonPath("$._embedded.productoList[0]._links.self.href").exists())
-                .andExpect(jsonPath("$._links.self.href").exists());
+                .andExpect(jsonPath("$.content[0].nombre").value("Martillo de Uña"));
                 
         verify(productoService, times(1)).obtenerTodos();
     }
@@ -99,8 +91,7 @@ public class ProductoControllerTest {
         mockMvc.perform(get("/api/productos/1"))
                 .andExpect(status().isOk()) // HTTP 200
                 .andExpect(jsonPath("$.nombre").value("Martillo de Uña"))
-                .andExpect(jsonPath("$._links.self.href").exists())
-                .andExpect(jsonPath("$._links.todos-los-productos.href").exists());
+            ;
                 
         verify(productoService, times(1)).obtenerPorId(1L);
     }

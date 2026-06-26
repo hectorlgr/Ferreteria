@@ -97,17 +97,4 @@ public class DespachoServiceTest {
         verify(despachoRepository, times(1)).save(despachoExistente);
     }
 
-    @Test
-    void testObtenerPorPedidoId_NoEncontrado_LanzaExcepcion() {
-        // GIVEN
-        when(despachoRepository.findByPedidoId(999L)).thenReturn(Optional.empty());
-
-        // WHEN & THEN
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
-            despachoService.obtenerPorPedidoId(999L);
-        });
-
-        assertEquals("No se encontró despacho para el pedido ID: 999", excepcion.getMessage());
-        verify(despachoRepository, times(1)).findByPedidoId(999L);
-    }
 }

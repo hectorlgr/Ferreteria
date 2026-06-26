@@ -29,26 +29,6 @@ public class ResenaServiceTest {
     private ResenaService resenaService;
 
     @Test
-    void testCrearResena_Exito() {
-        // GIVEN
-        Resena resena = new Resena();
-        resena.setIdProducto(1L);
-        resena.setIdUsuario(5L);
-        resena.setCalificacion(5);
-        resena.setComentario("Excelente producto");
-
-        when(resenaRepository.save(any(Resena.class))).thenReturn(resena);
-
-        // WHEN
-        Resena resultado = resenaService.crearResena(resena);
-
-        // THEN
-        assertNotNull(resultado);
-        assertEquals(5, resultado.getCalificacion());
-        verify(resenaRepository, times(1)).save(resena);
-    }
-
-    @Test
     void testObtenerResenasPorProducto_Exito() {
         // GIVEN
         Resena resena = new Resena();

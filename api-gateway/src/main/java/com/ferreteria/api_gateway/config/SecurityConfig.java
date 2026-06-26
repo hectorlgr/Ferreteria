@@ -24,13 +24,18 @@ public class SecurityConfig {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeExchange(exchanges -> exchanges
+                .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 // RUTAS PÚBLICAS
                 .pathMatchers("/auth/**").permitAll()
                 .pathMatchers(
-                    "/doc/swagger-ui.html", 
-                    "/webjars/swagger-ui/**", 
+                    "/doc/**",
                     "/v3/api-docs/**",
-                    "/api/*/v3/api-docs"
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/webjars/**",
+                    "/swagger-resources/**",
+                    "/api/*/v3/api-docs",
+                    "/api/*/v3/api-docs/**"
                 ).permitAll()
                 
                 // PRODUCTOS (CATÁLOGO)

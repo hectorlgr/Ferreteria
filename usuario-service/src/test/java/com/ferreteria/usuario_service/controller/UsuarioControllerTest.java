@@ -82,9 +82,9 @@ public class UsuarioControllerTest {
         mockMvc.perform(get("/api/usuarios/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre").value("Pedro Pascal"))
-                // Validamos HATEOAS
-                .andExpect(jsonPath("$._links.self.href").exists())
-                .andExpect(jsonPath("$._links.todos-los-usuarios.href").exists());
+                // 👇 Validamos HATEOAS usando el arreglo estándar 'links'
+                .andExpect(jsonPath("$.links[0].href").exists()) // Corresponde a 'self'
+                .andExpect(jsonPath("$.links[1].href").exists()); // Corresponde a 'todos-los-usuarios'
                 
         verify(usuarioService, times(1)).obtenerPorId(1L);
     }
@@ -98,7 +98,8 @@ public class UsuarioControllerTest {
         mockMvc.perform(get("/api/usuarios/email/pedro@email.com"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$._links.self.href").exists());
+                // 👇 Formato estándar de Jackson para links
+                .andExpect(jsonPath("$.links[0].href").exists()); // Corresponde a 'self'
                 
         verify(usuarioService, times(1)).obtenerPorEmail("pedro@email.com");
     }
@@ -111,8 +112,10 @@ public class UsuarioControllerTest {
         // WHEN & THEN
         mockMvc.perform(get("/api/usuarios"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$._embedded.usuarioList[0].nombre").value("Pedro Pascal"))
-                .andExpect(jsonPath("$._links.self.href").exists());
+                // 👇 La colección de usuarios va dentro del nodo 'content'
+                .andExpect(jsonPath("$.content[0].nombre").value("Pedro Pascal"))
+                // 👇 El link 'self' de la lista general va en la raíz del arreglo 'links'
+                .andExpect(jsonPath("$.links[0].href").exists());
                 
         verify(usuarioService, times(1)).obtenerTodos();
     }

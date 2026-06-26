@@ -29,7 +29,7 @@ public class UsuarioService {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> {
                     logger.warn("Búsqueda fallida: No se encontró ningún usuario con el ID: {}", id);
-                    return new RuntimeException("Error: Usuario no encontrado con el ID " + id);
+                    return new RuntimeException("Usuario no encontrado con ID: " + id);
                 });
     }
 

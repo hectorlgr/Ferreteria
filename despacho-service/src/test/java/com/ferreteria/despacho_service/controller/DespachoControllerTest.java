@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.util.Arrays;
 
@@ -82,11 +83,13 @@ public class DespachoControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/despachos/pedido/1024"))
+                .andDo(print()) // Imprimirá el JSON para que puedas verificarlo
                 .andExpect(status().isOk()) // HTTP 200
                 .andExpect(jsonPath("$.estado").value("RECIBIDO_EN_BODEGA"))
-                .andExpect(jsonPath("$._links.self.href").exists())
-                .andExpect(jsonPath("$._links.todos-los-despachos.href").exists())
-                .andExpect(jsonPath("$._links.actualizar-estado.href").exists());
+                
+                .andExpect(jsonPath("$.links[0].href").exists())
+                .andExpect(jsonPath("$.links[1].href").exists())
+                .andExpect(jsonPath("$.links[2].href").exists());
                 
         verify(despachoService, times(1)).obtenerPorPedidoId(1024L);
     }
@@ -116,9 +119,19 @@ public class DespachoControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/despachos"))
+                .andDo(print()) // Te sugiero dejarlo para ver el JSON en la consola si vuelve a fallar
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$._embedded.despachoList[0].pedidoId").value(1024L))
-                .andExpect(jsonPath("$._embedded.despachoList[0]._links.actualizar-estado.href").exists());
+                
+                // 1. Apuntamos al nodo 'content' en lugar de '_embedded' o 'despachoList'
+                .andExpect(jsonPath("$.content[0].pedidoId").value(1024L))
+                
+                // 2. Buscamos el link en el arreglo estándar. 
+                // El índice [1] corresponde a 'actualizar-estado' según el orden de tu controlador.
+                .andExpect(jsonPath("$.content[0].links[1].href").exists());
+                
+                // NOTA: Si prefieres buscarlo por el nombre sin importar el orden, 
+                // puedes usar esta expresión avanzada de JsonPath en su lugar:
+                // .andExpect(jsonPath("$.content[0].links[?(@.rel == 'actualizar-estado')].href").exists());
                 
         verify(despachoService, times(1)).obtenerTodos();
     }

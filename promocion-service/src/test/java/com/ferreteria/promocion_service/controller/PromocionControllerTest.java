@@ -80,10 +80,17 @@ public class PromocionControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/promociones"))
+                // .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print())
                 .andExpect(status().isOk()) // HTTP 200
-                .andExpect(jsonPath("$._embedded.promocionList[0].codigo").value("CYBER2026"))
-                .andExpect(jsonPath("$._embedded.promocionList[0]._links.validar-codigo.href").exists())
-                .andExpect(jsonPath("$._links.self.href").exists());
+                
+                // 1. Buscamos el código dentro del nodo 'content'
+                .andExpect(jsonPath("$.content[0].codigo").value("CYBER2026"))
+                
+                // 2. Buscamos el link de la promoción en su arreglo (validar-codigo)
+                .andExpect(jsonPath("$.content[0].links[0].href").exists())
+                
+                // 3. Buscamos el link 'self' general de la colección en la raíz
+                .andExpect(jsonPath("$.links[0].href").exists());
                 
         verify(promocionService, times(1)).obtenerTodas();
     }
@@ -95,9 +102,14 @@ public class PromocionControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/promociones/validar/CYBER2026"))
+                // .andDo(org.springframework.test.web.servlet.result.MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
+                
+                // El descuento se mapea correctamente en la raíz
                 .andExpect(jsonPath("$.descuento").value(30.0))
-                .andExpect(jsonPath("$._links.todas-las-promociones.href").exists());
+                
+                // Reemplazamos '_links.todas-las-promociones' por la posición en el arreglo
+                .andExpect(jsonPath("$.links[1].href").exists());
                 
         verify(promocionService, times(1)).validarYObtenerDescuento("CYBER2026");
     }

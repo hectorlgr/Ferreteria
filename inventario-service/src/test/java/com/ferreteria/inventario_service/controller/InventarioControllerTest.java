@@ -77,12 +77,15 @@ public class InventarioControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/inventario/producto/10"))
+                // .andDo(print()) // Descomenta esta línea si quieres ver el JSON generado en consola
                 .andExpect(status().isOk()) // HTTP 200
                 .andExpect(jsonPath("$.cantidad").value(50))
-                .andExpect(jsonPath("$._links.self.href").exists())
-                .andExpect(jsonPath("$._links.todo-el-inventario.href").exists())
-                .andExpect(jsonPath("$._links.agregar-stock.href").exists())
-                .andExpect(jsonPath("$._links.descontar-stock.href").exists());
+                
+                // 👇 Actualizamos a la sintaxis de arreglos para HATEOAS estándar 👇
+                .andExpect(jsonPath("$.links[0].href").exists()) // self
+                .andExpect(jsonPath("$.links[1].href").exists()) // todo-el-inventario
+                .andExpect(jsonPath("$.links[2].href").exists()) // agregar-stock
+                .andExpect(jsonPath("$.links[3].href").exists()); // descontar-stock
                 
         verify(inventarioService, times(1)).obtenerPorProductoId(10L);
     }

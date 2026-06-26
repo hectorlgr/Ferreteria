@@ -84,10 +84,13 @@ public class ResenaControllerTest {
         // WHEN & THEN
         mockMvc.perform(get("/api/resenas/producto/100"))
                 .andExpect(status().isOk()) // HTTP 200
-                .andExpect(jsonPath("$._embedded.resenaList[0].calificacion").value(5))
-                // Validar inyección de enlaces HATEOAS generales
-                .andExpect(jsonPath("$._links.self.href").exists())
-                .andExpect(jsonPath("$._links.ver-promedio-calificacion.href").exists());
+                
+                // Buscamos dentro del arreglo 'content'
+                .andExpect(jsonPath("$.content[0].calificacion").value(5))
+                
+                // Buscamos los links en el arreglo 'links' general de la colección
+                .andExpect(jsonPath("$.links[0].href").exists()) // self
+                .andExpect(jsonPath("$.links[1].href").exists()); // ver-promedio-calificacion
                 
         verify(resenaService, times(1)).obtenerResenasPorProducto(100L);
     }
@@ -99,11 +102,14 @@ public class ResenaControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(get("/api/resenas/producto/100/promedio"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content").value(4.5))
-                // Validar HATEOAS
-                .andExpect(jsonPath("$._links.self.href").exists())
-                .andExpect(jsonPath("$._links.ver-todas-las-resenas.href").exists());
+                .andExpect(status().isOk()) // Ya no será HTTP 500
+                
+                // Validamos la llave 'promedio' que creamos en el Map del controlador
+                .andExpect(jsonPath("$.promedio").value(4.5))
+                
+                // Validamos los links en el arreglo estándar
+                .andExpect(jsonPath("$.links[0].href").exists()) // self
+                .andExpect(jsonPath("$.links[1].href").exists()); // ver-todas-las-resenas
                 
         verify(resenaService, times(1)).calcularPromedioProducto(100L);
     }

@@ -76,9 +76,11 @@ public class VentaControllerTest {
                 .andExpect(jsonPath("$.id").value(10L))
                 .andExpect(jsonPath("$.usuarioId").value(5L))
                 .andExpect(jsonPath("$.total").value(12500))
-                // Verificar que HATEOAS está inyectando el enlace "self"
-                .andExpect(jsonPath("$._links.self.href").exists())
-                .andExpect(jsonPath("$._links.todas-las-ventas.href").exists());
+                
+                // 👇 Validamos HATEOAS usando el arreglo estándar 'links'
+                .andExpect(jsonPath("$.links[0].href").exists()) // Corresponde a 'self'
+                .andExpect(jsonPath("$.links[1].href").exists()) // Corresponde a 'todas-las-ventas'
+                .andExpect(jsonPath("$.links[2].href").exists()); // Corresponde a 'otras-compras-del-usuario'
                 
         verify(ventaService, times(1)).obtenerPorId(10L);
     }

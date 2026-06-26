@@ -24,6 +24,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -87,15 +88,18 @@ public class ResenaController {
     // GET: Obtener el promedio de calificación de un producto
     @Operation(summary = "Obtener el promedio de calificaciones", description = "Calcula y retorna el promedio numérico de todas las calificaciones válidas de un producto.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Promedio calculado exitosamente",
-                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Double.class)))
+        @ApiResponse(responseCode = "200", description = "Promedio calculado exitosamente")
     })
     @GetMapping("/producto/{idProducto}/promedio")
-    public ResponseEntity<EntityModel<Double>> obtenerPromedioProducto(
+    public ResponseEntity<EntityModel<Map<String, Double>>> obtenerPromedioProducto(
             @Parameter(description = "ID del producto para calcular el promedio", example = "1") @PathVariable Long idProducto) {
+        
         Double promedio = resenaService.calcularPromedioProducto(idProducto);
         
-        EntityModel<Double> recurso = EntityModel.of(promedio != null ? promedio : 0.0);
+        Map<String, Double> response = new java.util.HashMap<>();
+        response.put("promedio", promedio != null ? promedio : 0.0);
+        
+        EntityModel<Map<String, Double>> recurso = EntityModel.of(response);
         
         WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPromedioProducto(idProducto));
         WebMvcLinkBuilder linkResenas = linkTo(methodOn(this.getClass()).obtenerPorProducto(idProducto));

@@ -4,3 +4,5 @@
 .\clean-all.bat
 .\build-all.bat
 docker-compose up -d --build
+
+.\mvnw clean test -U
