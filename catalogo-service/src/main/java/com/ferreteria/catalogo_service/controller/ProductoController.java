@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ferreteria.catalogo_service.Dto.ProductoRequestDto;
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.service.ProductoService;
+import com.ferreteria.catalogo_service.assembler.ProductoModelAssembler;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -46,106 +47,95 @@ public class ProductoController {
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
 
     private final ProductoService productoService;
+    private final ProductoModelAssembler assembler;
 
     // GET: Obtener todos los productos
     @Operation(summary = "Obtener todos los productos", description = "Retorna una lista completa de los productos registrados en el catálogo con enlaces HATEOAS.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Lista de productos obtenida exitosamente")
+            @ApiResponse(responseCode = "200", description = "Lista de productos obtenida exitosamente")
     })
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<Producto>>> obtenerTodos() {
         logger.info("GET /api/productos - Solicitud para listar todos los productos");
         List<Producto> productos = productoService.obtenerTodos();
-        
+
         List<EntityModel<Producto>> productosModel = productos.stream()
-            .map(producto -> EntityModel.of(producto,
-                linkTo(methodOn(this.getClass()).obtenerPorId(producto.getId())).withSelfRel()))
-            .collect(Collectors.toList());
-            
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+
         WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerTodos());
-        
         logger.debug("Cantidad de productos obtenidos: {}", productos.size());
+
         return ResponseEntity.ok(CollectionModel.of(productosModel, linkSelf.withSelfRel()));
     }
 
     // GET: Obtener producto por ID
     @Operation(summary = "Buscar producto por ID", description = "Retorna los detalles de un único producto basado en su identificador.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Producto localizado correctamente", 
-                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
-        @ApiResponse(responseCode = "404", description = "El producto no fue encontrado", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Producto localizado correctamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "404", description = "El producto no fue encontrado", content = @Content)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<EntityModel<Producto>> obtenerPorId(
-            @Parameter(description = "ID único del producto a buscar", example = "1") @PathVariable Long id) {
+    public ResponseEntity<EntityModel<Producto>> obtenerPorId(@PathVariable Long id) {
         logger.info("GET /api/productos/{} - Solicitud para obtener producto por ID", id);
         Producto producto = productoService.obtenerPorId(id);
-        
-        EntityModel<Producto> recurso = EntityModel.of(producto);
-        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorId(id));
-        WebMvcLinkBuilder linkTodos = linkTo(methodOn(this.getClass()).obtenerTodos());
-        
-        recurso.add(linkSelf.withSelfRel());
-        recurso.add(linkTodos.withRel("todos-los-productos"));
-        
-        return ResponseEntity.ok(recurso);
+
+        return ResponseEntity.ok(assembler.toModel(producto));
     }
 
     // POST: Crear un nuevo producto
     @Operation(summary = "Registrar un nuevo producto", description = "Crea un nuevo artículo en el catálogo. Requiere validar los datos de entrada.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Producto creado exitosamente", 
-                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
-        @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos", content = @Content)
+            @ApiResponse(responseCode = "201", description = "Producto creado exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos", content = @Content)
     })
     @PostMapping
     public ResponseEntity<Producto> guardarProducto(
             @Parameter(description = "Objeto con los datos del nuevo producto") @Valid @RequestBody ProductoRequestDto dto) {
         logger.info("POST /api/productos - Solicitud para registrar un nuevo producto: {}", dto.getNombre());
-        
+
         Producto producto = new Producto();
         producto.setNombre(dto.getNombre());
         producto.setDescripcion(dto.getDescripcion());
         producto.setMarca(dto.getMarca());
         producto.setPrecio(dto.getPrecio());
-        
+
         Producto nuevoProducto = productoService.guardarProducto(producto);
         logger.info("Producto registrado exitosamente con ID: {}", nuevoProducto.getId());
-        
+
         return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
     }
 
     // PUT: Actualizar un producto existente
     @Operation(summary = "Actualizar producto", description = "Modifica los datos de un producto existente identificado por su ID.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Producto actualizado correctamente", 
-                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
-        @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos", content = @Content),
-        @ApiResponse(responseCode = "404", description = "El producto a actualizar no fue encontrado", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Producto actualizado correctamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos", content = @Content),
+            @ApiResponse(responseCode = "404", description = "El producto a actualizar no fue encontrado", content = @Content)
     })
     @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizarProducto(
-            @Parameter(description = "ID del producto a actualizar", example = "1") @PathVariable Long id, 
+            @Parameter(description = "ID del producto a actualizar", example = "1") @PathVariable Long id,
             @Parameter(description = "Nuevos datos del producto") @Valid @RequestBody ProductoRequestDto dto) {
         logger.info("PUT /api/productos/{} - Solicitud para actualizar datos del producto", id);
-        
+
         Producto producto = new Producto();
         producto.setNombre(dto.getNombre());
         producto.setDescripcion(dto.getDescripcion());
         producto.setMarca(dto.getMarca());
         producto.setPrecio(dto.getPrecio());
-        
+
         Producto productoActualizado = productoService.actualizarProducto(id, producto);
         logger.info("Producto ID {} actualizado correctamente", id);
-        
+
         return ResponseEntity.ok(productoActualizado);
     }
 
     // DELETE: Eliminar un producto
     @Operation(summary = "Eliminar producto", description = "Elimina un producto del catálogo utilizando su ID.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "204", description = "Producto eliminado exitosamente"),
-        @ApiResponse(responseCode = "404", description = "El producto a eliminar no fue encontrado", content = @Content)
+            @ApiResponse(responseCode = "204", description = "Producto eliminado exitosamente"),
+            @ApiResponse(responseCode = "404", description = "El producto a eliminar no fue encontrado", content = @Content)
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarProducto(
@@ -153,7 +143,7 @@ public class ProductoController {
         logger.info("DELETE /api/productos/{} - Solicitud para eliminar producto", id);
         productoService.eliminarProducto(id);
         logger.info("Producto ID {} eliminado exitosamente", id);
-        
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

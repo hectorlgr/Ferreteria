@@ -23,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.ferreteria.usuario_service.assembler.UsuarioModelAssembler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferreteria.usuario_service.Dto.UsuarioRequestDTO;
 import com.ferreteria.usuario_service.model.Usuario;
@@ -43,7 +44,10 @@ public class UsuarioControllerTest {
 
     @BeforeEach
     void setUp() {
-        UsuarioController controller = new UsuarioController(usuarioService);
+
+        UsuarioModelAssembler assembler = new UsuarioModelAssembler();
+
+        UsuarioController controller = new UsuarioController(usuarioService, assembler);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         usuarioMock = new Usuario();
@@ -69,7 +73,7 @@ public class UsuarioControllerTest {
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.nombre").value("Pedro Pascal"))
                 .andExpect(jsonPath("$.email").value("pedro@email.com"));
-                
+
         verify(usuarioService, times(1)).guardarUsuario(any(Usuario.class));
     }
 
@@ -84,7 +88,7 @@ public class UsuarioControllerTest {
                 .andExpect(jsonPath("$.nombre").value("Pedro Pascal"))
                 .andExpect(jsonPath("$.links[0].href").exists())
                 .andExpect(jsonPath("$.links[1].href").exists());
-                
+
         verify(usuarioService, times(1)).obtenerPorId(1L);
     }
 
@@ -98,7 +102,7 @@ public class UsuarioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.links[0].href").exists());
-                
+
         verify(usuarioService, times(1)).obtenerPorEmail("pedro@email.com");
     }
 
@@ -112,7 +116,7 @@ public class UsuarioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].nombre").value("Pedro Pascal"))
                 .andExpect(jsonPath("$.links[0].href").exists());
-                
+
         verify(usuarioService, times(1)).obtenerTodos();
     }
 
@@ -132,7 +136,7 @@ public class UsuarioControllerTest {
                 .content(objectMapper.writeValueAsString(dtoMock)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre").value("Pedro Editado"));
-                
+
         verify(usuarioService, times(1)).actualizarUsuario(any(Long.class), any(Usuario.class));
     }
 
@@ -144,7 +148,7 @@ public class UsuarioControllerTest {
         // WHEN & THEN
         mockMvc.perform(delete("/api/usuarios/1"))
                 .andExpect(status().isNoContent());
-                
+
         verify(usuarioService, times(1)).eliminarUsuario(1L);
     }
 }

@@ -21,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.ferreteria.catalogo_service.assembler.ProductoModelAssembler;
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.service.ProductoService;
 
@@ -36,7 +37,10 @@ public class ProductoControllerTest {
 
     @BeforeEach
     void setUp() {
-        ProductoController controller = new ProductoController(productoService);
+        ProductoModelAssembler assembler = new ProductoModelAssembler();
+
+        ProductoController controller = new ProductoController(productoService, assembler);
+
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         productoMock = new Producto();
@@ -46,7 +50,6 @@ public class ProductoControllerTest {
         productoMock.setMarca("Stanley");
         productoMock.setPrecio(14990);
         productoMock.setHabilitado(true);
-
     }
 
     @Test
@@ -56,13 +59,14 @@ public class ProductoControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(post("/api/productos")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content("{\"nombre\":\"Martillo de Uña\",\"descripcion\":\"Mango de fibra\",\"marca\":\"Stanley\",\"precio\":14990}"))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        "{\"nombre\":\"Martillo de Uña\",\"descripcion\":\"Mango de fibra\",\"marca\":\"Stanley\",\"precio\":14990}"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.nombre").value("Martillo de Uña"))
                 .andExpect(jsonPath("$.precio").value(14990));
-                
+
         verify(productoService, times(1)).guardarProducto(any(Producto.class));
     }
 
@@ -76,10 +80,10 @@ public class ProductoControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].nombre").value("Martillo de Uña"));
-                
+
         verify(productoService, times(1)).obtenerTodos();
     }
-    
+
     @Test
     public void testObtenerPorId() throws Exception {
         // GIVEN
@@ -88,9 +92,8 @@ public class ProductoControllerTest {
         // WHEN & THEN
         mockMvc.perform(get("/api/productos/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nombre").value("Martillo de Uña"))
-            ;
-                
+                .andExpect(jsonPath("$.nombre").value("Martillo de Uña"));
+
         verify(productoService, times(1)).obtenerPorId(1L);
     }
 }
