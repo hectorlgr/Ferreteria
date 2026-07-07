@@ -65,6 +65,9 @@ spring:
             - Path=/api/despachos/**
 
 eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
   client:
     fetch-registry: true
     register-with-eureka: true
