@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface PromocionRepository extends JpaRepository<Promocion, Long> {
 
     Optional<Promocion> findByCodigoAndEstadoTrue(String codigo);
+
+    Optional<Promocion> findByCodigo(String codigo);
 }

@@ -2,6 +2,8 @@ package com.ferreteria.promocion_service.service;
 
 import com.ferreteria.promocion_service.model.Promocion;
 import com.ferreteria.promocion_service.repository.PromocionRepository;
+import com.ferreteria.promocion_service.exception.ResourceNotFoundException;
+import com.ferreteria.promocion_service.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +20,15 @@ public class PromocionService {
 
     // Crear una nueva promoción
     public Promocion crearPromocion(Promocion promocion) {
-        promocion.setCodigo(promocion.getCodigo().toUpperCase());
+        String codigoMayusculas = promocion.getCodigo().toUpperCase();
+
+        if (promocionRepository.findByCodigo(codigoMayusculas).isPresent()) {
+            throw new BadRequestException("El código de promoción " + codigoMayusculas + " ya existe en el sistema.");
+        }
+
+        promocion.setCodigo(codigoMayusculas);
+        promocion.setEstado(true);
+
         logger.info("Creando nueva promoción con código: {}", promocion.getCodigo());
         return promocionRepository.save(promocion);
     }
@@ -33,7 +43,8 @@ public class PromocionService {
         Promocion promocion = promocionRepository.findByCodigoAndEstadoTrue(codigo.toUpperCase())
                 .orElseThrow(() -> {
                     logger.warn("Intento de uso de cupón inválido o inactivo: {}", codigo);
-                    return new RuntimeException("El código de descuento no existe o no está activo en este momento.");
+                    return new BadRequestException(
+                            "El código de descuento no existe o no está activo en este momento.");
                 });
 
         logger.info("Cupón {} validado exitosamente. Descuento: {}%", promocion.getCodigo(),
@@ -43,7 +54,7 @@ public class PromocionService {
 
     public Promocion activarPromocion(Long id) {
         Promocion promocion = promocionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Promoción no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Promoción no encontrada con el ID: " + id));
 
         promocion.setEstado(true);
         logger.info("Promoción ID {} ACTIVADA manualmente.", id);
@@ -52,7 +63,7 @@ public class PromocionService {
 
     public Promocion desactivarPromocion(Long id) {
         Promocion promocion = promocionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Promoción no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Promoción no encontrada con el ID: " + id));
 
         promocion.setEstado(false);
         logger.info("Promoción ID {} DESACTIVADA manualmente.", id);
