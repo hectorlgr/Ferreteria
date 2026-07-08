@@ -12,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,6 +27,7 @@ import com.ferreteria.venta_service.Dto.DetalleVentaRequestDto;
 import com.ferreteria.venta_service.Dto.VentaRequestDto;
 import com.ferreteria.venta_service.model.Venta;
 import com.ferreteria.venta_service.service.VentaService;
+import com.ferreteria.venta_service.assembler.VentaModelAssembler;
 
 @ExtendWith(MockitoExtension.class)
 public class VentaControllerTest {
@@ -44,7 +44,9 @@ public class VentaControllerTest {
 
     @BeforeEach
     void setUp() {
-        VentaController controller = new VentaController(ventaService);
+        VentaModelAssembler assembler = new VentaModelAssembler();
+
+        VentaController controller = new VentaController(ventaService, assembler);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         ventaMock = new Venta();
@@ -57,7 +59,7 @@ public class VentaControllerTest {
         ventaDtoMock.setUsuarioId(5L);
         ventaDtoMock.setCostoDespacho(2500);
         ventaDtoMock.setDireccion("Av. Matta 100");
-        
+
         DetalleVentaRequestDto detalleDto = new DetalleVentaRequestDto();
         detalleDto.setProductoId(1L);
         detalleDto.setCantidad(2);
@@ -80,7 +82,7 @@ public class VentaControllerTest {
                 .andExpect(jsonPath("$.links[0].href").exists())
                 .andExpect(jsonPath("$.links[1].href").exists())
                 .andExpect(jsonPath("$.links[2].href").exists());
-                
+
         verify(ventaService, times(1)).obtenerPorId(10L);
     }
 
@@ -91,8 +93,8 @@ public class VentaControllerTest {
 
         // WHEN & THEN
         mockMvc.perform(post("/api/ventas")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(ventaDtoMock)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(ventaDtoMock)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(10L))
                 .andExpect(jsonPath("$.usuarioId").value(5L));
