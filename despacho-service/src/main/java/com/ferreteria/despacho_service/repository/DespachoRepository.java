@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface DespachoRepository extends JpaRepository<Despacho, Long> {
     // Encontrar por Pedido en lugar de Venta
     Optional<Despacho> findByPedidoId(Long pedidoId);
-    
+
     Optional<Despacho> findByEstado(String estado);
 }

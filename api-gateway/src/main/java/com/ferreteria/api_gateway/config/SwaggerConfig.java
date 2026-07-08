@@ -11,20 +11,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("API Ecosistema Ferretería")
-                        .version("1.0.0")
-                        .description("Punto de acceso centralizado y documentación de microservicios para el sistema de gestión de la Ferretería."))
-                .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
-                .components(new Components()
-                        .addSecuritySchemes("BearerAuth", new SecurityScheme()
-                                .name("BearerAuth")
-                                .type(SecurityScheme.Type.HTTP)
-                                .scheme("bearer")
-                                .bearerFormat("JWT")
-                                .description("Ingresa el token JWT obtenido del servicio de autenticación para probar los endpoints protegidos.")));
-    }
+        @Bean
+        public OpenAPI customOpenAPI() {
+                return new OpenAPI()
+                                .info(new Info()
+                                                .title("API Ecosistema Ferretería")
+                                                .version("1.0.0")
+                                                .description("Punto de acceso centralizado y documentación de microservicios para el sistema de gestión de la Ferretería."))
+                                .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
+                                .components(new Components()
+                                                .addSecuritySchemes("BearerAuth", new SecurityScheme()
+                                                                .name("BearerAuth")
+                                                                .type(SecurityScheme.Type.HTTP)
+                                                                .scheme("bearer")
+                                                                .bearerFormat("JWT")
+                                                                .description("Ingresa el token JWT obtenido del servicio de autenticación para probar los endpoints protegidos.")));
+        }
 }

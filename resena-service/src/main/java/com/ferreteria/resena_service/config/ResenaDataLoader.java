@@ -13,14 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j 
+@Slf4j
 public class ResenaDataLoader implements CommandLineRunner {
 
     private final ResenaRepository resenaRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        
+
         if (resenaRepository.count() == 0) {
             log.info("Iniciando la carga de reseñas por defecto...");
 

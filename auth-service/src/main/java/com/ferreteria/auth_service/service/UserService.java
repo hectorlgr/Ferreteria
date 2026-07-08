@@ -9,33 +9,35 @@ import com.ferreteria.auth_service.repository.UserRepository;
 
 @Service
 public class UserService {
-    
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private JwtService jwtService;
-    
+
     @Autowired
     private HashService hashService;
-    
+
     @Autowired
     private WebClient.Builder webClientBuilder;
 
     // Método para manejar el proceso de login
-    public String login (String email, String password) {
+    public String login(String email, String password) {
         User user = userRepository.findByEmail(email);
 
-        if (user == null) return null;
+        if (user == null)
+            return null;
         // compare SHA-1 hashes
         String hashedInput = hashService.sha1(password);
-        if (!hashedInput.equals(user.getPassword())) return null;
+        if (!hashedInput.equals(user.getPassword()))
+            return null;
 
         return jwtService.generateToken(email, user.getRole());
     }
 
     // Método para obtener el rol de un usuario a partir de su email
-    public String getRole(String email){
+    public String getRole(String email) {
         User user = userRepository.findByEmail(email);
         return user.getRole();
     }
@@ -59,14 +61,14 @@ public class UserService {
             java.util.Map<String, String> usuarioPerfil = new java.util.HashMap<>();
             usuarioPerfil.put("email", email);
             usuarioPerfil.put("nombre", nombre);
-            
+
             webClientBuilder.build().post()
                     .uri("http://usuario-service/api/usuarios")
                     .bodyValue(usuarioPerfil)
                     .retrieve()
                     .bodyToMono(String.class)
                     .block();
-            
+
         } catch (Exception e) {
             System.out.println("No se pudo crear el perfil en usuario-service: " + e.getMessage());
         }

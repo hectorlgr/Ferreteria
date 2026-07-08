@@ -9,38 +9,35 @@ import com.ferreteria.catalogo_service.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Component
 @RequiredArgsConstructor
-@Slf4j 
+@Slf4j
 public class CatalogoDataLoader implements CommandLineRunner {
 
-    
     private final ProductoRepository productoRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        
-        
+
         if (productoRepository.count() == 0) {
             log.info("Iniciando la carga de datos maestros en el Catálogo...");
 
             Producto prod1 = new Producto();
             prod1.setNombre("Taladro Inalámbrico 20V");
             prod1.setDescripcion("Taladro percutor con 2 baterías de litio");
-            prod1.setPrecio(65000); 
-            prod1.setMarca("Makita"); 
+            prod1.setPrecio(65000);
+            prod1.setMarca("Makita");
 
             Producto prod2 = new Producto();
             prod2.setNombre("Set Llaves Punta Corona");
             prod2.setDescripcion("Juego de 12 llaves métricas de acero cromo vanadio");
-            prod2.setPrecio(18500); 
+            prod2.setPrecio(18500);
             prod2.setMarca("Stanley");
 
             Producto prod3 = new Producto();
             prod3.setNombre("Huincha de medir 5m");
             prod3.setDescripcion("Cinta métrica retráctil con freno automático");
-            prod3.setPrecio(4500); 
+            prod3.setPrecio(4500);
             prod3.setMarca("Bosch");
 
             productoRepository.save(prod1);

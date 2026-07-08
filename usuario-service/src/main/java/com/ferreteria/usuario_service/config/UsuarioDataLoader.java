@@ -11,21 +11,20 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j 
+@Slf4j
 public class UsuarioDataLoader implements CommandLineRunner {
 
     private final UsuarioRepository usuarioRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        
+
         if (usuarioRepository.count() == 0) {
             log.info("Iniciando la carga de usuarios por defecto...");
 
             Usuario admin = new Usuario();
             admin.setNombre("Administrador");
             admin.setEmail("admin@ferreteria.cl");
-
 
             Usuario cliente = new Usuario();
             cliente.setNombre("Cliente Frecuente");

@@ -56,15 +56,15 @@ public class PedidoServiceTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     void setUp() {
         lenient().when(webClientBuilder.build()).thenReturn(webClient);
-        
+
         lenient().when(webClient.post()).thenReturn((WebClient.RequestBodyUriSpec) requestBodyUriSpec);
-        
+
         lenient().when(requestBodyUriSpec.uri(anyString())).thenReturn((WebClient.RequestBodySpec) requestBodySpec);
-        
+
         lenient().when(requestBodySpec.bodyValue(any())).thenReturn((WebClient.RequestHeadersSpec) requestHeadersSpec);
-        
+
         lenient().when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-        
+
         lenient().when(responseSpec.bodyToMono(Void.class)).thenReturn(Mono.empty());
     }
 
@@ -102,8 +102,9 @@ public class PedidoServiceTest {
         RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
             pedidoService.cancelarPedido(1L);
         });
-        
-        assertEquals("No puedes cancelar un pedido que ya está en proceso de entrega o completado.", excepcion.getMessage());
+
+        assertEquals("No puedes cancelar un pedido que ya está en proceso de entrega o completado.",
+                excepcion.getMessage());
         verify(pedidoRepository, never()).save(any(Pedido.class));
     }
 

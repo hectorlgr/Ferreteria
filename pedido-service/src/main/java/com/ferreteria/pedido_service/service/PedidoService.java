@@ -33,7 +33,7 @@ public class PedidoService {
         nuevoPedido.setIdVenta(idVenta);
         nuevoPedido.setEstado("CONFIRMADO");
         nuevoPedido.setFechaCreacion(LocalDateTime.now());
-        
+
         Pedido pedidoGuardado = pedidoRepository.save(nuevoPedido);
         logger.info("Pedido interno creado con ID: {}", pedidoGuardado.getId());
 
@@ -67,10 +67,10 @@ public class PedidoService {
 
     public Pedido actualizarEstado(Long idPedido, String nuevoEstado) {
         logger.info("Actualizando pedido ID: {} a nuevo estado MACRO: {}", idPedido, nuevoEstado);
-        
+
         Pedido pedido = pedidoRepository.findById(idPedido)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado con ID: " + idPedido));
-                
+
         pedido.setEstado(nuevoEstado);
         return pedidoRepository.save(pedido);
     }
@@ -90,8 +90,9 @@ public class PedidoService {
         pedido.setEstado("CANCELADO");
         Pedido pedidoCancelado = pedidoRepository.save(pedido);
 
-        logger.info("Pedido marcado como CANCELADO. (Pendiente: Notificar a Venta y Despacho para reversar operaciones).");
-        
+        logger.info(
+                "Pedido marcado como CANCELADO. (Pendiente: Notificar a Venta y Despacho para reversar operaciones).");
+
         return pedidoCancelado;
     }
 }

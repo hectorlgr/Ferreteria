@@ -12,11 +12,10 @@ import java.util.List;
 public interface VentaRepository extends JpaRepository<Venta, Long> {
     // Método extra para buscar el historial de compras de un cliente específico
     List<Venta> findByUsuarioId(Long usuarioId);
-    
+
     // Método para buscar ventas dentro de un rango de fechas
     @Query("SELECT v FROM Venta v WHERE v.fechaVenta BETWEEN :fechaInicio AND :fechaFin ORDER BY v.fechaVenta DESC")
     List<Venta> findByFechaRango(
-            @Param("fechaInicio") LocalDateTime fechaInicio, 
-            @Param("fechaFin") LocalDateTime fechaFin
-    );
+            @Param("fechaInicio") LocalDateTime fechaInicio,
+            @Param("fechaFin") LocalDateTime fechaFin);
 }

@@ -24,7 +24,8 @@ public class Despacho {
     @Column(nullable = false)
     private String direccion;
 
-    // Estados logísticos internos: RECIBIDO_EN_BODEGA, PREPARANDO_PAQUETE, EN_RUTA, ENTREGADO
+    // Estados logísticos internos: RECIBIDO_EN_BODEGA, PREPARANDO_PAQUETE, EN_RUTA,
+    // ENTREGADO
     @Column(nullable = false)
-    private String estado; 
+    private String estado;
 }

@@ -8,10 +8,10 @@ import java.util.List;
 
 @Repository
 public interface ResenaRepository extends JpaRepository<Resena, Long> {
-    
+
     // Obtener todas las reseñas de un producto específico
     List<Resena> findByIdProducto(Long idProducto);
-    
+
     // Obtener todas las reseñas dejadas por un usuario específico
     List<Resena> findByIdUsuario(Long idUsuario);
 

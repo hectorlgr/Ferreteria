@@ -1,4 +1,4 @@
-package com.ferreteria.venta_service.Dto; 
+package com.ferreteria.venta_service.Dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -8,11 +8,11 @@ import lombok.Data;
 public class UsuarioDto {
 
     @Schema(description = "ID interno del usuario", example = "5")
-    private Long id; 
-    
+    private Long id;
+
     @Schema(description = "Nombre completo del usuario", example = "Juan Pérez")
     private String nombre;
-    
+
     @Schema(description = "Correo electrónico de contacto", example = "juan.perez@email.com")
     private String email;
 }

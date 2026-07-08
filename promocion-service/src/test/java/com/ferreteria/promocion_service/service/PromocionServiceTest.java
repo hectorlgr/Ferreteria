@@ -71,7 +71,7 @@ public class PromocionServiceTest {
         // GIVEN
         Promocion promoNueva = new Promocion();
         promoNueva.setCodigo("navidad2026");
-        
+
         when(promocionRepository.save(any(Promocion.class))).thenReturn(promoNueva);
 
         // WHEN
@@ -94,7 +94,7 @@ public class PromocionServiceTest {
         Promocion resultado = promocionService.activarPromocion(1L);
 
         // THEN
-        assertTrue(resultado.getEstado()); 
+        assertTrue(resultado.getEstado());
         verify(promocionRepository, times(1)).findById(1L);
         verify(promocionRepository, times(1)).save(promo);
     }

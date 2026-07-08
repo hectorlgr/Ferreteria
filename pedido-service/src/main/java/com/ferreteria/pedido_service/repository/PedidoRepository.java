@@ -9,8 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
-    
-    
+
     List<Pedido> findByIdUsuario(Long idUsuario);
 
     // Para uso interno de los microservicios

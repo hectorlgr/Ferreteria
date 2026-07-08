@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProductoService {
-    
+
     // Declarar el Logger
     private static final Logger logger = LoggerFactory.getLogger(ProductoService.class);
 
@@ -26,7 +26,8 @@ public class ProductoService {
         return productoRepository.findByHabilitadoTrue();
     }
 
-    // Método para obtener un producto por su ID, con manejo de excepción si no se encuentra
+    // Método para obtener un producto por su ID, con manejo de excepción si no se
+    // encuentra
     public Producto obtenerPorId(Long id) {
         logger.info("Buscando producto activo con ID: {}", id);
         return productoRepository.findByIdAndHabilitadoTrue(id)
@@ -40,36 +41,37 @@ public class ProductoService {
     public Producto guardarProducto(Producto producto) {
         logger.info("Registrando nuevo producto: {}", producto.getNombre());
         logger.debug("Precio a registrar: {}", producto.getPrecio());
-        
+
         producto.setHabilitado(true);
         Producto productoGuardado = productoRepository.save(producto);
         logger.debug("Producto guardado temporalmente con ID interno: {}", productoGuardado.getId());
-        
+
         return productoGuardado;
     }
 
     // Método para actualizar un producto existente
     public Producto actualizarProducto(Long id, Producto detallesProducto) {
         logger.info("Iniciando actualización para el producto ID: {}", id);
-        
+
         Producto productoExistente = obtenerPorId(id);
-        
-        logger.debug("Nuevos datos a aplicar -> Nombre: {}, Marca: {}, Precio: {}", 
+
+        logger.debug("Nuevos datos a aplicar -> Nombre: {}, Marca: {}, Precio: {}",
                 detallesProducto.getNombre(), detallesProducto.getMarca(), detallesProducto.getPrecio());
-                
+
         productoExistente.setNombre(detallesProducto.getNombre());
         productoExistente.setDescripcion(detallesProducto.getDescripcion());
         productoExistente.setMarca(detallesProducto.getMarca());
         productoExistente.setPrecio(detallesProducto.getPrecio());
-        
+
         logger.info("Guardando producto actualizado en la base de datos...");
         return productoRepository.save(productoExistente);
     }
 
-    // Método para deshabilitar un producto (baja lógica) y resetear su stock en el inventario
+    // Método para deshabilitar un producto (baja lógica) y resetear su stock en el
+    // inventario
     public void eliminarProducto(Long id) {
         logger.info("Iniciando deshabilitación y reseteo de stock para ID: {}", id);
-    
+
         Producto productoExistente = obtenerPorId(id);
         productoExistente.setHabilitado(false);
         productoRepository.save(productoExistente);
@@ -89,8 +91,8 @@ public class ProductoService {
     // Método para que otros servicios deshabiliten productos automáticamente
     public void marcarComoAgotado(Long id) {
         Producto producto = productoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-    
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
         if (producto.getHabilitado()) {
             producto.setHabilitado(false);
             productoRepository.save(producto);
@@ -101,10 +103,10 @@ public class ProductoService {
     // Método para reactivar un producto (por ejemplo, cuando vuelve a tener stock)
     public void habilitarProducto(Long id) {
         logger.info("Iniciando habilitación para el producto ID: {}", id);
-        
+
         Producto producto = productoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado en la BD general con ID: " + id));
-            
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado en la BD general con ID: " + id));
+
         if (!producto.getHabilitado()) {
             producto.setHabilitado(true);
             productoRepository.save(producto);

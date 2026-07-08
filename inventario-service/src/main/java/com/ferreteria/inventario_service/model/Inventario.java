@@ -21,7 +21,7 @@ public class Inventario {
 
     // Guardar el ID del producto que viene del catalogo-service
     @Column(name = "producto_id", nullable = false, unique = true)
-    private Long productoId; 
+    private Long productoId;
 
     // Stock actual
     @Column(nullable = false)

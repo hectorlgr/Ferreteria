@@ -25,7 +25,8 @@ public class DespachoService {
     public Despacho obtenerPorPedidoId(Long pedidoId) {
         logger.info("Buscando despacho asociado al Pedido ID: {}", pedidoId);
         return despachoRepository.findByPedidoId(pedidoId)
-                .orElseThrow(() -> new RuntimeException("No se encontró un despacho asociado al pedido ID: " + pedidoId));
+                .orElseThrow(
+                        () -> new RuntimeException("No se encontró un despacho asociado al pedido ID: " + pedidoId));
     }
 
     public Despacho obtenerPorEstado(String estado) {
@@ -37,19 +38,19 @@ public class DespachoService {
         logger.info("Iniciando creación de despacho para el Pedido ID: {}", despacho.getPedidoId());
 
         despacho.setEstado("RECIBIDO_EN_BODEGA");
-        
+
         Despacho despachoGuardado = despachoRepository.save(despacho);
         logger.info("Despacho creado exitosamente con ID: {}", despachoGuardado.getId());
-        
+
         return despachoGuardado;
     }
 
     public Despacho actualizarEstado(Long id, String nuevoEstadoInterno) {
         logger.info("Operario de bodega actualizando Despacho ID: {} a estado logístico: {}", id, nuevoEstadoInterno);
-        
+
         Despacho despacho = despachoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Despacho no encontrado"));
-        
+
         despacho.setEstado(nuevoEstadoInterno);
         Despacho despachoGuardado = despachoRepository.save(despacho);
 
@@ -61,7 +62,8 @@ public class DespachoService {
 
             logger.info("Notificando a pedido-service el cambio de estado Macro a: {}", estadoMacro);
             webClientBuilder.build().put()
-                    .uri("http://pedido-service/api/pedidos/" + despachoGuardado.getPedidoId() + "/estado?nuevoEstado=" + estadoMacro)
+                    .uri("http://pedido-service/api/pedidos/" + despachoGuardado.getPedidoId() + "/estado?nuevoEstado="
+                            + estadoMacro)
                     .retrieve()
                     .bodyToMono(Void.class)
                     .block();
@@ -69,7 +71,7 @@ public class DespachoService {
         } catch (Exception e) {
             logger.error("No se pudo notificar a pedido-service sobre el cambio de estado: {}", e.getMessage());
         }
-        
+
         return despachoGuardado;
     }
 

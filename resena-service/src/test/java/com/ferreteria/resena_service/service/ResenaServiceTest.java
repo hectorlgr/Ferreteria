@@ -46,9 +46,12 @@ public class ResenaServiceTest {
     @Test
     void testCalcularPromedioProducto_ConResenas() {
         // GIVEN
-        Resena r1 = new Resena(); r1.setCalificacion(5);
-        Resena r2 = new Resena(); r2.setCalificacion(4);
-        Resena r3 = new Resena(); r3.setCalificacion(3);
+        Resena r1 = new Resena();
+        r1.setCalificacion(5);
+        Resena r2 = new Resena();
+        r2.setCalificacion(4);
+        Resena r3 = new Resena();
+        r3.setCalificacion(3);
 
         when(resenaRepository.findByIdProducto(2L)).thenReturn(Arrays.asList(r1, r2, r3));
 

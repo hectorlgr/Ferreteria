@@ -34,75 +34,75 @@ import java.util.stream.Collectors;
 @Tag(name = "Gestión de Reseñas", description = "API para la administración de comentarios y valoraciones de los productos")
 public class ResenaController {
 
-    private final ResenaService resenaService;
-    private final ResenaModelAssembler assembler;
+        private final ResenaService resenaService;
+        private final ResenaModelAssembler assembler;
 
-    // POST: Crear una nueva reseña
-    @Operation(summary = "Crear una nueva reseña", description = "Registra la valoración y comentario de un usuario sobre un producto específico.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Reseña creada exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Resena.class))),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos o error de validación del servicio", content = @Content)
-    })
-    @PostMapping
-    public ResponseEntity<?> crearResena(
-            @Parameter(description = "Objeto con los datos de la reseña a crear") @Valid @RequestBody com.ferreteria.resena_service.Dto.ResenaRequestDto dto) {
-        try {
-            Resena resena = new Resena();
-            resena.setIdProducto(dto.getIdProducto());
-            resena.setIdUsuario(dto.getIdUsuario());
-            resena.setCalificacion(dto.getCalificacion());
-            resena.setComentario(dto.getComentario());
+        // POST: Crear una nueva reseña
+        @Operation(summary = "Crear una nueva reseña", description = "Registra la valoración y comentario de un usuario sobre un producto específico.")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "201", description = "Reseña creada exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Resena.class))),
+                        @ApiResponse(responseCode = "400", description = "Datos inválidos o error de validación del servicio", content = @Content)
+        })
+        @PostMapping
+        public ResponseEntity<?> crearResena(
+                        @Parameter(description = "Objeto con los datos de la reseña a crear") @Valid @RequestBody com.ferreteria.resena_service.Dto.ResenaRequestDto dto) {
+                try {
+                        Resena resena = new Resena();
+                        resena.setIdProducto(dto.getIdProducto());
+                        resena.setIdUsuario(dto.getIdUsuario());
+                        resena.setCalificacion(dto.getCalificacion());
+                        resena.setComentario(dto.getComentario());
 
-            Resena nuevaResena = resenaService.crearResena(resena);
-            return new ResponseEntity<>(nuevaResena, HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+                        Resena nuevaResena = resenaService.crearResena(resena);
+                        return new ResponseEntity<>(nuevaResena, HttpStatus.CREATED);
+                } catch (RuntimeException e) {
+                        return ResponseEntity.badRequest().body(e.getMessage());
+                }
         }
-    }
 
-    // GET: Obtener todas las reseñas de un producto
-    @Operation(summary = "Obtener reseñas por producto", description = "Devuelve una lista de todas las reseñas asociadas a un ID de producto específico.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de reseñas obtenida correctamente")
-    })
-    @GetMapping("/producto/{idProducto}")
-    public ResponseEntity<CollectionModel<EntityModel<Resena>>> obtenerPorProducto(
-            @Parameter(description = "ID del producto para consultar sus reseñas", example = "1") @PathVariable Long idProducto) {
+        // GET: Obtener todas las reseñas de un producto
+        @Operation(summary = "Obtener reseñas por producto", description = "Devuelve una lista de todas las reseñas asociadas a un ID de producto específico.")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Lista de reseñas obtenida correctamente")
+        })
+        @GetMapping("/producto/{idProducto}")
+        public ResponseEntity<CollectionModel<EntityModel<Resena>>> obtenerPorProducto(
+                        @Parameter(description = "ID del producto para consultar sus reseñas", example = "1") @PathVariable Long idProducto) {
 
-        List<EntityModel<Resena>> resenasModel = resenaService.obtenerResenasPorProducto(idProducto).stream()
-                .map(assembler::toModel) // HATEOAS delegado al Assembler
-                .collect(Collectors.toList());
+                List<EntityModel<Resena>> resenasModel = resenaService.obtenerResenasPorProducto(idProducto).stream()
+                                .map(assembler::toModel) // HATEOAS delegado al Assembler
+                                .collect(Collectors.toList());
 
-        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorProducto(idProducto));
-        WebMvcLinkBuilder linkPromedio = linkTo(methodOn(this.getClass()).obtenerPromedioProducto(idProducto));
+                WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPorProducto(idProducto));
+                WebMvcLinkBuilder linkPromedio = linkTo(methodOn(this.getClass()).obtenerPromedioProducto(idProducto));
 
-        return ResponseEntity.ok(CollectionModel.of(resenasModel,
-                linkSelf.withSelfRel(),
-                linkPromedio.withRel("ver-promedio-calificacion")));
-    }
+                return ResponseEntity.ok(CollectionModel.of(resenasModel,
+                                linkSelf.withSelfRel(),
+                                linkPromedio.withRel("ver-promedio-calificacion")));
+        }
 
-    // GET: Obtener el promedio de calificación de un producto
-    @Operation(summary = "Obtener el promedio de calificaciones", description = "Calcula y retorna el promedio numérico de todas las calificaciones válidas de un producto.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Promedio calculado exitosamente")
-    })
-    @GetMapping("/producto/{idProducto}/promedio")
-    public ResponseEntity<EntityModel<Map<String, Double>>> obtenerPromedioProducto(
-            @Parameter(description = "ID del producto para calcular el promedio", example = "1") @PathVariable Long idProducto) {
+        // GET: Obtener el promedio de calificación de un producto
+        @Operation(summary = "Obtener el promedio de calificaciones", description = "Calcula y retorna el promedio numérico de todas las calificaciones válidas de un producto.")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Promedio calculado exitosamente")
+        })
+        @GetMapping("/producto/{idProducto}/promedio")
+        public ResponseEntity<EntityModel<Map<String, Double>>> obtenerPromedioProducto(
+                        @Parameter(description = "ID del producto para calcular el promedio", example = "1") @PathVariable Long idProducto) {
 
-        Double promedio = resenaService.calcularPromedioProducto(idProducto);
+                Double promedio = resenaService.calcularPromedioProducto(idProducto);
 
-        Map<String, Double> response = new java.util.HashMap<>();
-        response.put("promedio", promedio != null ? promedio : 0.0);
+                Map<String, Double> response = new java.util.HashMap<>();
+                response.put("promedio", promedio != null ? promedio : 0.0);
 
-        EntityModel<Map<String, Double>> recurso = EntityModel.of(response);
+                EntityModel<Map<String, Double>> recurso = EntityModel.of(response);
 
-        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPromedioProducto(idProducto));
-        WebMvcLinkBuilder linkResenas = linkTo(methodOn(this.getClass()).obtenerPorProducto(idProducto));
+                WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerPromedioProducto(idProducto));
+                WebMvcLinkBuilder linkResenas = linkTo(methodOn(this.getClass()).obtenerPorProducto(idProducto));
 
-        recurso.add(linkSelf.withSelfRel());
-        recurso.add(linkResenas.withRel("ver-todas-las-resenas"));
+                recurso.add(linkSelf.withSelfRel());
+                recurso.add(linkResenas.withRel("ver-todas-las-resenas"));
 
-        return ResponseEntity.ok(recurso);
-    }
+                return ResponseEntity.ok(recurso);
+        }
 }

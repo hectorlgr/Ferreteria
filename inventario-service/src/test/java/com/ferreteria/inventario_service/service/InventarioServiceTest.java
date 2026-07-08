@@ -46,7 +46,7 @@ public class InventarioServiceTest {
     }
 
     // --- PRUEBAS DE NEGOCIO: MATEMÁTICA Y REGLAS DE STOCK ---
-    
+
     @Test
     void testAgregarStock_SumaCorrectamente() {
         // GIVEN
@@ -105,9 +105,9 @@ public class InventarioServiceTest {
 
         assertEquals("Stock insuficiente para el producto", excepcion.getMessage());
         // Verificamos que NUNCA se llame al método save si falla la validación
-        verify(inventarioRepository, times(0)).save(any(Inventario.class)); 
+        verify(inventarioRepository, times(0)).save(any(Inventario.class));
     }
-    
+
     @Test
     void testObtenerPorProductoId_NoEncontrado_LanzaExcepcion() {
         // GIVEN

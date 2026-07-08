@@ -20,17 +20,22 @@ public class ResenaService {
     private final ResenaRepository resenaRepository;
     private final WebClient.Builder webClientBuilder;
 
-    public record DetalleVentaDto(Long productoId) {}
-    public record VentaDto(List<DetalleVentaDto> detalles) {}
+    public record DetalleVentaDto(Long productoId) {
+    }
+
+    public record VentaDto(List<DetalleVentaDto> detalles) {
+    }
 
     public Resena crearResena(Resena resena) {
-        logger.info("Iniciando validaciones para crear reseña del Producto ID: {} por Usuario ID: {}", 
+        logger.info("Iniciando validaciones para crear reseña del Producto ID: {} por Usuario ID: {}",
                 resena.getIdProducto(), resena.getIdUsuario());
 
         // Verificar si el usuario ya reseñó este producto
         if (resenaRepository.existsByIdProductoAndIdUsuario(resena.getIdProducto(), resena.getIdUsuario())) {
-            logger.warn("Reseña rechazada: El usuario {} ya reseñó el producto {}", resena.getIdUsuario(), resena.getIdProducto());
-            throw new RuntimeException("Ya has publicado una reseña para este producto. Solo se permite una por cliente.");
+            logger.warn("Reseña rechazada: El usuario {} ya reseñó el producto {}", resena.getIdUsuario(),
+                    resena.getIdProducto());
+            throw new RuntimeException(
+                    "Ya has publicado una reseña para este producto. Solo se permite una por cliente.");
         }
 
         // Validar que el Usuario existe
@@ -74,12 +79,14 @@ public class ResenaService {
                             break;
                         }
                     }
-                    if (productoComprado) break;
+                    if (productoComprado)
+                        break;
                 }
             }
 
             if (!productoComprado) {
-                logger.warn("Reseña rechazada: El usuario {} no ha comprado el producto {}", resena.getIdUsuario(), resena.getIdProducto());
+                logger.warn("Reseña rechazada: El usuario {} no ha comprado el producto {}", resena.getIdUsuario(),
+                        resena.getIdProducto());
                 throw new RuntimeException("No puedes reseñar un producto que no has comprado.");
             }
 
@@ -108,7 +115,7 @@ public class ResenaService {
         }
         double suma = resenas.stream().mapToInt(Resena::getCalificacion).sum();
         double promedio = suma / resenas.size();
-        
+
         return Math.round(promedio * 10.0) / 10.0;
     }
 }

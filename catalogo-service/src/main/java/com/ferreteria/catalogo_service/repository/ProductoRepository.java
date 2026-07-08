@@ -8,7 +8,7 @@ import com.ferreteria.catalogo_service.model.Producto;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
-    
+
     // Devuelve solo los productos que tienen habilitado = true
     List<Producto> findByHabilitadoTrue();
 

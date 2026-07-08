@@ -28,25 +28,26 @@ public class JwtService {
         Date ahora = new Date();
         Date expiration = new Date(ahora.getTime() + 1000 * 60 * 60);
         return Jwts.builder()
-        .subject(email)
-        .claim("role", role)
-        .issuedAt(new Date())
-        .expiration(expiration)
-        .signWith(getSigningKey())
-        .compact();
+                .subject(email)
+                .claim("role", role)
+                .issuedAt(new Date())
+                .expiration(expiration)
+                .signWith(getSigningKey())
+                .compact();
     }
 
     // Método para extraer el email del usuario a partir del token JWT
     public String getEmailFromToken(String token) {
-        if (token == null || token.isBlank()) return null;
+        if (token == null || token.isBlank())
+            return null;
         String jwt = token.startsWith("Bearer ") ? token.substring(7) : token;
         try {
-        return Jwts.parser()
-            .verifyWith((SecretKey) getSigningKey())
-            .build()
-            .parseSignedClaims(jwt)
-            .getPayload()
-            .getSubject();
+            return Jwts.parser()
+                    .verifyWith((SecretKey) getSigningKey())
+                    .build()
+                    .parseSignedClaims(jwt)
+                    .getPayload()
+                    .getSubject();
         } catch (JwtException | IllegalArgumentException e) {
             return null;
         }
@@ -54,13 +55,14 @@ public class JwtService {
 
     // Método para validar un token JWT
     public boolean isValid(String token) {
-        if (token == null || token.isBlank()) return false;
+        if (token == null || token.isBlank())
+            return false;
         String jwt = token.startsWith("Bearer ") ? token.substring(7) : token;
         try {
             Jwts.parser()
-                .verifyWith((SecretKey) getSigningKey())
-                .build()
-                .parseSignedClaims(jwt);
+                    .verifyWith((SecretKey) getSigningKey())
+                    .build()
+                    .parseSignedClaims(jwt);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             return false;

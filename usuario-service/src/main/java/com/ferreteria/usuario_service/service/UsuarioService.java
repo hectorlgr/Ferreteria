@@ -47,27 +47,27 @@ public class UsuarioService {
     // Método para guardar un nuevo usuario
     public Usuario guardarUsuario(Usuario usuario) {
         logger.info("Iniciando guardado de nuevo usuario. Email: {}", usuario.getEmail());
-        
+
         logger.debug("Guardando usuario en la base de datos...");
-        
+
         Usuario usuarioGuardado = usuarioRepository.save(usuario);
         logger.debug("Usuario guardado con ID interno: {}", usuarioGuardado.getId());
-        
+
         return usuarioGuardado;
     }
 
     // Método para actualizar un usuario existente
     public Usuario actualizarUsuario(Long id, Usuario detallesUsuario) {
         logger.info("Iniciando actualización de datos para el usuario ID: {}", id);
-        
+
         Usuario usuarioExistente = obtenerPorId(id);
-        
-        logger.debug("Aplicando nuevos datos: Nombre={}, Email={}", 
+
+        logger.debug("Aplicando nuevos datos: Nombre={}, Email={}",
                 detallesUsuario.getNombre(), detallesUsuario.getEmail());
-                
+
         usuarioExistente.setNombre(detallesUsuario.getNombre());
         usuarioExistente.setEmail(detallesUsuario.getEmail());
-        
+
         logger.info("Guardando usuario actualizado en la base de datos...");
         return usuarioRepository.save(usuarioExistente);
     }
@@ -75,9 +75,9 @@ public class UsuarioService {
     // Método para eliminar un usuario por su ID
     public void eliminarUsuario(Long id) {
         logger.info("Iniciando proceso de eliminación para el usuario ID: {}", id);
-        
+
         Usuario usuarioExistente = obtenerPorId(id);
-        
+
         logger.debug("Procediendo a eliminar el usuario de la base de datos...");
         usuarioRepository.delete(usuarioExistente);
     }

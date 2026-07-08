@@ -40,8 +40,8 @@ public class UserController {
         if (token == null) {
             resp.put("error", "Credenciales inválidas");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resp);
-        } 
-        
+        }
+
         resp.put("token", token);
         return ResponseEntity.ok(resp);
     }
@@ -56,7 +56,7 @@ public class UserController {
     public ResponseEntity<Map<String, String>> registerCliente(@Valid @RequestBody RegisterRequestDto dto) {
         try {
             String resultado = userService.register(dto.getEmail(), dto.getPassword(), "CLIENTE", dto.getNombre());
-            
+
             Map<String, String> resp = new HashMap<>();
             resp.put("message", resultado);
             return ResponseEntity.status(HttpStatus.CREATED).body(resp);

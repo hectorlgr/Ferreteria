@@ -61,7 +61,7 @@ public class UserControllerTest {
                 .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().isOk()) // Espera HTTP 200
                 .andExpect(jsonPath("$.token").value("token_jwt_simulado"));
-                
+
         verify(userService, times(1)).login("cliente@correo.com", "MiPassword123");
     }
 
@@ -76,7 +76,7 @@ public class UserControllerTest {
                 .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().isUnauthorized()) // Espera HTTP 401
                 .andExpect(jsonPath("$.error").value("Credenciales inválidas"));
-                
+
         verify(userService, times(1)).login("cliente@correo.com", "MiPassword123");
     }
 
@@ -84,7 +84,7 @@ public class UserControllerTest {
     public void testRegisterCliente_Exito() throws Exception {
         // GIVEN
         when(userService.register("juan.perez@correo.com", "MiPassword123", "CLIENTE", "Juan Pérez"))
-            .thenReturn("Usuario creado exitosamente!");
+                .thenReturn("Usuario creado exitosamente!");
 
         // WHEN & THEN
         mockMvc.perform(post("/auth/register/cliente")
@@ -92,7 +92,7 @@ public class UserControllerTest {
                 .content(objectMapper.writeValueAsString(registerDto)))
                 .andExpect(status().isCreated()) // Espera HTTP 201
                 .andExpect(jsonPath("$.message").value("Usuario creado exitosamente!"));
-                
+
         verify(userService, times(1)).register("juan.perez@correo.com", "MiPassword123", "CLIENTE", "Juan Pérez");
     }
 
@@ -100,7 +100,7 @@ public class UserControllerTest {
     public void testRegisterAdmin_Exito() throws Exception {
         // GIVEN
         when(userService.register("juan.perez@correo.com", "MiPassword123", "ADMIN", "Juan Pérez"))
-            .thenReturn("Administrador creado exitosamente!");
+                .thenReturn("Administrador creado exitosamente!");
 
         // WHEN & THEN
         mockMvc.perform(post("/auth/register/admin")
@@ -108,7 +108,7 @@ public class UserControllerTest {
                 .content(objectMapper.writeValueAsString(registerDto)))
                 .andExpect(status().isCreated()) // Espera HTTP 201
                 .andExpect(jsonPath("$.message").value("Administrador creado exitosamente!"));
-                
+
         verify(userService, times(1)).register("juan.perez@correo.com", "MiPassword123", "ADMIN", "Juan Pérez");
     }
 
@@ -116,7 +116,7 @@ public class UserControllerTest {
     public void testRegister_Falla_Retorna400() throws Exception {
         // GIVEN
         when(userService.register(anyString(), anyString(), anyString(), anyString()))
-            .thenThrow(new RuntimeException("Usuario ya existe!"));
+                .thenThrow(new RuntimeException("Usuario ya existe!"));
 
         // WHEN & THEN
         mockMvc.perform(post("/auth/register/cliente")

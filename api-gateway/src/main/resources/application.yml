@@ -58,7 +58,7 @@ spring:
           uri: lb://inventario-service
           predicates:
             - Path=/api/inventario/**
-            
+
         - id: despacho-service
           uri: lb://despacho-service
           predicates:
