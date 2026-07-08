@@ -1,4 +1,4 @@
-package com.ferreteria.resena_service.exception;
+package com.ferreteria.auth_service.exception;
 
 import java.time.OffsetDateTime;
 
@@ -49,6 +49,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleGeneralException(Exception ex, HttpServletRequest request) {
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                 "Ocurrió un error inesperado: " + ex.getMessage(), request.getRequestURI());
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ApiErrorResponse> handleUnauthorized(UnauthorizedException ex, HttpServletRequest request) {
+        return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage(), request.getRequestURI());
     }
 
     private ResponseEntity<ApiErrorResponse> buildResponse(HttpStatus status, String message, String path) {

@@ -1,4 +1,4 @@
-package com.ferreteria.resena_service.exception;
+package com.ferreteria.inventario_service.exception;
 
 import java.time.OffsetDateTime;
 

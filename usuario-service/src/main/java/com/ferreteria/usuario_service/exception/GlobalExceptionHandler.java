@@ -1,4 +1,4 @@
-package com.ferreteria.resena_service.exception;
+package com.ferreteria.usuario_service.exception;
 
 import java.time.OffsetDateTime;
 
@@ -6,8 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.reactive.function.client.WebClientRequestException;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -24,25 +22,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleNotFound(ResourceNotFoundException ex,
             HttpServletRequest request) {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), request.getRequestURI());
-    }
-
-    @ExceptionHandler(WebClientResponseException.class)
-    public ResponseEntity<ApiErrorResponse> handleWebClientResponse(WebClientResponseException ex,
-            HttpServletRequest request) {
-        HttpStatus status = (HttpStatus) ex.getStatusCode();
-        if (status == null) {
-            status = HttpStatus.BAD_GATEWAY;
-        }
-        return buildResponse(status, "Error de comunicación con servicio externo: " + ex.getMessage(),
-                request.getRequestURI());
-    }
-
-    @ExceptionHandler(WebClientRequestException.class)
-    public ResponseEntity<ApiErrorResponse> handleWebClientRequest(WebClientRequestException ex,
-            HttpServletRequest request) {
-        return buildResponse(HttpStatus.BAD_GATEWAY,
-                "No se pudo establecer conexión con el servicio externo: " + ex.getMessage(),
-                request.getRequestURI());
     }
 
     @ExceptionHandler(Exception.class)
