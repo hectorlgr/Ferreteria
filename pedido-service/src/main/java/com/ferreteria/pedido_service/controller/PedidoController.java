@@ -44,16 +44,11 @@ public class PedidoController {
             @ApiResponse(responseCode = "201", description = "Pedido generado exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Pedido.class))),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor al procesar el pedido", content = @Content)
     })
-    @PostMapping
-    public ResponseEntity<?> crearPedido(
+    public ResponseEntity<Pedido> crearPedido(
             @Parameter(description = "Objeto con los datos base del pedido (Venta, Usuario y Dirección)") @Valid @RequestBody PedidoRequestDto dto) {
-        try {
-            // Se añade dto.getDireccion() como tercer parámetro
-            Pedido nuevoPedido = pedidoService.crearPedido(dto.getIdUsuario(), dto.getIdVenta(), dto.getDireccion());
-            return new ResponseEntity<>(nuevoPedido, HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
+
+        Pedido nuevoPedido = pedidoService.crearPedido(dto.getIdUsuario(), dto.getIdVenta(), dto.getDireccion());
+        return new ResponseEntity<>(nuevoPedido, HttpStatus.CREATED);
     }
 
     // GET: Historial de compras de un cliente
@@ -82,15 +77,12 @@ public class PedidoController {
             @ApiResponse(responseCode = "400", description = "El pedido no existe o el cambio de estado no es válido", content = @Content)
     })
     @PutMapping("/{id}/estado")
-    public ResponseEntity<?> actualizarEstado(
+    public ResponseEntity<Pedido> actualizarEstado(
             @Parameter(description = "ID interno del pedido a modificar", example = "1024") @PathVariable Long id,
             @Parameter(description = "Nombre del nuevo estado a asignar", example = "EN_RUTA") @RequestParam String nuevoEstado) {
-        try {
-            Pedido pedidoActualizado = pedidoService.actualizarEstado(id, nuevoEstado);
-            return ResponseEntity.ok(pedidoActualizado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+
+        Pedido pedidoActualizado = pedidoService.actualizarEstado(id, nuevoEstado);
+        return ResponseEntity.ok(pedidoActualizado);
     }
 
     // PUT: El cliente decide cancelar su orden
@@ -102,11 +94,8 @@ public class PedidoController {
     @PutMapping("/{id}/cancelar")
     public ResponseEntity<?> cancelarPedido(
             @Parameter(description = "ID interno del pedido a cancelar", example = "1024") @PathVariable Long id) {
-        try {
-            Pedido pedidoCancelado = pedidoService.cancelarPedido(id);
-            return ResponseEntity.ok(pedidoCancelado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+
+        Pedido pedidoCancelado = pedidoService.cancelarPedido(id);
+        return ResponseEntity.ok(pedidoCancelado);
     }
 }

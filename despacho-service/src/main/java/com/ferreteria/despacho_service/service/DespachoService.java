@@ -1,5 +1,7 @@
 package com.ferreteria.despacho_service.service;
 
+import com.ferreteria.despacho_service.exception.ResourceNotFoundException;
+import com.ferreteria.despacho_service.exception.BadRequestException;
 import com.ferreteria.despacho_service.model.Despacho;
 import com.ferreteria.despacho_service.repository.DespachoRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +28,14 @@ public class DespachoService {
         logger.info("Buscando despacho asociado al Pedido ID: {}", pedidoId);
         return despachoRepository.findByPedidoId(pedidoId)
                 .orElseThrow(
-                        () -> new RuntimeException("No se encontró un despacho asociado al pedido ID: " + pedidoId));
+                        () -> new ResourceNotFoundException(
+                                "No se encontró un despacho asociado al pedido ID: " + pedidoId));
     }
 
     public Despacho obtenerPorEstado(String estado) {
         return despachoRepository.findByEstado(estado)
-                .orElseThrow(() -> new RuntimeException("No se encontró el pedido con el estado: " + estado));
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("No se encontraron despachos con el estado: " + estado));
     }
 
     public Despacho crearDespacho(Despacho despacho) {
@@ -49,8 +53,7 @@ public class DespachoService {
         logger.info("Operario de bodega actualizando Despacho ID: {} a estado logístico: {}", id, nuevoEstadoInterno);
 
         Despacho despacho = despachoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Despacho no encontrado"));
-
+                .orElseThrow(() -> new ResourceNotFoundException("Despacho no encontrado con ID: " + id));
         despacho.setEstado(nuevoEstadoInterno);
         Despacho despachoGuardado = despachoRepository.save(despacho);
 
@@ -70,6 +73,9 @@ public class DespachoService {
             logger.info("Sincronización con pedido-service exitosa.");
         } catch (Exception e) {
             logger.error("No se pudo notificar a pedido-service sobre el cambio de estado: {}", e.getMessage());
+            throw new BadRequestException(
+                    "Estado actualizado en bodega, pero falló la notificación al sistema de pedidos: "
+                            + e.getMessage());
         }
 
         return despachoGuardado;
@@ -77,7 +83,7 @@ public class DespachoService {
 
     public void eliminarDespacho(Long id) {
         Despacho despacho = despachoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Despacho no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Despacho no encontrado con ID: " + id));
         despachoRepository.delete(despacho);
     }
 }

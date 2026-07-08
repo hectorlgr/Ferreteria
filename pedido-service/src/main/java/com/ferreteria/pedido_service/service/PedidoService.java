@@ -2,6 +2,8 @@ package com.ferreteria.pedido_service.service;
 
 import com.ferreteria.pedido_service.model.Pedido;
 import com.ferreteria.pedido_service.repository.PedidoRepository;
+import com.ferreteria.pedido_service.exception.ResourceNotFoundException;
+import com.ferreteria.pedido_service.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +56,8 @@ public class PedidoService {
 
         } catch (Exception e) {
             logger.error("Error crítico al contactar a despacho-service: {}", e.getMessage());
-            throw new RuntimeException("El pedido fue creado, pero falló la comunicación con el sistema de despachos.");
+            throw new BadRequestException(
+                    "El pedido fue creado, pero falló la comunicación con el sistema de despachos.");
         }
 
         return pedidoGuardado;
@@ -69,7 +72,7 @@ public class PedidoService {
         logger.info("Actualizando pedido ID: {} a nuevo estado MACRO: {}", idPedido, nuevoEstado);
 
         Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new RuntimeException("Pedido no encontrado con ID: " + idPedido));
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido no encontrado con ID: " + idPedido));
 
         pedido.setEstado(nuevoEstado);
         return pedidoRepository.save(pedido);
@@ -80,11 +83,12 @@ public class PedidoService {
         logger.info("Solicitud de cancelación para Pedido ID: {}", idPedido);
 
         Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new RuntimeException("Pedido no encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido no encontrado con ID: " + idPedido));
 
         if (pedido.getEstado().equals("EN_PROCESO") || pedido.getEstado().equals("COMPLETADO")) {
             logger.warn("Cancelación rechazada. El pedido ya está en una etapa logística avanzada.");
-            throw new RuntimeException("No puedes cancelar un pedido que ya está en proceso de entrega o completado.");
+            throw new BadRequestException(
+                    "No puedes cancelar un pedido que ya está en proceso de entrega o completado.");
         }
 
         pedido.setEstado("CANCELADO");

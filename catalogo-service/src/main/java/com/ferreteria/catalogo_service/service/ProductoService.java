@@ -1,5 +1,7 @@
 package com.ferreteria.catalogo_service.service;
 
+import com.ferreteria.catalogo_service.exception.BadRequestException;
+import com.ferreteria.catalogo_service.exception.ResourceNotFoundException;
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +35,7 @@ public class ProductoService {
         return productoRepository.findByIdAndHabilitadoTrue(id)
                 .orElseThrow(() -> {
                     logger.warn("Búsqueda fallida: El producto con ID {} no existe o está deshabilitado", id);
-                    return new RuntimeException("Error: Producto no encontrado con el ID " + id);
+                    return new ResourceNotFoundException("Error: Producto no encontrado con el ID " + id);
                 });
     }
 
@@ -85,13 +87,15 @@ public class ProductoService {
             logger.info("Stock reseteado en inventario-service para producto ID: {}", id);
         } catch (Exception e) {
             logger.error("No se pudo resetear el stock: {}", e.getMessage());
+            throw new BadRequestException(
+                    "El producto fue deshabilitado, pero falló el reseteo de stock: " + e.getMessage());
         }
     }
 
     // Método para que otros servicios deshabiliten productos automáticamente
     public void marcarComoAgotado(Long id) {
         Producto producto = productoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado"));
 
         if (producto.getHabilitado()) {
             producto.setHabilitado(false);
@@ -105,7 +109,8 @@ public class ProductoService {
         logger.info("Iniciando habilitación para el producto ID: {}", id);
 
         Producto producto = productoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado en la BD general con ID: " + id));
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Producto no encontrado en la BD general con ID: " + id));
 
         if (!producto.getHabilitado()) {
             producto.setHabilitado(true);

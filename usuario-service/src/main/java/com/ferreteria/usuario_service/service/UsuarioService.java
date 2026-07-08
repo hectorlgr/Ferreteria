@@ -2,6 +2,8 @@ package com.ferreteria.usuario_service.service;
 
 import com.ferreteria.usuario_service.model.Usuario;
 import com.ferreteria.usuario_service.repository.UsuarioRepository;
+import com.ferreteria.usuario_service.exception.ResourceNotFoundException;
+import com.ferreteria.usuario_service.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +27,11 @@ public class UsuarioService {
 
     // Método para obtener un usuario por su ID
     public Usuario obtenerPorId(Long id) {
-        logger.info("Buscando usuario en base de datos con ID: {}", id);
+        logger.info("Buscando usuario con ID: {}", id);
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> {
-                    logger.warn("Búsqueda fallida: No se encontró ningún usuario con el ID: {}", id);
-                    return new RuntimeException("Usuario no encontrado con ID: " + id);
+                    logger.warn("Búsqueda fallida: Usuario con ID {} no encontrado", id);
+                    return new ResourceNotFoundException("Error: Usuario no encontrado con el ID " + id);
                 });
     }
 
@@ -39,7 +41,7 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findByEmail(email);
         if (usuario == null) {
             logger.warn("Búsqueda fallida: No se encontró ningún usuario con el email: {}", email);
-            throw new RuntimeException("Error: Usuario no encontrado con el email " + email);
+            throw new ResourceNotFoundException("Error: Usuario no encontrado con el email " + email);
         }
         return usuario;
     }
@@ -48,8 +50,13 @@ public class UsuarioService {
     public Usuario guardarUsuario(Usuario usuario) {
         logger.info("Iniciando guardado de nuevo usuario. Email: {}", usuario.getEmail());
 
-        logger.debug("Guardando usuario en la base de datos...");
+        Usuario existente = usuarioRepository.findByEmail(usuario.getEmail());
+        if (existente != null) {
+            logger.warn("Creación rechazada: El email {} ya existe en la base de datos", usuario.getEmail());
+            throw new BadRequestException("Error: El email " + usuario.getEmail() + " ya está registrado.");
+        }
 
+        logger.debug("Guardando usuario en la base de datos...");
         Usuario usuarioGuardado = usuarioRepository.save(usuario);
         logger.debug("Usuario guardado con ID interno: {}", usuarioGuardado.getId());
 

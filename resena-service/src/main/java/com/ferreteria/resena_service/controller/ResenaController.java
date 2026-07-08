@@ -44,20 +44,17 @@ public class ResenaController {
                         @ApiResponse(responseCode = "400", description = "Datos inválidos o error de validación del servicio", content = @Content)
         })
         @PostMapping
-        public ResponseEntity<?> crearResena(
+        public ResponseEntity<Resena> crearResena(
                         @Parameter(description = "Objeto con los datos de la reseña a crear") @Valid @RequestBody com.ferreteria.resena_service.Dto.ResenaRequestDto dto) {
-                try {
-                        Resena resena = new Resena();
-                        resena.setIdProducto(dto.getIdProducto());
-                        resena.setIdUsuario(dto.getIdUsuario());
-                        resena.setCalificacion(dto.getCalificacion());
-                        resena.setComentario(dto.getComentario());
 
-                        Resena nuevaResena = resenaService.crearResena(resena);
-                        return new ResponseEntity<>(nuevaResena, HttpStatus.CREATED);
-                } catch (RuntimeException e) {
-                        return ResponseEntity.badRequest().body(e.getMessage());
-                }
+                Resena resena = new Resena();
+                resena.setIdProducto(dto.getIdProducto());
+                resena.setIdUsuario(dto.getIdUsuario());
+                resena.setCalificacion(dto.getCalificacion());
+                resena.setComentario(dto.getComentario());
+
+                Resena nuevaResena = resenaService.crearResena(resena);
+                return new ResponseEntity<>(nuevaResena, HttpStatus.CREATED);
         }
 
         // GET: Obtener todas las reseñas de un producto

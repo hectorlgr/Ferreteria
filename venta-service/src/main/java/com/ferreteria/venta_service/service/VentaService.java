@@ -4,6 +4,8 @@ import com.ferreteria.venta_service.Dto.UsuarioDto;
 import com.ferreteria.venta_service.model.DetalleVenta;
 import com.ferreteria.venta_service.model.Venta;
 import com.ferreteria.venta_service.repository.VentaRepository;
+import com.ferreteria.venta_service.exception.ResourceNotFoundException;
+import com.ferreteria.venta_service.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +30,7 @@ public class VentaService {
         logger.info("Listando todas las ventas desde la base de datos");
         return ventaRepository.findAll();
     }
-    
+
     // Método para obtener ventas por ID de usuario
     public List<Venta> obtenerPorUsuario(Long usuarioId) {
         logger.info("Buscando ventas asociadas al usuario ID: {}", usuarioId);
@@ -50,7 +52,7 @@ public class VentaService {
             logger.debug("Validación exitosa: Usuario ID {} existe.", venta.getUsuarioId());
         } catch (Exception e) {
             logger.error("Error al validar usuario ID: {}. Excepción: {}", venta.getUsuarioId(), e.getMessage());
-            throw new RuntimeException("Error: El usuario no existe o el servicio de usuarios está caído.");
+            throw new ResourceNotFoundException("Error: El usuario no existe o el servicio de usuarios está caído.");
         }
 
         logger.debug("Calculando totales y enlazando detalles de la venta...");
@@ -63,7 +65,7 @@ public class VentaService {
             detalle.setSubtotal(detalle.getCantidad() * detalle.getPrecioUnitario());
             totalProductos += detalle.getSubtotal();
         }
-        
+
         double porcentajeDescuento = 0.0;
 
         if (codigoPromocion != null && !codigoPromocion.trim().isEmpty()) {
@@ -81,7 +83,8 @@ public class VentaService {
                 }
             } catch (Exception e) {
                 logger.error("El cupón fue rechazado por el sistema de promociones: {}", e.getMessage());
-                throw new RuntimeException("Error en la compra: " + e.getMessage());
+                throw new BadRequestException(
+                        "Error en la compra: El cupón es inválido o el sistema de promociones no responde.");
             }
         }
 
@@ -94,9 +97,10 @@ public class VentaService {
 
         // Sumar el costo de despacho que ingresó el usuario al total final recalculado
         int totalVenta = totalProductos + costoDespachoIngresado;
-        
+
         venta.setTotal(totalVenta);
-        logger.debug("Cálculos finalizados. Total calculado: {} (incluye despacho de {})", totalVenta, costoDespachoIngresado);
+        logger.debug("Cálculos finalizados. Total calculado: {} (incluye despacho de {})", totalVenta,
+                costoDespachoIngresado);
 
         // Guardar la venta en la db
         logger.info("Guardando datos de la venta en base de datos...");
@@ -104,19 +108,23 @@ public class VentaService {
         logger.debug("Venta guardada temporalmente con ID: {}", ventaGuardada.getId());
 
         // Descontar el stock en el inventario
-        logger.info("Iniciando actualización de stock en inventario-service para {} productos", venta.getDetalles().size());
+        logger.info("Iniciando actualización de stock en inventario-service para {} productos",
+                venta.getDetalles().size());
         for (DetalleVenta detalle : venta.getDetalles()) {
             try {
-                logger.debug("Descontando {} unidades del Producto ID: {}", detalle.getCantidad(), detalle.getProductoId());
+                logger.debug("Descontando {} unidades del Producto ID: {}", detalle.getCantidad(),
+                        detalle.getProductoId());
                 webClientBuilder.build().put()
-                        .uri("http://inventario-service/api/inventario/producto/" + 
-                             detalle.getProductoId() + "/descontar?cantidad=" + detalle.getCantidad())
+                        .uri("http://inventario-service/api/inventario/producto/" +
+                                detalle.getProductoId() + "/descontar?cantidad=" + detalle.getCantidad())
                         .retrieve()
                         .bodyToMono(Object.class)
                         .block();
             } catch (Exception e) {
-                logger.error("Error crítico al descontar stock del Producto ID: {}. Excepción: {}", detalle.getProductoId(), e.getMessage());
-                throw new RuntimeException("Error descontando stock del producto ID: " + detalle.getProductoId());
+                logger.error("Error crítico al descontar stock del Producto ID: {}. Excepción: {}",
+                        detalle.getProductoId(), e.getMessage());
+                throw new BadRequestException("Error descontando stock del producto ID: " + detalle.getProductoId()
+                        + ". Puede que no haya stock suficiente.");
             }
         }
 
@@ -125,7 +133,7 @@ public class VentaService {
             java.util.Map<String, Object> pedidoPayload = new java.util.HashMap<>();
             pedidoPayload.put("idUsuario", ventaGuardada.getUsuarioId());
             pedidoPayload.put("idVenta", ventaGuardada.getId());
-            pedidoPayload.put("direccion", direccion); 
+            pedidoPayload.put("direccion", direccion);
 
             webClientBuilder.build().post()
                     .uri("http://pedido-service/api/pedidos")
@@ -136,7 +144,8 @@ public class VentaService {
             logger.info("Pedido orquestado exitosamente en pedido-service.");
         } catch (Exception e) {
             logger.error("Error al crear el pedido en pedido-service: {}", e.getMessage());
-            throw new RuntimeException("La venta se procesó, pero falló la creación del pedido: " + e.getMessage());
+            throw new BadRequestException(
+                    "La venta se procesó en bodega, pero falló la creación logística del pedido: " + e.getMessage());
         }
 
         logger.info("Procesamiento de venta finalizado exitosamente. ID final: {}", ventaGuardada.getId());
@@ -149,52 +158,52 @@ public class VentaService {
         return ventaRepository.findById(id)
                 .orElseThrow(() -> {
                     logger.warn("No se encontró ninguna venta con el ID: {}", id);
-                    return new RuntimeException("Venta no encontrada con ID: " + id);
+                    return new ResourceNotFoundException("Venta no encontrada con ID: " + id);
                 });
     }
 
     // Método para actualizar una venta existente
     public Venta actualizarVenta(Long id, Venta ventaActualizada) {
         logger.info("Iniciando actualización de venta con ID: {}", id);
-        
+
         Venta venta = obtenerPorId(id);
         logger.debug("Venta encontrada. Aplicando cambios...");
-        
+
         venta.setUsuarioId(ventaActualizada.getUsuarioId());
         venta.setTotal(ventaActualizada.getTotal());
-        
+
         logger.info("Guardando cambios de venta en base de datos...");
         Venta ventaGuardada = ventaRepository.save(venta);
         logger.info("Venta ID {} actualizada correctamente", id);
-        
+
         return ventaGuardada;
     }
 
     // Método para eliminar una venta
     public void eliminarVenta(Long id) {
         logger.info("Iniciando eliminación de venta con ID: {}", id);
-        
+
         Venta venta = obtenerPorId(id);
         logger.debug("Venta encontrada. Procediendo a eliminar...");
-        
+
         ventaRepository.delete(venta);
         logger.info("Venta ID {} eliminada correctamente", id);
     }
 
     // Método para obtener ventas por rango de fechas
     public List<Venta> obtenerPorRangoFechas(java.time.LocalDate inicio, java.time.LocalDate fin) {
-    logger.info("Procesando rango de fechas: {} al {}", inicio, fin);
+        logger.info("Procesando rango de fechas: {} al {}", inicio, fin);
 
-    if (inicio.isAfter(fin)) {
-        throw new RuntimeException("La fecha de inicio no puede ser posterior a la fecha de fin");
-    }
+        if (inicio.isAfter(fin)) {
+            throw new BadRequestException("La fecha de inicio no puede ser posterior a la fecha de fin");
+        }
 
         // Convertir LocalDate a LocalDateTime para la consulta en la BD
         java.time.LocalDateTime fechaInicioCompleta = inicio.atStartOfDay(); // 00:00:00
         java.time.LocalDateTime fechaFinCompleta = fin.atTime(java.time.LocalTime.MAX); // 23:59:59.999
 
         logger.debug("Buscando en BD entre {} y {}", fechaInicioCompleta, fechaFinCompleta);
-    
+
         return ventaRepository.findByFechaRango(fechaInicioCompleta, fechaFinCompleta);
     }
 
@@ -208,15 +217,16 @@ public class VentaService {
                     .retrieve()
                     .bodyToMono(UsuarioDto.class)
                     .block();
-            
+
             idClienteObtenido = usuario.getId();
             logger.info("Usuario encontrado en usuario-service. ID mapeado: {}", idClienteObtenido);
-            
+
         } catch (Exception e) {
             logger.error("Error al contactar a usuario-service o el email no existe: {}", email);
-            throw new RuntimeException("No se encontró al usuario con el email " + email + " para buscar sus ventas.");
+            throw new ResourceNotFoundException(
+                    "No se encontró al usuario con el email " + email + " para buscar sus ventas.");
         }
         logger.info("Buscando las ventas asociadas al ID de cliente: {}", idClienteObtenido);
-        return ventaRepository.findByUsuarioId(idClienteObtenido); 
+        return ventaRepository.findByUsuarioId(idClienteObtenido);
     }
 }

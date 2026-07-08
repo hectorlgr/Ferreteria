@@ -2,6 +2,8 @@ package com.ferreteria.resena_service.service;
 
 import com.ferreteria.resena_service.model.Resena;
 import com.ferreteria.resena_service.repository.ResenaRepository;
+import com.ferreteria.resena_service.exception.ResourceNotFoundException;
+import com.ferreteria.resena_service.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +36,7 @@ public class ResenaService {
         if (resenaRepository.existsByIdProductoAndIdUsuario(resena.getIdProducto(), resena.getIdUsuario())) {
             logger.warn("Reseña rechazada: El usuario {} ya reseñó el producto {}", resena.getIdUsuario(),
                     resena.getIdProducto());
-            throw new RuntimeException(
+            throw new BadRequestException(
                     "Ya has publicado una reseña para este producto. Solo se permite una por cliente.");
         }
 
@@ -47,7 +49,7 @@ public class ResenaService {
                     .block();
         } catch (Exception e) {
             logger.error("Error: El usuario ID {} no existe.", resena.getIdUsuario());
-            throw new RuntimeException("El usuario no existe.");
+            throw new ResourceNotFoundException("El usuario con ID " + resena.getIdUsuario() + " no existe.");
         }
 
         // Validar que el Producto existe
@@ -59,7 +61,8 @@ public class ResenaService {
                     .block();
         } catch (Exception e) {
             logger.error("Error: El producto ID {} no existe en el catálogo.", resena.getIdProducto());
-            throw new RuntimeException("El producto no existe.");
+            throw new ResourceNotFoundException(
+                    "El producto con ID " + resena.getIdProducto() + " no existe en el catálogo.");
         }
 
         logger.info("Verificando si el usuario compró el producto en venta-service...");
@@ -87,14 +90,14 @@ public class ResenaService {
             if (!productoComprado) {
                 logger.warn("Reseña rechazada: El usuario {} no ha comprado el producto {}", resena.getIdUsuario(),
                         resena.getIdProducto());
-                throw new RuntimeException("No puedes reseñar un producto que no has comprado.");
+                throw new BadRequestException("No puedes reseñar un producto que no has comprado.");
             }
 
-        } catch (RuntimeException e) {
+        } catch (BadRequestException e) {
             throw e;
         } catch (Exception e) {
             logger.error("Error al contactar a venta-service: {}", e.getMessage());
-            throw new RuntimeException("Error al verificar el historial de compras del usuario.");
+            throw new BadRequestException("Error al verificar el historial de compras del usuario.");
         }
 
         // Guardar la reseña si pasó todas las pruebas

@@ -47,13 +47,14 @@ public class PromocionController {
     })
     @PostMapping
     public ResponseEntity<Promocion> crearPromocion(
-            @Parameter(description = "Datos de la nueva promoción") @Valid @RequestBody PromocionRequestDto dto) {
+            @Parameter(description = "Datos de la promoción a crear") @Valid @RequestBody PromocionRequestDto dto) {
+
         Promocion promocion = new Promocion();
         promocion.setCodigo(dto.getCodigo());
         promocion.setPorcentajeDescuento(dto.getPorcentajeDescuento());
-        promocion.setEstado(dto.getEstado());
 
-        return new ResponseEntity<>(promocionService.crearPromocion(promocion), HttpStatus.CREATED);
+        Promocion nuevaPromocion = promocionService.crearPromocion(promocion);
+        return new ResponseEntity<>(nuevaPromocion, HttpStatus.CREATED);
     }
 
     // GET: Ver todas las promociones
@@ -63,9 +64,8 @@ public class PromocionController {
     })
     @GetMapping
     public ResponseEntity<CollectionModel<EntityModel<Promocion>>> obtenerTodas() {
-
         List<EntityModel<Promocion>> promocionesModel = promocionService.obtenerTodas().stream()
-                .map(assembler::toModel) // HATEOAS delegado al Assembler
+                .map(assembler::toModel)
                 .collect(Collectors.toList());
 
         WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).obtenerTodas());
@@ -79,27 +79,22 @@ public class PromocionController {
             @ApiResponse(responseCode = "400", description = "El código es inválido, no existe o se encuentra desactivado", content = @Content)
     })
     @GetMapping("/validar/{codigo}")
-    public ResponseEntity<?> validarCodigo(
+    public ResponseEntity<EntityModel<Map<String, Double>>> validarCodigo(
             @Parameter(description = "El texto del código promocional a validar", example = "VERANO2026") @PathVariable String codigo) {
-        try {
-            Double porcentaje = promocionService.validarYObtenerDescuento(codigo);
 
-            // Retornamos un Map para que sea un JSON fácil de leer por el Venta-Service
-            Map<String, Double> response = new HashMap<>();
-            response.put("descuento", porcentaje);
+        Double porcentaje = promocionService.validarYObtenerDescuento(codigo);
 
-            // Envolvemos el Map en HATEOAS
-            EntityModel<Map<String, Double>> recurso = EntityModel.of(response);
-            WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).validarCodigo(codigo));
-            WebMvcLinkBuilder linkTodas = linkTo(methodOn(this.getClass()).obtenerTodas());
+        Map<String, Double> response = new HashMap<>();
+        response.put("descuento", porcentaje);
 
-            recurso.add(linkSelf.withSelfRel());
-            recurso.add(linkTodas.withRel("todas-las-promociones"));
+        EntityModel<Map<String, Double>> recurso = EntityModel.of(response);
+        WebMvcLinkBuilder linkSelf = linkTo(methodOn(this.getClass()).validarCodigo(codigo));
+        WebMvcLinkBuilder linkTodas = linkTo(methodOn(this.getClass()).obtenerTodas());
 
-            return ResponseEntity.ok(recurso);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        recurso.add(linkSelf.withSelfRel());
+        recurso.add(linkTodas.withRel("todas-las-promociones"));
+
+        return ResponseEntity.ok(recurso);
     }
 
     // PUT: Botón de Activar
@@ -109,9 +104,9 @@ public class PromocionController {
             @ApiResponse(responseCode = "404", description = "Promoción no encontrada", content = @Content)
     })
     @PutMapping("/{id}/activar")
-    public ResponseEntity<Promocion> activarPromocion(
-            @Parameter(description = "ID interno de la promoción", example = "1") @PathVariable Long id) {
-        return ResponseEntity.ok(promocionService.activarPromocion(id));
+    public ResponseEntity<Promocion> activarPromocion(@PathVariable Long id) {
+        Promocion promocionActivada = promocionService.activarPromocion(id);
+        return ResponseEntity.ok(promocionActivada);
     }
 
     // PUT: Botón de Desactivar
@@ -121,8 +116,8 @@ public class PromocionController {
             @ApiResponse(responseCode = "404", description = "Promoción no encontrada", content = @Content)
     })
     @PutMapping("/{id}/desactivar")
-    public ResponseEntity<Promocion> desactivarPromocion(
-            @Parameter(description = "ID interno de la promoción", example = "1") @PathVariable Long id) {
-        return ResponseEntity.ok(promocionService.desactivarPromocion(id));
+    public ResponseEntity<Promocion> desactivarPromocion(@PathVariable Long id) {
+        Promocion promocionDesactivada = promocionService.desactivarPromocion(id);
+        return ResponseEntity.ok(promocionDesactivada);
     }
 }
