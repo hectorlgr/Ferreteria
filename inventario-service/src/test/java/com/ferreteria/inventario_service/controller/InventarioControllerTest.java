@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferreteria.inventario_service.Dto.InventarioRequestDto;
 import com.ferreteria.inventario_service.model.Inventario;
 import com.ferreteria.inventario_service.service.InventarioService;
+import com.ferreteria.inventario_service.assembler.InventarioModelAssembler;
 
 @ExtendWith(MockitoExtension.class)
 public class InventarioControllerTest {
@@ -41,7 +42,11 @@ public class InventarioControllerTest {
 
     @BeforeEach
     void setUp() {
-        InventarioController controller = new InventarioController(inventarioService);
+
+        InventarioModelAssembler assembler = new InventarioModelAssembler();
+
+        InventarioController controller = new InventarioController(inventarioService, assembler);
+
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         inventarioMock = new Inventario();
@@ -66,7 +71,7 @@ public class InventarioControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.productoId").value(10L))
                 .andExpect(jsonPath("$.cantidad").value(50));
-                
+
         verify(inventarioService, times(1)).guardarInventario(any(Inventario.class));
     }
 
@@ -79,12 +84,12 @@ public class InventarioControllerTest {
         mockMvc.perform(get("/api/inventario/producto/10"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.cantidad").value(50))
-                
+
                 .andExpect(jsonPath("$.links[0].href").exists())
                 .andExpect(jsonPath("$.links[1].href").exists())
                 .andExpect(jsonPath("$.links[2].href").exists())
                 .andExpect(jsonPath("$.links[3].href").exists());
-                
+
         verify(inventarioService, times(1)).obtenerPorProductoId(10L);
     }
 
@@ -102,7 +107,7 @@ public class InventarioControllerTest {
                 .param("cantidad", "5"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.cantidad").value(45));
-                
+
         verify(inventarioService, times(1)).actualizarStock(10L, 5);
     }
 
@@ -120,7 +125,7 @@ public class InventarioControllerTest {
                 .param("cantidad", "20"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.cantidad").value(70));
-                
+
         verify(inventarioService, times(1)).agregarStock(10L, 20);
     }
 
@@ -132,7 +137,7 @@ public class InventarioControllerTest {
         // WHEN & THEN
         mockMvc.perform(delete("/api/inventario/producto/10"))
                 .andExpect(status().isNoContent());
-                
+
         verify(inventarioService, times(1)).eliminarPorProductoId(10L);
     }
 }

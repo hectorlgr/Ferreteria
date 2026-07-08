@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferreteria.despacho_service.Dto.DespachoRequestDto;
 import com.ferreteria.despacho_service.model.Despacho;
 import com.ferreteria.despacho_service.service.DespachoService;
+import com.ferreteria.despacho_service.assembler.DespachoModelAssembler;
 
 @ExtendWith(MockitoExtension.class)
 public class DespachoControllerTest {
@@ -42,7 +43,10 @@ public class DespachoControllerTest {
 
     @BeforeEach
     void setUp() {
-        DespachoController controller = new DespachoController(despachoService);
+        DespachoModelAssembler assembler = new DespachoModelAssembler();
+
+        DespachoController controller = new DespachoController(despachoService, assembler);
+
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         // 1. Modelo simulado
@@ -72,7 +76,7 @@ public class DespachoControllerTest {
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.estado").value("RECIBIDO_EN_BODEGA"))
                 .andExpect(jsonPath("$.direccion").value("Av. Las Condes 500"));
-                
+
         verify(despachoService, times(1)).crearDespacho(any(Despacho.class));
     }
 
@@ -86,11 +90,11 @@ public class DespachoControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.estado").value("RECIBIDO_EN_BODEGA"))
-                
+
                 .andExpect(jsonPath("$.links[0].href").exists())
                 .andExpect(jsonPath("$.links[1].href").exists())
                 .andExpect(jsonPath("$.links[2].href").exists());
-                
+
         verify(despachoService, times(1)).obtenerPorPedidoId(1024L);
     }
 
@@ -100,7 +104,7 @@ public class DespachoControllerTest {
         Despacho despachoActualizado = new Despacho();
         despachoActualizado.setId(1L);
         despachoActualizado.setEstado("EN_RUTA");
-        
+
         when(despachoService.actualizarEstado(1L, "EN_RUTA")).thenReturn(despachoActualizado);
 
         // WHEN & THEN
@@ -108,7 +112,7 @@ public class DespachoControllerTest {
                 .param("estado", "EN_RUTA"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.estado").value("EN_RUTA"));
-                
+
         verify(despachoService, times(1)).actualizarEstado(1L, "EN_RUTA");
     }
 
@@ -121,10 +125,10 @@ public class DespachoControllerTest {
         mockMvc.perform(get("/api/despachos"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                
+
                 .andExpect(jsonPath("$.content[0].pedidoId").value(1024L))
                 .andExpect(jsonPath("$.content[0].links[1].href").exists());
-                
+
         verify(despachoService, times(1)).obtenerTodos();
     }
 }

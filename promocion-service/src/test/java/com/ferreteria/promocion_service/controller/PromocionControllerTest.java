@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferreteria.promocion_service.Dto.PromocionRequestDto;
 import com.ferreteria.promocion_service.model.Promocion;
 import com.ferreteria.promocion_service.service.PromocionService;
+import com.ferreteria.promocion_service.assembler.PromocionModelAssembler;
 
 @ExtendWith(MockitoExtension.class)
 public class PromocionControllerTest {
@@ -41,7 +42,10 @@ public class PromocionControllerTest {
 
     @BeforeEach
     void setUp() {
-        PromocionController controller = new PromocionController(promocionService);
+        PromocionModelAssembler assembler = new PromocionModelAssembler();
+
+        PromocionController controller = new PromocionController(promocionService, assembler);
+
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         promocionMock = new Promocion();
@@ -69,7 +73,7 @@ public class PromocionControllerTest {
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.codigo").value("CYBER2026"))
                 .andExpect(jsonPath("$.porcentajeDescuento").value(30.0));
-                
+
         verify(promocionService, times(1)).crearPromocion(any(Promocion.class));
     }
 
@@ -81,13 +85,13 @@ public class PromocionControllerTest {
         // WHEN & THEN
         mockMvc.perform(get("/api/promociones"))
                 .andExpect(status().isOk())
-                
+
                 .andExpect(jsonPath("$.content[0].codigo").value("CYBER2026"))
-                
+
                 .andExpect(jsonPath("$.content[0].links[0].href").exists())
-                
+
                 .andExpect(jsonPath("$.links[0].href").exists());
-                
+
         verify(promocionService, times(1)).obtenerTodas();
     }
 
@@ -99,11 +103,11 @@ public class PromocionControllerTest {
         // WHEN & THEN
         mockMvc.perform(get("/api/promociones/validar/CYBER2026"))
                 .andExpect(status().isOk())
-                
+
                 .andExpect(jsonPath("$.descuento").value(30.0))
-                
+
                 .andExpect(jsonPath("$.links[1].href").exists());
-                
+
         verify(promocionService, times(1)).validarYObtenerDescuento("CYBER2026");
     }
 
@@ -116,7 +120,7 @@ public class PromocionControllerTest {
         mockMvc.perform(put("/api/promociones/1/activar"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.estado").value(true));
-                
+
         verify(promocionService, times(1)).activarPromocion(1L);
     }
 }
