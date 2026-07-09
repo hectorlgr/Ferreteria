@@ -18,6 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ferreteria.promocion_service.model.Promocion;
 import com.ferreteria.promocion_service.repository.PromocionRepository;
+import com.ferreteria.promocion_service.exception.ResourceNotFoundException;
+import com.ferreteria.promocion_service.exception.BadRequestException;
 
 @ExtendWith(MockitoExtension.class)
 public class PromocionServiceTest {
@@ -58,7 +60,7 @@ public class PromocionServiceTest {
         when(promocionRepository.findByCodigoAndEstadoTrue("FALSO")).thenReturn(Optional.empty());
 
         // WHEN & THEN
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
+        BadRequestException excepcion = assertThrows(BadRequestException.class, () -> {
             promocionService.validarYObtenerDescuento("falso");
         });
 
@@ -72,6 +74,7 @@ public class PromocionServiceTest {
         Promocion promoNueva = new Promocion();
         promoNueva.setCodigo("navidad2026");
 
+        when(promocionRepository.findByCodigo("NAVIDAD2026")).thenReturn(Optional.empty());
         when(promocionRepository.save(any(Promocion.class))).thenReturn(promoNueva);
 
         // WHEN
@@ -79,6 +82,7 @@ public class PromocionServiceTest {
 
         // THEN
         assertEquals("NAVIDAD2026", resultado.getCodigo());
+        verify(promocionRepository, times(1)).findByCodigo("NAVIDAD2026");
         verify(promocionRepository, times(1)).save(promoNueva);
     }
 

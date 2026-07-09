@@ -57,17 +57,19 @@ public class VentaService {
 
         logger.debug("Calculando totales y enlazando detalles de la venta...");
         venta.setFechaVenta(LocalDateTime.now());
-        int totalProductos = 0;
+
+        // Sumar el subtotal neto de todos los productos
+        int subtotalNetoProductos = 0;
         int costoDespachoIngresado = venta.getCostoDespacho() != null ? venta.getCostoDespacho() : 0;
 
         for (DetalleVenta detalle : venta.getDetalles()) {
             detalle.setVenta(venta);
             detalle.setSubtotal(detalle.getCantidad() * detalle.getPrecioUnitario());
-            totalProductos += detalle.getSubtotal();
+            subtotalNetoProductos += detalle.getSubtotal();
         }
 
+        // Procesar Cupón de Descuento (Si existe)
         double porcentajeDescuento = 0.0;
-
         if (codigoPromocion != null && !codigoPromocion.trim().isEmpty()) {
             logger.info("Procesando cupón de descuento: {}", codigoPromocion);
             try {
@@ -88,15 +90,21 @@ public class VentaService {
             }
         }
 
-        // Aplicar el porcentaje de descuento si el cupón es válido
+        // Aplicar Descuento al Subtotal Neto
         if (porcentajeDescuento > 0.0) {
-            double descuentoDinero = totalProductos * (porcentajeDescuento / 100.0);
-            totalProductos = (int) (totalProductos - descuentoDinero);
-            logger.info("Descuento global aplicado correctamente. Total productos rebajado: ${}", totalProductos);
+            double descuentoDinero = subtotalNetoProductos * (porcentajeDescuento / 100.0);
+            subtotalNetoProductos = (int) (subtotalNetoProductos - descuentoDinero);
+            logger.info("Descuento aplicado. Subtotal Neto rebajado: ${}", subtotalNetoProductos);
         }
 
-        // Sumar el costo de despacho que ingresó el usuario al total final recalculado
-        int totalVenta = totalProductos + costoDespachoIngresado;
+        // LOGICA NEGOCIO: CALCULO DEL IVA (19%)
+        double iva = subtotalNetoProductos * 0.19;
+        int totalConIva = (int) (subtotalNetoProductos + iva);
+        logger.info("IVA (19%) calculado: ${}. Total productos con IVA: ${}", (int) iva, totalConIva);
+        // -------------------------------------------
+
+        // Sumar Despacho al Total Final
+        int totalVenta = totalConIva + costoDespachoIngresado;
 
         venta.setTotal(totalVenta);
         logger.debug("Cálculos finalizados. Total calculado: {} (incluye despacho de {})", totalVenta,
@@ -115,8 +123,8 @@ public class VentaService {
                 logger.debug("Descontando {} unidades del Producto ID: {}", detalle.getCantidad(),
                         detalle.getProductoId());
                 webClientBuilder.build().put()
-                        .uri("http://inventario-service/api/inventario/producto/" +
-                                detalle.getProductoId() + "/descontar?cantidad=" + detalle.getCantidad())
+                        .uri("http://inventario-service/api/inventario/producto/" + detalle.getProductoId()
+                                + "/descontar?cantidad=" + detalle.getCantidad())
                         .retrieve()
                         .bodyToMono(Object.class)
                         .block();
@@ -128,6 +136,7 @@ public class VentaService {
             }
         }
 
+        // 8. Notificar a pedido-service (Mantenemos tu lógica intacta)
         logger.info("Notificando a pedido-service para orquestar la logística...");
         try {
             java.util.Map<String, Object> pedidoPayload = new java.util.HashMap<>();

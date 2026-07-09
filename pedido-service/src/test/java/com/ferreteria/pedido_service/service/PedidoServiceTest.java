@@ -22,6 +22,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ferreteria.pedido_service.model.Pedido;
 import com.ferreteria.pedido_service.repository.PedidoRepository;
+import com.ferreteria.pedido_service.exception.ResourceNotFoundException;
+import com.ferreteria.pedido_service.exception.BadRequestException;
 
 import reactor.core.publisher.Mono;
 
@@ -56,15 +58,10 @@ public class PedidoServiceTest {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     void setUp() {
         lenient().when(webClientBuilder.build()).thenReturn(webClient);
-
         lenient().when(webClient.post()).thenReturn((WebClient.RequestBodyUriSpec) requestBodyUriSpec);
-
         lenient().when(requestBodyUriSpec.uri(anyString())).thenReturn((WebClient.RequestBodySpec) requestBodySpec);
-
         lenient().when(requestBodySpec.bodyValue(any())).thenReturn((WebClient.RequestHeadersSpec) requestHeadersSpec);
-
         lenient().when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-
         lenient().when(responseSpec.bodyToMono(Void.class)).thenReturn(Mono.empty());
     }
 
@@ -99,7 +96,7 @@ public class PedidoServiceTest {
         when(pedidoRepository.findById(1L)).thenReturn(Optional.of(pedidoAvanzado));
 
         // WHEN & THEN
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
+        BadRequestException excepcion = assertThrows(BadRequestException.class, () -> {
             pedidoService.cancelarPedido(1L);
         });
 

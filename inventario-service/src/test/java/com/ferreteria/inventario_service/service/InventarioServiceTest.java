@@ -5,18 +5,30 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ferreteria.inventario_service.model.Inventario;
 import com.ferreteria.inventario_service.repository.InventarioRepository;
+
+import reactor.core.publisher.Mono;
+
+import com.ferreteria.inventario_service.exception.ResourceNotFoundException;
+import com.ferreteria.inventario_service.exception.BadRequestException;
 
 @ExtendWith(MockitoExtension.class)
 public class InventarioServiceTest {
@@ -24,8 +36,29 @@ public class InventarioServiceTest {
     @Mock
     private InventarioRepository inventarioRepository;
 
+    @Mock
+    private WebClient.Builder webClientBuilder;
+
+    @Mock
+    private WebClient webClient;
+
+    @Mock
+    private WebClient.RequestBodyUriSpec requestBodyUriSpec;
+
+    @Mock
+    private WebClient.ResponseSpec responseSpec;
+
     @InjectMocks
     private InventarioService inventarioService;
+
+    @BeforeEach
+    void setUp() {
+        lenient().when(webClientBuilder.build()).thenReturn(webClient);
+        lenient().when(webClient.put()).thenReturn((WebClient.RequestBodyUriSpec) requestBodyUriSpec);
+        lenient().when(requestBodyUriSpec.uri(anyString())).thenReturn((WebClient.RequestBodySpec) requestBodyUriSpec);
+        lenient().when(requestBodyUriSpec.retrieve()).thenReturn(responseSpec);
+        lenient().when(responseSpec.bodyToMono(Void.class)).thenReturn(Mono.empty());
+    }
 
     @Test
     void testGuardarInventario_Exito() {
@@ -98,13 +131,11 @@ public class InventarioServiceTest {
         when(inventarioRepository.findByProductoId(5L)).thenReturn(Optional.of(inventarioActual));
 
         // WHEN & THEN
-        // Intento descontar 15, lo cual debe fallar
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
+        BadRequestException excepcion = assertThrows(BadRequestException.class, () -> {
             inventarioService.actualizarStock(5L, 15);
         });
 
-        assertEquals("Stock insuficiente para el producto", excepcion.getMessage());
-        // Verificamos que NUNCA se llame al método save si falla la validación
+        assertEquals("Stock insuficiente para el producto ID: 5", excepcion.getMessage());
         verify(inventarioRepository, times(0)).save(any(Inventario.class));
     }
 
@@ -114,7 +145,7 @@ public class InventarioServiceTest {
         when(inventarioRepository.findByProductoId(99L)).thenReturn(Optional.empty());
 
         // WHEN & THEN
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
+        ResourceNotFoundException excepcion = assertThrows(ResourceNotFoundException.class, () -> {
             inventarioService.obtenerPorProductoId(99L);
         });
 

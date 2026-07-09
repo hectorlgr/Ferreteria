@@ -21,6 +21,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ferreteria.despacho_service.model.Despacho;
 import com.ferreteria.despacho_service.repository.DespachoRepository;
+import com.ferreteria.despacho_service.exception.ResourceNotFoundException;
+import com.ferreteria.despacho_service.exception.BadRequestException;
 
 import reactor.core.publisher.Mono;
 
@@ -48,8 +50,8 @@ public class DespachoServiceTest {
     @BeforeEach
     void setUp() {
         lenient().when(webClientBuilder.build()).thenReturn(webClient);
-        lenient().when(webClient.put()).thenReturn(requestBodyUriSpec);
-        lenient().when(requestBodyUriSpec.uri(anyString())).thenReturn(requestBodyUriSpec);
+        lenient().when(webClient.put()).thenReturn((WebClient.RequestBodyUriSpec) requestBodyUriSpec);
+        lenient().when(requestBodyUriSpec.uri(anyString())).thenReturn((WebClient.RequestBodySpec) requestBodyUriSpec);
         lenient().when(requestBodyUriSpec.retrieve()).thenReturn(responseSpec);
         lenient().when(responseSpec.bodyToMono(Void.class)).thenReturn(Mono.empty());
     }
@@ -96,5 +98,4 @@ public class DespachoServiceTest {
         verify(despachoRepository, times(1)).findById(5L);
         verify(despachoRepository, times(1)).save(despachoExistente);
     }
-
 }

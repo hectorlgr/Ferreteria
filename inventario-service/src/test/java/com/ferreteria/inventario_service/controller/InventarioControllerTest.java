@@ -26,6 +26,7 @@ import com.ferreteria.inventario_service.Dto.InventarioRequestDto;
 import com.ferreteria.inventario_service.model.Inventario;
 import com.ferreteria.inventario_service.service.InventarioService;
 import com.ferreteria.inventario_service.assembler.InventarioModelAssembler;
+import com.ferreteria.inventario_service.exception.GlobalExceptionHandler;
 
 @ExtendWith(MockitoExtension.class)
 public class InventarioControllerTest {
@@ -47,7 +48,9 @@ public class InventarioControllerTest {
 
         InventarioController controller = new InventarioController(inventarioService, assembler);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         inventarioMock = new Inventario();
         inventarioMock.setId(1L);

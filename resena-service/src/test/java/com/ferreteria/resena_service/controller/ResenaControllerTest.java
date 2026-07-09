@@ -25,6 +25,7 @@ import com.ferreteria.resena_service.Dto.ResenaRequestDto;
 import com.ferreteria.resena_service.model.Resena;
 import com.ferreteria.resena_service.service.ResenaService;
 import com.ferreteria.resena_service.assembler.ResenaModelAssembler;
+import com.ferreteria.resena_service.exception.GlobalExceptionHandler;
 
 @ExtendWith(MockitoExtension.class)
 public class ResenaControllerTest {
@@ -44,7 +45,9 @@ public class ResenaControllerTest {
         ResenaModelAssembler assembler = new ResenaModelAssembler();
 
         ResenaController controller = new ResenaController(resenaService, assembler);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         resenaMock = new Resena();
         resenaMock.setId(1L);

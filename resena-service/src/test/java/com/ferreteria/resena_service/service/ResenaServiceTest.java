@@ -5,19 +5,22 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ferreteria.resena_service.model.Resena;
 import com.ferreteria.resena_service.repository.ResenaRepository;
+import com.ferreteria.resena_service.exception.BadRequestException;
 
 @ExtendWith(MockitoExtension.class)
 public class ResenaServiceTest {
@@ -25,8 +28,19 @@ public class ResenaServiceTest {
     @Mock
     private ResenaRepository resenaRepository;
 
+    @Mock
+    private WebClient.Builder webClientBuilder;
+
+    @Mock
+    private WebClient webClient;
+
     @InjectMocks
     private ResenaService resenaService;
+
+    @BeforeEach
+    void setUp() {
+        lenient().when(webClientBuilder.build()).thenReturn(webClient);
+    }
 
     @Test
     void testObtenerResenasPorProducto_Exito() {

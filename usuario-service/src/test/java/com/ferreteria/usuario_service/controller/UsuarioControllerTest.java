@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.ferreteria.usuario_service.assembler.UsuarioModelAssembler;
+import com.ferreteria.usuario_service.exception.GlobalExceptionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferreteria.usuario_service.Dto.UsuarioRequestDTO;
 import com.ferreteria.usuario_service.model.Usuario;
@@ -48,7 +49,9 @@ public class UsuarioControllerTest {
         UsuarioModelAssembler assembler = new UsuarioModelAssembler();
 
         UsuarioController controller = new UsuarioController(usuarioService, assembler);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         usuarioMock = new Usuario();
         usuarioMock.setId(1L);

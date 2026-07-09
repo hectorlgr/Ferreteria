@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.ferreteria.catalogo_service.assembler.ProductoModelAssembler;
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.service.ProductoService;
+import com.ferreteria.catalogo_service.exception.GlobalExceptionHandler;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductoControllerTest {
@@ -38,10 +39,11 @@ public class ProductoControllerTest {
     @BeforeEach
     void setUp() {
         ProductoModelAssembler assembler = new ProductoModelAssembler();
-
         ProductoController controller = new ProductoController(productoService, assembler);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         productoMock = new Producto();
         productoMock.setId(1L);

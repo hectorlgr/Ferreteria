@@ -21,108 +21,115 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferreteria.auth_service.Dto.LoginRequestDto;
 import com.ferreteria.auth_service.Dto.RegisterRequestDto;
 import com.ferreteria.auth_service.service.UserService;
+import com.ferreteria.auth_service.exception.GlobalExceptionHandler;
+import com.ferreteria.auth_service.exception.UnauthorizedException;
+import com.ferreteria.auth_service.exception.BadRequestException;
 
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
 
-    private MockMvc mockMvc;
+        private MockMvc mockMvc;
 
-    @Mock
-    private UserService userService;
+        @Mock
+        private UserService userService;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+        private ObjectMapper objectMapper = new ObjectMapper();
 
-    private LoginRequestDto loginDto;
-    private RegisterRequestDto registerDto;
+        private LoginRequestDto loginDto;
+        private RegisterRequestDto registerDto;
 
-    @BeforeEach
-    void setUp() {
-        UserController controller = new UserController(userService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        @BeforeEach
+        void setUp() {
+                UserController controller = new UserController(userService);
 
-        loginDto = new LoginRequestDto();
-        loginDto.setEmail("cliente@correo.com");
-        loginDto.setPassword("MiPassword123");
+                mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                                .setControllerAdvice(new GlobalExceptionHandler())
+                                .build();
 
-        registerDto = new RegisterRequestDto();
-        registerDto.setNombre("Juan Pérez");
-        registerDto.setEmail("juan.perez@correo.com");
-        registerDto.setPassword("MiPassword123");
-    }
+                loginDto = new LoginRequestDto();
+                loginDto.setEmail("cliente@correo.com");
+                loginDto.setPassword("MiPassword123");
 
-    @Test
-    public void testLogin_Exito() throws Exception {
-        // GIVEN
-        when(userService.login("cliente@correo.com", "MiPassword123")).thenReturn("token_jwt_simulado");
+                registerDto = new RegisterRequestDto();
+                registerDto.setNombre("Juan Pérez");
+                registerDto.setEmail("juan.perez@correo.com");
+                registerDto.setPassword("MiPassword123");
+        }
 
-        // WHEN & THEN
-        mockMvc.perform(post("/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginDto)))
-                .andExpect(status().isOk()) // Espera HTTP 200
-                .andExpect(jsonPath("$.token").value("token_jwt_simulado"));
+        @Test
+        public void testLogin_Exito() throws Exception {
+                // GIVEN
+                when(userService.login("cliente@correo.com", "MiPassword123")).thenReturn("token_jwt_simulado");
 
-        verify(userService, times(1)).login("cliente@correo.com", "MiPassword123");
-    }
+                // WHEN & THEN
+                mockMvc.perform(post("/auth/login")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(loginDto)))
+                                .andExpect(status().isOk()) // Espera HTTP 200
+                                .andExpect(jsonPath("$.token").value("token_jwt_simulado"));
 
-    @Test
-    public void testLogin_CredencialesInvalidas_Retorna401() throws Exception {
-        // GIVEN
-        when(userService.login("cliente@correo.com", "MiPassword123")).thenReturn(null);
+                verify(userService, times(1)).login("cliente@correo.com", "MiPassword123");
+        }
 
-        // WHEN & THEN
-        mockMvc.perform(post("/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginDto)))
-                .andExpect(status().isUnauthorized()) // Espera HTTP 401
-                .andExpect(jsonPath("$.error").value("Credenciales inválidas"));
+        @Test
+        public void testLogin_CredencialesInvalidas_Retorna401() throws Exception {
+                when(userService.login("cliente@correo.com", "MiPassword123"))
+                                .thenThrow(new UnauthorizedException("Credenciales inválidas"));
 
-        verify(userService, times(1)).login("cliente@correo.com", "MiPassword123");
-    }
+                // WHEN & THEN
+                mockMvc.perform(post("/auth/login")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(loginDto)))
+                                .andExpect(status().isUnauthorized()) // Espera HTTP 401
+                                .andExpect(jsonPath("$.message").value("Credenciales inválidas"));
 
-    @Test
-    public void testRegisterCliente_Exito() throws Exception {
-        // GIVEN
-        when(userService.register("juan.perez@correo.com", "MiPassword123", "CLIENTE", "Juan Pérez"))
-                .thenReturn("Usuario creado exitosamente!");
+                verify(userService, times(1)).login("cliente@correo.com", "MiPassword123");
+        }
 
-        // WHEN & THEN
-        mockMvc.perform(post("/auth/register/cliente")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerDto)))
-                .andExpect(status().isCreated()) // Espera HTTP 201
-                .andExpect(jsonPath("$.message").value("Usuario creado exitosamente!"));
+        @Test
+        public void testRegisterCliente_Exito() throws Exception {
+                // GIVEN
+                when(userService.register("juan.perez@correo.com", "MiPassword123", "CLIENTE", "Juan Pérez"))
+                                .thenReturn("Usuario creado exitosamente!");
 
-        verify(userService, times(1)).register("juan.perez@correo.com", "MiPassword123", "CLIENTE", "Juan Pérez");
-    }
+                // WHEN & THEN
+                mockMvc.perform(post("/auth/register/cliente")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(registerDto)))
+                                .andExpect(status().isCreated()) // Espera HTTP 201
+                                .andExpect(jsonPath("$.message").value("Usuario creado exitosamente!"));
 
-    @Test
-    public void testRegisterAdmin_Exito() throws Exception {
-        // GIVEN
-        when(userService.register("juan.perez@correo.com", "MiPassword123", "ADMIN", "Juan Pérez"))
-                .thenReturn("Administrador creado exitosamente!");
+                verify(userService, times(1)).register("juan.perez@correo.com", "MiPassword123", "CLIENTE",
+                                "Juan Pérez");
+        }
 
-        // WHEN & THEN
-        mockMvc.perform(post("/auth/register/admin")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerDto)))
-                .andExpect(status().isCreated()) // Espera HTTP 201
-                .andExpect(jsonPath("$.message").value("Administrador creado exitosamente!"));
+        @Test
+        public void testRegisterAdmin_Exito() throws Exception {
+                // GIVEN
+                when(userService.register("juan.perez@correo.com", "MiPassword123", "ADMIN", "Juan Pérez"))
+                                .thenReturn("Usuario creado exitosamente!");
 
-        verify(userService, times(1)).register("juan.perez@correo.com", "MiPassword123", "ADMIN", "Juan Pérez");
-    }
+                // WHEN & THEN
+                mockMvc.perform(post("/auth/register/admin")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(registerDto)))
+                                .andExpect(status().isCreated())
+                                .andExpect(jsonPath("$.message").value("Usuario creado exitosamente!"));
 
-    @Test
-    public void testRegister_Falla_Retorna400() throws Exception {
-        // GIVEN
-        when(userService.register(anyString(), anyString(), anyString(), anyString()))
-                .thenThrow(new RuntimeException("Usuario ya existe!"));
+                verify(userService, times(1)).register("juan.perez@correo.com", "MiPassword123", "ADMIN", "Juan Pérez");
+        }
 
-        // WHEN & THEN
-        mockMvc.perform(post("/auth/register/cliente")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerDto)))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error").value("Usuario ya existe!"));
-    }
+        @Test
+        public void testRegister_Falla_Retorna400() throws Exception {
+                // GIVEN:
+                when(userService.register(anyString(), anyString(), anyString(), anyString()))
+                                .thenThrow(new BadRequestException("El usuario con este email ya existe"));
+
+                // WHEN & THEN
+                mockMvc.perform(post("/auth/register/cliente")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(registerDto)))
+                                .andExpect(status().isBadRequest())
+                                .andExpect(jsonPath("$.message").value("El usuario con este email ya existe"));
+        }
 }

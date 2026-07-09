@@ -27,6 +27,7 @@ import com.ferreteria.pedido_service.Dto.PedidoRequestDto;
 import com.ferreteria.pedido_service.model.Pedido;
 import com.ferreteria.pedido_service.service.PedidoService;
 import com.ferreteria.pedido_service.assembler.PedidoModelAssembler;
+import com.ferreteria.pedido_service.exception.GlobalExceptionHandler;
 
 @ExtendWith(MockitoExtension.class)
 public class PedidoControllerTest {
@@ -47,7 +48,9 @@ public class PedidoControllerTest {
 
         PedidoController controller = new PedidoController(pedidoService, assembler);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         pedidoMock = new Pedido();
         pedidoMock.setId(10L);

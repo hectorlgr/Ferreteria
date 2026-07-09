@@ -24,6 +24,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.ferreteria.venta_service.model.DetalleVenta;
 import com.ferreteria.venta_service.model.Venta;
 import com.ferreteria.venta_service.repository.VentaRepository;
+import com.ferreteria.venta_service.exception.ResourceNotFoundException;
+import com.ferreteria.venta_service.exception.BadRequestException;
 
 @ExtendWith(MockitoExtension.class)
 public class VentaServiceTest {
@@ -82,7 +84,7 @@ public class VentaServiceTest {
         when(ventaRepository.findById(50L)).thenReturn(Optional.empty());
 
         // WHEN & THEN
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
+        ResourceNotFoundException excepcion = assertThrows(ResourceNotFoundException.class, () -> {
             ventaService.obtenerPorId(50L);
         });
 
@@ -97,7 +99,7 @@ public class VentaServiceTest {
         LocalDate fin = LocalDate.of(2026, 1, 1);
 
         // WHEN & THEN
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
+        BadRequestException excepcion = assertThrows(BadRequestException.class, () -> {
             ventaService.obtenerPorRangoFechas(inicio, fin);
         });
 

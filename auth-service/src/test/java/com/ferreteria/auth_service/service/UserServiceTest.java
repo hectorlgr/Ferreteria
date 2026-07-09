@@ -2,6 +2,7 @@ package com.ferreteria.auth_service.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
@@ -20,6 +21,8 @@ import reactor.core.publisher.Mono;
 
 import com.ferreteria.auth_service.model.User;
 import com.ferreteria.auth_service.repository.UserRepository;
+import com.ferreteria.auth_service.exception.UnauthorizedException;
+import com.ferreteria.auth_service.exception.BadRequestException;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -86,7 +89,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void testLogin_CredencialesInvalidas_RetornaNull() {
+    void testLogin_CredencialesInvalidas_LanzaExcepcion() {
         // GIVEN
         User user = new User();
         user.setEmail("admin@ferreteria.com");
@@ -95,11 +98,12 @@ public class UserServiceTest {
         when(userRepository.findByEmail("admin@ferreteria.com")).thenReturn(user);
         when(hashService.sha1("clave_falsa")).thenReturn("hash_incorrecto");
 
-        // WHEN
-        String token = userService.login("admin@ferreteria.com", "clave_falsa");
+        // WHEN & THEN
+        UnauthorizedException excepcion = assertThrows(UnauthorizedException.class, () -> {
+            userService.login("admin@ferreteria.com", "clave_falsa");
+        });
 
-        // THEN
-        assertNull(token);
+        assertEquals("Credenciales inválidas", excepcion.getMessage());
     }
 
     @Test
@@ -119,16 +123,17 @@ public class UserServiceTest {
     }
 
     @Test
-    void testRegister_UsuarioYaExiste_RetornaMensajeError() {
+    void testRegister_UsuarioYaExiste_LanzaExcepcion() {
         // GIVEN
         User existente = new User();
         existente.setEmail("existente@ferreteria.com");
         when(userRepository.findByEmail("existente@ferreteria.com")).thenReturn(existente);
 
-        // WHEN
-        String resultado = userService.register("existente@ferreteria.com", "1234", "USER", "Juan");
+        // WHEN & THEN
+        BadRequestException excepcion = assertThrows(BadRequestException.class, () -> {
+            userService.register("existente@ferreteria.com", "1234", "USER", "Juan");
+        });
 
-        // THEN
-        assertEquals("Usuario ya existe!", resultado);
+        assertEquals("El usuario con este email ya existe", excepcion.getMessage());
     }
 }

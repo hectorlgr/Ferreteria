@@ -22,6 +22,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ferreteria.catalogo_service.model.Producto;
 import com.ferreteria.catalogo_service.repository.ProductoRepository;
+import com.ferreteria.catalogo_service.exception.ResourceNotFoundException;
 
 import reactor.core.publisher.Mono;
 
@@ -78,7 +79,7 @@ public class ProductoServiceTest {
         when(productoRepository.findByIdAndHabilitadoTrue(99L)).thenReturn(Optional.empty());
 
         // WHEN / THEN
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
+        ResourceNotFoundException excepcion = assertThrows(ResourceNotFoundException.class, () -> {
             productoService.obtenerPorId(99L);
         });
 

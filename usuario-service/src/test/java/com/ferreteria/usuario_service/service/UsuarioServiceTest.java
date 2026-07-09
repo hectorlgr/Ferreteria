@@ -17,6 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ferreteria.usuario_service.model.Usuario;
 import com.ferreteria.usuario_service.repository.UsuarioRepository;
+import com.ferreteria.usuario_service.exception.ResourceNotFoundException;
+import com.ferreteria.usuario_service.exception.BadRequestException;
 
 @ExtendWith(MockitoExtension.class)
 public class UsuarioServiceTest {
@@ -39,6 +41,7 @@ public class UsuarioServiceTest {
         usuarioGuardado.setNombre("Juan Pérez");
         usuarioGuardado.setEmail("juan@email.com");
 
+        when(usuarioRepository.findByEmail("juan@email.com")).thenReturn(null);
         when(usuarioRepository.save(any(Usuario.class))).thenReturn(usuarioGuardado);
 
         // WHEN
@@ -75,11 +78,11 @@ public class UsuarioServiceTest {
         when(usuarioRepository.findById(99L)).thenReturn(Optional.empty());
 
         // WHEN & THEN
-        RuntimeException excepcion = assertThrows(RuntimeException.class, () -> {
+        ResourceNotFoundException excepcion = assertThrows(ResourceNotFoundException.class, () -> {
             usuarioService.obtenerPorId(99L);
         });
 
-        assertEquals("Usuario no encontrado con ID: 99", excepcion.getMessage());
+        assertEquals("Error: Usuario no encontrado con el ID 99", excepcion.getMessage());
         verify(usuarioRepository, times(1)).findById(99L);
     }
 

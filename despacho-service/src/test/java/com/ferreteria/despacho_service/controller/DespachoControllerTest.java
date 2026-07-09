@@ -27,6 +27,7 @@ import com.ferreteria.despacho_service.Dto.DespachoRequestDto;
 import com.ferreteria.despacho_service.model.Despacho;
 import com.ferreteria.despacho_service.service.DespachoService;
 import com.ferreteria.despacho_service.assembler.DespachoModelAssembler;
+import com.ferreteria.despacho_service.exception.GlobalExceptionHandler;
 
 @ExtendWith(MockitoExtension.class)
 public class DespachoControllerTest {
@@ -44,10 +45,11 @@ public class DespachoControllerTest {
     @BeforeEach
     void setUp() {
         DespachoModelAssembler assembler = new DespachoModelAssembler();
-
         DespachoController controller = new DespachoController(despachoService, assembler);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         // 1. Modelo simulado
         despachoMock = new Despacho();

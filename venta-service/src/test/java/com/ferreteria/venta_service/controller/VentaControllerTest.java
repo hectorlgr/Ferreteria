@@ -28,6 +28,7 @@ import com.ferreteria.venta_service.Dto.VentaRequestDto;
 import com.ferreteria.venta_service.model.Venta;
 import com.ferreteria.venta_service.service.VentaService;
 import com.ferreteria.venta_service.assembler.VentaModelAssembler;
+import com.ferreteria.venta_service.exception.GlobalExceptionHandler;
 
 @ExtendWith(MockitoExtension.class)
 public class VentaControllerTest {
@@ -47,13 +48,15 @@ public class VentaControllerTest {
         VentaModelAssembler assembler = new VentaModelAssembler();
 
         VentaController controller = new VentaController(ventaService, assembler);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         ventaMock = new Venta();
         ventaMock.setId(10L);
         ventaMock.setUsuarioId(5L);
         ventaMock.setCostoDespacho(2500);
-        ventaMock.setTotal(12500);
+        ventaMock.setTotal(14400);
 
         ventaDtoMock = new VentaRequestDto();
         ventaDtoMock.setUsuarioId(5L);
@@ -77,7 +80,7 @@ public class VentaControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(10L))
                 .andExpect(jsonPath("$.usuarioId").value(5L))
-                .andExpect(jsonPath("$.total").value(12500))
+                .andExpect(jsonPath("$.total").value(14400))
 
                 .andExpect(jsonPath("$.links[0].href").exists())
                 .andExpect(jsonPath("$.links[1].href").exists())

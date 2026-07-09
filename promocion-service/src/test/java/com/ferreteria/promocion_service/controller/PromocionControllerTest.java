@@ -26,6 +26,7 @@ import com.ferreteria.promocion_service.Dto.PromocionRequestDto;
 import com.ferreteria.promocion_service.model.Promocion;
 import com.ferreteria.promocion_service.service.PromocionService;
 import com.ferreteria.promocion_service.assembler.PromocionModelAssembler;
+import com.ferreteria.promocion_service.exception.GlobalExceptionHandler;
 
 @ExtendWith(MockitoExtension.class)
 public class PromocionControllerTest {
@@ -46,7 +47,9 @@ public class PromocionControllerTest {
 
         PromocionController controller = new PromocionController(promocionService, assembler);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
 
         promocionMock = new Promocion();
         promocionMock.setId(1L);

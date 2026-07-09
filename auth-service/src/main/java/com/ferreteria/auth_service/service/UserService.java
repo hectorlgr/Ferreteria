@@ -72,8 +72,6 @@ public class UserService {
                     .block();
 
         } catch (Exception e) {
-            // Nota: Aquí lo envuelvo en tu BadRequestException para que el cliente sepa que
-            // falló el perfil
             throw new BadRequestException(
                     "Usuario creado en Auth, pero falló la creación del perfil: " + e.getMessage());
         }
