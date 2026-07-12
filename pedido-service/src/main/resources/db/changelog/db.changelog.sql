@@ -21,3 +21,6 @@ INSERT INTO pedidos (id_usuario, id_venta, estado, fecha_creacion) VALUES
 (2, 8, 'CONFIRMADO', '2026-06-09 15:30:00'),
 (3, 9, 'CONFIRMADO', '2026-06-09 18:00:00'),
 (1, 10, 'CONFIRMADO', '2026-06-09 20:00:00');
+
+--changeset hector:3
+ALTER TABLE pedidos AUTO_INCREMENT = 100;

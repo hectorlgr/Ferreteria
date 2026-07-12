@@ -21,7 +21,7 @@ CREATE TABLE detalle_ventas (
 );
 
 --changeset hector:3
-INSERT INTO ventas (usuario_id, fecha_venta, total, costo_despacho) VALUES 
+INSERT INTO ventas (usuario_id, fecha_venta, total, costo_despacho) VALUES
 (1, NOW(), 46500, 1500),
 (2, NOW(), 18500, 1500),
 (3, NOW(), 5000, 1500),
@@ -34,7 +34,7 @@ INSERT INTO ventas (usuario_id, fecha_venta, total, costo_despacho) VALUES
 (10, NOW(), 481500, 1500);
 
 --changeset hector:4
-INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES 
+INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, subtotal) VALUES
 (1, 1, 1, 45000, 45000),
 (2, 2, 2, 8500, 17000),
 (3, 3, 1, 3500, 3500),
@@ -45,3 +45,9 @@ INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario, su
 (8, 8, 3, 5500, 16500),
 (9, 9, 2, 7000, 14000),
 (10, 10, 4, 120000, 480000);
+
+--changeset hector:5
+ALTER TABLE ventas AUTO_INCREMENT = 100;
+
+--changeset hector:6
+ALTER TABLE detalle_ventas AUTO_INCREMENT = 100;

@@ -20,3 +20,6 @@ INSERT INTO despachos (pedido_id, direccion, estado) VALUES
 (8, 'Calle Las Araucarias 456, Maipú', 'PREPARANDO_PAQUETE'),
 (9, 'Pasaje Nueva Esperanza 55, Renca', 'RECIBIDO_EN_BODEGA'),
 (10, 'Av. Providencia 1234, Santiago', 'RECIBIDO_EN_BODEGA');
+
+--changeset hector:3
+ALTER TABLE despachos AUTO_INCREMENT = 100;
