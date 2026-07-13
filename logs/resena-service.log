@@ -81,3 +81,149 @@
 04:32:18 INFO  Unregistering ...
 04:32:18 INFO  DiscoveryClient_SOPORTE-SERVICE/soporte-service:9100 - deregister  status: 200
 04:32:18 INFO  Completed shut down of DiscoveryClient
+05:52:48 INFO  Starting ResenaServiceApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/app/app.jar started by root in /app)
+05:52:48 INFO  No active profile set, falling back to 1 default profile: "default"
+05:52:48 INFO  Starting SoporteServiceApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/app/app.jar started by root in /app)
+05:52:48 INFO  No active profile set, falling back to 1 default profile: "default"
+05:52:56 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+05:52:56 INFO  Finished Spring Data repository scanning in 755 ms. Found 1 JPA repository interface.
+05:52:57 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+05:52:58 INFO  Finished Spring Data repository scanning in 1088 ms. Found 1 JPA repository interface.
+05:52:59 INFO  BeanFactory id=c17ea95a-ae53-3a35-b5bc-241e1538c753
+05:52:59 INFO  BeanFactory id=6f54e0c0-70e6-39e8-83ed-0d3ed1f53089
+05:53:01 INFO  Tomcat initialized with port 9100 (http)
+05:53:01 INFO  Tomcat initialized with port 9097 (http)
+05:53:01 INFO  Starting service [Tomcat]
+05:53:01 INFO  Starting Servlet engine: [Apache Tomcat/11.0.20]
+05:53:01 INFO  Starting service [Tomcat]
+05:53:01 INFO  Starting Servlet engine: [Apache Tomcat/11.0.20]
+05:53:01 INFO  Root WebApplicationContext: initialization completed in 12612 ms
+05:53:01 INFO  Root WebApplicationContext: initialization completed in 13388 ms
+05:53:02 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+05:53:02 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+05:53:02 INFO  HHH000001: Hibernate ORM core version 7.2.7.Final
+05:53:02 INFO  HHH000001: Hibernate ORM core version 7.2.7.Final
+05:53:06 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+05:53:06 INFO  HikariPool-1 - Starting...
+05:53:07 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+05:53:07 INFO  HikariPool-1 - Starting...
+05:53:07 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5b6f3d0b
+05:53:07 INFO  HikariPool-1 - Start completed.
+05:53:08 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+05:53:08 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://host.docker.internal:3306/db_soporte?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&autoReconnect=true&socketTimeout=10000&connectTimeout=10000]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_soporte/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+05:53:09 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4452e13c
+05:53:09 INFO  HikariPool-1 - Start completed.
+05:53:10 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+05:53:10 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://host.docker.internal:3306/db_resenas?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&autoReconnect=true&socketTimeout=10000&connectTimeout=10000]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_resenas/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+05:53:12 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+05:53:13 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+05:53:13 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+05:53:14 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+05:53:15 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+05:53:15 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+05:53:15 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+05:53:18 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+05:53:18 INFO  Eureka HTTP Client uses RestClient.
+05:53:19 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+05:53:19 INFO  Setting initial instance status as: STARTING
+05:53:19 INFO  Initializing Eureka in region us-east-1
+05:53:19 INFO  Resolving eureka endpoints via configuration
+05:53:19 INFO  Disable delta property : false
+05:53:19 INFO  Single vip registry refresh property : null
+05:53:19 INFO  Force full registry fetch : false
+05:53:19 INFO  Application is null : false
+05:53:19 INFO  Registered Applications size is zero : true
+05:53:19 INFO  Application version is -1: true
+05:53:19 INFO  Getting all instance registry info from the eureka server
+05:53:20 INFO  Eureka HTTP Client uses RestClient.
+05:53:21 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+05:53:21 INFO  Setting initial instance status as: STARTING
+05:53:21 INFO  Initializing Eureka in region us-east-1
+05:53:21 INFO  Resolving eureka endpoints via configuration
+05:53:21 INFO  Disable delta property : false
+05:53:21 INFO  Single vip registry refresh property : null
+05:53:21 INFO  Force full registry fetch : false
+05:53:21 INFO  Application is null : false
+05:53:21 INFO  Registered Applications size is zero : true
+05:53:21 INFO  Application version is -1: true
+05:53:21 INFO  Getting all instance registry info from the eureka server
+05:53:22 INFO  The response status is 200
+05:53:22 INFO  Starting heartbeat executor: renew interval is: 30
+05:53:22 INFO  InstanceInfoReplicator onDemand update allowed rate per min is 4
+05:53:22 INFO  Discovery Client initialized at timestamp 1783922002235 with initial instances count: 1
+05:53:22 INFO  Registering application SOPORTE-SERVICE with eureka with status UP
+05:53:22 INFO  Saw local status change event StatusChangeEvent [timestamp=1783922002274, current=UP, previous=STARTING]
+05:53:22 INFO  DiscoveryClient_SOPORTE-SERVICE/soporte-service:9100: registering service...
+05:53:22 INFO  Tomcat started on port 9100 (http) with context path '/'
+05:53:22 INFO  Updating port to 9100
+05:53:22 INFO  DiscoveryClient_SOPORTE-SERVICE/soporte-service:9100 - registration status: 204
+05:53:22 INFO  Started SoporteServiceApplication in 37.533 seconds (process running for 41.567)
+05:53:23 INFO  The response status is 200
+05:53:23 INFO  Starting heartbeat executor: renew interval is: 30
+05:53:24 INFO  InstanceInfoReplicator onDemand update allowed rate per min is 4
+05:53:24 INFO  Discovery Client initialized at timestamp 1783922004034 with initial instances count: 1
+05:53:24 INFO  Registering application RESENA-SERVICE with eureka with status UP
+05:53:24 INFO  Saw local status change event StatusChangeEvent [timestamp=1783922004150, current=UP, previous=STARTING]
+05:53:24 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097: registering service...
+05:53:24 INFO  Tomcat started on port 9097 (http) with context path '/'
+05:53:24 INFO  Updating port to 9097
+05:53:24 INFO  Iniciando la carga de tickets de soporte por defecto...
+05:53:24 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097 - registration status: 204
+05:53:24 INFO  Started ResenaServiceApplication in 39.098 seconds (process running for 42.976)
+05:53:24 INFO  ¡Tickets de soporte cargados exitosamente!
+05:53:24 WARN  SpringDoc /api/soporte/v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+05:53:24 WARN  SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+05:53:26 INFO  Iniciando la carga de reseñas por defecto...
+05:53:26 INFO  ¡Reseñas cargadas exitosamente!
+05:53:26 WARN  SpringDoc /api/resenas/v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+05:53:26 WARN  SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+05:58:19 INFO  Resolving eureka endpoints via configuration
+05:58:21 INFO  Resolving eureka endpoints via configuration
+06:02:58 INFO  Unregistering application RESENA-SERVICE with eureka with status DOWN
+06:02:58 INFO  Saw local status change event StatusChangeEvent [timestamp=1783922578194, current=DOWN, previous=UP]
+06:02:58 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097: registering service...
+06:02:58 INFO  Commencing graceful shutdown. Waiting for active requests to complete
+06:02:58 INFO  Graceful shutdown complete
+06:02:58 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097 - registration status: 204
+06:02:58 INFO  Unregistering application SOPORTE-SERVICE with eureka with status DOWN
+06:02:58 INFO  Saw local status change event StatusChangeEvent [timestamp=1783922578268, current=DOWN, previous=UP]
+06:02:58 INFO  DiscoveryClient_SOPORTE-SERVICE/soporte-service:9100: registering service...
+06:02:58 INFO  Commencing graceful shutdown. Waiting for active requests to complete
+06:02:58 INFO  DiscoveryClient_SOPORTE-SERVICE/soporte-service:9100 - registration status: 204
+06:02:58 INFO  Graceful shutdown complete
+06:02:58 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
+06:02:58 INFO  HikariPool-1 - Shutdown initiated...
+06:02:58 INFO  HikariPool-1 - Shutdown completed.
+06:02:58 INFO  Shutting down DiscoveryClient ...
+06:02:58 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
+06:02:58 INFO  HikariPool-1 - Shutdown initiated...
+06:02:58 INFO  HikariPool-1 - Shutdown completed.
+06:02:58 INFO  Shutting down DiscoveryClient ...
+06:03:01 INFO  Unregistering ...
+06:03:01 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097 - deregister  status: 200
+06:03:01 INFO  Completed shut down of DiscoveryClient
+06:03:01 INFO  Unregistering ...
+06:03:01 INFO  DiscoveryClient_SOPORTE-SERVICE/soporte-service:9100 - deregister  status: 200
+06:03:01 INFO  Completed shut down of DiscoveryClient
