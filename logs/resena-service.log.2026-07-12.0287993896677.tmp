@@ -1,0 +1,75 @@
+04:18:37 INFO  Starting ResenaServiceApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/app/app.jar started by root in /app)
+04:18:38 INFO  No active profile set, falling back to 1 default profile: "default"
+04:18:51 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+04:18:52 INFO  Finished Spring Data repository scanning in 739 ms. Found 1 JPA repository interface.
+04:18:54 INFO  BeanFactory id=6f54e0c0-70e6-39e8-83ed-0d3ed1f53089
+04:18:58 INFO  Tomcat initialized with port 9097 (http)
+04:18:58 INFO  Starting service [Tomcat]
+04:18:58 INFO  Starting Servlet engine: [Apache Tomcat/11.0.20]
+04:18:58 INFO  Root WebApplicationContext: initialization completed in 19772 ms
+04:18:59 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+04:18:59 INFO  HHH000001: Hibernate ORM core version 7.2.7.Final
+04:19:02 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+04:19:03 INFO  HikariPool-1 - Starting...
+04:19:04 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2b561f51
+04:19:04 INFO  HikariPool-1 - Start completed.
+04:19:04 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+04:19:04 INFO  HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://host.docker.internal:3306/db_resenas?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&autoReconnect=true&socketTimeout=10000&connectTimeout=10000]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 5.5.5
+	Default catalog/schema: db_resenas/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+04:19:08 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+04:19:08 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+04:19:08 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+04:19:10 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+04:19:13 INFO  Eureka HTTP Client uses RestClient.
+04:19:13 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+04:19:14 INFO  Setting initial instance status as: STARTING
+04:19:14 INFO  Initializing Eureka in region us-east-1
+04:19:14 INFO  Resolving eureka endpoints via configuration
+04:19:14 INFO  Disable delta property : false
+04:19:14 INFO  Single vip registry refresh property : null
+04:19:14 INFO  Force full registry fetch : false
+04:19:14 INFO  Application is null : false
+04:19:14 INFO  Registered Applications size is zero : true
+04:19:14 INFO  Application version is -1: true
+04:19:14 INFO  Getting all instance registry info from the eureka server
+04:19:17 INFO  The response status is 200
+04:19:17 INFO  Starting heartbeat executor: renew interval is: 30
+04:19:17 INFO  InstanceInfoReplicator onDemand update allowed rate per min is 4
+04:19:17 INFO  Discovery Client initialized at timestamp 1783916357418 with initial instances count: 2
+04:19:17 INFO  Registering application RESENA-SERVICE with eureka with status UP
+04:19:17 INFO  Saw local status change event StatusChangeEvent [timestamp=1783916357467, current=UP, previous=STARTING]
+04:19:17 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097: registering service...
+04:19:17 INFO  Tomcat started on port 9097 (http) with context path '/'
+04:19:17 INFO  Updating port to 9097
+04:19:17 INFO  Started ResenaServiceApplication in 42.768 seconds (process running for 48.051)
+04:19:17 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097 - registration status: 204
+04:19:19 INFO  Iniciando la carga de reseñas por defecto...
+04:19:19 INFO  ¡Reseñas cargadas exitosamente!
+04:19:19 WARN  SpringDoc /api/resenas/v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+04:19:19 WARN  SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+04:24:14 INFO  Resolving eureka endpoints via configuration
+04:29:14 INFO  Resolving eureka endpoints via configuration
+04:32:15 INFO  Unregistering application RESENA-SERVICE with eureka with status DOWN
+04:32:15 INFO  Saw local status change event StatusChangeEvent [timestamp=1783917135520, current=DOWN, previous=UP]
+04:32:15 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097: registering service...
+04:32:15 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097 - registration status: 204
+04:32:15 INFO  Commencing graceful shutdown. Waiting for active requests to complete
+04:32:15 INFO  Graceful shutdown complete
+04:32:15 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
+04:32:16 INFO  HikariPool-1 - Shutdown initiated...
+04:32:16 INFO  HikariPool-1 - Shutdown completed.
+04:32:16 INFO  Shutting down DiscoveryClient ...
+04:32:19 INFO  Unregistering ...
+04:32:19 WARN  task supervisor shutting down, can't accept the task
+04:32:19 INFO  DiscoveryClient_RESENA-SERVICE/resena-service:9097 - deregister  status: 200
+04:32:19 INFO  Completed shut down of DiscoveryClient

@@ -1,44 +1,44 @@
-05:03:32 INFO  Starting InventarioServiceApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/app/app.jar started by root in /app)
-05:03:32 INFO  No active profile set, falling back to 1 default profile: "default"
-05:03:41 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-05:03:42 INFO  Finished Spring Data repository scanning in 550 ms. Found 1 JPA repository interface.
-05:03:45 INFO  BeanFactory id=c946f156-50ea-320c-bf7f-d7a3a44122b7
-05:03:47 INFO  Tomcat initialized with port 9093 (http)
-05:03:48 INFO  Starting service [Tomcat]
-05:03:48 INFO  Starting Servlet engine: [Apache Tomcat/11.0.20]
-05:03:48 INFO  Root WebApplicationContext: initialization completed in 15623 ms
-05:03:49 INFO  HikariPool-1 - Starting...
-05:03:50 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6115846e
-05:03:50 INFO  HikariPool-1 - Start completed.
-05:03:53 INFO  Creating database changelog table with name: db_inventario.databasechangelog
-05:03:54 INFO  Reading from db_inventario.databasechangelog
-05:03:54 INFO  Creating snapshot
-05:03:54 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
-05:03:54 INFO  Successfully acquired change log lock
-05:03:54 INFO  Using deploymentId: 3832629229
-05:03:54 INFO  Reading from db_inventario.databasechangelog
-05:03:55 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
-05:03:55 INFO  Custom SQL executed
-05:03:55 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 106ms
-05:03:55 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
-05:03:55 INFO  Custom SQL executed
-05:03:55 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 35ms
-05:03:55 INFO  UPDATE SUMMARY
-05:03:55 INFO  Run:                          2
-05:03:55 INFO  Previously run:               0
-05:03:55 INFO  Filtered out:                 0
-05:03:55 INFO  -------------------------------
-05:03:55 INFO  Total change sets:            2
-05:03:55 INFO  Update summary generated
-05:03:55 INFO  Update command completed successfully.
-05:03:55 INFO  Liquibase: Update has been successful. Rows affected: 10
-05:03:55 INFO  Successfully released change log lock
-05:03:55 INFO  Command execution complete
-05:03:56 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
-05:03:56 INFO  HHH000001: Hibernate ORM core version 7.2.7.Final
-05:03:58 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
-05:03:59 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
-05:03:59 INFO  HHH10001005: Database info:
+04:18:38 INFO  Starting InventarioServiceApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/app/app.jar started by root in /app)
+04:18:38 INFO  No active profile set, falling back to 1 default profile: "default"
+04:18:49 INFO  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+04:18:49 INFO  Finished Spring Data repository scanning in 469 ms. Found 1 JPA repository interface.
+04:18:51 INFO  BeanFactory id=c946f156-50ea-320c-bf7f-d7a3a44122b7
+04:18:53 INFO  Tomcat initialized with port 9093 (http)
+04:18:53 INFO  Starting service [Tomcat]
+04:18:53 INFO  Starting Servlet engine: [Apache Tomcat/11.0.20]
+04:18:53 INFO  Root WebApplicationContext: initialization completed in 14335 ms
+04:18:55 INFO  HikariPool-1 - Starting...
+04:18:57 INFO  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5cbe95b1
+04:18:57 INFO  HikariPool-1 - Start completed.
+04:19:01 INFO  Creating database changelog table with name: db_inventario.databasechangelog
+04:19:02 INFO  Reading from db_inventario.databasechangelog
+04:19:02 INFO  Creating snapshot
+04:19:02 INFO  Name 'PK_DATABASECHANGELOGLOCK' ignored for PRIMARY key.
+04:19:02 INFO  Successfully acquired change log lock
+04:19:02 INFO  Using deploymentId: 3916335053
+04:19:02 INFO  Reading from db_inventario.databasechangelog
+04:19:02 INFO  Running Changeset: db/changelog/db.changelog.sql::1::hector
+04:19:02 INFO  Custom SQL executed
+04:19:02 INFO  ChangeSet db/changelog/db.changelog.sql::1::hector ran successfully in 114ms
+04:19:02 INFO  Running Changeset: db/changelog/db.changelog.sql::2::hector
+04:19:02 INFO  Custom SQL executed
+04:19:02 INFO  ChangeSet db/changelog/db.changelog.sql::2::hector ran successfully in 39ms
+04:19:02 INFO  UPDATE SUMMARY
+04:19:02 INFO  Run:                          2
+04:19:02 INFO  Previously run:               0
+04:19:02 INFO  Filtered out:                 0
+04:19:02 INFO  -------------------------------
+04:19:02 INFO  Total change sets:            2
+04:19:02 INFO  Update summary generated
+04:19:03 INFO  Update command completed successfully.
+04:19:03 INFO  Liquibase: Update has been successful. Rows affected: 10
+04:19:03 INFO  Successfully released change log lock
+04:19:03 INFO  Command execution complete
+04:19:03 INFO  HHH008540: Processing PersistenceUnitInfo [name: default]
+04:19:03 INFO  HHH000001: Hibernate ORM core version 7.2.7.Final
+04:19:06 INFO  No LoadTimeWeaver setup: ignoring JPA class transformer
+04:19:06 WARN  HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly.The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+04:19:06 INFO  HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://host.docker.internal:3306/db_inventario?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&autoReconnect=true&socketTimeout=10000&connectTimeout=10000]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -50,45 +50,48 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-05:04:01 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-05:04:01 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
-05:04:02 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
-05:04:03 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-05:04:06 INFO  Eureka HTTP Client uses RestClient.
-05:04:06 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-05:04:06 INFO  Setting initial instance status as: STARTING
-05:04:06 INFO  Initializing Eureka in region us-east-1
-05:04:06 INFO  Resolving eureka endpoints via configuration
-05:04:06 INFO  Disable delta property : false
-05:04:06 INFO  Single vip registry refresh property : null
-05:04:06 INFO  Force full registry fetch : false
-05:04:06 INFO  Application is null : false
-05:04:06 INFO  Registered Applications size is zero : true
-05:04:06 INFO  Application version is -1: true
-05:04:06 INFO  Getting all instance registry info from the eureka server
-05:04:08 INFO  The response status is 200
-05:04:08 INFO  Starting heartbeat executor: renew interval is: 30
-05:04:08 INFO  InstanceInfoReplicator onDemand update allowed rate per min is 4
-05:04:08 INFO  Discovery Client initialized at timestamp 1783832648206 with initial instances count: 1
-05:04:08 INFO  Registering application INVENTARIO-SERVICE with eureka with status UP
-05:04:08 INFO  Saw local status change event StatusChangeEvent [timestamp=1783832648223, current=UP, previous=STARTING]
-05:04:08 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093: registering service...
-05:04:08 INFO  Tomcat started on port 9093 (http) with context path '/'
-05:04:08 INFO  Updating port to 9093
-05:04:08 INFO  Started InventarioServiceApplication in 39.105 seconds (process running for 43.2)
-05:04:08 WARN  SpringDoc /api/inventarios/v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-05:04:08 WARN  SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-05:04:08 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093 - registration status: 204
-05:07:48 INFO  Unregistering application INVENTARIO-SERVICE with eureka with status DOWN
-05:07:48 INFO  Saw local status change event StatusChangeEvent [timestamp=1783832868208, current=DOWN, previous=UP]
-05:07:48 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093: registering service...
-05:07:48 INFO  Commencing graceful shutdown. Waiting for active requests to complete
-05:07:48 INFO  Graceful shutdown complete
-05:07:48 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093 - registration status: 204
-05:07:48 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
-05:07:48 INFO  HikariPool-1 - Shutdown initiated...
-05:07:48 INFO  HikariPool-1 - Shutdown completed.
-05:07:48 INFO  Shutting down DiscoveryClient ...
-05:07:51 INFO  Unregistering ...
-05:07:51 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093 - deregister  status: 200
-05:07:51 INFO  Completed shut down of DiscoveryClient
+04:19:09 INFO  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+04:19:10 INFO  Initialized JPA EntityManagerFactory for persistence unit 'default'
+04:19:10 INFO  Hibernate is in classpath; If applicable, HQL parser will be used.
+04:19:11 WARN  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+04:19:15 INFO  Eureka HTTP Client uses RestClient.
+04:19:15 WARN  Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+04:19:15 INFO  Setting initial instance status as: STARTING
+04:19:16 INFO  Initializing Eureka in region us-east-1
+04:19:16 INFO  Resolving eureka endpoints via configuration
+04:19:16 INFO  Disable delta property : false
+04:19:16 INFO  Single vip registry refresh property : null
+04:19:16 INFO  Force full registry fetch : false
+04:19:16 INFO  Application is null : false
+04:19:16 INFO  Registered Applications size is zero : true
+04:19:16 INFO  Application version is -1: true
+04:19:16 INFO  Getting all instance registry info from the eureka server
+04:19:18 INFO  The response status is 200
+04:19:18 INFO  Starting heartbeat executor: renew interval is: 30
+04:19:18 INFO  InstanceInfoReplicator onDemand update allowed rate per min is 4
+04:19:18 INFO  Discovery Client initialized at timestamp 1783916358177 with initial instances count: 2
+04:19:18 INFO  Registering application INVENTARIO-SERVICE with eureka with status UP
+04:19:18 INFO  Saw local status change event StatusChangeEvent [timestamp=1783916358280, current=UP, previous=STARTING]
+04:19:18 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093: registering service...
+04:19:18 INFO  Tomcat started on port 9093 (http) with context path '/'
+04:19:18 INFO  Updating port to 9093
+04:19:18 INFO  Started InventarioServiceApplication in 44.141 seconds (process running for 49.121)
+04:19:18 WARN  SpringDoc /api/inventarios/v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+04:19:18 WARN  SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+04:19:18 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093 - registration status: 204
+04:24:16 INFO  Resolving eureka endpoints via configuration
+04:29:16 INFO  Resolving eureka endpoints via configuration
+04:32:15 INFO  Unregistering application INVENTARIO-SERVICE with eureka with status DOWN
+04:32:15 INFO  Saw local status change event StatusChangeEvent [timestamp=1783917135522, current=DOWN, previous=UP]
+04:32:15 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093: registering service...
+04:32:15 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093 - registration status: 204
+04:32:15 INFO  Commencing graceful shutdown. Waiting for active requests to complete
+04:32:15 INFO  Graceful shutdown complete
+04:32:15 INFO  Closing JPA EntityManagerFactory for persistence unit 'default'
+04:32:16 INFO  HikariPool-1 - Shutdown initiated...
+04:32:16 INFO  HikariPool-1 - Shutdown completed.
+04:32:16 INFO  Shutting down DiscoveryClient ...
+04:32:19 INFO  Unregistering ...
+04:32:19 WARN  task supervisor shutting down, can't accept the task
+04:32:19 INFO  DiscoveryClient_INVENTARIO-SERVICE/inventario-service:9093 - deregister  status: 200
+04:32:19 INFO  Completed shut down of DiscoveryClient

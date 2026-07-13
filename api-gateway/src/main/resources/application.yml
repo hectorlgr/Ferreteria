@@ -64,6 +64,11 @@ spring:
           predicates:
             - Path=/api/despachos/**
 
+        - id: soporte-service
+          uri: lb://soporte-service
+          predicates:
+            - Path=/api/soporte/**
+
 eureka:
   instance:
     prefer-ip-address: true
@@ -100,3 +105,5 @@ springdoc:
         url: /api/despachos/v3/api-docs
       - name: 9. Auth Service
         url: /auth/v3/api-docs
+      - name: 10. Soporte Service
+        url: /api/soporte/v3/api-docs

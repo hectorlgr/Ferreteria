@@ -49,6 +49,9 @@ start "PEDIDO-SERVICE (Puerto 9098)" cmd /k "mvnw spring-boot:run"
 cd /d "%~dp0\promocion-service"
 start "PROMOCION-SERVICE (Puerto 9099)" cmd /k "mvnw spring-boot:run"
 
+cd /d "%~dp0\soporte-service"
+start "SOPORTE-SERVICE (Puerto 9100)" cmd /k "mvnw spring-boot:run"
+
 echo Esperando a que los servicios se registren en Eureka (10 segundos)...
 timeout /t 10 /nobreak
 echo.

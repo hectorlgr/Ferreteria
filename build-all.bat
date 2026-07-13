@@ -58,5 +58,10 @@ cd promocion-service
 call .\mvnw clean package -DskipTests
 cd ..
 
+echo Construyendo soporte-service...
+cd soporte-service
+call .\mvnw clean package -DskipTests
+cd ..
+
 echo ¡Todas las compilaciones terminadas con exito!
 pause

@@ -56,5 +56,10 @@ cd promocion-service
 call .\mvnw clean
 cd ..
 
+echo Limpiando soporte-service...
+cd soporte-service
+call .\mvnw clean
+cd ..
+
 echo ¡Limpieza completada con exito!
 pause

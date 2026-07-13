@@ -105,6 +105,17 @@ services:
     depends_on:
       - eureka-server
 
+  soporte-service:
+    build: ./soporte-service
+    ports:
+      - "9100:9100"
+    environment:
+      <<: *common-env
+    volumes:
+      - ./logs:/logs
+    depends_on:
+      - eureka-server
+
   api-gateway:
     build: ./api-gateway
     ports:
@@ -122,3 +133,4 @@ services:
       - inventario-service
       - resena-service
       - promocion-service
+      - soporte-service
