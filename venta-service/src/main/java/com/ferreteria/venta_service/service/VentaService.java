@@ -101,7 +101,6 @@ public class VentaService {
         double iva = subtotalNetoProductos * 0.19;
         int totalConIva = (int) (subtotalNetoProductos + iva);
         logger.info("IVA (19%) calculado: ${}. Total productos con IVA: ${}", (int) iva, totalConIva);
-        // -------------------------------------------
 
         // Sumar Despacho al Total Final
         int totalVenta = totalConIva + costoDespachoIngresado;
