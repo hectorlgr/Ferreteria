@@ -168,6 +168,15 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.11</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/ferreteria/despacho_service/model/**</exclude>
+                        <exclude>com/ferreteria/despacho_service/Dto/**</exclude>
+                        <exclude>com/ferreteria/despacho_service/config/**</exclude>
+                        <exclude>com/ferreteria/despacho_service/exception/**</exclude>
+                        <exclude>com/ferreteria/despacho_service/*Application.class</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
